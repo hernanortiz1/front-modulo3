@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useEffect, useState } from "react";
-
 import Menu from "./components/shared/Menu";
+import Footer from "./components/shared/Footer";
 
 function App() {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
@@ -18,7 +18,10 @@ function App() {
           usuarioAdmin={usuarioAdmin}
           setUsuarioAdmin={setUsuarioAdmin}
         </Menu>
-        <main></main>
+        <main>
+        
+        </main>
+        <Footer></Footer>
       </BrowserRouter>
     </>
   );

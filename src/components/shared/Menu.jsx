@@ -4,10 +4,10 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 const Menu = () => {
-const navegacion = useNavigate();
-const [expanded, setExpanded] = useState(false);
-    
-const logout = () => {
+  const navegacion = useNavigate();
+  const [expanded, setExpanded] = useState(false);
+
+  const logout = () => {
     Swal.fire({
       title: "¿Seguro que deseas cerrar sesión?",
       text: "Tu sesión se cerrará y volverás al inicio.",
@@ -21,70 +21,142 @@ const logout = () => {
       if (result.isConfirmed) {
         setUsuarioAdmin(null);
         setNombreUsuario("");
-       
+
         navegacion("/");
         setExpanded(false);
-        Swal.fire("Sesión cerrada", "Has cerrado sesión correctamente.", "success");
+        Swal.fire(
+          "Sesión cerrada",
+          "Has cerrado sesión correctamente.",
+          "success"
+        );
       }
     });
   };
 
-    return (
-        <header>
-             <Navbar expand="lg" className="bg-body-tertary" expanded={expanded}>
+  return (
+    <header>
+      <Navbar expand="lg" className="bg-body-tertary colorNavbarFooter" expanded={expanded}>
         <Container>
-          <NavLink to="/" className="navbar-brand "> {/*falta agregar fuente */}
+          <NavLink to="/" className="navbar-brand Bodoni">
             Lannister
           </NavLink>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={() => setExpanded(!expanded)}
+          />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavLink className="nav-link" to={"/"} onClick={() => setExpanded(false)}>
+              <NavLink
+                className="nav-link"
+                to={"/"}
+                onClick={() => setExpanded(false)}
+              >
                 Inicio
               </NavLink>
               <NavDropdown title="Categorias">
-                <NavDropdown.Item as={NavLink} to="/shooter" onClick={() => setExpanded(false)}>
-                  Shooter
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/remeras-chombas"
+                  onClick={() => setExpanded(false)}
+                >
+                  Remeras y Chombas
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/simulacion" onClick={() => setExpanded(false)}>
-                  Simulación
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/abrigos-camperas"
+                  onClick={() => setExpanded(false)}
+                >
+                  Abrigos y camperas
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/aventura" onClick={() => setExpanded(false)}>
-                  Aventura
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/sweaters-buzos"
+                  onClick={() => setExpanded(false)}
+                >
+                  Sweaters y buzos
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/sandbox" onClick={() => setExpanded(false)}>
-                  Sandbox
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/camisas"
+                  onClick={() => setExpanded(false)}
+                >
+                  Camisas
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/rpg" onClick={() => setExpanded(false)}>
-                  RPG
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/bermudas"
+                  onClick={() => setExpanded(false)}
+                >
+                  Bermudas
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/pantalones"
+                  onClick={() => setExpanded(false)}
+                >
+                  Pantalones
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/shorts"
+                  onClick={() => setExpanded(false)}
+                >
+                  Shorts de Baño
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/anteojos"
+                  onClick={() => setExpanded(false)}
+                >
+                  Anteojos de sol
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={NavLink}
+                  to="/gorras"
+                  onClick={() => setExpanded(false)}
+                >
+                  Gorras
                 </NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title="Acerca de">
-                <NavDropdown.Item as={NavLink} to={"/sobreNosotros"} onClick={() => setExpanded(false)}>
-                  ¿Sobre nosotros?
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to={"/preguntasFrecuentes"} onClick={() => setExpanded(false)}>
-                  Preguntas Frecuentes
-                </NavDropdown.Item>
-              </NavDropdown>
+              <NavLink
+                className="nav-link"
+                to={"/sobreNosotros"}
+                onClick={() => setExpanded(false)}
+              >
+                Sobre nosotros
+              </NavLink>
+              <NavLink
+                className="nav-link"
+                to={"/contacto"}
+                onClick={() => setExpanded(false)}
+              >
+                Contacto
+              </NavLink>
             </Nav>
             <Nav className="ms-auto">
               {/*Falta props de inicio de sesion */}
-                <>
-                  <NavLink className="nav-link" to="/login" onClick={() => setExpanded(false)}>
-                    Iniciar sesión
-                  </NavLink>
-                  <NavLink className="nav-link" to="/registro" onClick={() => setExpanded(false)}>
-                    Registro
-                  </NavLink>
-                </>
-              
+              <>
+                <NavLink
+                  className="nav-link"
+                  to="/login"
+                  onClick={() => setExpanded(false)}
+                >
+                  Iniciar sesión
+                </NavLink>
+                <NavLink
+                  className="nav-link"
+                  to="/registro"
+                  onClick={() => setExpanded(false)}
+                >
+                  Registro
+                </NavLink>
+              </>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-        </header>
-    );
+    </header>
+  );
 };
 
 export default Menu;

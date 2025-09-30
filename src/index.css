@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');  
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 #root {
   display: flex;
@@ -13,10 +13,47 @@ main {
   font-family: "Bodoni Moda SC", sans-serif;
 }
 
-.Bodoni{
-  font-family: "Bodoni Moda SC", sans-serif;
+.Montserrat {
+  font-family: "Montserrat", sans-serif;
 }
 
-.Montserrat{
-    font-family: "Montserrat", sans-serif;
+.colorNavbarFooter {
+  background: #1d3557;
+}
+
+.colorMain {
+  background: #fefae0;
+}
+
+/* links principales */
+.navbar .nav-link,
+.navbar .navbar-brand,
+.navbar .dropdown-toggle {
+  color: white !important;
+}
+
+/* items dentro del dropdown */
+.navbar .dropdown-menu .dropdown-item {
+  color: black !important;
+}
+
+/*hover*/
+.navbar .nav-link:hover,
+.navbar .dropdown-toggle:hover {
+  color: #a6c9fb !important;
+}
+
+/* Hover en los items del dropdown */
+.navbar .dropdown-menu .dropdown-item:hover {
+  background-color: #1d355777 !important;
+  color: black !important;
+}
+
+/* botón hamburguesa */
+.navbar-toggler {
+  border-color: white !important;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
 }

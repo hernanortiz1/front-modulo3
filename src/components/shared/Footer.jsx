@@ -42,10 +42,9 @@ const Footer = () => {
                   to={"/error404"}
                   className="link-light link-underline-opacity-0"
                 >
-                   Formas de pago
+                  Formas de pago
                 </Link>
               </li>
-            
             </ul>
           </div>
           <div className="col-12 col-lg-3 col-md-6">
@@ -120,7 +119,6 @@ const Footer = () => {
                   Métodos de envío
                 </Link>
               </li>
-              
             </ul>
           </div>
           <div className="col-12 col-lg-3 col-md-6">
@@ -139,7 +137,7 @@ const Footer = () => {
                   to={"/error404"}
                   className="link-light link-underline-opacity-0"
                 >
-                 Libro de quejas
+                  Libro de quejas
                 </Link>
               </li>
               <li>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useEffect, useState } from "react";
+
 import Menu from "./components/shared/Menu";
 
 
@@ -10,7 +11,7 @@ function App() {
     <>
       <BrowserRouter>
         <Menu>
-          {/*Falta session storage */}
+          {/*Falta enviar props de session storage */}
 
         </Menu>
         <main></main>

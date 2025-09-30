@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const Menu = () => {
+const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
@@ -35,7 +35,11 @@ const Menu = () => {
 
   return (
     <header>
-      <Navbar expand="lg" className="bg-body-tertary colorNavbarFooter" expanded={expanded}>
+      <Navbar
+        expand="lg"
+        className="bg-body-tertary colorNavbarFooter"
+        expanded={expanded}
+      >
         <Container>
           <NavLink to="/" className="navbar-brand Bodoni">
             Lannister
@@ -134,22 +138,22 @@ const Menu = () => {
               </NavLink>
             </Nav>
             <Nav className="ms-auto">
-              {/*Falta props de inicio de sesion */}
               <>
-                <NavLink
-                  className="nav-link"
-                  to="/login"
-                  onClick={() => setExpanded(false)}
-                >
-                  Iniciar sesión
-                </NavLink>
-                <NavLink
-                  className="nav-link"
-                  to="/registro"
-                  onClick={() => setExpanded(false)}
-                >
-                  Registro
-                </NavLink>
+                {usuarioAdmin ? (
+                  //falta agregar .TOKEN
+                  <>
+                    <NavLink className="nav-link" to={"/administrador"}>
+                      Administrador
+                    </NavLink>
+                    <Button className="nav-link" onClick={logout}>
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <NavLink className="nav-link" to={"/login"}>
+                    Login
+                  </NavLink>
+                )}
               </>
             </Nav>
           </Navbar.Collapse>

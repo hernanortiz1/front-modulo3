@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
-
+import Inicio from "./components/pages/Inicio";
 function App() {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
@@ -19,7 +19,9 @@ function App() {
           setUsuarioAdmin={setUsuarioAdmin}
         </Menu>
         <main>
-        
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+          </Routes>
         </main>
         <Footer></Footer>
       </BrowserRouter>

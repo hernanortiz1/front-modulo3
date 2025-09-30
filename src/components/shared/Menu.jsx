@@ -1,4 +1,12 @@
-import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  Modal,
+} from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -6,6 +14,11 @@ import Swal from "sweetalert2";
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const logout = () => {
     Swal.fire({
@@ -150,15 +163,54 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     </Button>
                   </>
                 ) : (
-                  <NavLink className="nav-link" to={"/login"}>
-                    Login
-                  </NavLink>
+                  <Button
+                    variant="link"
+                    className="nav-link p-0"
+                    onClick={handleShow}
+                  >
+                    <i className="bi bi-person-fill text-light fs-4"></i>
+                  </Button>
                 )}
               </>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/*MODAL */}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Iniciar sesión</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Example textarea</Form.Label>
+              <Form.Control as="textarea" rows={3} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </header>
   );
 };

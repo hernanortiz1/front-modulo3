@@ -146,7 +146,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     className="nav-link p-0"
                     onClick={handleShow}
                   >
-                    <i className="bi bi-person-fill text-light fs-4"></i>
+                    <div className="d-flex align-items-center gap-2">
+                      <i className="bi bi-person-fill text-light fs-4"></i>
+                      <h6 className="mb-0 text-light">Login</h6>
+                    </div>
                   </Button>
                 )}
               </>

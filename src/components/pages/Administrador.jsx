@@ -28,17 +28,17 @@ const Administrador = () => {
                   <tbody></tbody>
                 </Table>
               </div>
-              <div className="col-12 col-md-2 text-end text-md-center order-first order-md-last my-3 my-md-0">
+              <div className="col-12 col-md-2 text-end text-md-center order-first order-md-0 my-3 my-md-0">
                 <Button className="btn btn-success">
                   <i className="bi bi-file-earmark-plus"></i>
                 </Button>
               </div>
-            </Accordion.Body>
-            <div className="d-flex justify-content-center align-items-center my-3">
+              <div className="d-flex justify-content-center align-items-center my-3">
               <Button className="btn-table">Anterior</Button>
               <span className="mx-3">Página 1 de 3</span>
               <Button className="btn-table">Siguiente</Button>
             </div>
+            </Accordion.Body>
           </Accordion.Item>
         </Accordion>
         <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
@@ -59,17 +59,18 @@ const Administrador = () => {
                   <tbody></tbody>
                 </Table>
               </div>
-              <div className="col-12 col-md-2 text-end text-md-center order-first order-md-last my-3 my-md-0">
+              <div className="col-12 col-md-2 text-end text-md-center order-first order-md-0 my-3 my-md-0">
                 <Button className="btn btn-success">
                   <i class="bi bi-person-plus-fill"></i>
                 </Button>
               </div>
-            </Accordion.Body>
-            <div className="d-flex justify-content-center align-items-center my-3">
+              <div className="d-flex justify-content-center align-items-center my-3">
               <Button className="btn-table">Anterior</Button>
               <span className="mx-3">Página 1 de 3</span>
               <Button className="btn-table">Siguiente</Button>
             </div>
+            </Accordion.Body>
+            
           </Accordion.Item>
         </Accordion>
       </article>

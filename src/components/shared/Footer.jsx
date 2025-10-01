@@ -11,7 +11,7 @@ const Footer = () => {
         </Link>
         <div className="row text-center text-lg-start">
           <div className="col-12 col-lg-3 col-md-6">
-            <h5 className="mb-2 Montserrat text-light">Destacados</h5>
+            <h5 className="mb-2 text-light">Destacados</h5>
             <ul className="list-unstyled">
               <li>
                 <Link
@@ -48,7 +48,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-12 col-lg-3 col-md-6">
-            <h5 className="Montserrat text-light">Categorías</h5>
+            <h5 className="text-light">Categorías</h5>
             <ul className="list-unstyled">
               <li>
                 <Link
@@ -93,7 +93,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-12 col-lg-3 col-md-6">
-            <h5 className="Montserrat text-light">Soporte</h5>
+            <h5 className="text-light">Soporte</h5>
             <ul className="list-unstyled">
               <li>
                 <Link
@@ -122,7 +122,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-12 col-lg-3 col-md-6">
-            <h5 className="Montserrat text-light">Legales</h5>
+            <h5 className="text-light">Legales</h5>
             <ul className="list-unstyled">
               <li>
                 <Link

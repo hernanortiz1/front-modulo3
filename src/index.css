@@ -63,3 +63,10 @@ main {
   border-color: red !important;
   box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.434) !important;
 }
+
+/* Fondo/texto del ítem ACTIVO */
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:active {
+  background-color: #1d3557 !important; 
+  color: #fff !important;
+}

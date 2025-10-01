@@ -19,7 +19,7 @@ function App() {
           usuarioAdmin={usuarioAdmin}
           setUsuarioAdmin={setUsuarioAdmin}
         </Menu>
-        <main>
+        <main className="colorMain">
         <Administrador></Administrador>
         </main>
         <Footer></Footer>

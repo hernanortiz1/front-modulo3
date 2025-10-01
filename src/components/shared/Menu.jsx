@@ -141,16 +141,28 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     </Button>
                   </>
                 ) : (
-                  <Button
-                    variant="link"
-                    className="nav-link p-0"
-                    onClick={handleShow}
-                  >
-                    <div className="d-flex align-items-center gap-2">
-                      <i className="bi bi-person-fill text-light fs-4"></i>
-                      <h6 className="mb-0 text-light">Login</h6>
-                    </div>
-                  </Button>
+                  <>
+                    {/* Botón login */}
+                    <Button
+                      variant="link"
+                      className="nav-link p-0"
+                      onClick={handleShow}
+                    >
+                      <div className="d-flex align-items-center gap-2">
+                        <i className="bi bi-person-fill text-light fs-4"></i>
+                        <h6 className="mb-0 text-light">Login</h6>
+                      </div>
+                    </Button>
+
+                    {/* Botón carrito */}
+                    <NavLink
+                      to="/carrito"
+                      className="nav-link d-flex align-items-center ms-lg-5"
+                      onClick={() => setExpanded(false)}
+                    >
+                      <i className="bi bi-bag-fill text-light fs-4"></i>
+                    </NavLink>
+                  </>
                 )}
               </>
             </Nav>
@@ -207,7 +219,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             </Form>
             <div className="d-flex flex-column gap-2 mt-3">
               <Button variant="primary" className="w-100">
-                Continuar
+                Ingresar
                 {/*Falta agregar logica para inicio de sesion */}
               </Button>
               <Button

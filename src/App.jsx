@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import React from 'react'
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";

@@ -1,16 +1,32 @@
-import Carousel from 'react-bootstrap/Carousel';
+import React from "react";
+import Carousel from "react-bootstrap/Carousel";
+import Banner1 from "../../../assets/banners/bannerPublicidad1.webp";
+import Banner2 from "../../../assets/banners/bannerPublicidad2.jpg";
+import Banner3 from "../../../assets/banners/BannerPublicidad3.webp";
 
 const BannerPublicidad = () => {
   return (
-    <Carousel>
-      <Carousel.Item interval={1000}>
-        <img src='https://www.macowens.com.ar/media/wysiwyg/CREDICOOP_recu_banner.jpg' />
+    <Carousel fade controls={false} indicators={false}>
+      <Carousel.Item interval={2000}>
+        <img 
+          src={Banner1}
+          className="img-fluid imagenBanners"
+          alt="Imagen publicitaria con descuento"
+        />
       </Carousel.Item>
-      <Carousel.Item interval={500}>
-        <img src='https://www.macowens.com.ar/media/wysiwyg/CREDICOOP_recu_banner.jpg' />
+      <Carousel.Item interval={2000}>
+        <img
+          src={Banner2}
+          className="img-fluid imagenBanners"
+          alt="Imagen publicitaria con descuento"
+        />
       </Carousel.Item>
-      <Carousel.Item>
-        <img src='https://www.macowens.com.ar/media/wysiwyg/CREDICOOP_recu_banner.jpg' />
+      <Carousel.Item interval={2000}>
+        <img 
+          src={Banner3}
+          className="img-fluid imagenBanners"
+          alt="Imagen publicitaria con descuento"
+        />
       </Carousel.Item>
     </Carousel>
   );

@@ -1,4 +1,5 @@
 import BannerPublicidad from "./componentsInicio/bannerPublicidad";
+import React from "react";
 
 const Inicio = () => {
     return (

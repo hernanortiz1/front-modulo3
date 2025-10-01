@@ -57,3 +57,9 @@ main {
 .navbar-toggler-icon {
   filter: invert(1);
 }
+
+/* autofocus de modal en menu */
+.focus-red:focus {
+  border-color: red !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.434) !important;
+}

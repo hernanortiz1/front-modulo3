@@ -7,7 +7,7 @@ const Administrador = () => {
       <article className="my-4">
         <Accordion defaultActiveKey={["0"]} alwaysOpen>
           <Accordion.Item eventKey="0">
-            <Accordion.Header className="Montserrat">
+            <Accordion.Header className="Montserrat"><i class="bi bi-database me-2"></i>
               Productos
             </Accordion.Header>
             <Accordion.Body className="row">
@@ -43,7 +43,7 @@ const Administrador = () => {
         </Accordion>
         <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
           <Accordion.Item eventKey="0">
-            <Accordion.Header className="Montserrat">Usuarios</Accordion.Header>
+            <Accordion.Header className="Montserrat"><i class="bi bi-person-fill me-2"></i>Usuarios</Accordion.Header>
             <Accordion.Body className="row">
               <div className="col-12 col-md-10">
                 <Table responsive striped bordered hover className="Montserrat">

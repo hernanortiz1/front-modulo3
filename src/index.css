@@ -70,3 +70,12 @@ main {
   background-color: #1d3557 !important; 
   color: #fff !important;
 }
+
+.modal-header .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}

@@ -161,7 +161,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       {/*MODAL */}
 
       <Modal show={show} onHide={handleClose}>
-        <div className="colorNavbarFooter text-light">
+        <div className="colorNavbarFooter text-light rounded-2 shadow">
           <Modal.Header closeButton>
             <Modal.Title className="text-center w-100">
               Iniciar sesión

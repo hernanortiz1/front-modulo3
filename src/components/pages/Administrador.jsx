@@ -21,12 +21,14 @@ const Administrador = () => {
                 >
                   <thead>
                     <tr className="text-center">
+                      <th>#</th>
                       <th>Nombre</th>
                       <th>Categoría</th>
                       <th>Talle</th>
                       <th>Color</th>
                       <th>Precio</th>
-                      <th>Cantidad stock</th>
+                      <th>Stock</th>
+                      <th>Opciones</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
@@ -35,6 +37,40 @@ const Administrador = () => {
               <div className="col-12 col-md-2 text-end order-first order-md-last my-3 my-md-0">
                 <Button className="btn btn-success">
                   <i className="bi bi-file-earmark-plus"></i>
+                </Button>
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header className="Montserrat">
+              Usuarios
+            </Accordion.Header>
+            <Accordion.Body className="row">
+              <div className="col-12 col-md-10">
+                <Table
+                responsive
+                  striped
+                  bordered
+                  hover
+                  className="Montserrat"
+                >
+                  <thead>
+                    <tr className="text-center">
+                        <th>#</th>
+                      <th>Nombre de usuario</th>
+                      <th>Correo eléctronico</th>
+                      <th>Rol</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </Table>
+              </div>
+              <div className="col-12 col-md-2 text-end order-first order-md-last my-3 my-md-0">
+                <Button className="btn btn-success">
+                  <i class="bi bi-person-plus-fill"></i>
                 </Button>
               </div>
             </Accordion.Body>

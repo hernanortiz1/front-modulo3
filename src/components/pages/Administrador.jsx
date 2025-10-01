@@ -34,6 +34,11 @@ const Administrador = () => {
                 </Button>
               </div>
             </Accordion.Body>
+            <div className="d-flex justify-content-center align-items-center my-3">
+              <Button className="btn-table">Anterior</Button>
+              <span className="mx-3">Página 1 de 3</span>
+              <Button className="btn-table">Siguiente</Button>
+            </div>
           </Accordion.Item>
         </Accordion>
         <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
@@ -60,6 +65,11 @@ const Administrador = () => {
                 </Button>
               </div>
             </Accordion.Body>
+            <div className="d-flex justify-content-center align-items-center my-3">
+              <Button className="btn-table">Anterior</Button>
+              <span className="mx-3">Página 1 de 3</span>
+              <Button className="btn-table">Siguiente</Button>
+            </div>
           </Accordion.Item>
         </Accordion>
       </article>

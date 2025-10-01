@@ -173,7 +173,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 <Form.Label>Email *</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="email@email.com"
+                  placeholder="Ingrese e-mail"
                   autoFocus
                   className="focus-red"
                   required

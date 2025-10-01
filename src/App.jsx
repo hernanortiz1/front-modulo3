@@ -18,7 +18,7 @@ function App() {
           usuarioAdmin={usuarioAdmin}
           setUsuarioAdmin={setUsuarioAdmin}
         </Menu>
-        <main>
+        <main className="colorMain">
           <Routes>
             <Route path="/" element={<Inicio />} />
           </Routes>

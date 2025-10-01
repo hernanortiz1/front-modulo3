@@ -57,3 +57,44 @@ main {
 .navbar-toggler-icon {
   filter: invert(1);
 }
+
+.imagen-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.texto-sobre-imagen {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+}
+
+.imagen-container:hover .texto-sobre-imagen {
+  bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.imagen-container:hover img {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.carousel-img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.card-ropa {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-ropa:hover {
+  transform: translateY(-10px);
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+}

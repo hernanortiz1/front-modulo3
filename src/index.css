@@ -58,17 +58,37 @@ main {
   filter: invert(1);
 }
 
-.accordion-button{
-  background-color: #1d3557 !important;
-  color: white !important;
+/* autofocus de modal en menu */
+.focus-red:focus {
+  border-color: red !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.434) !important;
 }
 
+/* Fondo/texto del ítem ACTIVO */
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:active {
+  background-color: #1d3557 !important;
+  color: #fff !important;
+}
+
+.modal-header .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+  .accordion-button {
+    background-color: #1d3557 !important;
+    color: white !important;
+  }
+}
 .accordion-button:not(.collapsed) {
   background-color: #1d3557 !important;
   color: white !important;
 }
 
-.btn-table{
+.btn-table {
   background-color: #1d3557 !important;
   color: white !important;
 }

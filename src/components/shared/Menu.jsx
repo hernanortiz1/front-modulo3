@@ -1,37 +1,28 @@
-import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  Modal,
+} from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import React from 'react'
 import { useState } from "react";
-import Swal from "sweetalert2";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
-  const logout = () => {
-    Swal.fire({
-      title: "¿Seguro que deseas cerrar sesión?",
-      text: "Tu sesión se cerrará y volverás al inicio.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, cerrar sesión",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setUsuarioAdmin(null);
-        setNombreUsuario("");
+  const [show, setShow] = useState(false);
 
-        navegacion("/");
-        setExpanded(false);
-        Swal.fire(
-          "Sesión cerrada",
-          "Has cerrado sesión correctamente.",
-          "success"
-        );
-      }
-    });
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const irALogin = () => {
+    handleClose();
+    navegacion("/login");
   };
 
   return (
@@ -151,15 +142,98 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     </Button>
                   </>
                 ) : (
-                  <NavLink className="nav-link" to={"/login"}>
-                    Login
-                  </NavLink>
+                  <>
+                    {/* Botón login */}
+                    <Button
+                      variant="link"
+                      className="nav-link p-0"
+                      onClick={handleShow}
+                    >
+                      <div className="d-flex align-items-center gap-2">
+                        <i className="bi bi-person-fill text-light fs-4"></i>
+                        <h6 className="mb-0 text-light">Login</h6>
+                      </div>
+                    </Button>
+
+                    {/* Botón carrito */}
+                    <NavLink
+                      to="/carrito"
+                      className="nav-link d-flex align-items-center ms-lg-5"
+                      onClick={() => setExpanded(false)}
+                    >
+                      <i className="bi bi-bag-fill text-light fs-4"></i>
+                    </NavLink>
+                  </>
                 )}
               </>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/*MODAL */}
+
+      <Modal show={show} onHide={handleClose}>
+        <div className="colorNavbarFooter text-light rounded-2 shadow">
+          <Modal.Header closeButton>
+            <Modal.Title className="text-center w-100">
+              Iniciar sesión
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="ControlInput1">
+                <Form.Label>Email *</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Ingrese e-mail"
+                  autoFocus
+                  className="focus-red"
+                  required
+                  maxLength={100}
+                  pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                  onInvalid={(e) =>
+                    e.target.setCustomValidity("Ingresa un email válido")
+                  }
+                  onInput={(e) => e.target.setCustomValidity("")}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  className="focus-red"
+                  required
+                  maxLength={100}
+                  minLength={8}
+                  pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$"
+                  placeholder="Ingrese contraseña"
+                  onInvalid={(e) =>
+                    e.target.setCustomValidity(
+                      "La contraseña debe tener 1 mayuscula, 1 minuscula, 1 número y 1 símbolo"
+                    )
+                  }
+                  onInput={(e) => e.target.setCustomValidity("")}
+                />
+              </Form.Group>
+            </Form>
+            <div className="d-flex flex-column gap-2 mt-3">
+              <Button variant="primary" className="w-100">
+                Ingresar
+                {/*Falta agregar logica para inicio de sesion */}
+              </Button>
+              <Button
+                variant="outline-danger"
+                className="w-100"
+                onClick={irALogin}
+              >
+                Crear cuenta
+              </Button>
+            </div>
+          </Modal.Body>
+        </div>
+      </Modal>
     </header>
   );
 };

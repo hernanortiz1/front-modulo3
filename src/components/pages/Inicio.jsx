@@ -53,7 +53,7 @@ const Inicio = () => {
 
         {/* TARJETAS */}
         <Row className="m-4 g-3">
-          <Col xs={12} md={6} className="imagen-container" data-aos="fade-right">
+          <Col xs={12} md={6} className="imagen-container box-shadow" data-aos="fade-right">
             <Link to="/parte-superior">
               <img
                 src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format&fit=crop&q=60"
@@ -64,7 +64,7 @@ const Inicio = () => {
             </Link>
           </Col>
 
-          <Col xs={12} md={6} className="imagen-container" data-aos="fade-left">
+          <Col xs={12} md={6} className="imagen-container box-shadow" data-aos="fade-left">
             <Link to="/parte-inferior">
               <img
                 src="https://images.unsplash.com/photo-1548883354-7622d03aca27?w=500&auto=format&fit=crop&q=60"
@@ -81,11 +81,11 @@ const Inicio = () => {
             xs={12}
             sm={12}
             md={4}
-            className="imagen-container mb-3"
+            className="imagen-container mb-3 box-shadow"
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            <Link to="/remeras-chombas">
+            <Link to="/remeras-chombas box-shadow">
               <img
                 src="https://images.unsplash.com/photo-1614495039153-e9cd13240469?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
                 alt="Remeras y Chombas"
@@ -99,7 +99,7 @@ const Inicio = () => {
             xs={12}
             sm={12}
             md={4}
-            className="imagen-container mb-3"
+            className="imagen-container mb-3 box-shadow"
             data-aos="zoom-in"
             data-aos-duration="1000"
             data-aos-delay="100"
@@ -118,7 +118,7 @@ const Inicio = () => {
             xs={12}
             sm={12}
             md={4}
-            className="imagen-container mb-3"
+            className="imagen-container mb-3 box-shadow"
             data-aos="fade-left"
             data-aos-duration="1000"
             data-aos-delay="200"

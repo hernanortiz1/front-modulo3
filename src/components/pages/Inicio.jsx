@@ -20,7 +20,7 @@ const Inicio = () => {
             <img
               className="d-block w-100 carousel-img"
               src={BannerDesktop_uno}
-              alt="First slide"
+              alt="Banner de descuentos"
             />
           </picture>
         </Carousel.Item>
@@ -30,7 +30,7 @@ const Inicio = () => {
             <img
               className="d-block w-100 carousel-img"
               src={BannerDesktop_dos}
-              alt="Second slide"
+              alt="Banner de descuentos"
             />
           </picture>
         </Carousel.Item>
@@ -40,7 +40,7 @@ const Inicio = () => {
             <img
               className="d-block w-100 carousel-img"
               src={BannerDesktop_tres}
-              alt="Third slide"
+              alt="Banner de descuentos"
             />
           </picture>
         </Carousel.Item>
@@ -57,7 +57,7 @@ const Inicio = () => {
             <Link to="/parte-superior">
               <img
                 src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format&fit=crop&q=60"
-                alt=""
+                alt="Parte Superior Ropa"
                 className="w-100"
               />
               <span className="texto-sobre-imagen">PARTE SUPERIOR</span>
@@ -68,7 +68,7 @@ const Inicio = () => {
             <Link to="/parte-inferior">
               <img
                 src="https://images.unsplash.com/photo-1548883354-7622d03aca27?w=500&auto=format&fit=crop&q=60"
-                alt=""
+                alt="Parte Inferior Ropa"
                 className="w-100"
               />
               <span className="texto-sobre-imagen">PARTE INFERIOR</span>
@@ -88,7 +88,7 @@ const Inicio = () => {
             <Link to="/remeras-chombas">
               <img
                 src="https://images.unsplash.com/photo-1614495039153-e9cd13240469?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
-                alt=""
+                alt="Remeras y Chombas"
                 className="w-100"
               />
               <span className="texto-sobre-imagen">REMERAS Y CHOMBAS</span>
@@ -107,7 +107,7 @@ const Inicio = () => {
             <Link to="/camisas">
               <img
                 src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
-                alt=""
+                alt="Camisas"
                 className="w-100"
               />
               <span className="texto-sobre-imagen">CAMISAS</span>
@@ -126,7 +126,7 @@ const Inicio = () => {
             <Link to="/pantalones">
               <img
                 src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
-                alt=""
+                alt="Pantalones"
                 className="w-100"
               />
               <span className="texto-sobre-imagen">PANTALONES</span>

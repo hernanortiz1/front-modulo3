@@ -57,3 +57,18 @@ main {
 .navbar-toggler-icon {
   filter: invert(1);
 }
+
+.accordion-button{
+  background-color: #1d3557 !important;
+  color: white !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #1d3557 !important;
+  color: white !important;
+}
+
+.btn-table{
+  background-color: #1d3557 !important;
+  color: white !important;
+}

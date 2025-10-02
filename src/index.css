@@ -66,13 +66,15 @@ main {
 .texto-sobre-imagen {
   position: absolute;
   bottom: 20px;
-  left: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   color: white;
   font-size: 2rem;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
+  text-align: center;
 }
 
 .imagen-container:hover .texto-sobre-imagen {
@@ -96,5 +98,5 @@ main {
 
 .card-ropa:hover {
   transform: translateY(-10px);
-  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }

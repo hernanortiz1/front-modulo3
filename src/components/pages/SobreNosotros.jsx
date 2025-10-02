@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import Perfil from '../../assets/sobreNosotros/imagenPerfil.webp'
 
 const SobreNosotros = () => {
   return (
@@ -72,18 +73,22 @@ const SobreNosotros = () => {
               <div className="devs-grid">
                 <div className="dev-card">
                   <h3>Figueroa Lucas</h3>
+                  <img src={Perfil} className="img-fluid" alt="" />
                   <p>Full Stack Developer</p>
                 </div>
                 <div className="dev-card">
                   <h3>Ortiz Hernan</h3>
+                  <img src={Perfil} className="img-fluid" alt="" />
                   <p>UX/UI Designer</p>
                 </div>
                 <div className="dev-card">
                   <h3>Blanco Juan</h3>
+                  <img src={Perfil} className="img-fluid" alt="" />
                   <p>Backend Specialist</p>
                 </div>
                 <div className="dev-card">
                   <h3>Barrojo Ignacio</h3>
+                  <img src={Perfil} className="img-fluid" alt="" />
                   <p>Frontend Developer</p>
                 </div>
               </div>

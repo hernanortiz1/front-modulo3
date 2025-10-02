@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import emailjs from "emailjs-com";
 
 const Contacto = () => {
-  const [datosCorrectos, setDatosCorrectos] = useState([]);
-
   const {
     register,
     handleSubmit,
@@ -14,15 +13,34 @@ const Contacto = () => {
   } = useForm();
 
   const agregarDatos = (datos) => {
-    Swal.fire({
-      title: "Datos enviados con éxito",
-      text: `En breve contestaremos tu mensaje`,
-      icon: "success",
-      draggable: true,
-    });
-
-    setDatosCorrectos([...datosCorrectos, datos]);
-    reset();
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: datos.nombreYapellido,
+          email: datos.email,
+          phone: datos.telefono,
+          message: datos.consulta,
+          time: new Date().toLocaleString(),
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        Swal.fire({
+          title: "Mensaje enviado con éxito",
+          text: "En breve responderemos tu consulta",
+          icon: "success",
+        });
+        reset();
+      })
+      .catch(() => {
+        Swal.fire({
+          title: "Error al enviar",
+          text: "Intenta nuevamente más tarde",
+          icon: "error",
+        });
+      });
   };
 
   return (

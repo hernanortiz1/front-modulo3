@@ -57,3 +57,7 @@ main {
 .navbar-toggler-icon {
   filter: invert(1);
 }
+
+.shadowContacto{
+  box-shadow: 0 4px 15px rgba(29, 53, 87, 0.656);
+}

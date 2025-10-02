@@ -57,3 +57,34 @@ main {
 .navbar-toggler-icon {
   filter: invert(1);
 }
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  animation: fadeInRight 1s ease forwards;
+}
+
+.colorFondoTitulo {
+  background: #1d3557;
+}
+
+.sobre-nosotros-card {
+  padding: 15px;
+  border-radius: 30px !important;
+  box-shadow: 2px 5px 31px 18px #1d3557 inset;
+  -webkit-box-shadow: 2px 5px 31px 18px #1d3557 inset;
+  -moz-box-shadow: 2px 5px 31px 18px r#1d3557 inset;
+}
+
+@media (max-width: 767px) {
+  .sobre-nosotros-card {
+    width: 100vw !important;
+  }
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

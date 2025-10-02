@@ -8,9 +8,9 @@ const SobreNosotros = () => {
       <h1 className="text-center colorFondoTitulo text-white Montserrat">
         🧍‍♂️Sobre Nosotros
       </h1>
-      <section className="container-fluid my-2">
-        <article className="contenedorCard my-3 d-flex justify-content-center justify-content-md-start">
-          <Card className="sobre-nosotros-card fade-in-right w-50">
+      <section className="container-fluid my-2 text-center">
+        <article className="contenedorCard my-3 d-flex justify-content-center">
+          <Card className="sobre-nosotros-card fade-in-right container">
             <h2 className="Montserrat">Cuatro desarrolladores. Una visión.</h2>
             <p>
               En <strong>Lannister</strong>, combinamos tecnología y estilo para
@@ -21,8 +21,8 @@ const SobreNosotros = () => {
             </p>
           </Card>
         </article>
-        <article className="contenedorCard d-flex justify-content-center justify-content-md-end my-3">
-          <Card className="sobre-nosotros-card fade-in-right w-50">
+        <article className="contenedorCard container my-3">
+          <Card className="sobre-nosotros-card fade-in-right">
             <h2 className="Montserrat">Más que prendas, actitud</h2>
             <p>
               Cada prenda que ofrecemos está pensada para hombres que valoran la
@@ -34,8 +34,8 @@ const SobreNosotros = () => {
             </p>
           </Card>
         </article>
-        <article className="contenedorCard my-3 d-flex justify-content-center justify-content-md-start">
-          <Card className="sobre-nosotros-card fade-in-right w-50">
+        <article className="contenedorCard my-3 container">
+          <Card className="sobre-nosotros-card fade-in-right">
             <h2 className="Montserrat">Tecnología + Estilo</h2>
             <p>
               Como desarrolladores, cuidamos cada aspecto de la experiencia
@@ -45,14 +45,14 @@ const SobreNosotros = () => {
             </p>
           </Card>
         </article>
-        <article className="contenedorCard d-flex justify-content-center justify-content-md-end">
-          <Card className="sobre-nosotros-card fade-in-right w-50">
+        <article className="contenedorCard container">
+          <Card className="sobre-nosotros-card fade-in-right">
             <h2 className="Montserrat">¿Por qué confiar en Lannister?</h2>
-            <ul>
-              <li>Porque somos usuarios antes que vendedores.</li>
-              <li>Porque creemos en la calidad antes que en la cantidad.</li>
+            <ul className="list-unstyled">
+              <li>⚫Porque somos usuarios antes que vendedores.</li>
+              <li>⚫Porque creemos en la calidad antes que en la cantidad.</li>
               <li>
-                Porque cada prenda que ves fue seleccionada con criterio y
+                ⚫Porque cada prenda que ves fue seleccionada con criterio y
                 propósito.
               </li>
             </ul>
@@ -73,22 +73,22 @@ const SobreNosotros = () => {
               <div className="devs-grid">
                 <div className="dev-card">
                   <h3>Figueroa Lucas</h3>
-                  <img src={Perfil} className="img-fluid" alt="" />
+                  <img src={Perfil} className="img-fluid" alt="Imagen de Perfil" />
                   <p>Full Stack Developer</p>
                 </div>
                 <div className="dev-card">
                   <h3>Ortiz Hernan</h3>
-                  <img src={Perfil} className="img-fluid" alt="" />
+                  <img src={Perfil} className="img-fluid" alt="Imagen de Perfil" />
                   <p>UX/UI Designer</p>
                 </div>
                 <div className="dev-card">
                   <h3>Blanco Juan</h3>
-                  <img src={Perfil} className="img-fluid" alt="" />
+                  <img src={Perfil} className="img-fluid" alt="Imagen de Perfil" />
                   <p>Backend Specialist</p>
                 </div>
                 <div className="dev-card">
                   <h3>Barrojo Ignacio</h3>
-                  <img src={Perfil} className="img-fluid" alt="" />
+                  <img src={Perfil} className="img-fluid" alt="Imagen de Perfil" />
                   <p>Frontend Developer</p>
                 </div>
               </div>

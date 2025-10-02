@@ -67,7 +67,7 @@ main {
 /* Fondo/texto del ítem ACTIVO */
 .dropdown-menu .dropdown-item.active,
 .dropdown-menu .dropdown-item:active {
-  background-color: #1d3557 !important; 
+  background-color: #1d3557 !important;
   color: #fff !important;
 }
 
@@ -78,4 +78,17 @@ main {
 
 .modal-header .btn-close:hover {
   opacity: 1;
+  .accordion-button {
+    background-color: #1d3557 !important;
+    color: white !important;
+  }
+}
+.accordion-button:not(.collapsed) {
+  background-color: #1d3557 !important;
+  color: white !important;
+}
+
+.btn-table {
+  background-color: #1d3557 !important;
+  color: white !important;
 }

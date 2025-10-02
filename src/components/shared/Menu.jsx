@@ -8,6 +8,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
+import React from 'react'
 import { useState } from "react";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {

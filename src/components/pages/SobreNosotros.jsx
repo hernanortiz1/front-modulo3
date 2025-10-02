@@ -63,6 +63,34 @@ const SobreNosotros = () => {
           </Card>
         </article>
       </section>
+      <section className="equipo-section">
+        <div className="color-box">
+          <div className="equipo-card fade-in-up">
+           <h2 className="Bodoni">Lannister</h2>
+            <div className="equipo-info">
+              <h2 className="Montserrat">Conocé al equipo detrás de Lannister</h2>
+              <div className="devs-grid">
+                <div className="dev-card">
+                  <h3>Figueroa Lucas</h3>
+                  <p>Full Stack Developer</p>
+                </div>
+                <div className="dev-card">
+                  <h3>Ortiz Hernan</h3>
+                  <p>UX/UI Designer</p>
+                </div>
+                <div className="dev-card">
+                  <h3>Blanco Juan</h3>
+                  <p>Backend Specialist</p>
+                </div>
+                <div className="dev-card">
+                  <h3>Barrojo Ignacio</h3>
+                  <p>Frontend Developer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

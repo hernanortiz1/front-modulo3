@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import React from "react";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
@@ -7,9 +8,17 @@ import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
-import ProtectorAdmin from "./components/routes/ProtectorAdmin"
+import ProtectorAdmin from "./components/routes/ProtectorAdmin";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
 
@@ -24,7 +33,7 @@ function App() {
           usuarioAdmin={usuarioAdmin}
           setUsuarioAdmin={setUsuarioAdmin}
         ></Menu>
-        <main>
+        <main className="colorMain">
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             {/*  <Route
@@ -33,8 +42,8 @@ function App() {
             ></Route>*/}
             <Route path="/login" element={<Login></Login>}></Route>
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-           
-           {/*
+
+            {/*
             <Route
               path="/remeras-chombas"
               element={<RemerasChombas></RemerasChombas>}
@@ -85,6 +94,7 @@ function App() {
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
         </main>
+
         <Footer></Footer>
       </BrowserRouter>
     </>

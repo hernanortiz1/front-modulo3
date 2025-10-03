@@ -38,59 +38,77 @@ const ItemUsuario = () => {
       </tr>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Crea tu cuenta</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form className="raleway" onSubmit={handleSubmit()}>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Ej: juanperez@mail.com"
-                {...register("email", {
-                  required: "El email es un dato obligatorio",
-                  pattern: {
-                    value:
-                      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-                    message:
-                      "El email debe tener un formato valido, por ejemplo juanperez@mail.com",
-                  },
-                })}
-              />
-              <Form.Text className="text-danger">
-                {errors.email?.message}
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Ingresa una contraseña"
-                {...register("password", {
-                  required: "La contraseña es un dato obligatorio",
-                  pattern: {
-                    value:
-                      /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
-                    message:
-                      "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.",
-                  },
-                })}
-              />
-              <Form.Text className="text-danger">
-                {errors.password?.message}
-              </Form.Text>
-            </Form.Group>
-            <Button variant="success" type="submit">
-              Crear cuenta
+        <div className="colorNavbarFooter text-light rounded-2 shadow">
+          <Modal.Header closeButton>
+            <Modal.Title>Editar Usuario</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form className="raleway" onSubmit={handleSubmit()}>
+              <Form.Group className="mb-3" controlId="nombreUsuario">
+                <Form.Label>Nombre del Usuario</Form.Label>
+                <Form.Control
+                  type="text"
+                  {...register("nombreUsuario", {
+                    required: "El usuario debe tener un nombre",
+                    minLength: {
+                      value: 3,
+                      message:
+                        "El nombre del usuario debe tener al menos 3 caracteres",
+                    },
+                    maxLength: {
+                      value: 100,
+                      message:
+                        "El nombre del usuario debe tener como máximo 100 caracteres",
+                    },
+                  })}
+                />
+                <Form.Text className="text-danger">
+                  {errors.nombreUsuario?.message}
+                </Form.Text>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  {...register("email", {
+                    required: "El email es un dato obligatorio",
+                    pattern: {
+                      value:
+                        /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                      message:
+                        "El email debe tener un formato valido, por ejemplo juanperez@mail.com",
+                    },
+                  })}
+                />
+                <Form.Text className="text-danger">
+                  {errors.email?.message}
+                </Form.Text>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="rol">
+                <Form.Label>Rol</Form.Label>
+                <Form.Select
+                  {...register("rol", {
+                    required: "El rol del usuario es un dato obligatorio",
+                  })}>
+                  <option value="">Seleccione una opcion</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="Usuario">Usuario</option>
+                </Form.Select>
+                <Form.Text className="text-danger">
+                  {errors.rol?.message}
+                </Form.Text>
+              </Form.Group>
+              <Button variant="success" type="submit">
+                Actualizar
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Cancelar
             </Button>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Cancelar
-          </Button>
-        </Modal.Footer>
+          </Modal.Footer>
+        </div>
       </Modal>
     </>
   );

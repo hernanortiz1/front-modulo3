@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
 import Contacto from "./components/pages/Contacto";
+import Inicio from "./components/pages/Inicio"
 
 function App() {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
@@ -22,6 +23,7 @@ function App() {
         </Menu>
         <main className="colorMain">
           <Routes>
+              <Route path="/" element={<Inicio></Inicio>}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
           </Routes>
         </main>

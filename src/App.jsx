@@ -1,11 +1,18 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
+import React from 'react'
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
 import Inicio from "./components/pages/Inicio";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
 
@@ -20,8 +27,10 @@ function App() {
           usuarioAdmin={usuarioAdmin}
           setUsuarioAdmin={setUsuarioAdmin}
         </Menu>
-        <main>
-          <Inicio />
+        <main className="colorMain">
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+          </Routes>
         </main>
         <Footer></Footer>
       </BrowserRouter>

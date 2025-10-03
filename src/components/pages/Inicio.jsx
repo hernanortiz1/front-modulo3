@@ -1,4 +1,3 @@
-import React from "react";
 import BannerPublicidad from "./componentsInicio/bannerPublicidad";
 import Carousel from "react-bootstrap/Carousel";
 import CardRopa from "../pages/ropa/CardRopa";
@@ -10,6 +9,7 @@ import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
 import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
+import React from 'react';
 
 import { useEffect, useState } from "react";
 import { obtenerProductos } from "../../helpers/queries";

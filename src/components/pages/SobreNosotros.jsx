@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import Perfil from '../../assets/sobreNosotros/imagenPerfil.webp'
 

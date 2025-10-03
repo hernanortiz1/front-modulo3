@@ -34,7 +34,15 @@ const Administrador = () => {
                 Productos
               </Accordion.Header>
               <Accordion.Body className="row">
-                <div className="col-12 col-md-10">
+                <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
+                <Form className="w-50 d-flex justify-content-center me-3">
+                      <Form.Control type="text" placeholder="Buscar producto" />
+                </Form>
+                <Button className="btn btn-success">
+                  <i className="bi bi-file-earmark-plus"></i>
+                </Button>
+              </div>
+                <div className="col-12">
                   <Table
                     responsive
                     striped
@@ -59,11 +67,6 @@ const Administrador = () => {
                     </tbody>
                   </Table>
                 </div>
-                <div className="col-12 col-md-2 text-end text-md-center order-first order-md-0 my-3 my-md-0">
-                  <Button className="btn btn-success">
-                    <i className="bi bi-file-earmark-plus"></i>
-                  </Button>
-                </div>
                 <div className="d-flex justify-content-center align-items-center my-3">
                   <Button className="btn-table">Anterior</Button>
                   <span className="mx-3">Página 1 de 3</span>
@@ -78,7 +81,15 @@ const Administrador = () => {
                 <i className="bi bi-person-fill me-2"></i>Usuarios
               </Accordion.Header>
               <Accordion.Body className="row">
-                <div className="col-12 col-md-10">
+                <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
+                <Form className="w-50 d-flex justify-content-center me-3">
+                      <Form.Control type="text" placeholder="Buscar usuario" />
+                </Form>
+                <Button className="btn btn-success"  onClick={handleShow}>
+                  <i className="bi bi-person-plus-fill"></i>
+                </Button>
+              </div>
+                <div className="col-12">
                   <Table
                     responsive
                     striped
@@ -99,11 +110,6 @@ const Administrador = () => {
                       <ItemUsuario></ItemUsuario>
                     </tbody>
                   </Table>
-                </div>
-                <div className="col-12 col-md-2 text-end text-md-center order-first order-md-0 my-3 my-md-0">
-                  <Button className="btn btn-success" onClick={handleShow}>
-                    <i className="bi bi-person-plus-fill"></i>
-                  </Button>
                 </div>
                 <div className="d-flex justify-content-center align-items-center my-3">
                   <Button className="btn-table">Anterior</Button>

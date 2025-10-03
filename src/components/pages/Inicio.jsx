@@ -71,7 +71,6 @@ const Inicio = () => {
       </Carousel>
 
       <Container className="my-4">
-        {/* <Row data-aos="fade-up" data-aos-delay="0"> */}
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={20}
@@ -86,12 +85,11 @@ const Inicio = () => {
           }}
         >
           {productos.map((ropa) => (
-            <SwiperSlide key={ropa.id}>
-              <CardRopa ropa={ropa} />
+            <SwiperSlide key={ropa.id} data-aos="fade-up" data-aos-delay="0" >
+              <CardRopa ropa={ropa}/>
             </SwiperSlide>
           ))}
         </Swiper>
-        {/* </Row> */}
 
         {/* TARJETAS */}
         <Row className="m-4 g-3">

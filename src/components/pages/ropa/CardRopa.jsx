@@ -1,11 +1,11 @@
 import Card from "react-bootstrap/Card";
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
+import React from 'react';
 
 const CardRopa = () => {
   const productos = [

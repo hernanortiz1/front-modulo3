@@ -7,6 +7,7 @@ import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
+import ProtectorAdmin from "./components/routes/ProtectorAdmin"
 
 function App() {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
@@ -31,11 +32,36 @@ function App() {
               element={<DetalleProducto></DetalleProducto>}
             ></Route>*/}
             <Route path="/login" element={<Login></Login>}></Route>
+            {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
+           
+           {/*
+            <Route
+              path="/remeras-chombas"
+              element={<RemerasChombas></RemerasChombas>}
+            ></Route>
+            <Route
+              path="/abrigos-camperas"
+              element={<AbrigosCamperas></AbrigosCamperas>}
+            ></Route>
+            <Route
+              path="/sweaters-buzos"
+              element={<SweatersBuzos></SweatersBuzos>}
+            ></Route>
+            <Route path="/camisas" element={<Camisas></Camisas>}></Route>
+            <Route path="/bermudas" element={<Bermudas></Bermudas>}></Route>
+            <Route
+              path="/pantalones"
+              element={<Pantalones></Pantalones>}
+            ></Route>
+            <Route path="/shorts" element={<Shorts></Shorts>}></Route>
+            <Route path="/anteojos" element={<Anoteojos></Anoteojos>}></Route>
+            <Route path="/gorras" element={<Gorras></Gorras>}></Route>
+            */}
 
-            {/* <Route
+            <Route
               path="/administrador"
               element={<ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>}
-            ></Route> */}
+            ></Route>
 
             <Route index element={<Administrador></Administrador>}></Route>
 
@@ -48,12 +74,13 @@ function App() {
                   ></FormularioRopa>
                 }
               ></Route> */}
-            <Route
+
+            {/*<Route
               path="editar/:id"
               element={
                 <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
               }
-            ></Route>
+            ></Route>*/}
 
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>

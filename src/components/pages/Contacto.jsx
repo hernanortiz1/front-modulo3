@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 
 const Contacto = () => {
+
   const {
     register,
     handleSubmit,
@@ -60,6 +61,7 @@ const Contacto = () => {
                     required
                     type="text"
                     placeholder="Ingrese nombre"
+                    maxLength={80}
                     {...register("nombreYapellido", {
                       required: "El nombre un dato obligatorio",
                       minLength: {
@@ -87,6 +89,7 @@ const Contacto = () => {
                     type="email"
                     placeholder="Ingrese email"
                     required
+                    maxLength={100}
                     {...register("email", {
                       required: "El Email un dato obligatorio",
 
@@ -110,6 +113,7 @@ const Contacto = () => {
                     type="tel"
                     placeholder="Ingrese teléfono"
                     required
+                    maxLength={15}
                     {...register("telefono", {
                       required: "El teléfono es obligatorio",
                       pattern: {
@@ -140,6 +144,7 @@ const Contacto = () => {
                     rows={3}
                     placeholder="Ingrese consulta"
                     required
+                    maxLength={150}
                     {...register("consulta", {
                       required: "La consulta es un dato obligatorio",
                       minLength: {

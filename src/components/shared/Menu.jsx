@@ -8,7 +8,6 @@ import {
   Modal,
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
-import React from 'react'
 import { useState } from "react";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
@@ -137,7 +136,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
                     </NavLink>
-                    <Button className="nav-link" onClick={logout}>
+                    <Button className="nav-link" >
                       Logout
                     </Button>
                   </>

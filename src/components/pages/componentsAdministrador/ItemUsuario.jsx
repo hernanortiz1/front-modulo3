@@ -48,6 +48,7 @@ const ItemUsuario = () => {
                 <Form.Label>Nombre del Usuario</Form.Label>
                 <Form.Control
                   type="text"
+                  maxLength={120}
                   {...register("nombreUsuario", {
                     required: "El usuario debe tener un nombre",
                     minLength: {
@@ -70,6 +71,7 @@ const ItemUsuario = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
+                  maxLength={120}
                   {...register("email", {
                     required: "El email es un dato obligatorio",
                     pattern: {

@@ -132,6 +132,7 @@ const Administrador = () => {
                 <Form.Label>Nombre del Usuario</Form.Label>
                 <Form.Control
                   type="text"
+                  maxLength={120}
                   placeholder="Ej: juanperez97"
                   {...register("nombreUsuario", {
                     required: "El usuario debe tener un nombre",
@@ -155,6 +156,7 @@ const Administrador = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
+                  maxLength={120}
                   placeholder="Ej: juanperez@mail.com"
                   {...register("email", {
                     required: "El email es un dato obligatorio",
@@ -174,6 +176,7 @@ const Administrador = () => {
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control
                   type="password"
+                  maxLength={50}
                   placeholder="Contraseña"
                   {...register("password", {
                     required: "La contraseña es un dato obligatorio",

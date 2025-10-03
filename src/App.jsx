@@ -31,7 +31,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
           </Routes>
-
         </main>
         <Footer></Footer>
       </BrowserRouter>

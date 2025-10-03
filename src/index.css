@@ -57,7 +57,10 @@ main {
 .navbar-toggler-icon {
   filter: invert(1);
 }
-
+/*sombra en formulario contacto*/
+.shadowContacto {
+  box-shadow: 0 4px 15px rgba(29, 53, 87, 0.656);
+}
 .imagenBanners {
   width: 100%;
   max-height: 350px;

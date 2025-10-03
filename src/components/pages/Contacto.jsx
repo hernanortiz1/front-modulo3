@@ -70,7 +70,7 @@ const Contacto = () => {
                       maxLength: {
                         value: 80,
                         message:
-                          "El nombre debe tener 50 caracteres como máximo",
+                          "El nombre debe tener 80 caracteres como máximo",
                       },
                     })}
                   />
@@ -107,7 +107,7 @@ const Contacto = () => {
                 <Form.Group as={Col} md="12" controlId="validationCustom03">
                   <Form.Label>Teléfono *</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="tel"
                     placeholder="Ingrese teléfono"
                     required
                     {...register("telefono", {

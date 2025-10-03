@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import React from 'react'
+import React from "react";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
@@ -23,15 +23,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Menu>
+        <Menu
           usuarioAdmin={usuarioAdmin}
           setUsuarioAdmin={setUsuarioAdmin}
-        </Menu>
+        />
         <main className="colorMain">
           <Routes>
             <Route path="/" element={<Inicio />} />
+            {/* <Route path="/administrador" element={<Administrador />} /> */}
           </Routes>
-
         </main>
         <Footer></Footer>
       </BrowserRouter>

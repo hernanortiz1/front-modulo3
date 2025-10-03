@@ -1,9 +1,8 @@
 
-
 const Login = () => {
     return (
         <>
-            
+
         </>
     );
 };

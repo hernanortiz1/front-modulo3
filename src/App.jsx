@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import React from 'react';
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
+import Contacto from "./components/pages/Contacto";
 import Inicio from "./components/pages/Inicio";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Administrador from "./components/pages/Administrador";
 
 function App() {
   useEffect(() => {
@@ -31,9 +31,9 @@ function App() {
         </Menu>
         <main className="colorMain">
           <Routes>
-            <Route path="/" element={<Inicio />} />
+            <Route path="/" element={<Inicio></Inicio>}></Route>
+            <Route path="/contacto" element={<Contacto />}></Route>
           </Routes>
-          <Administrador></Administrador>
         </main>
         <Footer></Footer>
       </BrowserRouter>

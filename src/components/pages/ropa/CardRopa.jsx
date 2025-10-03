@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router";
 import "swiper/css";

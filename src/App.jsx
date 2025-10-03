@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import React from "react";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
+import Contacto from "./components/pages/Contacto";
 import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
@@ -36,13 +36,14 @@ function App() {
         <main className="colorMain">
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
+            <Route path="/contacto" element={<Contacto />}></Route>
             {/*  <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
             ></Route>*/}
             <Route path="/login" element={<Login></Login>}></Route>
+            
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-
             {/*
             <Route
               path="/remeras-chombas"
@@ -70,28 +71,29 @@ function App() {
             <Route
               path="/administrador"
               element={<ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>}
-            ></Route>
+            >
+              <Route index element={<Administrador></Administrador>}></Route>
 
-            <Route index element={<Administrador></Administrador>}></Route>
+                  {/* <Route
+                    path="crear"
+                    element={
+                      <FormularioRopa
+                      titulo={"Crear producto"}  
+                    
+                      ></FormularioRopa>
+                    }
+                  ></Route> */}
 
-            {/* <Route
-                path="crear"
-                element={
-                  <FormularioRopa
-                  titulo={"Crear producto"}  
-                 
-                  ></FormularioRopa>
-                }
-              ></Route> */}
-
-            {/*<Route
-              path="editar/:id"
-              element={
-                <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
-              }
-            ></Route>*/}
+                  {/*<Route
+                  path="editar/:id"
+                  element={
+                    <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
+                  }
+                ></Route>*/}
+            </Route>
 
             <Route path="*" element={<Error404></Error404>}></Route>
+      
           </Routes>
         </main>
 

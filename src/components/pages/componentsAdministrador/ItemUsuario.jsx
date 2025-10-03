@@ -5,7 +5,7 @@ const ItemUsuario = () => {
     return (
         <tr className="Montserrat">
       <td className="text-center">1</td>
-      <td>juanperez1</td>
+      <td className="text-center">juanperez1</td>
       <td className="text-center">juanperez@mail.com</td>
       <td className="text-center">Usuario</td>
       <td className="text-center">

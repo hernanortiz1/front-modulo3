@@ -1,4 +1,6 @@
 import { Accordion, Table, Button } from "react-bootstrap";
+import ItemUsuario from "./componentsAdministrador/ItemUsuario"
+import ItemProducto from "./componentsAdministrador/ItemProducto"
 import React from "react";
 
 const Administrador = () => {
@@ -27,7 +29,9 @@ const Administrador = () => {
                       <th>Opciones</th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody>
+                    <ItemProducto></ItemProducto>
+                  </tbody>
                 </Table>
               </div>
               <div className="col-12 col-md-2 text-end text-md-center order-first order-md-0 my-3 my-md-0">
@@ -60,7 +64,9 @@ const Administrador = () => {
                       <th>Opciones</th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody>
+                    <ItemUsuario></ItemUsuario>
+                  </tbody>
                 </Table>
               </div>
               <div className="col-12 col-md-2 text-end text-md-center order-first order-md-0 my-3 my-md-0">

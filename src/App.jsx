@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import React from 'react'
 import { useEffect, useState } from "react";
 import React from 'react';
 import Menu from "./components/shared/Menu";
@@ -7,6 +6,7 @@ import Footer from "./components/shared/Footer";
 import Inicio from "./components/pages/Inicio";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Administrador from "./components/pages/Administrador";
 function App() {
   useEffect(() => {
     AOS.init({
@@ -32,7 +32,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
           </Routes>
-
+        <Administrador></Administrador>
         </main>
         <Footer></Footer>
       </BrowserRouter>

@@ -58,6 +58,11 @@ main {
   filter: invert(1);
 }
 
+.imagenBanners {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+}
 .fade-in-right {
   opacity: 0;
   transform: translateX(50px);

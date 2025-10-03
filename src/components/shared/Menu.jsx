@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
+import React from 'react';
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();

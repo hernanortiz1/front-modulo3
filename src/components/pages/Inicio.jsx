@@ -9,6 +9,7 @@ import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
 import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
+import React from 'react';
 
 const Inicio = () => {
   return (

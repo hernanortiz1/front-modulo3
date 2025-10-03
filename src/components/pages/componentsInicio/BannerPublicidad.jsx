@@ -2,7 +2,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Banner1 from "../../../assets/banners/bannerPublicidad1.webp";
 import Banner2 from "../../../assets/banners/bannerPublicidad2.jpg";
 import Banner3 from "../../../assets/banners/BannerPublicidad3.webp";
-
+import React from 'react';
 const BannerPublicidad = () => {
   return (
     <Carousel fade controls={false} indicators={false}>

@@ -22,8 +22,10 @@ const Administrador = () => {
 
   return (
     <>
+      <section className="py-3 colorNavbarFooter text-light">
+        <h3 className=" Montserrat text-center">ADMINISTRADOR</h3>
+      </section>
       <section className="container">
-        <h3 className="mt-5 Montserrat">ADMINISTRADOR</h3>
         <article className="my-4">
           <Accordion defaultActiveKey={["0"]} alwaysOpen>
             <Accordion.Item eventKey="0">

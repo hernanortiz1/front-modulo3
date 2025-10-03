@@ -71,25 +71,27 @@ const Inicio = () => {
       </Carousel>
 
       <Container className="my-4">
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={20}
-          slidesPerView={4}
-          navigation
-          pagination={{ clickable: true }}
-          style={{ paddingBottom: "40px" }}
-          breakpoints={{
-            0: { slidesPerView: 1 },
-            576: { slidesPerView: 2 },
-            992: { slidesPerView: 4 },
-          }}
-        >
-          {productos.map((ropa) => (
-            <SwiperSlide key={ropa.id} data-aos="fade-up" data-aos-delay="0" >
-              <CardRopa ropa={ropa}/>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div data-aos="fade-down" data-aos-delay="0">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={20}
+            slidesPerView={4}
+            navigation
+            pagination={{ clickable: true }}
+            style={{ paddingBottom: "40px" }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 2 },
+              992: { slidesPerView: 4 },
+            }}
+          >
+            {productos.map((ropa) => (
+              <SwiperSlide key={ropa.id}>
+                <CardRopa ropa={ropa} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
         {/* TARJETAS */}
         <Row className="m-4 g-3">

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Container,
@@ -69,6 +70,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       });
     }
   };
+
   return (
     <header>
       <Navbar

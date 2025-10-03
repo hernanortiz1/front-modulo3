@@ -1,3 +1,4 @@
+import React from "react";
 import BannerPublicidad from "./componentsInicio/bannerPublicidad";
 import Carousel from "react-bootstrap/Carousel";
 import CardRopa from "../pages/ropa/CardRopa";

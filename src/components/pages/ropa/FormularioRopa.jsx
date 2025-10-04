@@ -185,18 +185,28 @@ const FormularioRopa = () => {
             <option value="XXXL">XXXL</option>
             <option value="Único">Único</option>
           </Form.Select>
-          <Form.Text className="text-danger">
-            {errors.talle?.message}
-          </Form.Text>
+          <Form.Text className="text-danger">{errors.talle?.message}</Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColorProducto">
           <Form.Label>Color del producto*</Form.Label>
           <Form.Control
             type="text"
             placeholder="Ej: Negro"
-            minLength={1}
-            maxLength={20}
+            {...register("color", {
+              required: "El color del producto es un dato obligatorio",
+              minLength: {
+                value: 3,
+                message:
+                  "El color del producto debe tener almenos 3 caracteres",
+              },
+              maxLength: {
+                value: 20,
+                message:
+                  "El color del producto debe tener como maximo 20 caracteres",
+              },
+            })}
           />
+          <Form.Text className="text-danger">{errors.color?.message}</Form.Text>
         </Form.Group>
         <Button type="submit" variant="success">
           Crear producto

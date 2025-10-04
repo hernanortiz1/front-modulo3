@@ -20,9 +20,9 @@ import Pantalones from "./components/pages/categorias/Pantalones"
 import RemerasChombas from "./components/pages/categorias/RemerasChombas"
 import Shorts from "./components/pages/categorias/Shorts"
 import SweatersBuzos from "./components/pages/categorias/SweatersBuzos"
-
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { obtenerProductos } from "./helpers/queries";
 
 function App() {
   useEffect(() => {
@@ -33,10 +33,29 @@ function App() {
   }, []);
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
+ 
+  const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     sessionStorage.setItem("userKey", JSON.stringify(usuarioAdmin));
   }, [usuarioAdmin]);
+
+
+
+  useEffect(() => {
+    const cargarProductos = async () => {
+      const respuesta = await obtenerProductos();
+      if (respuesta && respuesta.ok) {
+        const data = await respuesta.json();
+        setProductos(data);
+      } else {
+        console.error("Error al obtener productos");
+      }
+    };
+
+    cargarProductos();
+  }, []);
+
 
   return (
     <>
@@ -58,27 +77,15 @@ function App() {
 
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
             
-            <Route
-              path="/remeras-chombas"
-              element={<RemerasChombas></RemerasChombas>}
-            ></Route>
-            <Route
-              path="/abrigos-camperas"
-              element={<AbrigosCamperas ></AbrigosCamperas>}
-            ></Route>
-            <Route
-              path="/sweaters-buzos"
-              element={<SweatersBuzos></SweatersBuzos>}
-            ></Route>
-            <Route path="/camisas" element={<Camisas></Camisas>}></Route>
-            <Route path="/bermudas" element={<Bermudas></Bermudas>}></Route>
-            <Route
-              path="/pantalones"
-              element={<Pantalones></Pantalones>}
-            ></Route>
-            <Route path="/shorts" element={<Shorts></Shorts>}></Route>
-            <Route path="/anteojos" element={<Anteojos></Anteojos>}></Route>
-            <Route path="/gorras" element={<Gorras></Gorras>}></Route>
+            <Route path="/remeras-chombas" element={<RemerasChombas productos={productos}></RemerasChombas>}></Route>
+            <Route path="/abrigos-camperas" element={<AbrigosCamperas productos={productos}></AbrigosCamperas>} ></Route>
+            <Route path="/sweaters-buzos" element={<SweatersBuzos productos={productos}></SweatersBuzos>}></Route>
+            <Route path="/camisas" element={<Camisas productos={productos}></Camisas>}></Route>
+            <Route path="/bermudas" element={<Bermudas productos={productos}></Bermudas>}></Route>
+            <Route path="/pantalones" element={<Pantalones productos={productos}></Pantalones>}></Route>
+            <Route path="/shorts" element={<Shorts productos={productos}></Shorts>}></Route>
+            <Route path="/anteojos" element={<Anteojos productos={productos}></Anteojos>}></Route>
+            <Route path="/gorras" element={<Gorras productos={productos}></Gorras>}></Route>
           
 
             <Route

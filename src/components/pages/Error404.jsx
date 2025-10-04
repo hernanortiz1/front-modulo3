@@ -5,18 +5,16 @@ import React from "react";
 
 const Error404 = () => {
   return (
-    <section className="container-fluid mb-5 d-block align-content-center">
-      <div className="d-flex justify-content-center mt-5 col-12">
-        <img
-          src={errorImagen}
-          alt="Pagina no encontrada"
-          className="img-fluid"
-        />
-      </div>
-      <div className="d-flex justify-content-center col-12">
-        <Link className="btn-error Montserrat">Volver al Inicio</Link>
-      </div>
-    </section>
+    <section className="container-fluid d-flex flex-column justify-content-center align-items-center my-4">
+  <img
+    src={errorImagen}
+    alt="Página no encontrada"
+    className="img-fluid"
+  />
+  <Link className="btn-error Montserrat" to={"/"}>
+    Volver al Inicio
+  </Link>
+</section>
   );
 };
 

@@ -4,7 +4,7 @@ import CardCategoriaProducto from "../ropa/CardCategoriaProducto";
 import HashLoader from "react-spinners/HashLoader";
 
 const Shorts = ({ productos }) => {
-   const [cargando, setCargando] = useState(true);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     if (productos) {
@@ -46,7 +46,7 @@ const Shorts = ({ productos }) => {
         )}
       </section>
     </>
-    );
+  );
 };
 
 export default Shorts;

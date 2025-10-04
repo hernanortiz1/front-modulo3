@@ -2,7 +2,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
-
+import React from "react";
 const Contacto = () => {
 
   const {

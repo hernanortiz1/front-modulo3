@@ -38,7 +38,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
-            <Route path="/formulario" element={<FormularioRopa/>} />
             {/*  <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}

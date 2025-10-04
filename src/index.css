@@ -246,3 +246,35 @@ main {
   background-color: #1d3557 !important;
   color: white !important;
 }
+
+
+/* Spinner en categorias */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* hover de card categoria productos*/
+.cardCategorias {
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.cardCategorias:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.cardCategoriasImg {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  transition: transform 0.3s ease; 
+}
+
+.cardCategorias:hover .cardCategoriasImg {
+  transform: scale(1.1); 
+}

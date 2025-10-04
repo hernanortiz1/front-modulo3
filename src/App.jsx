@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import Menu from "./components/shared/Menu";
@@ -11,15 +11,15 @@ import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
-import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas"
-import Anteojos from "./components/pages/categorias/Anteojos"
-import Bermudas from "./components/pages/categorias/Bermudas"
-import Camisas from "./components/pages/categorias/Camisas"
-import Gorras from "./components/pages/categorias/Gorras"
-import Pantalones from "./components/pages/categorias/Pantalones"
-import RemerasChombas from "./components/pages/categorias/RemerasChombas"
-import Shorts from "./components/pages/categorias/Shorts"
-import SweatersBuzos from "./components/pages/categorias/SweatersBuzos"
+import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas";
+import Anteojos from "./components/pages/categorias/Anteojos";
+import Bermudas from "./components/pages/categorias/Bermudas";
+import Camisas from "./components/pages/categorias/Camisas";
+import Gorras from "./components/pages/categorias/Gorras";
+import Pantalones from "./components/pages/categorias/Pantalones";
+import RemerasChombas from "./components/pages/categorias/RemerasChombas";
+import Shorts from "./components/pages/categorias/Shorts";
+import SweatersBuzos from "./components/pages/categorias/SweatersBuzos";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { obtenerProductos } from "./helpers/queries";
@@ -33,14 +33,12 @@ function App() {
   }, []);
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
- 
+
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     sessionStorage.setItem("userKey", JSON.stringify(usuarioAdmin));
   }, [usuarioAdmin]);
-
-
 
   useEffect(() => {
     const cargarProductos = async () => {
@@ -55,8 +53,7 @@ function App() {
 
     cargarProductos();
   }, []);
-
-
+  
   return (
     <>
       <BrowserRouter>
@@ -76,17 +73,45 @@ function App() {
             <Route path="/login" element={<Login></Login>}></Route>
 
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-            
-            <Route path="/remeras-chombas" element={<RemerasChombas productos={productos}></RemerasChombas>}></Route>
-            <Route path="/abrigos-camperas" element={<AbrigosCamperas productos={productos}></AbrigosCamperas>} ></Route>
-            <Route path="/sweaters-buzos" element={<SweatersBuzos productos={productos}></SweatersBuzos>}></Route>
-            <Route path="/camisas" element={<Camisas productos={productos}></Camisas>}></Route>
-            <Route path="/bermudas" element={<Bermudas productos={productos}></Bermudas>}></Route>
-            <Route path="/pantalones" element={<Pantalones productos={productos}></Pantalones>}></Route>
-            <Route path="/shorts" element={<Shorts productos={productos}></Shorts>}></Route>
-            <Route path="/anteojos" element={<Anteojos productos={productos}></Anteojos>}></Route>
-            <Route path="/gorras" element={<Gorras productos={productos}></Gorras>}></Route>
-          
+
+            <Route
+              path="/remeras-chombas"
+              element={<RemerasChombas productos={productos}></RemerasChombas>}
+            ></Route>
+            <Route
+              path="/abrigos-camperas"
+              element={
+                <AbrigosCamperas productos={productos}></AbrigosCamperas>
+              }
+            ></Route>
+            <Route
+              path="/sweaters-buzos"
+              element={<SweatersBuzos productos={productos}></SweatersBuzos>}
+            ></Route>
+            <Route
+              path="/camisas"
+              element={<Camisas productos={productos}></Camisas>}
+            ></Route>
+            <Route
+              path="/bermudas"
+              element={<Bermudas productos={productos}></Bermudas>}
+            ></Route>
+            <Route
+              path="/pantalones"
+              element={<Pantalones productos={productos}></Pantalones>}
+            ></Route>
+            <Route
+              path="/shorts"
+              element={<Shorts productos={productos}></Shorts>}
+            ></Route>
+            <Route
+              path="/anteojos"
+              element={<Anteojos productos={productos}></Anteojos>}
+            ></Route>
+            <Route
+              path="/gorras"
+              element={<Gorras productos={productos}></Gorras>}
+            ></Route>
 
             <Route
               path="/administrador"
@@ -94,7 +119,7 @@ function App() {
             >
               <Route index element={<Administrador></Administrador>}></Route>
 
-                  {/* <Route
+              {/* <Route
                     path="crear"
                     element={
                       <FormularioRopa
@@ -104,7 +129,7 @@ function App() {
                     }
                   ></Route> */}
 
-                  {/*<Route
+              {/*<Route
                   path="editar/:id"
                   element={
                     <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
@@ -113,7 +138,6 @@ function App() {
             </Route>
 
             <Route path="*" element={<Error404></Error404>}></Route>
-
           </Routes>
         </main>
 

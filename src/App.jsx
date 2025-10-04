@@ -10,6 +10,16 @@ import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
+import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas"
+import Anteojos from "./components/pages/categorias/Anteojos"
+import Bermudas from "./components/pages/categorias/Bermudas"
+import Camisas from "./components/pages/categorias/Camisas"
+import Gorras from "./components/pages/categorias/Gorras"
+import Pantalones from "./components/pages/categorias/Pantalones"
+import RemerasChombas from "./components/pages/categorias/RemerasChombas"
+import Shorts from "./components/pages/categorias/Shorts"
+import SweatersBuzos from "./components/pages/categorias/SweatersBuzos"
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -46,14 +56,14 @@ function App() {
             <Route path="/login" element={<Login></Login>}></Route>
             
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-            {/*
+            
             <Route
               path="/remeras-chombas"
               element={<RemerasChombas></RemerasChombas>}
             ></Route>
             <Route
               path="/abrigos-camperas"
-              element={<AbrigosCamperas></AbrigosCamperas>}
+              element={<AbrigosCamperas ></AbrigosCamperas>}
             ></Route>
             <Route
               path="/sweaters-buzos"
@@ -66,9 +76,9 @@ function App() {
               element={<Pantalones></Pantalones>}
             ></Route>
             <Route path="/shorts" element={<Shorts></Shorts>}></Route>
-            <Route path="/anteojos" element={<Anoteojos></Anoteojos>}></Route>
+            <Route path="/anteojos" element={<Anteojos></Anteojos>}></Route>
             <Route path="/gorras" element={<Gorras></Gorras>}></Route>
-            */}
+          
 
             <Route
               path="/administrador"

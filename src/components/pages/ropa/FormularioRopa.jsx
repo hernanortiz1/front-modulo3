@@ -151,7 +151,22 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formImagen">
           <Form.Label>Imagen URL*</Form.Label>
-          <Form.Control type="file" accept="image/*" />
+          <Form.Control
+            type="file"
+            accept="image/*"
+            {...register("imagen", {
+              required: "La imagen es obligatoria",
+              validate: {
+                fileSize: (files) =>
+                  !files[0] ||
+                  files[0].size <= 2 * 1024 * 1024 ||
+                  "La imagen no debe superar los 2MB.",
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {errors.imagen?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formTalle">
           <Form.Label>Talle*</Form.Label>

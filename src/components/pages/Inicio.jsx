@@ -23,10 +23,10 @@ const Inicio = () => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    cargarProductos();
+    leerProductos();
   }, []);
 
-  const cargarProductos = async () => {
+  const leerProductos = async () => {
     const respuesta = await obtenerProductos();
     if (respuesta.status === 200) {
       const datos = await respuesta.json();

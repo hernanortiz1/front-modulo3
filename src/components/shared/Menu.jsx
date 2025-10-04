@@ -9,9 +9,10 @@ import {
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
-import React from 'react';
+import React from "react";
 import { useForm } from "react-hook-form";
-
+import { login } from "../../helpers/queries";
+import Swal from "sweetalert2";
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -32,12 +33,26 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const logout = () => {
-    setUsuarioAdmin({});
-    navegacion("/");
+    Swal.fire({
+      title: "¿Cerrar sesión?",
+      text: "¿Estás seguro que quieres salir?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, salir",
+      confirmButtonColor: "#198754",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUsuarioAdmin({});
+        navegacion("/");
+        Swal.fire("Sesión cerrada", "Has salido correctamente.", "success");
+      }
+    });
   };
 
   const Navegacion = useNavigate();

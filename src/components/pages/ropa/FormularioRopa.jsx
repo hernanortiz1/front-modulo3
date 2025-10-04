@@ -10,8 +10,8 @@ const FormularioRopa = () => {
   } = useForm();
 
   const onSubmit = () => {
-    alert('Producto creado');
-  }
+    alert("Producto creado");
+  };
 
   return (
     <section className="container">
@@ -43,7 +43,27 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
           <Form.Label>Precio*</Form.Label>
-          <Form.Control type="number" placeholder="Ej: 10000" />
+          <Form.Control
+            type="number"
+            placeholder="Ej: 10000"
+            step="0.01"
+            {...register("precio", {
+              required: "El precio es un valor obligatorio",
+              min: {
+                value: 100,
+                message:
+                  "El precio minimo del producto debe ser de almenos $100",
+              },
+              max: {
+                value: 1000000,
+                message:
+                  "El precio maximo de un producto debe ser de hasta $1000000",
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {errors.precio?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formCategoria">
           <Form.Label>Categoría*</Form.Label>

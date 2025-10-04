@@ -44,7 +44,7 @@ const FormularioRopa = () => {
             as="textarea"
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formNombreProdcuto">
+        <Form.Group className="mb-3" controlId="formFechaUltimoControlStock">
           <Form.Label>fechaUltimoControlStock*</Form.Label>
           <Form.Control type="date" />
         </Form.Group>
@@ -66,9 +66,14 @@ const FormularioRopa = () => {
             <option value="Único">Único</option>
           </Form.Select>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formNombreProdcuto">
+        <Form.Group className="mb-3" controlId="formColorProducto">
           <Form.Label>Color del producto*</Form.Label>
-          <Form.Control type="text" placeholder="Ej: Negro" minLength={1} maxLength={20} />
+          <Form.Control
+            type="text"
+            placeholder="Ej: Negro"
+            minLength={1}
+            maxLength={20}
+          />
         </Form.Group>
         <Button type="submit" variant="success">
           Crear producto

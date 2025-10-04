@@ -2,6 +2,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
+import React from "react";
 
 const Contacto = () => {
 
@@ -49,7 +50,7 @@ const Contacto = () => {
         <h1 className="text-center Montserrat">Contacto</h1>
       </section>
 
-      <section className="container Montserrat shadowContacto rounded-3 border my-3">
+      <section className="container Montserrat shadowContacto rounded-3 border my-5 bg-light">
         <div className="row">
           <article className="col-12 col-md-6 my-4">
             <Form onSubmit={handleSubmit(agregarDatos)}>

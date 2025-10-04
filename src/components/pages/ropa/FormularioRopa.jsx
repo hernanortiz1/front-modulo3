@@ -89,7 +89,26 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formStock">
           <Form.Label>Disponibilidad de Stock*</Form.Label>
-          <Form.Control type="number" placeholder="Ej: 5" />
+          <Form.Control 
+            type="number" 
+            placeholder="Ej: 5"
+            {...register("stock", {
+              required: "El stock es un dato obligatorio",
+              min: {
+                value: 1,
+                message:
+                  "Como minimo es 1 stock (un producto disponible)",
+              },
+              max: {
+                value: 1000000,
+                message:
+                  "El precio maximo de un producto debe ser de hasta $1000000",
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {errors.stock?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formDescripcion">
           <Form.Label>Descripción*</Form.Label>

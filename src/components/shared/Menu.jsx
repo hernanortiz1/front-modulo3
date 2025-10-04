@@ -10,6 +10,7 @@ import {
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import React from 'react';
+import { useForm } from "react-hook-form";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
@@ -180,7 +181,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
                     </NavLink>
-                    <Button className="nav-link" >
+                    <Button className="nav-link" onClick={logout}>
                       Logout
                     </Button>
                   </>

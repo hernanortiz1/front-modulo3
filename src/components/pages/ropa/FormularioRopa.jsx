@@ -99,9 +99,9 @@ const FormularioRopa = () => {
                 message: "Como minimo es 1 stock (un producto disponible)",
               },
               max: {
-                value: 1000000,
+                value: 500,
                 message:
-                  "El precio maximo de un producto debe ser de hasta $1000000",
+                  "La cantidad de stock debe tener entre 1 y 5000 productos",
               },
             })}
           />

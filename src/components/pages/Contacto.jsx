@@ -5,7 +5,6 @@ import emailjs from "emailjs-com";
 import React from "react";
 
 const Contacto = () => {
-
   const {
     register,
     handleSubmit,

@@ -9,9 +9,8 @@ import {
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { login } from "../../helpers/queries";
-import Swal from "sweetalert2";
+import React from 'react';
+
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -181,7 +180,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
                     </NavLink>
-                    <Button className="nav-link" onClick={logout}>
+                    <Button className="nav-link" >
                       Logout
                     </Button>
                   </>

@@ -1,3 +1,4 @@
+import BannerPublicidad from "./componentsInicio/bannerPublicidad";
 import Carousel from "react-bootstrap/Carousel";
 import CardRopa from "../pages/ropa/CardRopa";
 import { Container, Row, Col } from "react-bootstrap";
@@ -5,10 +6,10 @@ import { Link } from "react-router";
 import BannerDesktop_uno from "../../assets/BannerDesktop_uno.png";
 import BannerDesktop_dos from "../../assets/BannerDesktop_dos.png";
 import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
-
 import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
+import React from 'react';
 
 import { useEffect, useState } from "react";
 import { obtenerProductos } from "../../helpers/queries";
@@ -186,6 +187,9 @@ const Inicio = () => {
           </Col>
         </Row>
       </Container>
+              <section className="mt-3">
+            <BannerPublicidad />
+        </section>
     </>
   );
 };

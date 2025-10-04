@@ -89,15 +89,14 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formStock">
           <Form.Label>Disponibilidad de Stock*</Form.Label>
-          <Form.Control 
-            type="number" 
+          <Form.Control
+            type="number"
             placeholder="Ej: 5"
             {...register("stock", {
               required: "El stock es un dato obligatorio",
               min: {
                 value: 1,
-                message:
-                  "Como minimo es 1 stock (un producto disponible)",
+                message: "Como minimo es 1 stock (un producto disponible)",
               },
               max: {
                 value: 1000000,
@@ -106,19 +105,30 @@ const FormularioRopa = () => {
               },
             })}
           />
-          <Form.Text className="text-danger">
-            {errors.stock?.message}
-          </Form.Text>
+          <Form.Text className="text-danger">{errors.stock?.message}</Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formDescripcion">
           <Form.Label>Descripción*</Form.Label>
           <Form.Control
             type="text"
-            minLength={10}
-            maxLength={500}
             placeholder="Ej: Remera Levis Estampa Original Manga Corta Logo Rojo Algodon"
             as="textarea"
+            rows={2}
+            {...register("descripcion", {
+              required: "La descripción es un dato obligatorio",
+              minLength: {
+                value: 10,
+                message: "La descrición debe tener almenos 10 caracteres",
+              },
+              maxLength: {
+                value: 500,
+                message: "La descrición debe tener como máximo 500 caracteres",
+              },
+            })}
           />
+          <Form.Text className="text-danger">
+            {errors.descripcion?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formFechaUltimoControlStock">
           <Form.Label>fechaUltimoControlStock*</Form.Label>

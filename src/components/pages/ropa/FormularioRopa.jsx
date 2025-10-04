@@ -13,36 +13,62 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
           <Form.Label>Precio*</Form.Label>
-          <Form.Control type="number" placeholder="Ej: 50" />
+          <Form.Control type="number" placeholder="Ej: 10000" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formCategoria">
+          <Form.Label>Categoría*</Form.Label>
+          <Form.Select placeholder="Debe seleccionar una categora">
+            <option value="">Seleccione una opcion</option>
+            <option value="Remeras y chombas">Remeras y chombas</option>
+            <option value="Abrigos y camperas">Abrigos y camperas</option>
+            <option value="Sweaters y buzos">Sweaters y buzos</option>
+            <option value="Camisas">Camisas</option>
+            <option value="Bermudas">Bermudas</option>
+            <option value="Pantalones">Pantalones</option>
+            <option value="Shorts de Baño">Shorts de Baño</option>
+            <option value="Anteojos de sol">Anteojos de sol</option>
+            <option value="Gorras">Gorras</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formStock">
+          <Form.Label>Disponibilidad de Stock*</Form.Label>
+          <Form.Control type="number" placeholder="Ej: 5" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDescripcion">
+          <Form.Label>Descripción*</Form.Label>
+          <Form.Control
+            type="text"
+            minLength={10}
+            maxLength={500}
+            placeholder="Ej: Remera Levis Estampa Original Manga Corta Logo Rojo Algodon"
+            as="textarea"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formNombreProdcuto">
+          <Form.Label>fechaUltimoControlStock*</Form.Label>
+          <Form.Control type="date" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formImagen">
           <Form.Label>Imagen URL*</Form.Label>
           <Form.Control type="file" accept="image/*" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formPrecio">
-          <Form.Label>Categoría*</Form.Label>
-          <Form.Select placeholder="Debe seleccionar una categora">
+        <Form.Group className="mb-3" controlId="formTalle">
+          <Form.Label>Talle*</Form.Label>
+          <Form.Select placeholder="Debe seleccionar un talle">
             <option value="">Seleccione una opcion</option>
-            <option value="Infusiones">Infusiones</option>
-            <option value="Batidos">Batidos</option>
-            <option value="dulce">Dulce</option>
-            <option value="salado">Salado</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+            <option value="Único">Único</option>
           </Form.Select>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formImagen">
-          <Form.Label>Descripción breve*</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Ej: Una taza de café suave y aromático."
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formImagen">
-          <Form.Label>Descripción Amplia*</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Ej: El café americano es una bebida caliente que consiste en un espresso diluido con agua caliente, lo que resulta en una taza de café suave y aromático. Es una opción popular para aquellos que prefieren un café menos intenso que el espresso tradicional. Perfecto para disfrutar en cualquier momento del día."
-            as="textarea"
-          />
+        <Form.Group className="mb-3" controlId="formNombreProdcuto">
+          <Form.Label>Color del producto*</Form.Label>
+          <Form.Control type="text" placeholder="Ej: Negro" minLength={1} maxLength={20} />
         </Form.Group>
         <Button type="submit" variant="success">
           Crear producto

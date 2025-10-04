@@ -33,12 +33,26 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const logout = () => {
-    setUsuarioAdmin({});
-    navegacion("/");
+    Swal.fire({
+      title: "¿Cerrar sesión?",
+      text: "¿Estás seguro que quieres salir?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, salir",
+      confirmButtonColor: "#198754",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUsuarioAdmin({});
+        navegacion("/");
+        Swal.fire("Sesión cerrada", "Has salido correctamente.", "success");
+      }
+    });
   };
 
   const Navegacion = useNavigate();
@@ -183,7 +197,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
                     </NavLink>
-                    <Button className="nav-link" >
+                    <Button className="nav-link" onClick={logout}>
                       Logout
                     </Button>
                   </>

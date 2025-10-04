@@ -9,7 +9,7 @@ import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
 import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
-import React from 'react';
+import React from "react";
 
 import { useEffect, useState } from "react";
 import { obtenerProductos } from "../../helpers/queries";
@@ -23,10 +23,10 @@ const Inicio = () => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    cargarProductos();
+    leerProductos();
   }, []);
 
-  const cargarProductos = async () => {
+  const leerProductos = async () => {
     const respuesta = await obtenerProductos();
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
@@ -187,9 +187,9 @@ const Inicio = () => {
           </Col>
         </Row>
       </Container>
-              <section className="mt-3">
-            <BannerPublicidad />
-        </section>
+      <section className="mt-3">
+        <BannerPublicidad />
+      </section>
     </>
   );
 };

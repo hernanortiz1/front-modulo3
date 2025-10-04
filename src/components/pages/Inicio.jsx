@@ -11,7 +11,31 @@ import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
 import React from 'react';
 
+import { useEffect, useState } from "react";
+import { obtenerProductos } from "../../helpers/queries";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
 const Inicio = () => {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
+  const cargarProductos = async () => {
+    const respuesta = await obtenerProductos();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setProductos(datos);
+    } else {
+      console.info("Error al cargar los productos");
+    }
+  };
+
   return (
     <>
       <Carousel>
@@ -48,13 +72,36 @@ const Inicio = () => {
       </Carousel>
 
       <Container className="my-4">
-        <Row data-aos="fade-up" data-aos-delay="0">
-          <CardRopa />
-        </Row>
+        <div data-aos="fade-down" data-aos-delay="0">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={20}
+            slidesPerView={4}
+            navigation
+            pagination={{ clickable: true }}
+            style={{ paddingBottom: "40px" }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 2 },
+              992: { slidesPerView: 4 },
+            }}
+          >
+            {productos.map((ropa) => (
+              <SwiperSlide key={ropa.id}>
+                <CardRopa ropa={ropa} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
         {/* TARJETAS */}
         <Row className="m-4 g-3">
-          <Col xs={12} md={6} className="imagen-container box-shadow" data-aos="fade-right">
+          <Col
+            xs={12}
+            md={6}
+            className="imagen-container box-shadow"
+            data-aos="fade-right"
+          >
             <Link to="/parte-superior">
               <img
                 src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format&fit=crop&q=60"
@@ -65,7 +112,12 @@ const Inicio = () => {
             </Link>
           </Col>
 
-          <Col xs={12} md={6} className="imagen-container box-shadow" data-aos="fade-left">
+          <Col
+            xs={12}
+            md={6}
+            className="imagen-container box-shadow"
+            data-aos="fade-left"
+          >
             <Link to="/parte-inferior">
               <img
                 src="https://images.unsplash.com/photo-1548883354-7622d03aca27?w=500&auto=format&fit=crop&q=60"

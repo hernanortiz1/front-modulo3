@@ -11,6 +11,7 @@ import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
+import DetalleProducto from "./components/pages/DetalleProducto";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -39,10 +40,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
-            {/*  <Route
+             <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
-            ></Route>*/}
+            ></Route>
 
             <Route path="/login" element={<Login></Login>}></Route>
 

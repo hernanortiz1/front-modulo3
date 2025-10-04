@@ -31,6 +31,16 @@ export const obtenerProductos = async () => {
   }
 };
 
+export const obtenerProductosPorId = async (id) => {
+  try {
+    const respuesta = await fetch(API_URL + `/${id}`);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const login = async (datosUsuario) => {
   try {
     const respuesta = await fetch(API_USUARIOS, {

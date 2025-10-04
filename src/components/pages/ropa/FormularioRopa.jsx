@@ -1,15 +1,45 @@
 import { Form, Button } from "react-bootstrap";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const FormularioRopa = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = () => {
+    alert('Producto creado');
+  }
+
   return (
     <section className="container">
       <h1 className="display-4 mt-5">Crear Producto</h1>
       <hr />
-      <Form className="my-4">
-        <Form.Group className="mb-3" controlId="formNombreProdcuto">
+      <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group className="mb-3" controlId="formNombreProducto">
           <Form.Label>Nombre producto*</Form.Label>
-          <Form.Control type="text" placeholder="Ej: Remera Levis" />
+          <Form.Control
+            type="text"
+            placeholder="Ej: Remera Levis"
+            {...register("nombreProducto", {
+              required: "El nombre del producto es un dato obligatorio",
+              minLength: {
+                value: 3,
+                message:
+                  "El nombre del producto debe tener almenos 3 caracteres",
+              },
+              maxLength: {
+                value: 100,
+                message:
+                  "El nombre del producto debe tener como maximo 100 caracteres",
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {errors.nombreProducto?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
           <Form.Label>Precio*</Form.Label>

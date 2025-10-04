@@ -170,7 +170,11 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formTalle">
           <Form.Label>Talle*</Form.Label>
-          <Form.Select placeholder="Debe seleccionar un talle">
+          <Form.Select
+            {...register("talle", {
+              required: "Debe seleccionar un talle",
+            })}
+          >
             <option value="">Seleccione una opcion</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
@@ -181,6 +185,9 @@ const FormularioRopa = () => {
             <option value="XXXL">XXXL</option>
             <option value="Único">Único</option>
           </Form.Select>
+          <Form.Text className="text-danger">
+            {errors.talle?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColorProducto">
           <Form.Label>Color del producto*</Form.Label>

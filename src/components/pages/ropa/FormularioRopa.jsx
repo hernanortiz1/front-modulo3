@@ -93,7 +93,7 @@ const FormularioRopa = () => {
             type="number"
             placeholder="Ej: 5"
             {...register("stock", {
-              required: "El stock es un dato obligatorio",
+              required: "Este campo es obligatorio",
               min: {
                 value: 1,
                 message: "Como minimo es 1 stock (un producto disponible)",
@@ -132,7 +132,22 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formFechaUltimoControlStock">
           <Form.Label>fechaUltimoControlStock*</Form.Label>
-          <Form.Control type="date" />
+          <Form.Control
+            type="date"
+            {...register("fechaUltimoControlStock", {
+              required: "Este campo es obligatorio",
+              validate: (value) => {
+                const hoy = new Date();
+                const fechaIngresada = new Date(value);
+                hoy.setHours(0, 0, 0, 0);
+                fechaIngresada.setHours(0, 0, 0, 0);
+                return fechaIngresada <= hoy || "La fecha no puede ser futura";
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {errors.fechaUltimoControlStock?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formImagen">
           <Form.Label>Imagen URL*</Form.Label>

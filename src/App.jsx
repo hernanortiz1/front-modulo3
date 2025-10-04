@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useEffect, useState } from "react";
-import React from 'react';
+import { useEffect, useState} from "react";
+import React from "react";
+import { Carousel } from "react-bootstrap";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
 import Contacto from "./components/pages/Contacto";
@@ -52,9 +53,9 @@ function App() {
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
             ></Route>*/}
-           
+
             <Route path="/login" element={<Login></Login>}></Route>
-            
+
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
             
             <Route
@@ -90,8 +91,8 @@ function App() {
                     path="crear"
                     element={
                       <FormularioRopa
-                      titulo={"Crear producto"}  
-                    
+                      titulo={"Crear producto"}
+
                       ></FormularioRopa>
                     }
                   ></Route> */}
@@ -105,7 +106,7 @@ function App() {
             </Route>
 
             <Route path="*" element={<Error404></Error404>}></Route>
-      
+
           </Routes>
         </main>
 

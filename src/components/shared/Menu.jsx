@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Container,
@@ -9,20 +10,79 @@ import {
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
-import React from 'react';
-
+import { useForm } from "react-hook-form";
+import { login } from "../../helpers/queries";
+import Swal from "sweetalert2";
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    reset();
+  };
   const handleShow = () => setShow(true);
 
   const irALogin = () => {
     handleClose();
     navegacion("/login");
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const logout = () => {
+    Swal.fire({
+      title: "¿Cerrar sesión?",
+      text: "¿Estás seguro que quieres salir?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, salir",
+      confirmButtonColor: "#198754",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUsuarioAdmin({});
+        navegacion("/");
+        Swal.fire("Sesión cerrada", "Has salido correctamente.", "success");
+      }
+    });
+  };
+
+  const Navegacion = useNavigate();
+
+  const iniciarSesion = async (usuario) => {
+    const respuesta = await login(usuario);
+    if (respuesta.status === 200) {
+      const datoUsuario = await respuesta.json();
+      setUsuarioAdmin({
+        nombreUsuario: datoUsuario.nombreUsuario,
+        token: datoUsuario.token,
+      });
+      Swal.fire({
+        title: "Inicio de sesion correcto!",
+
+        text: `Bienvenido ${datoUsuario.nombreUsuario} !`,
+
+        icon: "success",
+      });
+      handleClose();
+      Navegacion("/administrador");
+    } else {
+      Swal.fire({
+        title: "Error al iniciar sesion",
+
+        text: `Credenciales incorrectas`,
+
+        icon: "error",
+      });
+    }
   };
 
   return (
@@ -131,13 +191,13 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             </Nav>
             <Nav className="ms-auto">
               <>
-                {usuarioAdmin ? (
+                {usuarioAdmin.token ? (
                   //falta agregar .TOKEN
                   <>
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
                     </NavLink>
-                    <Button className="nav-link" >
+                    <Button className="nav-link" onClick={logout}>
                       Logout
                     </Button>
                   </>
@@ -181,7 +241,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form onSubmit={handleSubmit(iniciarSesion)}>
               <Form.Group className="mb-3" controlId="ControlInput1">
                 <Form.Label>Email *</Form.Label>
                 <Form.Control
@@ -189,14 +249,19 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                   placeholder="Ingrese e-mail"
                   autoFocus
                   className="focus-red"
-                  required
                   maxLength={100}
-                  pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
-                  onInvalid={(e) =>
-                    e.target.setCustomValidity("Ingresa un email válido")
-                  }
-                  onInput={(e) => e.target.setCustomValidity("")}
+                  {...register("email", {
+                    required: "El email es obligatorio",
+                    pattern: {
+                      value:
+                        /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                      message: "Ingresa un email válido",
+                    },
+                  })}
                 />
+                {errors.email && (
+                  <span className="text-danger">{errors.email.message}</span>
+                )}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -204,33 +269,38 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 <Form.Control
                   type="password"
                   className="focus-red"
-                  required
                   maxLength={100}
                   minLength={8}
-                  pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$"
                   placeholder="Ingrese contraseña"
-                  onInvalid={(e) =>
-                    e.target.setCustomValidity(
-                      "La contraseña debe tener 1 mayuscula, 1 minuscula, 1 número y 1 símbolo"
-                    )
-                  }
-                  onInput={(e) => e.target.setCustomValidity("")}
+                  {...register("password", {
+                    required: "La contraseña es obligatoria",
+                    minLength: {
+                      value: 8,
+                      message: "Mínimo 8 caracteres",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$/,
+                      message:
+                        "Debe tener mayúscula, minúscula, número y símbolo",
+                    },
+                  })}
                 />
+                {errors.password && (
+                  <span className="text-danger">{errors.password.message}</span>
+                )}
               </Form.Group>
-            </Form>
-            <div className="d-flex flex-column gap-2 mt-3">
-              <Button variant="primary" className="w-100">
+              <Button variant="primary" className="w-100" type="submit">
                 Ingresar
-                {/*Falta agregar logica para inicio de sesion */}
               </Button>
-              <Button
-                variant="outline-danger"
-                className="w-100"
-                onClick={irALogin}
-              >
-                Crear cuenta
-              </Button>
-            </div>
+            </Form>
+            <Button
+              variant="outline-danger"
+              className="w-100 mt-2"
+              onClick={irALogin}
+            >
+              Crear cuenta
+            </Button>
           </Modal.Body>
         </div>
       </Modal>

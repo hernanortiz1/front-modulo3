@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Container,
@@ -9,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
@@ -84,6 +84,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       });
     }
   };
+
   return (
     <header>
       <Navbar

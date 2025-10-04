@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useEffect, useState } from "react";
-import React from 'react';
+import { useEffect, useState} from "react";
+import React from "react";
+import { Carousel } from "react-bootstrap";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
 import Contacto from "./components/pages/Contacto";

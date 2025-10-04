@@ -67,7 +67,11 @@ const FormularioRopa = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formCategoria">
           <Form.Label>Categoría*</Form.Label>
-          <Form.Select placeholder="Debe seleccionar una categora">
+          <Form.Select
+            {...register("categoria", {
+              required: "Debe seleccionar una categoria",
+            })}
+          >
             <option value="">Seleccione una opcion</option>
             <option value="Remeras y chombas">Remeras y chombas</option>
             <option value="Abrigos y camperas">Abrigos y camperas</option>
@@ -79,6 +83,9 @@ const FormularioRopa = () => {
             <option value="Anteojos de sol">Anteojos de sol</option>
             <option value="Gorras">Gorras</option>
           </Form.Select>
+          <Form.Text className="text-danger">
+            {errors.categoria?.message}
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formStock">
           <Form.Label>Disponibilidad de Stock*</Form.Label>

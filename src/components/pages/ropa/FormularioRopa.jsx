@@ -15,7 +15,7 @@ const FormularioRopa = () => {
 
   return (
     <section className="container">
-      <h1 className="display-4 mt-5">Crear Producto</h1>
+      <h1 className="display-5 mt-5 Montserrat">Titulo</h1>
       <hr />
       <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formNombreProducto">
@@ -210,6 +210,9 @@ const FormularioRopa = () => {
         </Form.Group>
         <Button type="submit" variant="success">
           Crear producto
+        </Button>
+        <Button variant="danger" className="mx-1">
+          Cancelar
         </Button>
       </Form>
     </section>

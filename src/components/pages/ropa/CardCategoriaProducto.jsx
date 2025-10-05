@@ -27,7 +27,7 @@ const CardCategoriaProducto = ({ productos }) => {
             <Card.Body className="cardCategoriasBody">
               <ul className="list-unstyled mb-0">
                 <li className="mb-1">
-                  <strong className="fs-5">{productos.nombreProducto}</strong>
+                  <strong className="fs-5">{productos.nombreProducto.substring(0, 20) + "..."}</strong>
                 </li>
                 <li className="mb-1 fs-6">
                   <strong>$ {productos.precio}</strong>

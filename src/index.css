@@ -307,7 +307,7 @@ main {
 }
 
 .cardCategoriasBody {
-  height: 250px;
+  height: 220px;
   overflow: hidden;
 }
 @media (max-width: 992px) {

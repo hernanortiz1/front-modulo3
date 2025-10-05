@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row } from "react-bootstrap";
 import CardCategoriaProducto from "../ropa/CardCategoriaProducto";
 import HashLoader from "react-spinners/HashLoader";
+import BtnScroll from "./funcion/BtnScroll";
 
 const Gorras = ({ productos }) => {
   const [cargando, setCargando] = useState(true);
@@ -45,6 +46,7 @@ const Gorras = ({ productos }) => {
           </Row>
         )}
       </section>
+      <BtnScroll />
     </>
   );
 };

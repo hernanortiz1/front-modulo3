@@ -186,6 +186,11 @@ main {
   object-fit: cover;
 }
 
+.img-ropa{
+  width: 150px;
+  height:125px ;
+}
+
 .card-ropa {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -200,6 +205,14 @@ main {
 .box-shadow:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.btn-error{
+  border: #1d3557 1px solid;
+  padding: 15px;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  color:#1d3557
 }
 
 @media (max-width: 768px) {

@@ -26,10 +26,10 @@ const Inicio = () => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    cargarProductos();
+    leerProductos();
   }, []);
 
-  const cargarProductos = async () => {
+  const leerProductos = async () => {
     const respuesta = await obtenerProductos();
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
@@ -190,9 +190,9 @@ const Inicio = () => {
           </Col>
         </Row>
       </Container>
-              <section className="mt-3">
-            <BannerPublicidad />
-        </section>
+      <section className="mt-3">
+        <BannerPublicidad />
+      </section>
     </>
   );
 };

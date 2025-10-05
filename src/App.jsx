@@ -9,8 +9,9 @@ import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
-import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
+import DetalleProducto from "./components/pages/DetalleProducto";
+import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -39,10 +40,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
-            {/*  <Route
+             <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
-            ></Route>*/}
+            ></Route>
 
             <Route path="/login" element={<Login></Login>}></Route>
 
@@ -77,7 +78,7 @@ function App() {
             >
               <Route index element={<Administrador></Administrador>}></Route>
 
-                  {/* <Route
+                  <Route
                     path="crear"
                     element={
                       <FormularioRopa
@@ -85,7 +86,7 @@ function App() {
 
                       ></FormularioRopa>
                     }
-                  ></Route> */}
+                  ></Route>
 
                   {/*<Route
                   path="editar/:id"

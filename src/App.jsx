@@ -9,7 +9,6 @@ import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
-import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas";
 import Anteojos from "./components/pages/categorias/Anteojos";

@@ -17,8 +17,18 @@ export const crearProducto = async (productoNuevo) => {
       "fechaUltimoControlStock",
       productoNuevo.fechaUltimoControlStock
     );
-    const respuesta = await fetch(API_URL, {});
-  } catch (error) {}
+    const respuesta = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
+      },
+      body: formData
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export const obtenerProductos = async () => {

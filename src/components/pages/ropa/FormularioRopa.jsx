@@ -1,16 +1,45 @@
 import { Form, Button } from "react-bootstrap";
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import { crearProducto } from "../../../helpers/queries";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 const FormularioRopa = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
-  const onSubmit = () => {
-    alert("Producto creado");
+  const navegacion = useNavigate();
+  const onSubmit = async (producto) => {
+    const productoMejorado = {
+      ...producto,
+      imagen: producto.imagen[0],
+    };
+    const respuesta = await crearProducto(productoMejorado);
+    if (respuesta.status === 201) {
+      Swal.fire({
+        title: "Producto creado!",
+
+        text: `El producto ${producto.nombreProducto} fue creado correctamente!`,
+
+        icon: "success",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          reset();
+          navegacion("/administrador");
+        }
+      });
+    } else {
+      const datosErroneos = await respuesta.json();
+      Swal.fire({
+        title: "Ocurrio un error",
+        text: `El producto ${producto.nombreProducto} no pudo ser creado, ${datosErroneos[0].msg}`,
+        icon: "error",
+      });
+    }
   };
 
   return (

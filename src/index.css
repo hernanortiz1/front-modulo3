@@ -186,6 +186,11 @@ main {
   object-fit: cover;
 }
 
+.img-ropa{
+  width: 150px;
+  height:125px ;
+}
+
 .card-ropa {
   transition: transform 0.3s, box-shadow 0.3s;
 }

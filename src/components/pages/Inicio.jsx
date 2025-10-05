@@ -9,6 +9,9 @@ import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
 import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
+import ParteSuperior from "../../assets/ParteSuperior.jpeg"
+import ParteInferior from "../../assets/ParteInferior.jpeg"
+
 import React from 'react';
 
 import { useEffect, useState } from "react";
@@ -104,9 +107,9 @@ const Inicio = () => {
           >
             <Link to="/parte-superior">
               <img
-                src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format&fit=crop&q=60"
+                src={ParteSuperior}
                 alt="Parte Superior Ropa"
-                className="w-100"
+                className="w-100 h-100"
               />
               <span className="texto-sobre-imagen">PARTE SUPERIOR</span>
             </Link>
@@ -120,7 +123,7 @@ const Inicio = () => {
           >
             <Link to="/parte-inferior">
               <img
-                src="https://images.unsplash.com/photo-1548883354-7622d03aca27?w=500&auto=format&fit=crop&q=60"
+                src={ParteInferior}
                 alt="Parte Inferior Ropa"
                 className="w-100"
               />

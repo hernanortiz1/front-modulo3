@@ -1,6 +1,8 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { registro } from "../../helpers/queries.js";
+import Swal from "sweetalert2";
 
 const Registro = () => {
 
@@ -10,19 +12,37 @@ const Registro = () => {
     formState: { errors },
   } = useForm();
 
+  const crearCuenta = async (usuario) => {
+    const respuesta = await registro(usuario);
+
+    if (respuesta.status === 201) {
+      Swal.fire({
+        title: "Registro exitoso",
+        text: `Bienvenido ${usuario.email}`,
+        icon: "success",
+      });
+      navegacion("/");
+    } else {
+      Swal.fire({
+        title: "Error al registrarse",
+        text: `Credenciales incorrectas`,
+        icon: "error",
+      });
+    }
+  };
+
     return (
         <>
         <section className="py-3 colorNavbarFooter text-light">
         <h1 className=" Montserrat text-center">CREA TU CUENTA</h1>
       </section>
       <section className="container-fluid my-5">
-        <Form className="Montserrat" onSubmit={handleSubmit}>
+        <Form className="Montserrat" onSubmit={handleSubmit(crearCuenta)}>
             <Form.Group className="mb-3" controlId="nombreUsuario">
               <Form.Label>Nombre del usuario</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Ej: juanperez01"
-                required
                 maxLength={100}
                 {...register("nombreUsuario", {
                   required: "El nombre del usuario es un dato obligatorio",
@@ -47,7 +67,6 @@ const Registro = () => {
               <Form.Control
                 type="email"
                 placeholder="Ej: juanperez@mail.com"
-                required
                 maxLength={100}
                 {...register("email", {
                   required: "El email es un dato obligatorio",
@@ -68,7 +87,6 @@ const Registro = () => {
               <Form.Control
                 type="password"
                 placeholder="Ingresa una contraseña"
-                required
                 maxLength={40}
                 {...register("password", {
                   required: "La contraseña es un dato obligatorio",

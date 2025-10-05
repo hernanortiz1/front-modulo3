@@ -23,6 +23,7 @@ const FormularioRopa = () => {
           <Form.Control
             type="text"
             placeholder="Ej: Remera Levis"
+            maxLength={100}
             {...register("nombreProducto", {
               required: "El nombre del producto es un dato obligatorio",
               minLength: {
@@ -46,6 +47,7 @@ const FormularioRopa = () => {
           <Form.Control
             type="number"
             placeholder="Ej: 10000"
+            max={1000000}
             step="0.01"
             {...register("precio", {
               required: "El precio es un valor obligatorio",
@@ -92,8 +94,13 @@ const FormularioRopa = () => {
           <Form.Control
             type="number"
             placeholder="Ej: 5"
+            max={500}
             {...register("stock", {
               required: "Este campo es obligatorio",
+              pattern: {
+                value: /^[0-9]+$/,
+                message: "El campo solo admite números",
+              },
               min: {
                 value: 1,
                 message: "Como minimo es 1 stock (un producto disponible)",
@@ -101,7 +108,7 @@ const FormularioRopa = () => {
               max: {
                 value: 500,
                 message:
-                  "La cantidad de stock debe tener entre 1 y 5000 productos",
+                  "La cantidad de stock debe tener entre 1 y 500 productos",
               },
             })}
           />
@@ -114,6 +121,7 @@ const FormularioRopa = () => {
             placeholder="Ej: Remera Levis Estampa Original Manga Corta Logo Rojo Algodon"
             as="textarea"
             rows={2}
+            maxLength={500}
             {...register("descripcion", {
               required: "La descripción es un dato obligatorio",
               minLength: {
@@ -192,8 +200,14 @@ const FormularioRopa = () => {
           <Form.Control
             type="text"
             placeholder="Ej: Negro"
+            maxLength={20}
             {...register("color", {
               required: "El color del producto es un dato obligatorio",
+              pattern: {
+                value: /^[^\d]+$/,
+                message: "No se permiten números en el nombre del color",
+              },
+
               minLength: {
                 value: 3,
                 message:

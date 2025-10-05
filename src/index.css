@@ -333,3 +333,27 @@ main {
   }
 }
 /* FIN  hover de card categoria productos*/
+/* BTN Scroll de categoria productos */
+.btnScrollArriba {
+ position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #1d3557;
+  color: white; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+  z-index: 1;
+}
+
+.btnScrollArriba:hover {
+  transform: scale(1.1);
+}
+/* FIN BTN Scroll de categoria productos */

@@ -46,3 +46,20 @@ export const login = async (datosUsuario) => {
     return null;
   }
 };
+
+export const registro = async (nuevoUsuario) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nuevoUsuario),
+    });
+
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

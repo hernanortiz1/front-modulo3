@@ -1,5 +1,6 @@
 import React from "react";
-const Login = () => {
+
+const Registro = () => {
     return (
         <>
 
@@ -7,4 +8,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Registro;

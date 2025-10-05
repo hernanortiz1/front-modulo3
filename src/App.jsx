@@ -8,10 +8,10 @@ import Contacto from "./components/pages/Contacto";
 import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
-import Login from "./components/pages/Login";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Registro from "./components/pages/Registro";
 
 function App() {
   useEffect(() => {
@@ -43,9 +43,7 @@ function App() {
               element={<DetalleProducto></DetalleProducto>}
             ></Route>*/}
 
-            <Route path="/login" element={<Login></Login>}></Route>
-
-            {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
+            <Route path="/registro" element={<Registro></Registro>}></Route>
             {/*
             <Route
               path="/remeras-chombas"

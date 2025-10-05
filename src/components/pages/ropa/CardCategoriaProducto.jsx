@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import {
   precioDescuento,
   calcularCuotas,
+  formatearPrecio,
 } from "../categorias/funcion/operaciones";
 
 const CardCategoriaProducto = ({ productos }) => {
@@ -30,16 +31,16 @@ const CardCategoriaProducto = ({ productos }) => {
                   <strong className="fs-5">{productos.nombreProducto.substring(0, 20) + "..."}</strong>
                 </li>
                 <li className="mb-1 fs-6">
-                  <strong>$ {productos.precio}</strong>
+                  <strong>$ {formatearPrecio(productos.precio)}</strong>
                 </li>
                 <li className="mb-1">
                   <small className="text-primary">
-                    ${precioDescuento(productos.precio, 10)} con Transferencia
+                    ${" "}{formatearPrecio(precioDescuento(productos.precio, 10))} con Transferencia
                   </small>
                 </li>
                 <li className="mb-1">
                   3 cuotas sin interés de{" "}
-                  <strong>${calcularCuotas(productos.precio, 3)}</strong>
+                  <strong>${" "}{formatearPrecio(calcularCuotas(productos.precio, 3))}</strong>
                 </li>
                 <li className="mb-1">
                   <small>

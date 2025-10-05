@@ -8,7 +8,6 @@ import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
-import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -38,7 +37,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
-            <Route path="/formulario" element={<FormularioRopa />}></Route>
             {/*  <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}

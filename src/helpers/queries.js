@@ -33,7 +33,7 @@ export const obtenerProductos = async () => {
 
 export const login = async (datosUsuario) => {
   try {
-    const respuesta = await fetch(API_USUARIOS, {
+    const respuesta = await fetch(API_USUARIOS + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

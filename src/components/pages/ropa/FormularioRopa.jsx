@@ -28,7 +28,7 @@ const FormularioRopa = () => {
               minLength: {
                 value: 3,
                 message:
-                  "El nombre del producto debe tener almenos 3 caracteres",
+                  "El nombre del producto debe tener al menos 3 caracteres",
               },
               maxLength: {
                 value: 100,
@@ -52,7 +52,7 @@ const FormularioRopa = () => {
               min: {
                 value: 100,
                 message:
-                  "El precio minimo del producto debe ser de almenos $100",
+                  "El precio minimo del producto debe ser de al menos $100",
               },
               max: {
                 value: 1000000,
@@ -118,7 +118,7 @@ const FormularioRopa = () => {
               required: "La descripción es un dato obligatorio",
               minLength: {
                 value: 10,
-                message: "La descrición debe tener almenos 10 caracteres",
+                message: "La descrición debe tener al menos 10 caracteres",
               },
               maxLength: {
                 value: 500,
@@ -197,7 +197,7 @@ const FormularioRopa = () => {
               minLength: {
                 value: 3,
                 message:
-                  "El color del producto debe tener almenos 3 caracteres",
+                  "El color del producto debe tener al menos 3 caracteres",
               },
               maxLength: {
                 value: 20,

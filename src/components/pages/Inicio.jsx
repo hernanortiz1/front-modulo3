@@ -81,7 +81,9 @@ const Inicio = () => {
             spaceBetween={20}
             slidesPerView={4}
             navigation
-            pagination={{ clickable: true }}
+            pagination={{ clickable: true,
+              dynamicBullets:true
+             }}
             style={{ paddingBottom: "40px" }}
             breakpoints={{
               0: { slidesPerView: 1 },

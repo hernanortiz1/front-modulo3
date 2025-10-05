@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 const BtnScroll = () => {
   const [visible, setVisible] = useState(false);
@@ -21,7 +21,7 @@ const BtnScroll = () => {
         <i className="bi bi-arrow-up fs-3"></i>
       </button>
     )
-    );
+  );
 };
 
 export default BtnScroll;

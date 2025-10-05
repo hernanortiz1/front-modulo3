@@ -8,5 +8,5 @@ export const calcularCuotas = (precio, cuotas = 3) => {
 };
 
 export const formatearPrecio = (precio) => {
-  return new Intl.NumberFormat('es-AR').format(precio);
+  return new Intl.NumberFormat("es-AR").format(precio);
 };

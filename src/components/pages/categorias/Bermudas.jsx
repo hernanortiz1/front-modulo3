@@ -46,8 +46,8 @@ const Bermudas = ({ productos }) => {
           </Row>
         )}
       </section>
-      
-     <BtnScroll />
+
+      <BtnScroll />
     </>
   );
 };

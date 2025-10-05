@@ -46,7 +46,7 @@ const Anteojos = ({ productos }) => {
           </Row>
         )}
       </section>
-       <BtnScroll />
+      <BtnScroll />
     </>
   );
 };

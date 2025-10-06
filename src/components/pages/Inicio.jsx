@@ -147,7 +147,7 @@ const Inicio = () => {
               Camisas
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/camisas"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -180,7 +180,7 @@ const Inicio = () => {
               Sweaters y buzos
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/sweaters-buzos"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -213,7 +213,7 @@ const Inicio = () => {
               Abrigos y camperas
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/abrigos-camperas"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -246,7 +246,7 @@ const Inicio = () => {
               Pantalones
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/pantalones"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -279,7 +279,7 @@ const Inicio = () => {
               Bermudas
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/bermudas"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -312,7 +312,7 @@ const Inicio = () => {
               Shorts de Baño
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/shorts"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -345,7 +345,7 @@ const Inicio = () => {
               Gorras
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/gorras"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}
@@ -378,7 +378,7 @@ const Inicio = () => {
               Anteojos de sol
             </h3>
             <Link
-              to={"/remeras-chombas"}
+              to={"/anteojos"}
               className="colorTitleInicio text-decoration-none"
             >
               {" "}

@@ -13,7 +13,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
-import Offcanvas from "react-bootstrap/Offcanvas";
+import CartOffcanvas from "../pages/offCanvas/CartOffCanvas";
+
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -27,10 +28,19 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const handleShow = () => setShow(true);
 
   //CARRITO
-  const [showCarrito, setShowCarrito] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
-  const handleCloseCarrito = () => setShowCarrito(false);
-  const handleShowCarrito = () => setShowCarrito(true);
+  const cartItems = [
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image: "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+  ];
 
   const irALogin = () => {
     handleClose();
@@ -225,10 +235,15 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     {/* Botón carrito */}
                     <Button
                       className="nav-link d-flex align-items-center ms-lg-5"
-                      onClick={handleShowCarrito}
+                      onClick={() => setShowCart(true)}
                     >
                       <i className="bi bi-bag-fill text-light fs-4"></i>
                     </Button>
+                    <CartOffcanvas
+                      show={showCart}
+                      handleClose={() => setShowCart(false)}
+                      cartItems={cartItems}
+                    />
                   </>
                 )}
               </>
@@ -310,16 +325,6 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           </Modal.Body>
         </div>
       </Modal>
-      {/*CANVAS CARRITO */}
-      <Offcanvas show={showCarrito} onHide={handleCloseCarrito} placement="end">
-        <Offcanvas.Header className="colorFondoTitulo text-light" closeButton>
-          <Offcanvas.Title>🛒Mi Carrito</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="colorMain">
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
-      </Offcanvas>
     </header>
   );
 };

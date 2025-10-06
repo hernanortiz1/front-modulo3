@@ -312,10 +312,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       </Modal>
       {/*CANVAS CARRITO */}
       <Offcanvas show={showCarrito} onHide={handleCloseCarrito} placement="end">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Mi Carrito</Offcanvas.Title>
+        <Offcanvas.Header className="colorFondoTitulo text-light" closeButton>
+          <Offcanvas.Title>🛒Mi Carrito</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className="colorMain">
           Some text as placeholder. In real life you can have the elements you
           have chosen. Like, text, images, lists, etc.
         </Offcanvas.Body>

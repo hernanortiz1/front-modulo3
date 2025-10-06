@@ -78,12 +78,6 @@ const Inicio = () => {
   const gorras = filtrarPorCategoria("Gorras");
   const anteojos = filtrarPorCategoria("Anteojos de sol");
 
-  const productosColeccion = productos.filter(
-    (producto) =>
-      producto.categoria !== "Abrigos y camperas" &&
-      producto.categoria !== "Sweaters y buzos"
-  );
-
   return (
     <>
       <Carousel>
@@ -176,6 +170,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {remeras.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -195,6 +192,7 @@ const Inicio = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+          }
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -207,6 +205,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {camisas.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -225,7 +226,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -240,6 +241,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {buzos.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -258,7 +262,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -273,6 +277,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {abrigosCamperas.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -291,7 +298,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -304,6 +311,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {pantalones.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -322,7 +332,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -335,6 +345,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {bermudas.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -353,7 +366,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -368,6 +381,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {shortsBanio.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -386,7 +402,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -399,6 +415,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {gorras.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -417,7 +436,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
@@ -432,6 +451,9 @@ const Inicio = () => {
               ver todo <i className="bi bi-arrow-right"></i>
             </Link>
           </div>
+          {anteojos.length===0?
+          <p>No se encontraron productos</p>
+          :
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -450,7 +472,7 @@ const Inicio = () => {
                 <CardRopa ropa={ropa} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </div>
       </Container>
       <section className="mt-3">

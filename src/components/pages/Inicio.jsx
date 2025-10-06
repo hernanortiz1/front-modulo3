@@ -1,7 +1,7 @@
 import BannerPublicidad from "./componentsInicio/bannerPublicidad";
 import Carousel from "react-bootstrap/Carousel";
 import CardRopa from "../pages/ropa/CardRopa";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { Link } from "react-router";
 import BannerDesktop_uno from "../../assets/BannerDesktop_uno.png";
 import BannerDesktop_dos from "../../assets/BannerDesktop_dos.png";

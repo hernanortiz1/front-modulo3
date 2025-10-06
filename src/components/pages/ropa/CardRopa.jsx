@@ -4,8 +4,8 @@ import { Link } from "react-router";
 const CardRopa = ({ ropa }) => {
   return (
     <>
-      <Card className="card-ropa h-100 d-flex flex-column">
-        <Link>
+    <Link className="text-decoration-none">
+      <Card className="card-ropa h-100 d-flex flex-column shadow">
           <Card.Img
             src={ropa.imagen}
             style={{
@@ -13,17 +13,18 @@ const CardRopa = ({ ropa }) => {
               objectFit: "cover",
             }}
           />
-        </Link>
         <Card.Body className="d-flex flex-column">
-          <Link className="text-decoration-none text-dark Montserrat flex-grow-1">
             <Card.Title className="Montserrat text-truncate">
               {ropa.nombreProducto}
             </Card.Title>
             <Card.Text className="text-truncate">{ropa.descripcion}</Card.Text>
-          </Link>
-          <Card.Text className="mt-auto Montserrat">${ropa.precio}</Card.Text>
+            <div className="d-flex mx-2">
+              <Card.Text className="me-auto Montserrat fs-5"><strong>${ropa.precio}</strong></Card.Text>
+              <Card.Text className="Montserrat"><strong>Ver más<i className="bi bi-arrow-right"></i></strong></Card.Text>
+            </div>
         </Card.Body>
       </Card>
+      </Link>
     </>
   );
 };

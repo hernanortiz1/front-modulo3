@@ -3,10 +3,10 @@ import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { registro } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
+import imagenRegistro from "../../assets/sobreNosotros/registroImagen.jpg"
 
 const Registro = () => {
-
-    const {
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -18,7 +18,7 @@ const Registro = () => {
     if (respuesta.status === 201) {
       Swal.fire({
         title: "Registro exitoso",
-        text: `Bienvenido ${usuario.email}`,
+        text: `Bienvenido ${usuario.nombreUsuario}`,
         icon: "success",
       });
       navegacion("/");
@@ -31,13 +31,14 @@ const Registro = () => {
     }
   };
 
-    return (
-        <>
-        <section className="py-3 colorNavbarFooter text-light">
+  return (
+    <>
+      <section className="py-3 colorNavbarFooter text-light">
         <h1 className=" Montserrat text-center">CREA TU CUENTA</h1>
       </section>
-      <section className="container-fluid my-5">
-        <Form className="Montserrat" onSubmit={handleSubmit(crearCuenta)}>
+      <section className="container-fluid my-5 row justify-content-center">
+        <div className="col-12 col-md-5">
+          <Form className="Montserrat" onSubmit={handleSubmit(crearCuenta)}>
             <Form.Group className="mb-3" controlId="nombreUsuario">
               <Form.Label>Nombre del usuario</Form.Label>
               <Form.Control
@@ -46,16 +47,16 @@ const Registro = () => {
                 maxLength={100}
                 {...register("nombreUsuario", {
                   required: "El nombre del usuario es un dato obligatorio",
-              minLength: {
-                value: 3,
-                message:
-                  "El nombre del usuario debe tener al menos 3 caracteres",
-              },
-              maxLength: {
-                value: 100,
-                message:
-                  "El nombre del usuario debe tener como maximo 100 caracteres",
-              },
+                  minLength: {
+                    value: 3,
+                    message:
+                      "El nombre del usuario debe tener al menos 3 caracteres",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message:
+                      "El nombre del usuario debe tener como maximo 100 caracteres",
+                  },
                 })}
               />
               <Form.Text className="text-danger">
@@ -106,9 +107,10 @@ const Registro = () => {
               Registrarse
             </Button>
           </Form>
+        </div>
       </section>
-        </>
-    );
+    </>
+  );
 };
 
 export default Registro;

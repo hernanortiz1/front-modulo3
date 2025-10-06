@@ -72,6 +72,12 @@ const Inicio = () => {
     (producto) => producto.categoria === "Sweaters y buzos"
   );
 
+  const productosFiltrados = productos.filter(
+  (producto) => producto.categoria !== "Abrigos y camperas" && producto.categoria !== "Sweaters y buzos"
+);
+
+  const coleccionRandom = productosFiltrados.sort(() => Math.random() - 0.5).slice(0, 10);
+
   return (
     <>
       <Carousel>
@@ -109,10 +115,34 @@ const Inicio = () => {
 
       <Container className="my-4">
         <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Remeras y chombas
+            <h3 className="Montserrat text-center mt-5 mb-4">
+              COLECCIÓN PRIMAVERA-VERANO
             </h3>
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={20}
+            slidesPerView={4}
+            navigation
+            pagination={{ clickable: true }}
+            style={{ paddingBottom: "40px" }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 2 },
+              992: { slidesPerView: 4 },
+            }}
+          >
+            {coleccionRandom.map((ropa) => (
+              <SwiperSlide key={ropa.id}>
+                <CardRopa ropa={ropa} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h5 className="Montserrat me-auto colorTitleInicio">
+              REMERAS Y CHOMBAS
+            </h5>
             <Link
               to={"/remeras-chombas"}
               className="colorTitleInicio text-decoration-none"
@@ -143,9 +173,7 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Camisas
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">CAMISAS</h5>
             <Link
               to={"/camisas"}
               className="colorTitleInicio text-decoration-none"
@@ -176,9 +204,9 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Sweaters y buzos
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">
+              SWEATERS Y BUZOS
+            </h5>
             <Link
               to={"/sweaters-buzos"}
               className="colorTitleInicio text-decoration-none"
@@ -209,9 +237,9 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Abrigos y camperas
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">
+              ABRIGOS Y CAMPERAS
+            </h5>
             <Link
               to={"/abrigos-camperas"}
               className="colorTitleInicio text-decoration-none"
@@ -242,9 +270,7 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Pantalones
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">PANTALONES</h5>
             <Link
               to={"/pantalones"}
               className="colorTitleInicio text-decoration-none"
@@ -275,9 +301,7 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Bermudas
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">BERMUDAS</h5>
             <Link
               to={"/bermudas"}
               className="colorTitleInicio text-decoration-none"
@@ -308,9 +332,9 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Shorts de Baño
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">
+              SHORTS DE BAÑO
+            </h5>
             <Link
               to={"/shorts"}
               className="colorTitleInicio text-decoration-none"
@@ -341,9 +365,7 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Gorras
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">GORRAS</h5>
             <Link
               to={"/gorras"}
               className="colorTitleInicio text-decoration-none"
@@ -374,9 +396,9 @@ const Inicio = () => {
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">
-            <h3 className="Montserrat me-auto colorTitleInicio">
-              Anteojos de sol
-            </h3>
+            <h5 className="Montserrat me-auto colorTitleInicio">
+              ANTEOJOS DE SOL
+            </h5>
             <Link
               to={"/anteojos"}
               className="colorTitleInicio text-decoration-none"

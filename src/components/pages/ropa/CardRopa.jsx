@@ -16,7 +16,7 @@ const CardRopa = ({ ropa }) => {
         </Link>
         <Card.Body className="d-flex flex-column">
           <Link className="text-decoration-none text-dark Montserrat flex-grow-1">
-            <Card.Title className="Montserrat">
+            <Card.Title className="Montserrat text-truncate">
               {ropa.nombreProducto}
             </Card.Title>
             <Card.Text className="text-truncate">{ropa.descripcion}</Card.Text>

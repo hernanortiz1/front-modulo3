@@ -9,10 +9,13 @@ import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
 import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
-import ParteSuperior from "../../assets/ParteSuperior.jpeg"
-import ParteInferior from "../../assets/ParteInferior.jpeg"
+import ParteSuperior from "../../assets/ParteSuperior.jpeg";
+import ParteInferior from "../../assets/ParteInferior.jpeg";
+import gafas from "../../assets/gafas.avif";
+import Gorra from "../../assets/Gorra.avif";
+import sueter from "../../assets/sueter.avif";
 
-import React from 'react';
+import React from "react";
 
 import { useEffect, useState } from "react";
 import { obtenerProductos } from "../../helpers/queries";
@@ -75,15 +78,42 @@ const Inicio = () => {
       </Carousel>
 
       <Container className="my-4">
+        <Link
+          className="d-flex justify-content-end ver-todo"
+          to="/remeras-chombas"
+        >
+          Ver todo
+        </Link>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div
+            className="swiper-button-prev"
+            style={{
+              left: "-40px",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              color:"#000"
+            }}
+          ></div>
+          <div
+            className="swiper-button-next"
+            style={{
+              right: "-40px",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              color:"#000"
+            }}
+          ></div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
             slidesPerView={4}
-            navigation
-            pagination={{ clickable: true,
-              dynamicBullets:true
-             }}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            pagination={{ clickable: true, dynamicBullets: true }}
             style={{ paddingBottom: "40px" }}
             breakpoints={{
               0: { slidesPerView: 1 },
@@ -91,11 +121,13 @@ const Inicio = () => {
               992: { slidesPerView: 4 },
             }}
           >
-            {productos.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
+            {productos
+              .filter((ropa) => ropa.categoria === "Remeras y chombas")
+              .map((ropa) => (
+                <SwiperSlide key={ropa.id}>
+                  <CardRopa ropa={ropa} />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
 
@@ -107,7 +139,7 @@ const Inicio = () => {
             className="imagen-container box-shadow"
             data-aos="fade-right"
           >
-            <Link to="/parte-superior">
+            <Link to="/camisas">
               <img
                 src={ParteSuperior}
                 alt="Parte Superior Ropa"
@@ -123,7 +155,7 @@ const Inicio = () => {
             className="imagen-container box-shadow"
             data-aos="fade-left"
           >
-            <Link to="/parte-inferior">
+            <Link to="/pantalones">
               <img
                 src={ParteInferior}
                 alt="Parte Inferior Ropa"
@@ -139,17 +171,13 @@ const Inicio = () => {
             xs={12}
             sm={12}
             md={4}
-            className="imagen-container mb-3 box-shadow"
+            className="imagen-container mb-3 box-shadow "
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            <Link to="/remeras-chombas box-shadow">
-              <img
-                src="https://images.unsplash.com/photo-1614495039153-e9cd13240469?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
-                alt="Remeras y Chombas"
-                className="w-100"
-              />
-              <span className="texto-sobre-imagen">REMERAS Y CHOMBAS</span>
+            <Link to="/gorras">
+              <img src={Gorra} alt="gorra" className="w-100" />
+              <span className="texto-sobre-imagen">GORRAS</span>
             </Link>
           </Col>
 
@@ -162,13 +190,9 @@ const Inicio = () => {
             data-aos-duration="1000"
             data-aos-delay="100"
           >
-            <Link to="/camisas">
-              <img
-                src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
-                alt="Camisas"
-                className="w-100"
-              />
-              <span className="texto-sobre-imagen">CAMISAS</span>
+            <Link to="/anteojos">
+              <img src={gafas} alt="gafas" className="w-100 h-100" />
+              <span className="texto-sobre-imagen">GAFAS</span>
             </Link>
           </Col>
 
@@ -181,13 +205,9 @@ const Inicio = () => {
             data-aos-duration="1000"
             data-aos-delay="200"
           >
-            <Link to="/pantalones">
-              <img
-                src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0"
-                alt="Pantalones"
-                className="w-100"
-              />
-              <span className="texto-sobre-imagen">PANTALONES</span>
+            <Link to="/sweaters-buzos">
+              <img src={sueter} alt="sueter" className="w-100" />
+              <span className="texto-sobre-imagen">SWEATER Y BUZOS</span>
             </Link>
           </Col>
         </Row>

@@ -36,6 +36,42 @@ const Inicio = () => {
     }
   };
 
+  const abrigosCamperas = (productos || []).filter(
+    (producto) => producto.categoria === "Abrigos y camperas"
+  );
+
+  const anteojos = (productos || []).filter(
+    (producto) => producto.categoria === "Anteojos de sol"
+  );
+
+  const bermudas = (productos || []).filter(
+    (producto) => producto.categoria === "Bermudas"
+  );
+
+  const camisas = (productos || []).filter(
+    (producto) => producto.categoria === "Camisas"
+  );
+
+  const gorras = (productos || []).filter(
+    (producto) => producto.categoria === "Gorras"
+  );
+
+  const pantalones = (productos || []).filter(
+    (producto) => producto.categoria === "Pantalones"
+  );
+
+  const remeras = (productos || []).filter(
+    (producto) => producto.categoria === "Remeras y chombas"
+  );
+
+  const shortsBanio = (productos || []).filter(
+    (producto) => producto.categoria === "Shorts de Baño"
+  );
+
+  const buzos = (productos || []).filter(
+    (producto) => producto.categoria === "Sweaters y buzos"
+  );
+
   return (
     <>
       <Carousel>
@@ -72,6 +108,27 @@ const Inicio = () => {
       </Carousel>
 
       <Container className="my-4">
+        <div data-aos="fade-down" data-aos-delay="0">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={20}
+            slidesPerView={4}
+            navigation
+            pagination={{ clickable: true }}
+            style={{ paddingBottom: "40px" }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 2 },
+              992: { slidesPerView: 4 },
+            }}
+          >
+            {abrigosCamperas.map((ropa) => (
+              <SwiperSlide key={ropa.id}>
+                <CardRopa ropa={ropa} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <Swiper
             modules={[Navigation, Pagination]}

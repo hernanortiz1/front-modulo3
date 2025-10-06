@@ -1,5 +1,6 @@
 import { Card } from "react-bootstrap";
 import Perfil from '../../assets/sobreNosotros/imagenPerfil.webp'
+import React from "react";
 
 const SobreNosotros = () => {
   return (

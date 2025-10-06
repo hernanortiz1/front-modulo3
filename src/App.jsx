@@ -22,6 +22,7 @@ import SweatersBuzos from "./components/pages/categorias/SweatersBuzos";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { obtenerProductos } from "./helpers/queries";
+import SobreNosotros from "./components/pages/SobreNosotros"
 
 function App() {
   useEffect(() => {
@@ -112,6 +113,9 @@ function App() {
               element={<Gorras productos={productos}></Gorras>}
             ></Route>
 
+              <Route path="/sobreNosotros" element={<SobreNosotros/>}>
+                
+              </Route>
             <Route
               path="/administrador"
               element={<ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>}

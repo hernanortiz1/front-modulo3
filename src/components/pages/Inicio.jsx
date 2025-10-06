@@ -1,7 +1,7 @@
 import BannerPublicidad from "./componentsInicio/bannerPublicidad";
 import Carousel from "react-bootstrap/Carousel";
 import CardRopa from "../pages/ropa/CardRopa";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router";
 import BannerDesktop_uno from "../../assets/BannerDesktop_uno.png";
 import BannerDesktop_dos from "../../assets/BannerDesktop_dos.png";
@@ -35,48 +35,46 @@ const Inicio = () => {
       console.info("Error al cargar los productos");
     }
   };
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
 
-  const abrigosCamperas = (productos || []).filter(
-    (producto) => producto.categoria === "Abrigos y camperas"
+  const handleChange = (e) => {
+    setTerminoBusqueda(e.target.value);
+  };
+
+  const filtrarPorCategoria = (categoria) => {
+    const filtrados = productos.filter(
+      (producto) => producto.categoria === categoria
+    );
+    if (terminoBusqueda.trim() !== "") {
+      return filtrados.filter((producto) =>
+        producto.nombreProducto
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      );
+    }
+
+    return filtrados;
+  };
+
+  const abrigosCamperas = filtrarPorCategoria("Abrigos y camperas");
+  const buzos = filtrarPorCategoria("Sweaters y buzos");
+  const remeras = filtrarPorCategoria("Remeras y chombas");
+  const camisas = filtrarPorCategoria("Camisas");
+  const pantalones = filtrarPorCategoria("Pantalones");
+  const bermudas = filtrarPorCategoria("Bermudas");
+  const shortsBanio = filtrarPorCategoria("Shorts de Baño");
+  const gorras = filtrarPorCategoria("Gorras");
+  const anteojos = filtrarPorCategoria("Anteojos de sol");
+
+  const productosColeccion = productos.filter(
+    (producto) =>
+      producto.categoria !== "Abrigos y camperas" &&
+      producto.categoria !== "Sweaters y buzos"
   );
 
-  const anteojos = (productos || []).filter(
-    (producto) => producto.categoria === "Anteojos de sol"
-  );
-
-  const bermudas = (productos || []).filter(
-    (producto) => producto.categoria === "Bermudas"
-  );
-
-  const camisas = (productos || []).filter(
-    (producto) => producto.categoria === "Camisas"
-  );
-
-  const gorras = (productos || []).filter(
-    (producto) => producto.categoria === "Gorras"
-  );
-
-  const pantalones = (productos || []).filter(
-    (producto) => producto.categoria === "Pantalones"
-  );
-
-  const remeras = (productos || []).filter(
-    (producto) => producto.categoria === "Remeras y chombas"
-  );
-
-  const shortsBanio = (productos || []).filter(
-    (producto) => producto.categoria === "Shorts de Baño"
-  );
-
-  const buzos = (productos || []).filter(
-    (producto) => producto.categoria === "Sweaters y buzos"
-  );
-
-  const productosFiltrados = productos.filter(
-  (producto) => producto.categoria !== "Abrigos y camperas" && producto.categoria !== "Sweaters y buzos"
-);
-
-  const coleccionRandom = productosFiltrados.sort(() => Math.random() - 0.5).slice(0, 10);
+  const coleccionRandom = productosColeccion
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 10);
 
   return (
     <>
@@ -115,9 +113,12 @@ const Inicio = () => {
 
       <Container className="my-4">
         <div data-aos="fade-down" data-aos-delay="0">
-            <h3 className="Montserrat text-center mt-5 mb-4">
-              COLECCIÓN PRIMAVERA-VERANO
-            </h3>
+          <h2 className="Montserrat text-center mt-5 mb-4">
+            COLECCIÓN PRIMAVERA-VERANO
+          </h2>
+          <p className="text-center lead mb-5">
+            Explora lo último en tendencias.
+          </p>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -137,6 +138,23 @@ const Inicio = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+        </div>
+        <hr />
+        <div className="d-flex">
+          <h3 className="Montserrat text-start me-auto my-5">
+            TODAS NUESTRAS CATEGORÍAS
+          </h3>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Buscar producto</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ingresa nombre del producto"
+                onChange={handleChange}
+                value={terminoBusqueda}
+              />
+            </Form.Group>
+          </Form>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
           <div className="d-flex my-1">

@@ -10,10 +10,9 @@ import BannerMobile from "../../assets/BannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
 import React from "react";
-
+import HashLoader from "react-spinners/HashLoader";
 import { useEffect, useState } from "react";
 import { obtenerProductos } from "../../helpers/queries";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,6 +25,15 @@ const Inicio = () => {
   useEffect(() => {
     leerProductos();
   }, []);
+
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    if (productos) {
+      const timer = setTimeout(() => setCargando(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [productos]);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -42,7 +50,7 @@ const Inicio = () => {
         .sort(() => Math.random() - 0.5)
         .slice(0, 10);
 
-        setColeccionRandom(productosRandom)
+      setColeccionRandom(productosRandom);
     } else {
       console.info("Error al cargar los productos");
     }
@@ -157,323 +165,361 @@ const Inicio = () => {
             </Form.Group>
           </Form>
         </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">
-              REMERAS Y CHOMBAS
-            </h5>
-            <Link
-              to={"/remeras-chombas"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
+        {cargando ? (
+          <div className="d-flex justify-content-center my-5">
+            <HashLoader size={80} color="#1d3557" />
           </div>
-          {remeras.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {remeras.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          }
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">CAMISAS</h5>
-            <Link
-              to={"/camisas"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {camisas.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {camisas.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">
-              SWEATERS Y BUZOS
-            </h5>
-            <Link
-              to={"/sweaters-buzos"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {buzos.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {buzos.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">
-              ABRIGOS Y CAMPERAS
-            </h5>
-            <Link
-              to={"/abrigos-camperas"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {abrigosCamperas.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {abrigosCamperas.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">PANTALONES</h5>
-            <Link
-              to={"/pantalones"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {pantalones.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {pantalones.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">BERMUDAS</h5>
-            <Link
-              to={"/bermudas"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {bermudas.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {bermudas.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">
-              SHORTS DE BAÑO
-            </h5>
-            <Link
-              to={"/shorts"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {shortsBanio.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {shortsBanio.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">GORRAS</h5>
-            <Link
-              to={"/gorras"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {gorras.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {gorras.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
-        <div data-aos="fade-down" data-aos-delay="0">
-          <div className="d-flex my-1">
-            <h5 className="Montserrat me-auto colorTitleInicio">
-              ANTEOJOS DE SOL
-            </h5>
-            <Link
-              to={"/anteojos"}
-              className="colorTitleInicio text-decoration-none"
-            >
-              {" "}
-              ver todo <i className="bi bi-arrow-right"></i>
-            </Link>
-          </div>
-          {anteojos.length===0?
-          <p>No se encontraron productos</p>
-          :
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {anteojos.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </div>
+        ) : (
+          <Container>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  REMERAS Y CHOMBAS
+                </h5>
+                <Link
+                  to={"/remeras-chombas"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {remeras.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {remeras.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">CAMISAS</h5>
+                <Link
+                  to={"/camisas"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {camisas.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {camisas.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  SWEATERS Y BUZOS
+                </h5>
+                <Link
+                  to={"/sweaters-buzos"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {buzos.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {buzos.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  ABRIGOS Y CAMPERAS
+                </h5>
+                <Link
+                  to={"/abrigos-camperas"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {abrigosCamperas.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {abrigosCamperas.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  PANTALONES
+                </h5>
+                <Link
+                  to={"/pantalones"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {pantalones.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {pantalones.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  BERMUDAS
+                </h5>
+                <Link
+                  to={"/bermudas"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {bermudas.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {bermudas.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  SHORTS DE BAÑO
+                </h5>
+                <Link
+                  to={"/shorts"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {shortsBanio.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {shortsBanio.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">GORRAS</h5>
+                <Link
+                  to={"/gorras"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {gorras.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {gorras.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            <div data-aos="fade-down" data-aos-delay="0">
+              <div className="d-flex my-1">
+                <h5 className="Montserrat me-auto colorTitleInicio">
+                  ANTEOJOS DE SOL
+                </h5>
+                <Link
+                  to={"/anteojos"}
+                  className="colorTitleInicio text-decoration-none"
+                >
+                  {" "}
+                  ver todo <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+              {anteojos.length === 0 ? (
+                <p className="text-center lead my-3">
+                  <i className="bi bi-x-lg"></i> No se encontraron productos
+                </p>
+              ) : (
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation
+                  pagination={{ clickable: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {anteojos.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+          </Container>
+        )}
       </Container>
       <section className="mt-3">
         <BannerPublicidad />

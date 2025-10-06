@@ -36,7 +36,68 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       size: 46,
       price: 279900,
       quantity: 1,
-      image: "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
       increaseQty: () => {}, // lógica personalizada
       decreaseQty: () => {}, // lógica personalizada
     },

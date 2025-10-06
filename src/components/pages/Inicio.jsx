@@ -109,6 +109,18 @@ const Inicio = () => {
 
       <Container className="my-4">
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Remeras y chombas
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -130,6 +142,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Camisas
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -151,6 +175,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Sweaters y buzos
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -172,6 +208,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Abrigos y camperas
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -193,6 +241,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Pantalones
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -214,6 +274,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Bermudas
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -235,6 +307,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Shorts de Baño
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -256,6 +340,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Gorras
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -277,6 +373,18 @@ const Inicio = () => {
           </Swiper>
         </div>
         <div data-aos="fade-down" data-aos-delay="0">
+          <div className="d-flex my-1">
+            <h3 className="Montserrat me-auto colorTitleInicio">
+              Anteojos de sol
+            </h3>
+            <Link
+              to={"/remeras-chombas"}
+              className="colorTitleInicio text-decoration-none"
+            >
+              {" "}
+              ver todo <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}

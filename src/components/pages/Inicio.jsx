@@ -21,6 +21,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
+  const [coleccionRandom, setColeccionRandom] = useState([]);
 
   useEffect(() => {
     leerProductos();
@@ -31,6 +32,17 @@ const Inicio = () => {
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       setProductos(datos);
+      const productosColeccion = datos.filter(
+        (producto) =>
+          producto.categoria !== "Abrigos y camperas" &&
+          producto.categoria !== "Sweaters y buzos"
+      );
+
+      const productosRandom = productosColeccion
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 10);
+
+        setColeccionRandom(productosRandom)
     } else {
       console.info("Error al cargar los productos");
     }
@@ -42,18 +54,18 @@ const Inicio = () => {
   };
 
   const filtrarPorCategoria = (categoria) => {
-    const filtrados = productos.filter(
+    const categoriaFiltrados = productos.filter(
       (producto) => producto.categoria === categoria
     );
     if (terminoBusqueda.trim() !== "") {
-      return filtrados.filter((producto) =>
+      return categoriaFiltrados.filter((producto) =>
         producto.nombreProducto
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase())
       );
     }
 
-    return filtrados;
+    return categoriaFiltrados;
   };
 
   const abrigosCamperas = filtrarPorCategoria("Abrigos y camperas");
@@ -71,10 +83,6 @@ const Inicio = () => {
       producto.categoria !== "Abrigos y camperas" &&
       producto.categoria !== "Sweaters y buzos"
   );
-
-  const coleccionRandom = productosColeccion
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 10);
 
   return (
     <>
@@ -140,16 +148,15 @@ const Inicio = () => {
           </Swiper>
         </div>
         <hr />
-        <div className="d-flex">
-          <h3 className="Montserrat text-start me-auto my-5">
+        <div className="row align-items-center">
+          <h3 className="Montserrat text-start my-5 col-6">
             TODAS NUESTRAS CATEGORÍAS
           </h3>
-          <Form>
+          <Form className="col-6">
             <Form.Group className="mb-3">
-              <Form.Label>Buscar producto</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ingresa nombre del producto"
+                placeholder="Buscar producto"
                 onChange={handleChange}
                 value={terminoBusqueda}
               />

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
+import Offcanvas from "react-bootstrap/Offcanvas";
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -24,6 +25,12 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     reset();
   };
   const handleShow = () => setShow(true);
+
+  //CARRITO
+  const [showCarrito, setShowCarrito] = useState(false);
+
+  const handleCloseCarrito = () => setShowCarrito(false);
+  const handleShowCarrito = () => setShowCarrito(true);
 
   const irALogin = () => {
     handleClose();
@@ -216,13 +223,12 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     </Button>
 
                     {/* Botón carrito */}
-                    <NavLink
-                      to="/carrito"
+                    <Button
                       className="nav-link d-flex align-items-center ms-lg-5"
-                      onClick={() => setExpanded(false)}
+                      onClick={handleShowCarrito}
                     >
                       <i className="bi bi-bag-fill text-light fs-4"></i>
-                    </NavLink>
+                    </Button>
                   </>
                 )}
               </>
@@ -304,6 +310,16 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           </Modal.Body>
         </div>
       </Modal>
+      {/*CANVAS CARRITO */}
+      <Offcanvas show={showCarrito} onHide={handleCloseCarrito} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Mi Carrito</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
     </header>
   );
 };

@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const CardRopa = ({ ropa }) => {
   return (
     <>
-    <Link className="text-decoration-none">
+    <Link className="text-decoration-none" to={`/detalle/${ropa._id}`}>
       <Card className="card-ropa h-100 d-flex flex-column shadow">
           <Card.Img
             src={ropa.imagen}

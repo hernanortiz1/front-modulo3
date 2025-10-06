@@ -146,7 +146,8 @@ const Inicio = () => {
             slidesPerView={4}
             navigation
             pagination={{ clickable: true }}
-            style={{ paddingBottom: "40px" }}
+            style={{
+              paddingBottom: "40px"}}
             breakpoints={{
               0: { slidesPerView: 1 },
               576: { slidesPerView: 2 },
@@ -191,12 +192,10 @@ const Inicio = () => {
             {(remeras.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    REMERAS Y CHOMBAS
-                  </h5>
+                  <h5 className="Montserrat me-auto">REMERAS Y CHOMBAS</h5>
                   <Link
                     to={"/remeras-chombas"}
-                    className="colorTitleInicio text-decoration-none"
+                    className="text-decoration-none text-dark"
                   >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
@@ -232,13 +231,8 @@ const Inicio = () => {
             {(camisas.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    CAMISAS
-                  </h5>
-                  <Link
-                    to={"/camisas"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">CAMISAS</h5>
+                  <Link to={"/camisas"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
@@ -273,13 +267,8 @@ const Inicio = () => {
             {(buzos.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    SWEATERS Y BUZOS
-                  </h5>
-                  <Link
-                    to={"/sweaters-buzos"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">SWEATERS Y BUZOS</h5>
+                  <Link to={"/sweaters-buzos"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
@@ -314,12 +303,10 @@ const Inicio = () => {
             {(abrigosCamperas.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    ABRIGOS Y CAMPERAS
-                  </h5>
+                  <h5 className="Montserrat me-auto">ABRIGOS Y CAMPERAS</h5>
                   <Link
                     to={"/abrigos-camperas"}
-                    className="colorTitleInicio text-decoration-none"
+                    className="text-decoration-none text-dark"
                   >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
@@ -355,13 +342,8 @@ const Inicio = () => {
             {(pantalones.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    PANTALONES
-                  </h5>
-                  <Link
-                    to={"/pantalones"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">PANTALONES</h5>
+                  <Link to={"/pantalones"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
@@ -396,13 +378,8 @@ const Inicio = () => {
             {(bermudas.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    BERMUDAS
-                  </h5>
-                  <Link
-                    to={"/bermudas"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">BERMUDAS</h5>
+                  <Link to={"/bermudas"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
@@ -437,13 +414,8 @@ const Inicio = () => {
             {(shortsBanio.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    SHORTS DE BAÑO
-                  </h5>
-                  <Link
-                    to={"/shorts"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">SHORTS DE BAÑO</h5>
+                  <Link to={"/shorts"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
@@ -478,13 +450,8 @@ const Inicio = () => {
             {(gorras.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    GORRAS
-                  </h5>
-                  <Link
-                    to={"/gorras"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">GORRAS</h5>
+                  <Link to={"/gorras"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
@@ -519,13 +486,8 @@ const Inicio = () => {
             {(anteojos.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
-                  <h5 className="Montserrat me-auto colorTitleInicio">
-                    ANTEOJOS DE SOL
-                  </h5>
-                  <Link
-                    to={"/anteojos"}
-                    className="colorTitleInicio text-decoration-none"
-                  >
+                  <h5 className="Montserrat me-auto">ANTEOJOS DE SOL</h5>
+                  <Link to={"/anteojos"} className="text-decoration-none text-dark">
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>

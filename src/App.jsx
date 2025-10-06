@@ -70,7 +70,6 @@ function App() {
             ></Route>*/}
 
             <Route path="/registro" element={<Registro></Registro>}></Route>
-            {/*
             <Route
               path="/remeras-chombas"
               element={<RemerasChombas productos={productos}></RemerasChombas>}
@@ -126,13 +125,13 @@ function App() {
                     }
                   ></Route> */}
 
-            {/*<Route
+              {/*<Route
                   path="editar/:id"
                   element={
                     <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
                   }
                 ></Route>*/}
-
+            </Route>
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
         </main>

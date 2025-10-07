@@ -5,6 +5,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { obtenerProductos, registro } from "../../helpers/queries.js";
+import Swal from "sweetalert2";
 const Administrador = () => {
   const [show, setShow] = useState(false);
   const [ropa, setRopa] = useState([]);
@@ -44,10 +45,11 @@ const Administrador = () => {
         text: `El usuario ${usuario.nombreUsuario} fue creador exitosamente`,
         icon: "success",
       });
+      handleClose();
     } else {
       Swal.fire({
-        title: "Error al crear el usuario",
-        text: `Credenciales incorrectas`,
+        title: "ocurri[o un problema",
+        text: `No pudimos crear el usuario ${usuario.nombreUsuario}`,
         icon: "error",
       });
     }
@@ -101,7 +103,7 @@ const Administrador = () => {
                     <tbody>
                       {ropa.map((producto, indice) => (
                         <ItemProducto
-                          key={producto.id}
+                          key={producto._id}
                           ropa={producto}
                           setRopa={setRopa}
                           fila={indice + 1}
@@ -170,7 +172,7 @@ const Administrador = () => {
             <Modal.Title>Crear Usuario</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form className="raleway" onSubmit={handleSubmit()}>
+            <Form className="raleway" onSubmit={handleSubmit(crearCuenta)}>
               <Form.Group className="mb-3" controlId="nombreUsuario">
                 <Form.Label>Nombre del Usuario</Form.Label>
                 <Form.Control
@@ -220,7 +222,7 @@ const Administrador = () => {
                 <Form.Control
                   type="password"
                   maxLength={50}
-                  placeholder="Contraseña"
+                  placeholder="Ingresa una contraseña"
                   {...register("password", {
                     required: "La contraseña es un dato obligatorio",
                     pattern: {

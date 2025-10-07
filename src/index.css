@@ -202,12 +202,12 @@ main {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-.btn-error{
+.btn-error {
   border: #1d3557 1px solid;
   padding: 15px;
   border-radius: 0.8rem;
   text-decoration: none;
-  color:#1d3557
+  color: #1d3557;
 }
 
 @media (max-width: 768px) {
@@ -289,7 +289,7 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
-   object-position: top center;
+  object-position: top center;
   transition: transform 0.5s ease;
 }
 
@@ -320,30 +320,30 @@ main {
 }
 @media (max-width: 992px) {
   .cardCategorias {
-    height: 450px;         
+    height: 450px;
   }
   .cardCategoriasImgWrapper {
-    height: 280px;          
+    height: 280px;
   }
   .cardCategoriasBody {
-    height: 170px;         
+    height: 170px;
   }
 }
 @media (max-width: 768px) {
   .cardCategorias {
-    height: auto;           
+    height: auto;
   }
   .cardCategoriasImgWrapper {
-    height: 250px;        
+    height: 250px;
   }
   .cardCategoriasBody {
-    height: auto;          
+    height: auto;
   }
 }
 /* FIN  hover de card categoria productos*/
 /* BTN Scroll de categoria productos */
 .btnScrollArriba {
- position: fixed;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   width: 50px;
@@ -351,12 +351,12 @@ main {
   border-radius: 50%;
   border: none;
   background-color: #1d3557;
-  color: white; 
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
   z-index: 1;
 }
@@ -366,3 +366,8 @@ main {
 }
 /* FIN BTN Scroll de categoria productos */
 
+.botonIrAlCarrito:hover {
+  background: rgba(0, 0, 0, 0.966) !important;
+  color: #fff !important;
+  transition: all 1s ease;
+}

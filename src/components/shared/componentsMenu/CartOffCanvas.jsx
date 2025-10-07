@@ -2,6 +2,7 @@ import { Offcanvas, Button, Image, ListGroup } from "react-bootstrap";
 import { useEffect } from "react";
 import React from "react";
 import { useRef } from "react";
+import { NavLink } from "react-router";
 
 const CartOffcanvas = ({ show, handleClose, cartItems }) => {
   const endRef = useRef(null);
@@ -88,10 +89,10 @@ const CartOffcanvas = ({ show, handleClose, cartItems }) => {
             </h5>
           </div>
           <div className="d-grid gap-2">
-            <Button variant="primary">Iniciar pago</Button>
-            <Button variant="outline-dark" onClick={handleClose}>
+            <Button variant="primary">Iniciar pago💳</Button>
+            <NavLink className="botonIrAlCarrito btn border border-5 rounded-2 text-dark" to={'/carrito'}>
               Ir al carrito
-            </Button>
+            </NavLink>
           </div>
         </div>
       </Offcanvas.Body>

@@ -26,13 +26,14 @@ const Administrador = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
     leerProductos();
     leerUsuarios();
-  }, []);
+  }, [ropa, usuarios]);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -63,7 +64,7 @@ const Administrador = () => {
         text: `El usuario ${usuario.nombreUsuario} fue creador exitosamente`,
         icon: "success",
       });
-      handleClose();
+      reset()
     } else {
       Swal.fire({
         title: "ocurri[o un problema",
@@ -283,7 +284,7 @@ const Administrador = () => {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>
-              Cancelar
+              Cerrar
             </Button>
           </Modal.Footer>
         </div>

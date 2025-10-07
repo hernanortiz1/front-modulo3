@@ -59,18 +59,18 @@ const Carrito = () => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <a
-                        href="error404.html"
+                      <NavLink
+                        to={'*'}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
-                      </a>
-                      <a
-                        href="error404.html"
+                      </NavLink>
+                      <NavLink
+                        to={'*'}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                   <div className="col-2 text-center">
@@ -118,18 +118,18 @@ const Carrito = () => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <a
-                        href="error404.html"
+                      <NavLink
+                        to={'*'}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
-                      </a>
-                      <a
-                        href="error404.html"
+                      </NavLink>
+                      <NavLink
+                        to={'*'}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                   <div className="col-2 text-center">
@@ -176,18 +176,18 @@ const Carrito = () => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <a
-                        href="error404.html"
+                      <NavLink
+                        to={'*'}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
-                      </a>
-                      <a
-                        href="error404.html"
+                      </NavLink>
+                      <NavLink
+                        to={'*'}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                   <div className="col-2 text-center">
@@ -234,18 +234,18 @@ const Carrito = () => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <a
-                        href="error404.html"
+                      <NavLink
+                        to={'*'}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
-                      </a>
-                      <a
-                        href="error404.html"
+                      </NavLink>
+                      <NavLink
+                        to={'*'}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                   <div className="col-2 text-center">
@@ -272,12 +272,12 @@ const Carrito = () => {
                     <strong>$165,900</strong>
                   </li>
                 </ul>
-                <a
-                  href="./error404.html"
+                <NavLink
+                  to={'*'}
                   className="btn btn-success w-100 mb-2"
                 >
                   Comprar
-                </a>
+                </NavLink>
                 <NavLink
                   to={'/'}
                   className="btn btn-outline-dark text-decoration-underline w-100"

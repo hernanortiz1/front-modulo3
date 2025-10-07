@@ -35,6 +35,13 @@ const CartOffcanvas = ({ show, handleClose, cartItems }) => {
                 </div>
                 <div className="text-end">
                   <div>${item.price.toLocaleString()}</div>
+                  <Button
+                    size="sm"
+                    variant="outline-secondary"
+                    className="bg-white"
+                  >
+                    <i class="bi bi-trash-fill text-danger"></i>
+                  </Button>
                   <div className="d-flex align-items-center mt-2">
                     <Button
                       variant="outline-secondary"

@@ -77,7 +77,7 @@ const Administrador = () => {
       leerUsuarios();
     } else {
       Swal.fire({
-        title: "ocurri[o un problema",
+        title: "ocurrió un problema",
         text: `No pudimos crear el usuario ${usuario.nombreUsuario}`,
         icon: "error",
       });

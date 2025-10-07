@@ -14,7 +14,7 @@ const CartOffcanvas = ({ show, handleClose, cartItems }) => {
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
-      <Offcanvas.Header className="colorFondoTitulo text-light" closeButton>
+      <Offcanvas.Header className="colorFondoTitulo text-light btn-close-white" closeButton>
         <Offcanvas.Title>🛒Tu carrito</Offcanvas.Title>
       </Offcanvas.Header>
 
@@ -24,7 +24,7 @@ const CartOffcanvas = ({ show, handleClose, cartItems }) => {
             {cartItems.map((item, index) => (
               <ListGroup.Item
                 key={index}
-                className="d-flex align-items-center justify-content-between"
+                className="d-flex align-items-center justify-content-between mb-2"
               >
                 <div className="d-flex align-items-center">
                   <Image src={item.image} rounded width={60} height={60} />

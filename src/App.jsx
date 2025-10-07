@@ -65,7 +65,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
-            {/*  <Route
+           
+           {/* <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
             ></Route>*/}

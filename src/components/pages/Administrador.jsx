@@ -5,6 +5,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
+  leerUsuariosPaginados,
   obtenerProductos,
   obtenerUsuarios,
   registro,
@@ -15,6 +16,10 @@ const Administrador = () => {
   const [show, setShow] = useState(false);
   const [ropa, setRopa] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
+
+  const [pageUsuario, setPageUsuario] = useState(1);
+  const [limitUsuario] = useState(10);
+  const [totalPagesUsuario, setTotalPagesUsuario] = useState(1);
 
   const handleClose = () => {
     setShow(false);
@@ -32,8 +37,11 @@ const Administrador = () => {
 
   useEffect(() => {
     leerProductos();
+  }, []);
+
+  useEffect(() => {
     leerUsuarios();
-  }, [ropa, usuarios]);
+  }, [pageUsuario, usuarios]);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -46,10 +54,11 @@ const Administrador = () => {
   };
 
   const leerUsuarios = async () => {
-    const respuesta = await obtenerUsuarios();
+    const respuesta = await leerUsuariosPaginados(pageUsuario, limitUsuario);
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
-      setUsuarios(datos);
+      setUsuarios(datos.usuarios);
+      setTotalPagesUsuario(datos.totalPages);
     } else {
       console.info("Error al cargar los productos");
     }
@@ -64,7 +73,8 @@ const Administrador = () => {
         text: `El usuario ${usuario.nombreUsuario} fue creador exitosamente`,
         icon: "success",
       });
-      reset()
+      reset();
+      leerUsuarios()
     } else {
       Swal.fire({
         title: "ocurri[o un problema",
@@ -175,18 +185,40 @@ const Administrador = () => {
                         <ItemUsuario
                           key={usuario._id}
                           usuario={usuario}
-                          fila={indice + 1}
+                          fila={(pageUsuario - 1) * limitUsuario + indice + 1}
                           setUsuarios={setUsuarios}
                           usuarios={usuarios}
+                          limit={limitUsuario}
+                          page={pageUsuario}
                         ></ItemUsuario>
                       ))}
                     </tbody>
                   </Table>
                 </div>
                 <div className="d-flex justify-content-center align-items-center my-3">
-                  <Button className="btn-table">Anterior</Button>
-                  <span className="mx-3">Página 1 de 3</span>
-                  <Button className="btn-table">Siguiente</Button>
+                  <Button
+                    onClick={() =>
+                      setPageUsuario((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={pageUsuario === 1}
+                    className="btn-table"
+                  >
+                    Anterior
+                  </Button>
+                  <span className="mx-3">
+                    Página {pageUsuario} de {totalPagesUsuario}
+                  </span>
+                  <Button
+                    onClick={() =>
+                      setPageUsuario((prev) =>
+                        Math.min(prev + 1, totalPagesUsuario)
+                      )
+                    }
+                    disabled={pageUsuario === totalPagesUsuario}
+                    className="btn-table"
+                  >
+                    Siguiente
+                  </Button>
                 </div>
               </Accordion.Body>
             </Accordion.Item>

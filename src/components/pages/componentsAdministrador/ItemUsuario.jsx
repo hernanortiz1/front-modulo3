@@ -5,11 +5,19 @@ import { useForm } from "react-hook-form";
 import {
   borrarUsuario,
   editarUsuario,
+  leerUsuariosPaginados,
   obtenerUsuarioID,
 } from "../../../helpers/queries.js";
 import Swal from "sweetalert2";
 
-const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
+const ItemUsuario = ({
+  usuario,
+  fila,
+  setUsuarios,
+  usuarios,
+  limitUsuario,
+  pageUsuario,
+}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -44,7 +52,12 @@ const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
             text: `El usuario ${usuario.nombreUsuario} fue eliminado correctamente`,
             icon: "success",
           });
-          setUsuarios(usuarios.filter((data) => data._id !== usuario._id));
+          const respuestaUsuarios = await leerUsuariosPaginados(
+            pageUsuario,
+            limitUsuario
+          );
+          const usuariosActualizados = await respuestaUsuarios.json();
+          setUsuarios(usuariosActualizados.usuarios);
         } else {
           Swal.fire({
             title: "Usario eliminado!",

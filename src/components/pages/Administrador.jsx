@@ -86,7 +86,7 @@ const Administrador = () => {
 
   const [terminoBusquedaUsuario, setTerminoBusquedaUsuario] = useState("");
 
-  const handleChange = (e) => {
+  const handleChangeUsuario = (e) => {
     setTerminoBusquedaUsuario(e.target.value);
   };
 
@@ -98,6 +98,21 @@ const Administrador = () => {
 
   const sinResultadosUsuarios =
     terminoBusquedaUsuario.trim() !== "" && usuariosFiltrados.length === 0;
+
+  const [terminoBusquedaProducto, setTerminoBusquedaProducto] = useState("");
+
+  const handleChangeProducto = (e) => {
+    setTerminoBusquedaProducto(e.target.value);
+  };
+
+  const productosFiltrados = ropa.filter((producto) =>
+    producto.nombreProducto
+      .toLowerCase()
+      .includes(terminoBusquedaProducto.toLowerCase())
+  );
+
+  const sinResultadosProductos =
+    terminoBusquedaProducto.trim() !== "" && productosFiltrados.length === 0;
 
   return (
     <>
@@ -115,7 +130,8 @@ const Administrador = () => {
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
                   <Form className="w-50 d-flex justify-content-center me-3">
-                    <Form.Control type="text" placeholder="Buscar producto" />
+                    <Form.Control type="text" placeholder="Buscar producto" onChange={handleChangeProducto}
+                      value={terminoBusquedaProducto}/>
                   </Form>
                   <Button
                     className="btn btn-success"
@@ -145,7 +161,13 @@ const Administrador = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {ropa.map((producto, indice) => (
+                      {sinResultadosProductos && (
+                        <p className="text-center lead my-5">
+                          <i className="bi bi-x-lg"></i> No hay resultados
+                          disponibles para “{terminoBusquedaProducto}”
+                        </p>
+                      )}
+                      {productosFiltrados.map((producto, indice) => (
                         <ItemProducto
                           key={producto._id}
                           ropa={producto}
@@ -175,7 +197,7 @@ const Administrador = () => {
                     <Form.Control
                       type="text"
                       placeholder="Buscar por nombre de usuario"
-                      onChange={handleChange}
+                      onChange={handleChangeUsuario}
                       value={terminoBusquedaUsuario}
                     />
                   </Form>

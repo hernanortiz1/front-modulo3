@@ -5,7 +5,7 @@ const CardRopa = ({ ropa }) => {
   return (
     <>
       <Card className="card-ropa h-100 d-flex flex-column">
-        <Link>
+        <Link to={`/detalle/${ropa._id}`}>
           <Card.Img
             src={ropa.imagen}
             style={{
@@ -15,7 +15,7 @@ const CardRopa = ({ ropa }) => {
           />
         </Link>
         <Card.Body className="d-flex flex-column">
-          <Link className="text-decoration-none text-dark Montserrat flex-grow-1">
+          <Link to={`/detalle/${ropa._id}`} className="text-decoration-none text-dark Montserrat flex-grow-1">
             <Card.Title className="Montserrat">
               {ropa.nombreProducto}
             </Card.Title>

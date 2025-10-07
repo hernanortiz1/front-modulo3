@@ -140,34 +140,11 @@ const Inicio = () => {
           <p className="text-center lead mb-5">
             Explora lo último en tendencias.
           </p>
-          <div
-            className="swiper-button-prev"
-            style={{
-              left: "-40px",
-              width: "44px",
-              height: "44px",
-              borderRadius: "50%",
-              color: "#000",
-            }}
-          ></div>
-          <div
-            className="swiper-button-next"
-            style={{
-              right: "-40px",
-              width: "44px",
-              height: "44px",
-              borderRadius: "50%",
-              color: "#000",
-            }}
-          ></div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
             slidesPerView={4}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            }}
+            navigation
             pagination={{ clickable: true, dynamicBullets: true }}
             style={{
               paddingBottom: "40px",
@@ -225,48 +202,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {remeras.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {remeras.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {remeras.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(camisas.length > 0 || terminoBusqueda === "") && (
@@ -281,48 +241,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {camisas.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {camisas.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {camisas.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(buzos.length > 0 || terminoBusqueda === "") && (
@@ -337,48 +280,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {buzos.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {buzos.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {buzos.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(abrigosCamperas.length > 0 || terminoBusqueda === "") && (
@@ -393,48 +319,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {abrigosCamperas.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {abrigosCamperas.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {abrigosCamperas.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(pantalones.length > 0 || terminoBusqueda === "") && (
@@ -449,48 +358,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {pantalones.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {pantalones.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {pantalones.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(bermudas.length > 0 || terminoBusqueda === "") && (
@@ -505,48 +397,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {bermudas.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {bermudas.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {bermudas.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(shortsBanio.length > 0 || terminoBusqueda === "") && (
@@ -561,48 +436,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {shortsBanio.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {shortsBanio.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {shortsBanio.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(gorras.length > 0 || terminoBusqueda === "") && (
@@ -617,48 +475,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {gorras.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {gorras.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {gorras.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
             {(anteojos.length > 0 || terminoBusqueda === "") && (
@@ -673,48 +514,31 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                <div
-                  className="swiper-button-prev"
-                  style={{
-                    left: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <div
-                  className="swiper-button-next"
-                  style={{
-                    right: "-40px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    color: "#000",
-                  }}
-                ></div>
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  style={{ paddingBottom: "40px" }}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    992: { slidesPerView: 4 },
-                  }}
-                >
-                  {anteojos.map((ropa) => (
-                    <SwiperSlide key={ropa.id}>
-                      <CardRopa ropa={ropa} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {anteojos.length === 0 ? (
+                  <p className="text-center lead my-3">
+                    <i className="bi bi-x-lg"></i> No se encontraron productos
+                  </p>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={4}
+                    navigation
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    style={{ paddingBottom: "40px" }}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      576: { slidesPerView: 2 },
+                      992: { slidesPerView: 4 },
+                    }}
+                  >
+                    {anteojos.map((ropa) => (
+                      <SwiperSlide key={ropa.id}>
+                        <CardRopa ropa={ropa} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             )}
           </Container>

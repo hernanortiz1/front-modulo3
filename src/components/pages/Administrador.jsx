@@ -4,7 +4,7 @@ import ItemProducto from "./componentsAdministrador/ItemProducto";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { obtenerProductos } from "../../helpers/queries";
+import { obtenerProductos, registro } from "../../helpers/queries.js";
 const Administrador = () => {
   const [show, setShow] = useState(false);
   const [ropa, setRopa] = useState([]);
@@ -32,6 +32,24 @@ const Administrador = () => {
       setRopa(datos);
     } else {
       console.info("Error al cargar los productos");
+    }
+  };
+
+  const crearCuenta = async (usuario) => {
+    const respuesta = await registro(usuario);
+
+    if (respuesta.status === 201) {
+      Swal.fire({
+        title: "Usuario creado!",
+        text: `El usuario ${usuario.nombreUsuario} fue creador exitosamente`,
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        title: "Error al crear el usuario",
+        text: `Credenciales incorrectas`,
+        icon: "error",
+      });
     }
   };
 

@@ -2,11 +2,12 @@ import { Accordion, Table, Button, Form, Modal } from "react-bootstrap";
 import ItemUsuario from "./componentsAdministrador/ItemUsuario";
 import ItemProducto from "./componentsAdministrador/ItemProducto";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-
+import { obtenerProductos } from "../../helpers/queries";
 const Administrador = () => {
   const [show, setShow] = useState(false);
+  const [ropa, setRopa] = useState([]);
   const handleClose = () => {
     setShow(false);
   };
@@ -19,6 +20,20 @@ const Administrador = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    leerProductos();
+  }, []);
+
+  const leerProductos = async () => {
+    const respuesta = await obtenerProductos();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setRopa(datos);
+    } else {
+      console.info("Error al cargar los productos");
+    }
+  };
 
   return (
     <>
@@ -35,13 +50,16 @@ const Administrador = () => {
               </Accordion.Header>
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
-                <Form className="w-50 d-flex justify-content-center me-3">
-                      <Form.Control type="text" placeholder="Buscar producto" />
-                </Form>
-                <Button className="btn btn-success">
-                  <i className="bi bi-file-earmark-plus"></i>
-                </Button>
-              </div>
+                  <Form className="w-50 d-flex justify-content-center me-3">
+                    <Form.Control type="text" placeholder="Buscar producto" />
+                  </Form>
+                  <Button
+                    className="btn btn-success"
+                    href="/administrador/crear"
+                  >
+                    <i className="bi bi-file-earmark-plus"></i>
+                  </Button>
+                </div>
                 <div className="col-12">
                   <Table
                     responsive
@@ -54,16 +72,23 @@ const Administrador = () => {
                       <tr className="text-center">
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Categoría</th>
                         <th>Talle</th>
                         <th>Color</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Imagen</th>
                         <th>Opciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <ItemProducto></ItemProducto>
+                      {ropa.map((producto, indice) => (
+                        <ItemProducto
+                          key={producto.id}
+                          ropa={producto}
+                          setRopa={setRopa}
+                          fila={indice + 1}
+                        ></ItemProducto>
+                      ))}
                     </tbody>
                   </Table>
                 </div>
@@ -82,13 +107,13 @@ const Administrador = () => {
               </Accordion.Header>
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
-                <Form className="w-50 d-flex justify-content-center me-3">
-                      <Form.Control type="text" placeholder="Buscar usuario" />
-                </Form>
-                <Button className="btn btn-success"  onClick={handleShow}>
-                  <i className="bi bi-person-plus-fill"></i>
-                </Button>
-              </div>
+                  <Form className="w-50 d-flex justify-content-center me-3">
+                    <Form.Control type="text" placeholder="Buscar usuario" />
+                  </Form>
+                  <Button className="btn btn-success" onClick={handleShow}>
+                    <i className="bi bi-person-plus-fill"></i>
+                  </Button>
+                </div>
                 <div className="col-12">
                   <Table
                     responsive

@@ -17,8 +17,18 @@ export const crearProducto = async (productoNuevo) => {
       "fechaUltimoControlStock",
       productoNuevo.fechaUltimoControlStock
     );
-    const respuesta = await fetch(API_URL, {});
-  } catch (error) {}
+    const respuesta = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
+      },
+      body: formData
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export const obtenerProductos = async () => {
@@ -31,15 +41,42 @@ export const obtenerProductos = async () => {
   }
 };
 
+export const obtenerProductosPorId = async (id) => {
+  try {
+    const respuesta = await fetch(API_URL + `/${id}`);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const login = async (datosUsuario) => {
   try {
-    const respuesta = await fetch(API_USUARIOS, {
+    const respuesta = await fetch(API_USUARIOS + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(datosUsuario),
     });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const registro = async (nuevoUsuario) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nuevoUsuario),
+    });
+
     return respuesta;
   } catch (error) {
     console.error(error);

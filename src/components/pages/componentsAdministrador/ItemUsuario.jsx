@@ -2,8 +2,10 @@ import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { borrarUsuario } from "../../../helpers/queries.js";
+import Swal from "sweetalert2";
 
-const ItemUsuario = ({usuario, fila}) => {
+const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -18,6 +20,37 @@ const ItemUsuario = ({usuario, fila}) => {
     formState: { errors },
   } = useForm();
 
+  const eliminarUsuario = () => {
+    Swal.fire({
+      title: "¿Quieres eliminar el usuario?",
+      text: "No puedes revertir este paso!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#277a35ff",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, quiero eliminar!",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const respuesta = await borrarUsuario(usuario._id);
+        if (respuesta.status === 200) {
+          Swal.fire({
+            title: "Usuario eliminado!",
+            text: `El usuario ${usuario.nombreUsuario} fue eliminado correctamente`,
+            icon: "success",
+          });
+          setUsuarios(usuarios.filter((data) => data._id !== usuario._id));
+        } else {
+          Swal.fire({
+            title: "Usario eliminado!",
+            text: `El Usuario ${usuario.nombreUsuario} no pudo ser eliminado`,
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <>
       <tr className="Montserrat">
@@ -30,7 +63,11 @@ const ItemUsuario = ({usuario, fila}) => {
             <Button className="btn btn-warning me-lg-2">
               <i className="bi bi-person-fill-gear" onClick={handleShow}></i>
             </Button>
-            <Button variant="danger" className="me-lg-2">
+            <Button
+              variant="danger"
+              className="me-lg-2"
+              onClick={eliminarUsuario}
+            >
               <i className="bi bi-person-fill-x"></i>
             </Button>
           </div>
@@ -91,7 +128,8 @@ const ItemUsuario = ({usuario, fila}) => {
                 <Form.Select
                   {...register("rol", {
                     required: "El rol del usuario es un dato obligatorio",
-                  })}>
+                  })}
+                >
                   <option value="">Seleccione una opcion</option>
                   <option value="Administrador">Administrador</option>
                   <option value="Usuario">Usuario</option>

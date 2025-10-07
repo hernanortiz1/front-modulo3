@@ -176,6 +176,8 @@ const Administrador = () => {
                           key={usuario._id}
                           usuario={usuario}
                           fila={indice + 1}
+                          setUsuarios={setUsuarios}
+                          usuarios={usuarios}
                         ></ItemUsuario>
                       ))}
                     </tbody>

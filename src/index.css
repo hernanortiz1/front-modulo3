@@ -373,7 +373,7 @@ main {
 }
 
 .total-compra {
-    box-shadow: 0 0 5px rgba(127, 51, 85, 0.49), 0 0 10px rgba(127, 51, 85, 0.49), 0 0 15px rgba(127, 51, 85, 0.49);
+    box-shadow: 0 0 5px rgba(190, 34, 104, 0.637), 0 0 10px rgba(190, 34, 104, 0.637), 0 0 15px rgba(190, 34, 104, 0.637);
     border-radius: 5px;
     padding: 15px;
     max-height: 400px; /* Altura máxima para scroll */

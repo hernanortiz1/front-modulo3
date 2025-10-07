@@ -2,7 +2,11 @@ import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { borrarUsuario } from "../../../helpers/queries.js";
+import {
+  borrarUsuario,
+  editarUsuario,
+  obtenerUsuarioID,
+} from "../../../helpers/queries.js";
 import Swal from "sweetalert2";
 
 const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
@@ -18,6 +22,7 @@ const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const eliminarUsuario = () => {
@@ -51,6 +56,50 @@ const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
     });
   };
 
+  const prepararModal = async (id) => {
+    try {
+      const respuesta = await obtenerUsuarioID(id);
+      if (respuesta.status === 200) {
+        const usuarioBuscado = await respuesta.json();
+        setValue("nombreUsuario", usuarioBuscado.nombreUsuario);
+        setValue("email", usuarioBuscado.email);
+        setValue("rol", usuarioBuscado.rol);
+        handleShow();
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "No se pudo obtener los datos del usuario.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Error al cargar usuario",
+        text: "Hubo un problema al obtener los datos del usuario.",
+        icon: "error",
+      });
+    }
+  };
+
+  const actualizarUsuario = async (usuarioActualizado) => {
+    const respuesta = await editarUsuario(usuarioActualizado, usuario._id);
+    if (respuesta.status === 200) {
+      Swal.fire({
+        title: "Producto editado",
+        text: `El usuario ${usuarioActualizado.nombreUsuario} fue editado correctamente.`,
+        icon: "success",
+      });
+      handleClose();
+    } else {
+      Swal.fire({
+        title: "Error al actualizar el usuario!",
+        text: `El usuario ${usuarioActualizado.nombreUsuario} no pudo ser editado.`,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <>
       <tr className="Montserrat">
@@ -60,8 +109,11 @@ const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
         <td className="text-center">{usuario.rol}</td>
         <td className="text-center">
           <div className="d-flex gap-1 justify-content-center">
-            <Button className="btn btn-warning me-lg-2">
-              <i className="bi bi-person-fill-gear" onClick={handleShow}></i>
+            <Button
+              className="btn btn-warning me-lg-2"
+              onClick={() => prepararModal(usuario._id)}
+            >
+              <i className="bi bi-person-fill-gear"></i>
             </Button>
             <Button
               variant="danger"
@@ -80,7 +132,10 @@ const ItemUsuario = ({ usuario, fila, setUsuarios, usuarios }) => {
             <Modal.Title>Editar Usuario</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form className="raleway" onSubmit={handleSubmit()}>
+            <Form
+              className="raleway"
+              onSubmit={handleSubmit(actualizarUsuario)}
+            >
               <Form.Group className="mb-3" controlId="nombreUsuario">
                 <Form.Label>Nombre del Usuario</Form.Label>
                 <Form.Control

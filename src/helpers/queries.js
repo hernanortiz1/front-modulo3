@@ -94,6 +94,16 @@ export const obtenerUsuarios = async () => {
   }
 };
 
+export const obtenerUsuarioID = async (id) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS + `/${id}`);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const editarUsuario = async (usuarioEditado, id) => {
   try {
     const respuesta = await fetch(API_USUARIOS + `/${id}`, {
@@ -103,6 +113,7 @@ export const editarUsuario = async (usuarioEditado, id) => {
       },
       body: JSON.stringify(usuarioEditado),
     });
+    const data = await respuesta.json();
     return respuesta;
   } catch (error) {
     console.error(error);
@@ -113,7 +124,7 @@ export const editarUsuario = async (usuarioEditado, id) => {
 export const borrarUsuario = async (id) => {
   try {
     const respuesta = await fetch(API_USUARIOS + `/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
     return respuesta;
   } catch (error) {

@@ -9,6 +9,8 @@ import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
+import DetalleProducto from "./components/pages/DetalleProducto";
+import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas";
 import Anteojos from "./components/pages/categorias/Anteojos";
 import Bermudas from "./components/pages/categorias/Bermudas";
@@ -22,7 +24,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Registro from "./components/pages/Registro";
 import { obtenerProductos } from "./helpers/queries";
-import SobreNosotros from "./components/pages/SobreNosotros"
+import SobreNosotros from "./components/pages/SobreNosotros";
 
 function App() {
   useEffect(() => {
@@ -66,10 +68,11 @@ function App() {
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
            
-           {/* <Route
+           
+            <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
-            ></Route>*/}
+            ></Route>
 
             <Route path="/registro" element={<Registro></Registro>}></Route>
             <Route
@@ -111,24 +114,17 @@ function App() {
               element={<Gorras productos={productos}></Gorras>}
             ></Route>
 
-              <Route path="/sobreNosotros" element={<SobreNosotros/>}>
-                
-              </Route>
+            <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
             <Route
               path="/administrador"
               element={<ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>}
             >
               <Route index element={<Administrador></Administrador>}></Route>
-
-              {/* <Route
-                    path="crear"
-                    element={
-                      <FormularioRopa
-                      titulo={"Crear producto"}
-
-                      ></FormularioRopa>
-                    }
-                  ></Route> */}
+              <Route
+                path="crear"
+                element={<FormularioRopa />}
+                titulo={"Crear producto"}
+              ></Route>
 
               {/*<Route
                   path="editar/:id"

@@ -8,7 +8,6 @@ import Contacto from "./components/pages/Contacto";
 import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
-import Login from "./components/pages/Login";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas";
 import Anteojos from "./components/pages/categorias/Anteojos";
@@ -21,6 +20,7 @@ import Shorts from "./components/pages/categorias/Shorts";
 import SweatersBuzos from "./components/pages/categorias/SweatersBuzos";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Registro from "./components/pages/Registro";
 import { obtenerProductos } from "./helpers/queries";
 import SobreNosotros from "./components/pages/SobreNosotros"
 
@@ -53,7 +53,7 @@ function App() {
 
     cargarProductos();
   }, []);
-  
+
   return (
     <>
       <BrowserRouter>
@@ -70,10 +70,7 @@ function App() {
               element={<DetalleProducto></DetalleProducto>}
             ></Route>*/}
 
-            <Route path="/login" element={<Login></Login>}></Route>
-
-            {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-
+            <Route path="/registro" element={<Registro></Registro>}></Route>
             <Route
               path="/remeras-chombas"
               element={<RemerasChombas productos={productos}></RemerasChombas>}
@@ -139,7 +136,6 @@ function App() {
                   }
                 ></Route>*/}
             </Route>
-
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
         </main>

@@ -255,6 +255,37 @@ const Carrito = () => {
               </div>
             </div>
 
+            <div className="col-lg-4 col-12">
+              <div className="total-compra">
+                <h5>Resumen de Compra</h5>
+                <ul className="list-group list-group-flush mb-3">
+                  <li className="list-group-item d-flex justify-content-between">
+                    <span>Total de productos:</span>
+                    <span>$165,900</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between">
+                    <span>Costo de envío:</span>
+                    <span className="text-success">Gratis</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between text-primary">
+                    <strong>Total:</strong>
+                    <strong>$165,900</strong>
+                  </li>
+                </ul>
+                <a
+                  href="./error404.html"
+                  className="btn btn-success w-100 mb-2"
+                >
+                  Comprar
+                </a>
+                <NavLink
+                  to={'/'}
+                  className="btn btn-outline-dark text-decoration-underline w-100"
+                >
+                  Seguir comprando
+                </NavLink>
+              </div>
+            </div>
           </div>
         </div>
       </section>

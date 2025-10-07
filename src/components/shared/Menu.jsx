@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
-import CartOffcanvas from "../pages/offCanvas/CartOffCanvas";
+import CartOffcanvas from "./componentsMenu/CartOffCanvas";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();

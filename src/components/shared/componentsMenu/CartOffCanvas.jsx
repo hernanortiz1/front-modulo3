@@ -40,7 +40,7 @@ const CartOffcanvas = ({ show, handleClose, cartItems }) => {
                     variant="outline-secondary"
                     className="bg-white"
                   >
-                    <i class="bi bi-trash-fill text-danger"></i>
+                    <i className="bi bi-trash-fill text-danger"></i>
                   </Button>
                   <div className="d-flex align-items-center mt-2">
                     <Button

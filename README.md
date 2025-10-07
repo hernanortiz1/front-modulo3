@@ -37,6 +37,7 @@ El sistema está diseñado para gestionar un **catálogo de productos de una tie
 ## ✨ Funcionalidades Principales
 
 ### 🛍️ Usuario final
+- Sistema de **login y autenticación con JWT**.
 - Visualización del catálogo completo de productos.  
 - Filtros por **categoría** y búsqueda por **nombre**.  
 - Páginas informativas: *Quiénes somos*, *Contacto*, *Galería*, *Error 404*.
@@ -48,12 +49,6 @@ El sistema está diseñado para gestionar un **catálogo de productos de una tie
   - Validaciones de formularios.
   - Control de stock y fecha de última actualización.  
 - Gestión de usuarios registrados (solo visible para administradores).
-
----
-
-## 🧩 Estructura del Proyecto
-
-
 
 
 ---

@@ -140,14 +140,38 @@ const Inicio = () => {
           <p className="text-center lead mb-5">
             Explora lo último en tendencias.
           </p>
+          <div
+            className="swiper-button-prev"
+            style={{
+              left: "-40px",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              color: "#000",
+            }}
+          ></div>
+          <div
+            className="swiper-button-next"
+            style={{
+              right: "-40px",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              color: "#000",
+            }}
+          ></div>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
             slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            pagination={{ clickable: true, dynamicBullets: true }}
             style={{
-              paddingBottom: "40px"}}
+              paddingBottom: "40px",
+            }}
             breakpoints={{
               0: { slidesPerView: 1 },
               576: { slidesPerView: 2 },
@@ -201,103 +225,160 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {remeras.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {remeras.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {remeras.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(camisas.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">CAMISAS</h5>
-                  <Link to={"/camisas"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/camisas"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {camisas.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {camisas.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {camisas.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(buzos.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">SWEATERS Y BUZOS</h5>
-                  <Link to={"/sweaters-buzos"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/sweaters-buzos"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {buzos.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {buzos.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {buzos.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(abrigosCamperas.length > 0 || terminoBusqueda === "") && (
@@ -312,211 +393,328 @@ const Inicio = () => {
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {abrigosCamperas.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {abrigosCamperas.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {abrigosCamperas.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(pantalones.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">PANTALONES</h5>
-                  <Link to={"/pantalones"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/pantalones"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {pantalones.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {pantalones.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {pantalones.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(bermudas.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">BERMUDAS</h5>
-                  <Link to={"/bermudas"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/bermudas"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {bermudas.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {bermudas.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {bermudas.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(shortsBanio.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">SHORTS DE BAÑO</h5>
-                  <Link to={"/shorts"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/shorts"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {shortsBanio.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {shortsBanio.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {shortsBanio.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(gorras.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">GORRAS</h5>
-                  <Link to={"/gorras"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/gorras"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {gorras.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {gorras.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {gorras.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
             {(anteojos.length > 0 || terminoBusqueda === "") && (
               <div data-aos="fade-down" data-aos-delay="0">
                 <div className="d-flex my-1">
                   <h5 className="Montserrat me-auto">ANTEOJOS DE SOL</h5>
-                  <Link to={"/anteojos"} className="text-decoration-none text-dark">
+                  <Link
+                    to={"/anteojos"}
+                    className="text-decoration-none text-dark"
+                  >
                     {" "}
                     ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
-                {anteojos.length === 0 ? (
-                  <p className="text-center lead my-3">
-                    <i className="bi bi-x-lg"></i> No se encontraron productos
-                  </p>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {anteojos.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                <div
+                  className="swiper-button-prev"
+                  style={{
+                    left: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <div
+                  className="swiper-button-next"
+                  style={{
+                    right: "-40px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    color: "#000",
+                  }}
+                ></div>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={4}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  style={{ paddingBottom: "40px" }}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 4 },
+                  }}
+                >
+                  {anteojos.map((ropa) => (
+                    <SwiperSlide key={ropa.id}>
+                      <CardRopa ropa={ropa} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
           </Container>

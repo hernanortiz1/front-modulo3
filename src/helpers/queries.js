@@ -22,7 +22,7 @@ export const crearProducto = async (productoNuevo) => {
       headers: {
         "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
       },
-      body: formData
+      body: formData,
     });
     return respuesta;
   } catch (error) {
@@ -77,6 +77,16 @@ export const registro = async (nuevoUsuario) => {
       body: JSON.stringify(nuevoUsuario),
     });
 
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const obtenerUsuarios = async () => {
+  try {
+    const respuesta = await fetch(API_USUARIOS);
     return respuesta;
   } catch (error) {
     console.error(error);

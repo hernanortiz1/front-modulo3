@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const ItemUsuario = () => {
+const ItemUsuario = ({usuario, fila}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -21,10 +21,10 @@ const ItemUsuario = () => {
   return (
     <>
       <tr className="Montserrat">
-        <td className="text-center">1</td>
-        <td className="text-center">juanperez97</td>
-        <td className="text-center">juanperez@mail.com</td>
-        <td className="text-center">Usuario</td>
+        <td className="text-center">{fila}</td>
+        <td className="text-center">{usuario.nombreUsuario}</td>
+        <td className="text-center">{usuario.email}</td>
+        <td className="text-center">{usuario.rol}</td>
         <td className="text-center">
           <div className="d-flex gap-1 justify-content-center">
             <Button className="btn btn-warning me-lg-2">

@@ -4,11 +4,18 @@ import ItemProducto from "./componentsAdministrador/ItemProducto";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { obtenerProductos, registro } from "../../helpers/queries.js";
+import {
+  obtenerProductos,
+  obtenerUsuarios,
+  registro,
+} from "../../helpers/queries.js";
 import Swal from "sweetalert2";
+
 const Administrador = () => {
   const [show, setShow] = useState(false);
   const [ropa, setRopa] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+
   const handleClose = () => {
     setShow(false);
   };
@@ -24,6 +31,7 @@ const Administrador = () => {
 
   useEffect(() => {
     leerProductos();
+    leerUsuarios();
   }, []);
 
   const leerProductos = async () => {
@@ -31,6 +39,16 @@ const Administrador = () => {
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       setRopa(datos);
+    } else {
+      console.info("Error al cargar los productos");
+    }
+  };
+
+  const leerUsuarios = async () => {
+    const respuesta = await obtenerUsuarios();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setUsuarios(datos);
     } else {
       console.info("Error al cargar los productos");
     }
@@ -152,7 +170,13 @@ const Administrador = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <ItemUsuario></ItemUsuario>
+                      {usuarios.map((usuario, indice) => (
+                        <ItemUsuario
+                          key={usuario._id}
+                          usuario={usuario}
+                          fila={indice + 1}
+                        ></ItemUsuario>
+                      ))}
                     </tbody>
                   </Table>
                 </div>

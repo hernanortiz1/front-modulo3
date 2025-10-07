@@ -90,7 +90,7 @@ const CartOffcanvas = ({ show, handleClose, cartItems }) => {
           </div>
           <div className="d-grid gap-2">
             <Button variant="primary">Iniciar pago💳</Button>
-            <NavLink className="botonIrAlCarrito btn border border-5 rounded-2 text-dark" to={'/carrito'}>
+            <NavLink className="botonIrAlCarrito btn border border-5 rounded-2 text-dark" to={'/carrito'} onClick={handleClose}>
               Ir al carrito
             </NavLink>
           </div>

@@ -22,6 +22,7 @@ import SweatersBuzos from "./components/pages/categorias/SweatersBuzos";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { obtenerProductos } from "./helpers/queries";
+import Carrito from "./components/pages/Carrito";
 
 function App() {
   useEffect(() => {
@@ -70,6 +71,7 @@ function App() {
             ></Route>*/}
 
             <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/carrito" element={<Carrito />}/>
 
             {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
 

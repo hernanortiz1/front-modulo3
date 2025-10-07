@@ -371,3 +371,13 @@ main {
   color: #fff !important;
   transition: all 1s ease;
 }
+
+.total-compra {
+    box-shadow: 0 0 5px rgba(127, 51, 85, 0.49), 0 0 10px rgba(127, 51, 85, 0.49), 0 0 15px rgba(127, 51, 85, 0.49);
+    border-radius: 5px;
+    padding: 15px;
+    max-height: 400px; /* Altura máxima para scroll */
+    overflow-y: auto; /* Scroll vertical */
+    position: sticky; /* Fijo mientras se hace scroll en pantallas grandes */
+    top: 100px; /* Separación desde arriba */
+}

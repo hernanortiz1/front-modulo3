@@ -74,7 +74,7 @@ const Administrador = () => {
         icon: "success",
       });
       reset();
-      leerUsuarios()
+      leerUsuarios();
     } else {
       Swal.fire({
         title: "ocurri[o un problema",
@@ -83,6 +83,21 @@ const Administrador = () => {
       });
     }
   };
+
+  const [terminoBusquedaUsuario, setTerminoBusquedaUsuario] = useState("");
+
+  const handleChange = (e) => {
+    setTerminoBusquedaUsuario(e.target.value);
+  };
+
+  const usuariosFiltrados = usuarios.filter((usuario) =>
+    usuario.nombreUsuario
+      .toLowerCase()
+      .includes(terminoBusquedaUsuario.toLowerCase())
+  );
+
+  const sinResultadosUsuarios =
+    terminoBusquedaUsuario.trim() !== "" && usuariosFiltrados.length === 0;
 
   return (
     <>
@@ -157,7 +172,12 @@ const Administrador = () => {
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
                   <Form className="w-50 d-flex justify-content-center me-3">
-                    <Form.Control type="text" placeholder="Buscar usuario" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Buscar por nombre de usuario"
+                      onChange={handleChange}
+                      value={terminoBusquedaUsuario}
+                    />
                   </Form>
                   <Button className="btn btn-success" onClick={handleShow}>
                     <i className="bi bi-person-plus-fill"></i>
@@ -181,7 +201,13 @@ const Administrador = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {usuarios.map((usuario, indice) => (
+                      {sinResultadosUsuarios && (
+                        <p className="text-center lead my-5">
+                          <i className="bi bi-x-lg"></i> No hay resultados
+                          disponibles para “{terminoBusquedaUsuario}”
+                        </p>
+                      )}
+                      {usuariosFiltrados.map((usuario, indice) => (
                         <ItemUsuario
                           key={usuario._id}
                           usuario={usuario}

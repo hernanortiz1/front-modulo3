@@ -5,9 +5,12 @@ import React from "react";
 const SobreNosotros = () => {
   return (
     <>
-      <h1 className="text-center colorFondoTitulo text-white Montserrat">
+    <div className="py-3 colorNavbarFooter text-light ">
+      <h1 className="text-center Montserrat">
         🧍‍♂️Sobre Nosotros
       </h1>
+
+    </div>
       <section className="container-fluid my-2 text-center">
         <article className="contenedorCard my-3 d-flex justify-content-center">
           <Card className="sobre-nosotros-card fade-in-right container">

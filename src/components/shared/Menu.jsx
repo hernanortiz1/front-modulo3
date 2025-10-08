@@ -103,9 +103,9 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     },
   ];
 
-  const irALogin = () => {
+  const irARegistro = () => {
     handleClose();
-    navegacion("/login");
+    navegacion("/registro");
   };
   const {
     register,
@@ -379,7 +379,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <Button
               variant="outline-danger"
               className="w-100 mt-2"
-              onClick={irALogin}
+              onClick={irARegistro}
             >
               Crear cuenta
             </Button>

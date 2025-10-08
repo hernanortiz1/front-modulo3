@@ -27,6 +27,7 @@ import { obtenerProductos } from "./helpers/queries";
 import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
 import { LogIn } from "lucide-react";
+import { CartProvider } from "./helpers/CartContext";
 
 function App() {
   useEffect(() => {
@@ -60,92 +61,97 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Menu
-          usuarioAdmin={usuarioAdmin}
-          setUsuarioAdmin={setUsuarioAdmin}
-        ></Menu>
-        <main className="colorMain">
-          <Routes>
-            <Route path="/" element={<Inicio />}></Route>
-            <Route path="/contacto" element={<Contacto />}></Route>
-           
-           
-            <Route
-              path="/detalle/:id"
-              element={<DetalleProducto></DetalleProducto>}
-            ></Route>
+      <CartProvider>
+        <BrowserRouter>
+          <Menu
+            usuarioAdmin={usuarioAdmin}
+            setUsuarioAdmin={setUsuarioAdmin}
+          ></Menu>
+          <main className="colorMain">
+            <Routes>
+              <Route path="/" element={<Inicio />}></Route>
+              <Route path="/contacto" element={<Contacto />}></Route>
 
-            <Route path="/login" element={<LogIn></LogIn>}></Route>
-            <Route path="/carrito" element={<Carrito />}/>
-
-            {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-
-            <Route path="/registro" element={<Registro></Registro>}></Route>
-            <Route
-              path="/remeras-chombas"
-              element={<RemerasChombas productos={productos}></RemerasChombas>}
-            ></Route>
-            <Route
-              path="/abrigos-camperas"
-              element={
-                <AbrigosCamperas productos={productos}></AbrigosCamperas>
-              }
-            ></Route>
-            <Route
-              path="/sweaters-buzos"
-              element={<SweatersBuzos productos={productos}></SweatersBuzos>}
-            ></Route>
-            <Route
-              path="/camisas"
-              element={<Camisas productos={productos}></Camisas>}
-            ></Route>
-            <Route
-              path="/bermudas"
-              element={<Bermudas productos={productos}></Bermudas>}
-            ></Route>
-            <Route
-              path="/pantalones"
-              element={<Pantalones productos={productos}></Pantalones>}
-            ></Route>
-            <Route
-              path="/shorts"
-              element={<Shorts productos={productos}></Shorts>}
-            ></Route>
-            <Route
-              path="/anteojos"
-              element={<Anteojos productos={productos}></Anteojos>}
-            ></Route>
-            <Route
-              path="/gorras"
-              element={<Gorras productos={productos}></Gorras>}
-            ></Route>
-
-            <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
-            <Route
-              path="/administrador"
-              element={<ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>}
-            >
-              <Route index element={<Administrador></Administrador>}></Route>
               <Route
-                path="crear"
-                element={<FormularioRopa />}
-                titulo={"Crear producto"}
+                path="/detalle/:id"
+                element={<DetalleProducto></DetalleProducto>}
               ></Route>
 
-              {/*<Route
+              <Route path="/login" element={<LogIn></LogIn>}></Route>
+              <Route path="/carrito" element={<Carrito />} />
+
+              {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
+
+              <Route path="/registro" element={<Registro></Registro>}></Route>
+              <Route
+                path="/remeras-chombas"
+                element={
+                  <RemerasChombas productos={productos}></RemerasChombas>
+                }
+              ></Route>
+              <Route
+                path="/abrigos-camperas"
+                element={
+                  <AbrigosCamperas productos={productos}></AbrigosCamperas>
+                }
+              ></Route>
+              <Route
+                path="/sweaters-buzos"
+                element={<SweatersBuzos productos={productos}></SweatersBuzos>}
+              ></Route>
+              <Route
+                path="/camisas"
+                element={<Camisas productos={productos}></Camisas>}
+              ></Route>
+              <Route
+                path="/bermudas"
+                element={<Bermudas productos={productos}></Bermudas>}
+              ></Route>
+              <Route
+                path="/pantalones"
+                element={<Pantalones productos={productos}></Pantalones>}
+              ></Route>
+              <Route
+                path="/shorts"
+                element={<Shorts productos={productos}></Shorts>}
+              ></Route>
+              <Route
+                path="/anteojos"
+                element={<Anteojos productos={productos}></Anteojos>}
+              ></Route>
+              <Route
+                path="/gorras"
+                element={<Gorras productos={productos}></Gorras>}
+              ></Route>
+
+              <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
+              <Route
+                path="/administrador"
+                element={
+                  <ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>
+                }
+              >
+                <Route index element={<Administrador></Administrador>}></Route>
+                <Route
+                  path="crear"
+                  element={<FormularioRopa />}
+                  titulo={"Crear producto"}
+                ></Route>
+
+                {/*<Route
                   path="editar/:id"
                   element={
                     <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
                   }
                 ></Route>*/}
-            </Route>
-            <Route path="*" element={<Error404></Error404>}></Route>
-          </Routes>
-        </main>
+              </Route>
+              <Route path="*" element={<Error404></Error404>}></Route>
+            </Routes>
+          </main>
 
-        <Footer></Footer>
-      </BrowserRouter>
+          <Footer></Footer>
+        </BrowserRouter>
+      </CartProvider>
     </>
   );
 }

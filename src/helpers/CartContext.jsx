@@ -10,3 +10,22 @@ export const useCart = () => {
   }
   return context;
 };
+
+export const CartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState([]);
+
+  // Cargar carrito desde localStorage al inicializar
+  useEffect(() => {
+    const savedCart = localStorage.getItem("lannister-cart");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+  }, []);
+
+  // Guardar en localStorage cuando cambie el carrito
+  useEffect(() => {
+    localStorage.setItem("lannister-cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};

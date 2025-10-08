@@ -120,8 +120,9 @@ function App() {
               <Route index element={<Administrador></Administrador>}></Route>
               <Route
                 path="crear"
-                element={<FormularioRopa />}
+                element={<FormularioRopa
                 titulo={"Crear producto"}
+                />}
               ></Route>
 
               <Route

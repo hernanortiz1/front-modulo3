@@ -1,0 +1,23 @@
+.img-preview {
+  max-width: 150px;
+}
+
+.btn-img-preview {
+  position: absolute;
+
+  top: 6px;
+
+  right: 6px;
+
+  width: 28px;
+
+  height: 28px;
+
+  border-radius: 50%;
+
+  border: 1px solid #dee2e6;
+
+  cursor: pointer;
+
+  z-index: 2;
+}

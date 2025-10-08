@@ -66,6 +66,23 @@ export const borrarProducto = async (id) => {
   }
 };
 
+export const editarProducto = async (productoEditado, id) => {
+  try {
+    const respuesta = await fetch(API_URL + `/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
+      },
+      body: JSON.stringify(productoEditado),
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const login = async (datosUsuario) => {
   try {
     const respuesta = await fetch(API_USUARIOS + "/login", {

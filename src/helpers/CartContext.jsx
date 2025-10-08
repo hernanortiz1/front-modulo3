@@ -51,9 +51,43 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const updateQuantity = (productId, size, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeFromCart(productId, size);
+      return;
+    }
+
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId && item.size === size
+          ? { ...item, quantity: newQuantity }
+          : item
+      )
+    );
+  };
+
+  const increaseQuantity = (productId, size) => {
+    updateQuantity(
+      productId,
+      size,
+      cartItems.find((item) => item.id === productId && item.size === size)
+        .quantity + 1
+    );
+  };
+
+  const decreaseQuantity = (productId, size) => {
+    updateQuantity(
+      productId,
+      size,
+      cartItems.find((item) => item.id === productId && item.size === size)
+        .quantity - 1
+    );
+  };
+
   const value = {
     cartItems,
     addToCart,
+    removeFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

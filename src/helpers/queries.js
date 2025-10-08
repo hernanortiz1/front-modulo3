@@ -22,7 +22,7 @@ export const crearProducto = async (productoNuevo) => {
       headers: {
         "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
       },
-      body: formData
+      body: formData,
     });
     return respuesta;
   } catch (error) {
@@ -46,6 +46,21 @@ export const obtenerProductosPorId = async (id) => {
     const respuesta = await fetch(API_URL + `/${id}`);
     return respuesta;
   } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const borrarProducto = async (id) => {
+  try {
+    const respuesta = await fetch(API_URL + `/${id}`, {
+      method: "DELETE",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
+      },
+    });
+    return respuesta;
+  } catch {
     console.error(error);
     return null;
   }

@@ -2,11 +2,11 @@ import { Accordion, Table, Button, Form, Modal } from "react-bootstrap";
 import ItemUsuario from "./componentsAdministrador/ItemUsuario";
 import ItemProducto from "./componentsAdministrador/ItemProducto";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import {
+  leerProductosPaginados,
   leerUsuariosPaginados,
-  obtenerProductos,
   registro,
 } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
@@ -19,7 +19,16 @@ const Administrador = () => {
   const [limitUsuario] = useState(10);
   const [totalPagesUsuario, setTotalPagesUsuario] = useState(1);
 
+  const [pageProducto, setPageProducto] = useState(1);
+  const [limitProducto] = useState(10);
+  const [totalPagesProducto, setTotalPagesProducto] = useState(1);
+
   const [loadingUsuarios, setLoadingUsuarios] = useState(false);
+  const [loadingProductos, setLoadingProductos] = useState(false);
+
+  const headerProductosRef = useRef(null);
+  const headerUsuariosRef = useRef(null);
+
   const handleClose = () => {
     setShow(false);
   };
@@ -35,20 +44,29 @@ const Administrador = () => {
 
   useEffect(() => {
     leerProductos();
-  }, []);
+  }, [pageProducto]);
 
   useEffect(() => {
     leerUsuarios();
   }, [pageUsuario]);
 
   const leerProductos = async () => {
-    const respuesta = await obtenerProductos();
+    setLoadingProductos(true);
+    const respuesta = await leerProductosPaginados(pageProducto, limitProducto);
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
-      setRopa(datos);
+      setRopa(datos.productos);
+      setTotalPagesProducto(datos.totalPages);
+      setTimeout(() => {
+        headerProductosRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
     } else {
       console.info("Error al cargar los productos");
     }
+    setLoadingProductos(false);
   };
 
   const leerUsuarios = async () => {
@@ -58,6 +76,12 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setUsuarios(datos.usuarios);
       setTotalPagesUsuario(datos.totalPages);
+      setTimeout(() => {
+        headerUsuariosRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
     } else {
       console.info("Error al cargar los usuarios");
     }
@@ -120,7 +144,7 @@ const Administrador = () => {
         <article className="my-4">
           <Accordion defaultActiveKey={["0"]} alwaysOpen>
             <Accordion.Item eventKey="0">
-              <Accordion.Header className="Montserrat">
+              <Accordion.Header className="Montserrat" ref={headerProductosRef}>
                 <i className="bi bi-database me-2"></i>
                 Productos
               </Accordion.Header>
@@ -162,34 +186,75 @@ const Administrador = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {sinResultadosProductos && (
-                        <p className="text-center lead my-5">
-                          <i className="bi bi-x-lg"></i> No hay resultados
-                          disponibles para “{terminoBusquedaProducto}”
-                        </p>
+                      {loadingProductos ? (
+                        <tr>
+                          <td colSpan="5" className="text-center py-4">
+                            <div
+                              className="spinner-border text-success"
+                              role="status"
+                            >
+                              <span className="visually-hidden">
+                                Cargando...
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      ) : sinResultadosProductos ? (
+                        <tr>
+                          <td colSpan="5" className="text-center py-4">
+                            <i className="bi bi-x-lg"></i> No hay resultados
+                            disponibles para “{terminoBusquedaProducto}”
+                          </td>
+                        </tr>
+                      ) : (
+                        productosFiltrados.map((producto, indice) => (
+                          <ItemProducto
+                            key={producto._id}
+                            ropa={producto}
+                            setRopa={setRopa}
+                            fila={
+                              (pageProducto - 1) * limitProducto + indice + 1
+                            }
+                            limitProducto={limitProducto}
+                            pageProducto={pageProducto}
+                            onProductoActualizado={leerProductos}
+                          />
+                        ))
                       )}
-                      {productosFiltrados.map((producto, indice) => (
-                        <ItemProducto
-                          key={producto._id}
-                          ropa={producto}
-                          setRopa={setRopa}
-                          fila={indice + 1}
-                        ></ItemProducto>
-                      ))}
                     </tbody>
                   </Table>
                 </div>
                 <div className="d-flex justify-content-center align-items-center my-3">
-                  <Button className="btn-table">Anterior</Button>
-                  <span className="mx-3">Página 1 de 3</span>
-                  <Button className="btn-table">Siguiente</Button>
+                  <Button
+                    onClick={() =>
+                      setPageProducto((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={pageProducto === 1}
+                    className="btn-table"
+                  >
+                    Anterior
+                  </Button>
+                  <span className="mx-3">
+                    Página {pageProducto} de {totalPagesProducto}
+                  </span>
+                  <Button
+                    onClick={() =>
+                      setPageProducto((prev) =>
+                        Math.min(prev + 1, totalPagesProducto)
+                      )
+                    }
+                    disabled={pageProducto === totalPagesProducto}
+                    className="btn-table"
+                  >
+                    Siguiente
+                  </Button>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
           <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
             <Accordion.Item eventKey="0">
-              <Accordion.Header className="Montserrat">
+              <Accordion.Header className="Montserrat" ref={headerUsuariosRef}>
                 <i className="bi bi-person-fill me-2"></i>Usuarios
               </Accordion.Header>
               <Accordion.Body className="row">
@@ -223,7 +288,6 @@ const Administrador = () => {
                         <th>Opciones</th>
                       </tr>
                     </thead>
-                    {/*nuevo */}
                     <tbody>
                       {loadingUsuarios ? (
                         <tr>
@@ -254,12 +318,11 @@ const Administrador = () => {
                             setUsuarios={setUsuarios}
                             limitUsuario={limitUsuario}
                             pageUsuario={pageUsuario}
-                            onUsuarioActualizado={leerUsuarios} // 👈 nuevo callback
+                            onUsuarioActualizado={leerUsuarios}
                           />
                         ))
                       )}
                     </tbody>
-                    {/*fin modificiacion */}
                   </Table>
                 </div>
                 <div className="d-flex justify-content-center align-items-center my-3">

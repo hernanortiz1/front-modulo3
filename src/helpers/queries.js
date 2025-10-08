@@ -142,3 +142,13 @@ export const leerUsuariosPaginados = async (page, limit) => {
     return null;
   }
 };
+
+export const leerProductosPaginados = async (page, limit) => {
+  try {
+    const respuesta = await fetch(`${API_URL}/paginacion?page=${page}&limit=${limit}`);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

@@ -24,7 +24,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Registro from "./components/pages/Registro";
 import { obtenerProductos } from "./helpers/queries";
+import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
+import { LogIn } from "lucide-react";
 
 function App() {
   useEffect(() => {
@@ -73,6 +75,11 @@ function App() {
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
             ></Route>
+
+            <Route path="/login" element={<LogIn></LogIn>}></Route>
+            <Route path="/carrito" element={<Carrito />}/>
+
+            {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
 
             <Route path="/registro" element={<Registro></Registro>}></Route>
             <Route

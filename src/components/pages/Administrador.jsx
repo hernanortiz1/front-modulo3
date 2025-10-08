@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import {
   leerUsuariosPaginados,
   obtenerProductos,
-  obtenerUsuarios,
   registro,
 } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
@@ -16,18 +15,17 @@ const Administrador = () => {
   const [show, setShow] = useState(false);
   const [ropa, setRopa] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
-
   const [pageUsuario, setPageUsuario] = useState(1);
   const [limitUsuario] = useState(10);
   const [totalPagesUsuario, setTotalPagesUsuario] = useState(1);
 
+  const [loadingUsuarios, setLoadingUsuarios] = useState(false);
   const handleClose = () => {
     setShow(false);
   };
   const handleShow = () => {
     setShow(true);
   };
-
   const {
     register,
     handleSubmit,
@@ -41,7 +39,7 @@ const Administrador = () => {
 
   useEffect(() => {
     leerUsuarios();
-  }, [pageUsuario, usuarios]);
+  }, [pageUsuario]);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -54,19 +52,20 @@ const Administrador = () => {
   };
 
   const leerUsuarios = async () => {
+    setLoadingUsuarios(true);
     const respuesta = await leerUsuariosPaginados(pageUsuario, limitUsuario);
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       setUsuarios(datos.usuarios);
       setTotalPagesUsuario(datos.totalPages);
     } else {
-      console.info("Error al cargar los productos");
+      console.info("Error al cargar los usuarios");
     }
+    setLoadingUsuarios(false);
   };
 
   const crearCuenta = async (usuario) => {
     const respuesta = await registro(usuario);
-
     if (respuesta.status === 201) {
       Swal.fire({
         title: "Usuario creado!",
@@ -98,9 +97,7 @@ const Administrador = () => {
 
   const sinResultadosUsuarios =
     terminoBusquedaUsuario.trim() !== "" && usuariosFiltrados.length === 0;
-
   const [terminoBusquedaProducto, setTerminoBusquedaProducto] = useState("");
-
   const handleChangeProducto = (e) => {
     setTerminoBusquedaProducto(e.target.value);
   };
@@ -130,8 +127,12 @@ const Administrador = () => {
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
                   <Form className="w-50 d-flex justify-content-center me-3">
-                    <Form.Control type="text" placeholder="Buscar producto" onChange={handleChangeProducto}
-                      value={terminoBusquedaProducto}/>
+                    <Form.Control
+                      type="text"
+                      placeholder="Buscar producto"
+                      onChange={handleChangeProducto}
+                      value={terminoBusquedaProducto}
+                    />
                   </Form>
                   <Button
                     className="btn btn-success"
@@ -222,25 +223,43 @@ const Administrador = () => {
                         <th>Opciones</th>
                       </tr>
                     </thead>
+                    {/*nuevo */}
                     <tbody>
-                      {sinResultadosUsuarios && (
-                        <p className="text-center lead my-5">
-                          <i className="bi bi-x-lg"></i> No hay resultados
-                          disponibles para “{terminoBusquedaUsuario}”
-                        </p>
+                      {loadingUsuarios ? (
+                        <tr>
+                          <td colSpan="5" className="text-center py-4">
+                            <div
+                              className="spinner-border text-success"
+                              role="status"
+                            >
+                              <span className="visually-hidden">
+                                Cargando...
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      ) : sinResultadosUsuarios ? (
+                        <tr>
+                          <td colSpan="5" className="text-center py-4">
+                            <i className="bi bi-x-lg"></i> No hay resultados
+                            disponibles para “{terminoBusquedaUsuario}”
+                          </td>
+                        </tr>
+                      ) : (
+                        usuariosFiltrados.map((usuario, indice) => (
+                          <ItemUsuario
+                            key={usuario._id}
+                            usuario={usuario}
+                            fila={(pageUsuario - 1) * limitUsuario + indice + 1}
+                            setUsuarios={setUsuarios}
+                            limitUsuario={limitUsuario}
+                            pageUsuario={pageUsuario}
+                            onUsuarioActualizado={leerUsuarios} // 👈 nuevo callback
+                          />
+                        ))
                       )}
-                      {usuariosFiltrados.map((usuario, indice) => (
-                        <ItemUsuario
-                          key={usuario._id}
-                          usuario={usuario}
-                          fila={(pageUsuario - 1) * limitUsuario + indice + 1}
-                          setUsuarios={setUsuarios}
-                          usuarios={usuarios}
-                          limit={limitUsuario}
-                          page={pageUsuario}
-                        ></ItemUsuario>
-                      ))}
                     </tbody>
+                    {/*fin modificiacion */}
                   </Table>
                 </div>
                 <div className="d-flex justify-content-center align-items-center my-3">
@@ -374,5 +393,4 @@ const Administrador = () => {
     </>
   );
 };
-
 export default Administrador;

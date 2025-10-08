@@ -53,13 +53,30 @@ export const obtenerProductosPorId = async (id) => {
 
 export const login = async (datosUsuario) => {
   try {
-    const respuesta = await fetch(API_USUARIOS, {
+    const respuesta = await fetch(API_USUARIOS + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(datosUsuario),
     });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const registro = async (nuevoUsuario) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nuevoUsuario),
+    });
+
     return respuesta;
   } catch (error) {
     console.error(error);

@@ -8,7 +8,6 @@ import Contacto from "./components/pages/Contacto";
 import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
-import Login from "./components/pages/Login";
 import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 import DetalleProducto from "./components/pages/DetalleProducto";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
@@ -23,7 +22,9 @@ import Shorts from "./components/pages/categorias/Shorts";
 import SweatersBuzos from "./components/pages/categorias/SweatersBuzos";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Registro from "./components/pages/Registro";
 import { obtenerProductos } from "./helpers/queries";
+import SobreNosotros from "./components/pages/SobreNosotros";
 
 function App() {
   useEffect(() => {
@@ -66,15 +67,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
-             <Route
+            <Route
               path="/detalle/:id"
               element={<DetalleProducto></DetalleProducto>}
             ></Route>
 
-            <Route path="/login" element={<Login></Login>}></Route>
-
-            {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-
+            <Route path="/registro" element={<Registro></Registro>}></Route>
             <Route
               path="/remeras-chombas"
               element={<RemerasChombas productos={productos}></RemerasChombas>}
@@ -114,21 +112,17 @@ function App() {
               element={<Gorras productos={productos}></Gorras>}
             ></Route>
 
+            <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
             <Route
               path="/administrador"
               element={<ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>}
             >
               <Route index element={<Administrador></Administrador>}></Route>
-
               <Route
-                    path="crear"
-                    element={
-                      <FormularioRopa
-                      titulo={"Crear producto"}
-
-                      ></FormularioRopa>
-                    }
-                  ></Route>
+                path="crear"
+                element={<FormularioRopa />}
+                titulo={"Crear producto"}
+              ></Route>
 
               <Route
                   path="editar/:id"
@@ -137,7 +131,6 @@ function App() {
                   }
                 ></Route>
             </Route>
-
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
         </main>

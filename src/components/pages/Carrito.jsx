@@ -11,7 +11,7 @@ const Carrito = () => {
     decreaseQuantity,
     getTotalPrice,
   } = useCart();
-  
+
   return (
     <>
       <section>
@@ -30,268 +30,118 @@ const Carrito = () => {
           </div>
           <div className="row">
             <div className="col-lg-8 col-12 mb-4">
-              <div className="mb-4 mx-2 mx-md-0">
-                <h5 className="text-center text-md-start text-success">
-                  <i className="bi bi-lightning-fill"></i> Producto Full
-                </h5>
-                <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
-                  <div className="col-2 p-0 d-flex justify-content-center">
-                    <Image
-                      src="https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg"
-                      rounded
-                      width={95}
-                      height={95}
-                    />
-                  </div>
-                  <div className="col-4 text-center">
-                    <p className="m-0">
-                      <strong>Remera levis negra</strong>
-                    </p>
-                    <p className="m-0">
-                      Talle: <strong>XS</strong>
-                    </p>
-                    <p className="m-0">
-                      Color: <strong>Negro</strong>
-                    </p>
-                  </div>
-                  <div className="col-4 text-center">
-                    <div>
-                      <span>Cantidad</span>
-                      <div className="d-flex justify-content-center align-items-center mt-2">
-                        <Button variant="outline-secondary" size="sm">
-                          -
-                        </Button>
-                        <span className="mx-2">1</span>
-                        <Button variant="outline-secondary" size="sm">
-                          +
-                        </Button>
+              {cartItems.length === 0 ? (
+                <div className="text-center py-5">
+                  <h4>Tu carrito está vacío</h4>
+                  <NavLink to="/" className="btn btn-primary mt-3">
+                    Seguir comprando
+                  </NavLink>
+                </div>
+              ) : (
+                cartItems.map((item, index) => (
+                  <div
+                    key={`${item.id}-${item.size}-${index}`}
+                    className="mb-4 mx-2 mx-md-0"
+                  >
+                    <h5 className="text-center text-md-start text-success">
+                      <i className="bi bi-lightning-fill"></i>
+                      {item.vendor || "Producto Full"}
+                    </h5>
+                    <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
+                      <div className="col-2 p-0 d-flex justify-content-center">
+                        <Image
+                          src="https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg"
+                          rounded
+                          width={95}
+                          height={95}
+                        />
+                      </div>
+                      <div className="col-4 text-center">
+                        <p className="m-0">
+                          <strong>{item.name}</strong>
+                        </p>
+                        <p className="m-0">
+                          Talle: <strong>{item.size}</strong>
+                        </p>
+                        <p className="m-0">
+                          Color: <strong>{item.color || "Negro"}</strong>
+                        </p>
+                      </div>
+                      <div className="col-4 text-center">
+                        <div>
+                          <span>Cantidad</span>
+                          <div className="d-flex justify-content-center align-items-center mt-2">
+                            <Button 
+                              variant="outline-secondary" 
+                              size="sm"
+                              onClick={() => decreaseQuantity(item.id, item.size)}
+                            >
+                              -
+                            </Button>
+                            <span className="mx-2">${item.quantity}</span>
+                            <Button 
+                              variant="outline-secondary" 
+                              size="sm"
+                              onClick={()=> increaseQuantity(item.id, item.isze)}
+                            >
+                              +
+                            </Button>
+                          </div>
+                        </div>
+                        <div className="mt-4">
+                          <Button
+                            onClick={() => removeFromCart(item.id, item.size)}
+                            className="btn btn-danger text-decoration-none p-1 p-md-2 border me-2"
+                          >
+                            <i className="bi bi-trash-fill text-light"></i>
+                          </Button>
+                          <NavLink
+                            to={"*"}
+                            className="btn btn-success text-decoration-none p-1 p-md-2 border"
+                          >
+                            Comprar
+                          </NavLink>
+                        </div>
+                      </div>
+                      <div className="col-2 text-center">
+                        <span>${(item.price * item.quantity).toLocaleString()}</span>
                       </div>
                     </div>
-                    <div className="mt-4">
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-danger text-decoration-none p-1 p-md-2 border"
-                      >
-                        <i className="bi bi-trash-fill text-light"></i>
-                      </NavLink>
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-success text-decoration-none p-1 p-md-2 border"
-                      >
-                        Comprar
-                      </NavLink>
-                    </div>
                   </div>
-                  <div className="col-2 text-center">
-                    <span>$19,900</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-4 mx-2 mx-md-0">
-                <h5 className="text-center text-md-start text-success">
-                  <i className="bi bi-lightning-fill"></i> Producto tienda
-                  Lannister
-                </h5>
-                <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
-                  <div className="col-2 p-0 d-flex justify-content-center">
-                    <Image
-                      src="https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg"
-                      rounded
-                      width={95}
-                      height={95}
-                    />
-                  </div>
-                  <div className="col-4 text-center">
-                    <p className="m-0">
-                      <strong>Remera levis negra</strong>
-                    </p>
-                    <p className="m-0">
-                      Talle: <strong>XS</strong>
-                    </p>
-                    <p className="m-0">
-                      Color: <strong>Negro</strong>
-                    </p>
-                  </div>
-                  <div className="col-4 text-center">
-                    <div>
-                      <span>Cantidad</span>
-                      <div className="d-flex justify-content-center align-items-center mt-2">
-                        <Button variant="outline-secondary" size="sm">
-                          -
-                        </Button>
-                        <span className="mx-2">1</span>
-                        <Button variant="outline-secondary" size="sm">
-                          +
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-danger text-decoration-none p-1 p-md-2 border"
-                      >
-                        <i className="bi bi-trash-fill text-light"></i>
-                      </NavLink>
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-success text-decoration-none p-1 p-md-2 border"
-                      >
-                        Comprar
-                      </NavLink>
-                    </div>
-                  </div>
-                  <div className="col-2 text-center">
-                    <span>$19,900</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-4 mx-2 mx-md-0">
-                <h5 className="text-center text-md-start text-success">
-                  <i className="bi bi-lightning-fill"></i> Producto Full
-                </h5>
-                <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
-                  <div className="col-2 p-0 d-flex justify-content-center">
-                    <Image
-                      src="https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg"
-                      rounded
-                      width={95}
-                      height={95}
-                    />
-                  </div>
-                  <div className="col-4 text-center">
-                    <p className="m-0">
-                      <strong>Remera levis negra</strong>
-                    </p>
-                    <p className="m-0">
-                      Talle: <strong>XS</strong>
-                    </p>
-                    <p className="m-0">
-                      Color: <strong>Negro</strong>
-                    </p>
-                  </div>
-                  <div className="col-4 text-center">
-                    <div>
-                      <span>Cantidad</span>
-                      <div className="d-flex justify-content-center align-items-center mt-2">
-                        <Button variant="outline-secondary" size="sm">
-                          -
-                        </Button>
-                        <span className="mx-2">1</span>
-                        <Button variant="outline-secondary" size="sm">
-                          +
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-danger text-decoration-none p-1 p-md-2 border"
-                      >
-                        <i className="bi bi-trash-fill text-light"></i>
-                      </NavLink>
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-success text-decoration-none p-1 p-md-2 border"
-                      >
-                        Comprar
-                      </NavLink>
-                    </div>
-                  </div>
-                  <div className="col-2 text-center">
-                    <span>$19,900</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-4 mx-2 mx-md-0">
-                <h5 className="text-center text-md-start text-success">
-                  <i className="bi bi-lightning-fill"></i> Producto Full
-                </h5>
-                <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
-                  <div className="col-2 p-0 d-flex justify-content-center">
-                    <Image
-                      src="https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg"
-                      rounded
-                      width={95}
-                      height={95}
-                    />
-                  </div>
-                  <div className="col-4 text-center">
-                    <p className="m-0">
-                      <strong>Remera levis negra</strong>
-                    </p>
-                    <p className="m-0">
-                      Talle: <strong>XS</strong>
-                    </p>
-                    <p className="m-0">
-                      Color: <strong>Negro</strong>
-                    </p>
-                  </div>
-                  <div className="col-4 text-center">
-                    <div>
-                      <span>Cantidad</span>
-                      <div className="d-flex justify-content-center align-items-center mt-2">
-                        <Button variant="outline-secondary" size="sm">
-                          -
-                        </Button>
-                        <span className="mx-2">1</span>
-                        <Button variant="outline-secondary" size="sm">
-                          +
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-danger text-decoration-none p-1 p-md-2 border"
-                      >
-                        <i className="bi bi-trash-fill text-light"></i>
-                      </NavLink>
-                      <NavLink
-                        to={"*"}
-                        className="btn btn-success text-decoration-none p-1 p-md-2 border"
-                      >
-                        Comprar
-                      </NavLink>
-                    </div>
-                  </div>
-                  <div className="col-2 text-center">
-                    <span>$19,900</span>
-                  </div>
-                </div>
-              </div>
+                ))
+              )}
             </div>
 
-            <div className="col-lg-4 col-12">
-              <div className="total-compra">
-                <h5>Resumen de Compra</h5>
-                <ul className="list-group list-group-flush mb-3">
-                  <li className="list-group-item d-flex justify-content-between">
-                    <span>Total de productos:</span>
-                    <span>$165,900</span>
-                  </li>
-                  <li className="list-group-item d-flex justify-content-between">
-                    <span>Costo de envío:</span>
-                    <span className="text-success">Gratis</span>
-                  </li>
-                  <li className="list-group-item d-flex justify-content-between text-primary">
-                    <strong>Total:</strong>
-                    <strong>$165,900</strong>
-                  </li>
-                </ul>
-                <NavLink to={"*"} className="btn btn-success w-100 mb-2">
-                  Comprar
-                </NavLink>
-                <NavLink
-                  to={"/"}
-                  className="btn btn-outline-dark text-decoration-underline w-100"
-                >
-                  Seguir comprando
-                </NavLink>
+            {cartItems.length > 0 && (
+              <div className="col-lg-4 col-12">
+                <div className="total-compra">
+                  <h5>Resumen de Compra</h5>
+                  <ul className="list-group list-group-flush mb-3">
+                    <li className="list-group-item d-flex justify-content-between">
+                      <span>Total de productos:</span>
+                      <span>${getTotalPrice().toLocalString()}</span>
+                    </li>
+                    <li className="list-group-item d-flex justify-content-between">
+                      <span>Costo de envío:</span>
+                      <span className="text-success">Gratis</span>
+                    </li>
+                    <li className="list-group-item d-flex justify-content-between text-primary">
+                      <strong>Total:</strong>
+                      <strong>${getTotalPrice().toLocaleString()}</strong>
+                    </li>
+                  </ul>
+                  <NavLink to={"*"} className="btn btn-success w-100 mb-2">
+                    Comprar
+                  </NavLink>
+                  <NavLink
+                    to={"/"}
+                    className="btn btn-outline-dark text-decoration-underline w-100"
+                  >
+                    Seguir comprando
+                  </NavLink>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

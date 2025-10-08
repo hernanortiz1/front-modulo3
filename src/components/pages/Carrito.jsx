@@ -1,8 +1,17 @@
 import React from "react";
 import { Button, Image } from "react-bootstrap";
 import { NavLink } from "react-router";
+import { useCart } from "../../helpers/CartContext";
 
 const Carrito = () => {
+  const {
+    cartItems,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    getTotalPrice,
+  } = useCart();
+  
   return (
     <>
       <section>
@@ -60,13 +69,13 @@ const Carrito = () => {
                     </div>
                     <div className="mt-4">
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
                       </NavLink>
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
@@ -119,13 +128,13 @@ const Carrito = () => {
                     </div>
                     <div className="mt-4">
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
                       </NavLink>
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
@@ -177,13 +186,13 @@ const Carrito = () => {
                     </div>
                     <div className="mt-4">
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
                       </NavLink>
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
@@ -235,13 +244,13 @@ const Carrito = () => {
                     </div>
                     <div className="mt-4">
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-danger text-decoration-none p-1 p-md-2 border"
                       >
                         <i className="bi bi-trash-fill text-light"></i>
                       </NavLink>
                       <NavLink
-                        to={'*'}
+                        to={"*"}
                         className="btn btn-success text-decoration-none p-1 p-md-2 border"
                       >
                         Comprar
@@ -272,14 +281,11 @@ const Carrito = () => {
                     <strong>$165,900</strong>
                   </li>
                 </ul>
-                <NavLink
-                  to={'*'}
-                  className="btn btn-success w-100 mb-2"
-                >
+                <NavLink to={"*"} className="btn btn-success w-100 mb-2">
                   Comprar
                 </NavLink>
                 <NavLink
-                  to={'/'}
+                  to={"/"}
                   className="btn btn-outline-dark text-decoration-underline w-100"
                 >
                   Seguir comprando

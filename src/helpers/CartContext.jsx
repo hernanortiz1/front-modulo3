@@ -45,11 +45,16 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const removeFromCart = (productId, size) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => !(item.id === productId && item.size === size))
+    );
+  };
+
   const value = {
     cartItems,
     addToCart,
   };
-
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

@@ -13,6 +13,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
     increaseQuantity,
     decreaseQuantity,
     getTotalPrice,
+    isLoading
   } = useCart();
 
   useEffect(() => {
@@ -23,6 +24,19 @@ const CartOffcanvas = ({ show, handleClose }) => {
 
   const totalPrice = getTotalPrice();
   const displayTotal = typeof totalPrice === "number" ? totalPrice : 0;
+
+  if (isLoading) {
+    return (
+      <Offcanvas show={show} onHide={handleClose} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Cargando carrito...</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body className="d-flex justify-content-center align-items-center">
+          <Spinner animation="border" variant="primary" />
+        </Offcanvas.Body>
+      </Offcanvas>
+    );
+  }
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
@@ -69,10 +83,10 @@ const CartOffcanvas = ({ show, handleClose }) => {
                   <div className="text-end">
                     <Button
                       size="sm"
-                      variant="outline-danger"
+                      variant="danger"
                       onClick={() => removeFromCart(item.id, item.size)}
                     >
-                      <i className="bi bi-trash-fill text-danger"></i>
+                      <i className="bi bi-trash-fill text-white"></i>
                     </Button>
                     <div className="d-flex align-items-center mt-2">
                       <Button

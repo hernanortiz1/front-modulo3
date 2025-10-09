@@ -13,19 +13,43 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Cargar carrito desde localStorage al inicializar
   useEffect(() => {
-    const savedCart = localStorage.getItem("lannister-cart");
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
+    try {
+      const savedCart = localStorage.getItem("lannister-cart");
+
+      if (savedCart && savedCart !== "undefined") {
+        const parsedCart = JSON.parse(savedCart);
+
+        // Validar que sea un array
+        if (Array.isArray(parsedCart)) {
+          setCartItems(parsedCart);
+        } else {
+          console.warn("Datos del carrito no válidos, inicializando vacío");
+          setCartItems([]);
+        }
+      } else {
+        setCartItems([]);
+      }
+    } catch (error) {
+      console.error("Error al cargar el carrito:", error);
+      setCartItems([]);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
   // Guardar en localStorage cuando cambie el carrito
   useEffect(() => {
-    localStorage.setItem("lannister-cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (!isLoading) {
+      try {
+        localStorage.setItem("lannister-cart", JSON.stringify(cartItems));
+      } catch (error) {
+        console.error("Error al guardar el carrito:", error);
+      }
+    }
+  }, [cartItems, isLoading]);
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -102,7 +126,7 @@ export const CartProvider = ({ children }) => {
     return cartItems.reduce((total, item) => {
       const price = Number(item.price) || 0;
       const quantity = Number(item.quantity) || 0;
-      return total + (price * quantity);
+      return total + price * quantity;
     }, 0);
   };
 

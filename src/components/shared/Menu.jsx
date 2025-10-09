@@ -31,7 +31,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   //CARRITO
   const [showCart, setShowCart] = useState(false);
-  const { cartItems, getTotalItems } = useCart();
+  const { cartItems, getTotalItems, isLoading } = useCart();
 
   const isCartPage = location.pathname === "/carrito";
 
@@ -229,9 +229,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       <Button
                         className="nav-link d-flex align-items-center ms-lg-5 position-relative"
                         onClick={() => setShowCart(true)}
+                        disabled={isLoading} // opcional
                       >
                         <i className="bi bi-bag-fill text-light fs-4"></i>
-                        {getTotalItems() > 0 && (
+                        {!isLoading && getTotalItems() > 0 && (
                           <Badge bg="danger">{getTotalItems()}</Badge>
                         )}
                       </Button>

@@ -106,7 +106,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
             </div>
           )}
 
-          {cartItems.lenth > 0 && (
+          {cartItems.length > 0 && (
             <>
               <p className="text-success fw-bold mt-4">
                 ¡Llegaste! Tenés ENVÍO GRATIS 🎉
@@ -122,7 +122,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
           <div ref={endRef}></div>
         </div>
 
-        {cartItems.lenth > 0 && (
+        {cartItems.length > 0 && (
           <div className="border-top px-3 py-3 bg-white">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <h5>Total:</h5>

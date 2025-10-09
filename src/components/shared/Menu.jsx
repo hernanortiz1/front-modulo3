@@ -33,6 +33,8 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const [showCart, setShowCart] = useState(false);
   const { cartItems, getTotalItems } = useCart();
 
+  const isCartPage = location.pathname === "/carrito";
+
   const irARegistro = () => {
     handleClose();
     navegacion("/registro");
@@ -223,20 +225,17 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       </div>
                     </Button>
 
-                    {/* Botón carrito */}
-                    <Button
-                      className="nav-link d-flex align-items-center ms-lg-5"
-                      onClick={() => setShowCart(true)}
-                    >
-                      <i className="bi bi-bag-fill text-light fs-4"></i>
-                      {getTotalItems() > 0 && (
-                        <Badge
-                          bg="danger"
-                        >
-                          {getTotalItems()}
-                        </Badge>
-                      )}
-                    </Button>
+                    {!isCartPage && (
+                      <Button
+                        className="nav-link d-flex align-items-center ms-lg-5 position-relative"
+                        onClick={() => setShowCart(true)}
+                      >
+                        <i className="bi bi-bag-fill text-light fs-4"></i>
+                        {getTotalItems() > 0 && (
+                          <Badge bg="danger">{getTotalItems()}</Badge>
+                        )}
+                      </Button>
+                    )}
                     <CartOffcanvas
                       show={showCart}
                       handleClose={() => setShowCart(false)}

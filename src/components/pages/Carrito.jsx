@@ -152,7 +152,7 @@ const Carrito = () => {
                   </NavLink>
                   <NavLink
                     to={"/"}
-                    className="btn btn-outline-dark text-decoration-underline w-100"
+                    className="btn btn-outline-dark w-100"
                   >
                     Seguir comprando
                   </NavLink>

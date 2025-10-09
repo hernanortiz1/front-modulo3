@@ -29,6 +29,9 @@ const Administrador = () => {
   const headerProductosRef = useRef(null);
   const headerUsuariosRef = useRef(null);
 
+  const [terminoBusquedaUsuario, setTerminoBusquedaUsuario] = useState("");
+  const [terminoBusquedaProducto, setTerminoBusquedaProducto] = useState("");
+
   const handleClose = () => {
     setShow(false);
   };
@@ -44,15 +47,19 @@ const Administrador = () => {
 
   useEffect(() => {
     leerProductos();
-  }, [pageProducto]);
+  }, [pageProducto, terminoBusquedaProducto]);
 
   useEffect(() => {
     leerUsuarios();
-  }, [pageUsuario]);
+  }, [pageUsuario, terminoBusquedaUsuario]);
 
   const leerProductos = async () => {
     setLoadingProductos(true);
-    const respuesta = await leerProductosPaginados(pageProducto, limitProducto);
+    const respuesta = await leerProductosPaginados(
+      pageProducto,
+      limitProducto,
+      terminoBusquedaProducto
+    );
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       setRopa(datos.productos);
@@ -71,7 +78,11 @@ const Administrador = () => {
 
   const leerUsuarios = async () => {
     setLoadingUsuarios(true);
-    const respuesta = await leerUsuariosPaginados(pageUsuario, limitUsuario);
+    const respuesta = await leerUsuariosPaginados(
+      pageUsuario,
+      limitUsuario,
+      terminoBusquedaUsuario
+    );
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       setUsuarios(datos.usuarios);
@@ -107,8 +118,6 @@ const Administrador = () => {
     }
   };
 
-  const [terminoBusquedaUsuario, setTerminoBusquedaUsuario] = useState("");
-
   const handleChangeUsuario = (e) => {
     setTerminoBusquedaUsuario(e.target.value);
   };
@@ -121,7 +130,6 @@ const Administrador = () => {
 
   const sinResultadosUsuarios =
     terminoBusquedaUsuario.trim() !== "" && usuariosFiltrados.length === 0;
-  const [terminoBusquedaProducto, setTerminoBusquedaProducto] = useState("");
   const handleChangeProducto = (e) => {
     setTerminoBusquedaProducto(e.target.value);
   };
@@ -153,7 +161,7 @@ const Administrador = () => {
                   <Form className="w-50 d-flex justify-content-center me-3">
                     <Form.Control
                       type="text"
-                      placeholder="Buscar producto"
+                      placeholder="Buscar por nombre de producto"
                       onChange={handleChangeProducto}
                       value={terminoBusquedaProducto}
                     />

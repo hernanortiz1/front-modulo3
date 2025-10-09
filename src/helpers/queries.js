@@ -133,9 +133,11 @@ export const borrarUsuario = async (id) => {
   }
 };
 
-export const leerUsuariosPaginados = async (page, limit) => {
+export const leerUsuariosPaginados = async (page, limit, search = "") => {
   try {
-    const respuesta = await fetch(`${API_USUARIOS}/paginacion?page=${page}&limit=${limit}`);
+    const respuesta = await fetch(
+      `${API_USUARIOS}/paginacion?page=${page}&limit=${limit}&search=${search}`
+    );
     return respuesta;
   } catch (error) {
     console.error(error);
@@ -143,9 +145,11 @@ export const leerUsuariosPaginados = async (page, limit) => {
   }
 };
 
-export const leerProductosPaginados = async (page, limit) => {
+export const leerProductosPaginados = async (page, limit, search = "") => {
   try {
-    const respuesta = await fetch(`${API_URL}/paginacion?page=${page}&limit=${limit}`);
+    const respuesta = await fetch(
+      `${API_URL}/paginacion?page=${page}&limit=${limit}&search=${search}`
+    );
     return respuesta;
   } catch (error) {
     console.error(error);

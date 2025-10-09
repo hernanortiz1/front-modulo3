@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -61,9 +62,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     const respuesta = await login(usuario);
     if (respuesta.status === 200) {
       const datoUsuario = await respuesta.json();
+      const datosToken = jwtDecode(datoUsuario.token);
       setUsuarioAdmin({
         nombreUsuario: datoUsuario.nombreUsuario,
         token: datoUsuario.token,
+        rol: datosToken.rol,
       });
       Swal.fire({
         title: "Inicio de sesion correcto!",
@@ -73,7 +76,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         icon: "success",
       });
       handleClose();
-      Navegacion("/administrador");
+      if (datosToken.rol === "Administrador") {
+        Navegacion("/administrador");
+      } else {
+        Navegacion("/");
+      }
     } else {
       Swal.fire({
         title: "Error al iniciar sesion",
@@ -191,28 +198,31 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             </Nav>
             <Nav className="ms-auto">
               <>
-                {usuarioAdmin.token ? (
+                {usuarioAdmin.token && usuarioAdmin.rol === "Administrador" ? (
                   //falta agregar .TOKEN
                   <>
+                    <Button
+                      variant="link"
+                      className="nav-link p-0 me-3"
+                      onClick={logout}
+                      title="Cerrar sesión"
+                    >
+                      <i className="bi bi-box-arrow-left text-light fs-4"></i>
+                    </Button>
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
                     </NavLink>
-                    <Button className="nav-link" onClick={logout}>
-                      Logout
-                    </Button>
                   </>
-                ) : (
+                ) : usuarioAdmin.token ? (
                   <>
-                    {/* Botón login */}
+                    {/* Botón logout */}
                     <Button
                       variant="link"
                       className="nav-link p-0"
-                      onClick={handleShow}
+                      onClick={logout}
+                      title="Cerrar sesión"
                     >
-                      <div className="d-flex align-items-center gap-2">
-                        <i className="bi bi-person-fill text-light fs-4"></i>
-                        <h6 className="mb-0 text-light">Login</h6>
-                      </div>
+                      <i className="bi bi-box-arrow-left text-light fs-4"></i>
                     </Button>
 
                     {/* Botón carrito */}
@@ -223,6 +233,19 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     >
                       <i className="bi bi-bag-fill text-light fs-4"></i>
                     </NavLink>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="link"
+                      className="nav-link p-0"
+                      onClick={handleShow}
+                    >
+                      <div className="d-flex align-items-center gap-2">
+                        <i className="bi bi-person-fill text-light fs-4"></i>
+                        <h6 className="mb-0 text-light">Login</h6>
+                      </div>
+                    </Button>
                   </>
                 )}
               </>

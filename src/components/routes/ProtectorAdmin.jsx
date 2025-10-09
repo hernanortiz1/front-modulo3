@@ -2,7 +2,8 @@ import { Navigate, Outlet } from "react-router";
 import React from 'react';
 
 const ProtectorAdmin = ({ isAdmin }) => {
-  if (!isAdmin.token) {
+  if (!isAdmin.token || isAdmin.rol !== "Administrador") {
+
     return <Navigate to={"/"}></Navigate>;
   }
 

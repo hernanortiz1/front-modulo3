@@ -120,7 +120,7 @@ const Administrador = () => {
 
   const handleChangeProducto = (e) => {
     setTerminoBusquedaProducto(e.target.value);
-    setPageProducto(1); // resetear a página 1 al buscar
+    setPageProducto(1); 
   };
 
   const handleChangeUsuario = (e) => {

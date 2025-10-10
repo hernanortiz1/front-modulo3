@@ -31,7 +31,7 @@ const Carrito = () => {
               <i className="bi bi-lock fs-6"></i>Pago seguro
             </p>
           </div>
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="col-lg-8 col-12 mb-4">
               {cartItems.length === 0 ? (
                 <div className="text-center py-5">

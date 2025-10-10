@@ -32,7 +32,7 @@ const Carrito = () => {
             </p>
           </div>
           <div className="row">
-            <div className="col-12 mb-4">
+            <div className="col-lg-8 col-12 mb-4">
               {cartItems.length === 0 ? (
                 <div className="text-center py-5">
                   <h4>Tu carrito está vacío</h4>

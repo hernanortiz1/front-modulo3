@@ -239,7 +239,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {remeras.length === 0 ? (
@@ -278,7 +278,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {camisas.length === 0 ? (
@@ -317,7 +317,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {buzos.length === 0 ? (
@@ -356,7 +356,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {abrigosCamperas.length === 0 ? (
@@ -395,7 +395,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {pantalones.length === 0 ? (
@@ -434,7 +434,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {bermudas.length === 0 ? (
@@ -473,7 +473,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {shortsBanio.length === 0 ? (
@@ -512,7 +512,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {gorras.length === 0 ? (
@@ -551,7 +551,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {anteojos.length === 0 ? (
@@ -598,7 +598,7 @@ const Inicio = () => {
           ))}
         </div>
       </div>
-      <BtnScroll/>
+      <BtnScroll />
     </>
   );
 };

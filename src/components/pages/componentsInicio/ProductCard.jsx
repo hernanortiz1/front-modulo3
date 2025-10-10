@@ -32,9 +32,9 @@ const ProductCard = ({ product }) => {
 
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img 
-        variant="top" 
-        src={product.image} 
+      <Card.Img
+        variant="top"
+        src={product.image}
         style={{ height: "250px", objectFit: "cover" }}
       />
       <Card.Body className="d-flex flex-column">
@@ -42,26 +42,24 @@ const ProductCard = ({ product }) => {
         <Card.Text className="text-primary fw-bold">
           ${product.price.toLocaleString()}
         </Card.Text>
-        
+
         {/* Selector de talle */}
         <Form.Group className="mb-3">
           <Form.Label>Talle:</Form.Label>
-          <Form.Select 
-            value={selectedSize} 
+          <Form.Select
+            value={selectedSize}
             onChange={(e) => setSelectedSize(e.target.value)}
             size="sm"
           >
-            {tallesDisponibles.map(talle => (
-              <option key={talle} value={talle}>{talle}</option>
+            {tallesDisponibles.map((talle) => (
+              <option key={talle} value={talle}>
+                {talle}
+              </option>
             ))}
           </Form.Select>
         </Form.Group>
 
-        <Button 
-          variant="primary" 
-          className="mt-auto"
-          onClick={handleAddToCart}
-        >
+        <Button variant="primary" className="mt-auto" onClick={handleAddToCart}>
           Agregar al carrito
         </Button>
       </Card.Body>

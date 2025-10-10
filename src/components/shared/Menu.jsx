@@ -7,6 +7,7 @@ import {
   NavDropdown,
   Form,
   Modal,
+  Badge,
 } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
@@ -14,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
 import CartOffcanvas from "./componentsMenu/CartOffCanvas";
+import { useCart } from "../../helpers/CartContext";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
@@ -29,79 +31,9 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   //CARRITO
   const [showCart, setShowCart] = useState(false);
+  const { cartItems, getTotalItems, isLoading } = useCart();
 
-  const cartItems = [
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-    {
-      name: "Remera levis negra",
-      size: 46,
-      price: 279900,
-      quantity: 1,
-      image:
-        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
-      increaseQty: () => {}, // lógica personalizada
-      decreaseQty: () => {}, // lógica personalizada
-    },
-  ];
+  const isCartPage = location.pathname === "/carrito";
 
   const irARegistro = () => {
     handleClose();
@@ -293,17 +225,21 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       </div>
                     </Button>
 
-                    {/* Botón carrito */}
-                    <Button
-                      className="nav-link d-flex align-items-center ms-lg-5"
-                      onClick={() => setShowCart(true)}
-                    >
-                      <i className="bi bi-bag-fill text-light fs-4"></i>
-                    </Button>
+                    {!isCartPage && (
+                      <Button
+                        className="nav-link d-flex align-items-center ms-lg-5 position-relative"
+                        onClick={() => setShowCart(true)}
+                        disabled={isLoading} // opcional
+                      >
+                        <i className="bi bi-bag-fill text-light fs-4"></i>
+                        {!isLoading && getTotalItems() > 0 && (
+                          <Badge bg="danger">{getTotalItems()}</Badge>
+                        )}
+                      </Button>
+                    )}
                     <CartOffcanvas
                       show={showCart}
                       handleClose={() => setShowCart(false)}
-                      cartItems={cartItems}
                     />
                   </>
                 )}

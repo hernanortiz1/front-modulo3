@@ -1,50 +1,114 @@
-import { Form, Button } from "react-bootstrap";
 import React from "react";
+import { Form, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { crearProducto } from "../../../helpers/queries";
+import {
+  crearProducto,
+  editarProducto,
+  obtenerProductosPorId,
+} from "../../../helpers/queries";
+import "./FormularioProducto.css";
+
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
-const FormularioRopa = () => {
+import { useNavigate, useParams } from "react-router";
+const FormularioRopa = ({ titulo }) => {
+  const [imagenActual, setImagenActual] = useState("");
+  const [preview, setPreview] = useState("");
+
+  const { id } = useParams();
+  const navegacion = useNavigate();
+
+  useEffect(() => {
+    const obtenerProducto = async () => {
+      if (titulo === "Editar producto") {
+        const respuesta = await obtenerProductosPorId(id);
+        if (respuesta.status === 200) {
+          const productoBuscado = await respuesta.json();
+          setValue("nombreProducto", productoBuscado.nombreProducto);
+          setValue("precio", productoBuscado.precio);
+          setValue("categoria", productoBuscado.categoria);
+          setValue("talle", productoBuscado.talle);
+          setValue("stock", productoBuscado.stock);
+          setValue("descripcion", productoBuscado.descripcion);
+          setValue(
+            "fechaUltimoControlStock",
+            productoBuscado.fechaUltimoControlStock
+              ? productoBuscado.fechaUltimoControlStock.slice(0, 10)
+              : ""
+          );
+          setValue("color", productoBuscado.color);
+          setImagenActual(productoBuscado.imagen);
+        }
+      }
+    };
+    obtenerProducto();
+  }, []);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    resetField,
+    setValue,
   } = useForm();
 
-  const navegacion = useNavigate();
   const onSubmit = async (producto) => {
     const productoMejorado = {
       ...producto,
       imagen: producto.imagen[0],
     };
-    const respuesta = await crearProducto(productoMejorado);
-    if (respuesta.status === 201) {
-      Swal.fire({
-        title: "Producto creado!",
+    if (titulo === "Crear producto") {
+      const respuesta = await crearProducto(productoMejorado);
+      if (respuesta.status === 201) {
+        Swal.fire({
+          title: "Producto creado!",
 
-        text: `El producto ${producto.nombreProducto} fue creado correctamente!`,
+          text: `El producto ${producto.nombreProducto} fue creado correctamente!`,
 
-        icon: "success",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          reset();
-          navegacion("/administrador");
-        }
-      });
+          icon: "success",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            reset();
+            navegacion("/administrador");
+          }
+        });
+      } else {
+        const datosErroneos = await respuesta.json();
+        Swal.fire({
+          title: "Ocurrio un error",
+          text: `El producto ${producto.nombreProducto} no pudo ser creado, ${datosErroneos[0].msg}`,
+          icon: "error",
+        });
+      }
     } else {
-      const datosErroneos = await respuesta.json();
-      Swal.fire({
-        title: "Ocurrio un error",
-        text: `El producto ${producto.nombreProducto} no pudo ser creado, ${datosErroneos[0].msg}`,
-        icon: "error",
-      });
+      const respuesta = await editarProducto(productoMejorado, id);
+      if (respuesta.status === 200) {
+        Swal.fire({
+          title: "Producto editado!",
+
+          text: `El producto ${producto.nombreProducto} fue editado correctamente!`,
+
+          icon: "success",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            reset();
+            navegacion("/administrador");
+          }
+        });
+      } else {
+        const datosErroneos = await respuesta.json();
+        Swal.fire({
+          title: "Ocurrio un error",
+          text: `El producto ${producto.nombreProducto} no pudo ser creado, ${datosErroneos[0].msg}`,
+          icon: "error",
+        });
+      }
     }
   };
 
   return (
     <section className="container">
-      <h1 className="display-5 mt-5 Montserrat">Titulo</h1>
+      <h1 className="display-5 mt-5 Montserrat">{titulo}</h1>
       <hr />
       <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formNombreProducto">
@@ -192,7 +256,10 @@ const FormularioRopa = () => {
             type="file"
             accept="image/*"
             {...register("imagen", {
-              required: "La imagen es obligatoria",
+              required:
+                titulo === "Crear producto"
+                  ? "La imagen es obligatoria"
+                  : false,
               validate: {
                 fileSize: (files) =>
                   !files[0] ||
@@ -200,7 +267,36 @@ const FormularioRopa = () => {
                   "La imagen no debe superar los 2MB.",
               },
             })}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                setPreview(URL.createObjectURL(file)); //crea una URL temporal en el navegador
+              } else {
+                setPreview("");
+              }
+            }}
           />
+          {(preview || imagenActual) && (
+            <div className="mb-2 position-relative d-inline-block mt-3">
+              <img
+                className="rounded-3 img-preview"
+                src={preview || imagenActual}
+                alt="Imagen"
+              />
+              <Button
+                variant="light"
+                size="sm"
+                className="p-0 d-flex align-items-center justify-content-center shadow btn-img-preview"
+                onClick={() => {
+                  setPreview("");
+                  setImagenActual("");
+                  resetField("imagen");
+                }}
+              >
+                <i className="bi bi-x fs-5 text-danger"></i>
+              </Button>
+            </div>
+          )}
           <Form.Text className="text-danger">
             {errors.imagen?.message}
           </Form.Text>
@@ -252,9 +348,13 @@ const FormularioRopa = () => {
           <Form.Text className="text-danger">{errors.color?.message}</Form.Text>
         </Form.Group>
         <Button type="submit" variant="success">
-          Crear producto
+          {titulo}
         </Button>
-        <Button variant="danger" className="mx-1">
+        <Button
+          variant="danger"
+          className="mx-2"
+          onClick={() => navegacion("/administrador")}
+        >
           Cancelar
         </Button>
       </Form>

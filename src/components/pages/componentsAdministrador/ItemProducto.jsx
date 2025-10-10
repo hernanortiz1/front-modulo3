@@ -32,9 +32,9 @@ const ItemProducto = ({ ropa, setRopa, fila }) => {
 
             icon: "success",
           });
-          const respuestaProducto = await obtenerProductos()
-          const productoActualizado = await respuestaProducto.json()
-          setRopa(productoActualizado)
+          const respuestaProducto = await obtenerProductos();
+          const productoActualizado = await respuestaProducto.json();
+          setRopa(productoActualizado);
         }
       }
     });
@@ -56,7 +56,10 @@ const ItemProducto = ({ ropa, setRopa, fila }) => {
       </td>
       <td className="text-center">
         <div className="d-flex gap-1 justify-content-center">
-          <Link to={`/administrador/editar/${ropa._id}`} className="btn btn-warning me-lg-2">
+          <Link
+            to={`/administrador/editar/${ropa._id}`}
+            className="btn btn-warning me-lg-2"
+          >
             <i className="bi bi-pencil-square"></i>
           </Link>
           <Button

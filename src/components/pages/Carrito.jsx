@@ -150,10 +150,7 @@ const Carrito = () => {
                   <NavLink to={"*"} className="btn btn-success w-100 mb-2">
                     Comprar
                   </NavLink>
-                  <NavLink
-                    to={"/"}
-                    className="btn btn-outline-dark w-100"
-                  >
+                  <NavLink to={"/"} className="btn btn-outline-dark w-100">
                     Seguir comprando
                   </NavLink>
                 </div>

@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import ProductCard from "./componentsInicio/ProductCard";
+import BtnScroll from "./categorias/funcion/BtnScroll";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
@@ -597,6 +598,7 @@ const Inicio = () => {
           ))}
         </div>
       </div>
+      <BtnScroll/>
     </>
   );
 };

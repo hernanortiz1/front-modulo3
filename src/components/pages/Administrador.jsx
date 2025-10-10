@@ -118,30 +118,15 @@ const Administrador = () => {
     }
   };
 
-  const handleChangeUsuario = (e) => {
-    setTerminoBusquedaUsuario(e.target.value);
-  };
-
-  const usuariosFiltrados = usuarios.filter((usuario) =>
-    usuario.nombreUsuario
-      .toLowerCase()
-      .includes(terminoBusquedaUsuario.toLowerCase())
-  );
-
-  const sinResultadosUsuarios =
-    terminoBusquedaUsuario.trim() !== "" && usuariosFiltrados.length === 0;
   const handleChangeProducto = (e) => {
     setTerminoBusquedaProducto(e.target.value);
+    setPageProducto(1); // resetear a página 1 al buscar
   };
 
-  const productosFiltrados = ropa.filter((producto) =>
-    producto.nombreProducto
-      .toLowerCase()
-      .includes(terminoBusquedaProducto.toLowerCase())
-  );
-
-  const sinResultadosProductos =
-    terminoBusquedaProducto.trim() !== "" && productosFiltrados.length === 0;
+  const handleChangeUsuario = (e) => {
+    setTerminoBusquedaUsuario(e.target.value);
+    setPageUsuario(1);
+  };
 
   return (
     <>
@@ -196,7 +181,7 @@ const Administrador = () => {
                     <tbody>
                       {loadingProductos ? (
                         <tr>
-                          <td colSpan="5" className="text-center py-4">
+                          <td colSpan="8" className="text-center py-4">
                             <div
                               className="spinner-border text-success"
                               role="status"
@@ -207,15 +192,15 @@ const Administrador = () => {
                             </div>
                           </td>
                         </tr>
-                      ) : sinResultadosProductos ? (
+                      ) : ropa.length === 0 ? (
                         <tr>
-                          <td colSpan="5" className="text-center py-4">
+                          <td colSpan="8" className="text-center py-4">
                             <i className="bi bi-x-lg"></i> No hay resultados
                             disponibles para “{terminoBusquedaProducto}”
                           </td>
                         </tr>
                       ) : (
-                        productosFiltrados.map((producto, indice) => (
+                        ropa.map((producto, indice) => (
                           <ItemProducto
                             key={producto._id}
                             ropa={producto}
@@ -310,7 +295,7 @@ const Administrador = () => {
                             </div>
                           </td>
                         </tr>
-                      ) : sinResultadosUsuarios ? (
+                      ) : usuarios.length === 0 ? (
                         <tr>
                           <td colSpan="5" className="text-center py-4">
                             <i className="bi bi-x-lg"></i> No hay resultados
@@ -318,7 +303,7 @@ const Administrador = () => {
                           </td>
                         </tr>
                       ) : (
-                        usuariosFiltrados.map((usuario, indice) => (
+                        usuarios.map((usuario, indice) => (
                           <ItemUsuario
                             key={usuario._id}
                             usuario={usuario}

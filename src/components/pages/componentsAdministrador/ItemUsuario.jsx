@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ const ItemUsuario = ({
   usuarios,
   limitUsuario,
   pageUsuario,
+  leerUsuarios,
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
@@ -25,6 +26,8 @@ const ItemUsuario = ({
   const handleShow = () => {
     setShow(true);
   };
+
+  useEffect(() => {}, []);
 
   const {
     register,
@@ -103,6 +106,14 @@ const ItemUsuario = ({
         text: `El usuario ${usuarioActualizado.nombreUsuario} fue editado correctamente.`,
         icon: "success",
       });
+      const respuestaUsuarios = await leerUsuariosPaginados(
+        pageUsuario,
+        limitUsuario
+      );
+      if (respuestaUsuarios.status === 200) {
+        const datos = await respuestaUsuarios.json();
+        setUsuarios(datos.usuarios);
+      }
       handleClose();
     } else {
       Swal.fire({

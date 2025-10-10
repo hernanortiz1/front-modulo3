@@ -326,7 +326,7 @@ const Administrador = () => {
                             setUsuarios={setUsuarios}
                             limitUsuario={limitUsuario}
                             pageUsuario={pageUsuario}
-                            onUsuarioActualizado={leerUsuarios}
+                            leerUsuarios={leerUsuarios}
                           />
                         ))
                       )}

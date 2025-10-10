@@ -80,8 +80,6 @@ function App() {
               <Route path="/login" element={<LogIn></LogIn>}></Route>
               <Route path="/carrito" element={<Carrito />} />
 
-              {/* <Route path="/registro" element={<Registro></Registro>}></Route>*/}
-
               <Route path="/registro" element={<Registro></Registro>}></Route>
               <Route
                 path="/remeras-chombas"
@@ -138,16 +136,23 @@ function App() {
                   titulo={"Crear producto"}
                 ></Route>
 
-                {/*<Route
+                <Route
+                path="crear"
+                element={<FormularioRopa
+                titulo={"Crear producto"}
+                />}
+              ></Route>
+
+              <Route
                   path="editar/:id"
                   element={
                     <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
                   }
-                ></Route>*/}
-              </Route>
-              <Route path="*" element={<Error404></Error404>}></Route>
-            </Routes>
-          </main>
+                ></Route>
+            </Route>
+            <Route path="*" element={<Error404></Error404>}></Route>
+          </Routes>
+        </main>
 
           <Footer></Footer>
         </BrowserRouter>

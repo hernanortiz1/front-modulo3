@@ -33,7 +33,7 @@ const DetalleProducto = () => {
         timer: 1500,
         showConfirmButton: false,
       });
-    }, 4000); // tiempo total de la animación
+    }, 4000);
   };
 
   useEffect(() => {

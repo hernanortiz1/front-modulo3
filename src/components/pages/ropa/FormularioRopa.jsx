@@ -11,6 +11,7 @@ import "./FormularioProducto.css";
 
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
+
 const FormularioRopa = ({ titulo }) => {
   const [imagenActual, setImagenActual] = useState("");
   const [preview, setPreview] = useState("");
@@ -187,7 +188,7 @@ const FormularioRopa = ({ titulo }) => {
           <Form.Control
             type="number"
             placeholder="Ej: 5"
-            max={500}
+            max={5000}
             {...register("stock", {
               required: "Este campo es obligatorio",
               pattern: {
@@ -199,9 +200,9 @@ const FormularioRopa = ({ titulo }) => {
                 message: "Como minimo es 1 stock (un producto disponible)",
               },
               max: {
-                value: 500,
+                value: 5000,
                 message:
-                  "La cantidad de stock debe tener entre 1 y 500 productos",
+                  "La cantidad de stock debe tener entre 1 y 5000 productos",
               },
             })}
           />
@@ -270,7 +271,7 @@ const FormularioRopa = ({ titulo }) => {
             onChange={(e) => {
               const file = e.target.files[0];
               if (file) {
-                setPreview(URL.createObjectURL(file)); //crea una URL temporal en el navegador
+                setPreview(URL.createObjectURL(file));
               } else {
                 setPreview("");
               }

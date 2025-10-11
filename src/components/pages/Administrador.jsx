@@ -64,12 +64,15 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setRopa(datos.productos);
       setTotalPagesProducto(datos.totalPages);
-      setTimeout(() => {
-        headerProductosRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 100);
+
+      if (pageProducto > 1) {
+        setTimeout(() => {
+          headerProductosRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
     } else {
       console.info("Error al cargar los productos");
     }
@@ -87,12 +90,16 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setUsuarios(datos.usuarios);
       setTotalPagesUsuario(datos.totalPages);
-      setTimeout(() => {
-        headerUsuariosRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 100);
+      
+      if (pageUsuario > 1) {
+        setTimeout(() => {
+          headerUsuariosRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
+      
     } else {
       console.info("Error al cargar los usuarios");
     }

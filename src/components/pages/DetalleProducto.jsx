@@ -4,22 +4,111 @@ import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
 import { useParams } from "react-router";
 import { obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useCart } from "../../helpers/CartContext";
+
 const DetalleProducto = () => {
   const [producto, setProducto] = useState([]);
   const [favorito, setFavorito] = useState(false);
   const { id } = useParams();
+  const { addToCart } = useCart();
+  const [loading, setLoading] = useState(true);
+  const [cantidad, setCantidad] = useState(1);
+  const [animationStage, setAnimationStage] = useState("idle");
+
+  const handleBuy = () => {
+    setAnimationStage("entering");
+
+    setTimeout(() => {
+      setAnimationStage("exiting");
+    }, 2000);
+
+    setTimeout(() => {
+      setAnimationStage("idle");
+
+      Swal.fire({
+        title: "¡Gracias por su compra!",
+        text: `${producto.nombreProducto} comprado exitosamente`,
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }, 4000); // tiempo total de la animación
+  };
 
   useEffect(() => {
     leerProducto();
-  }, []);
+  }, [id]);
 
   const leerProducto = async () => {
-    const respuesta = await obtenerProductosPorId(id);
-    if (respuesta.status === 200) {
-      const producto = await respuesta.json();
-      setProducto(producto);
+    try {
+      const respuesta = await obtenerProductosPorId(id);
+      if (respuesta.status === 200) {
+        const producto = await respuesta.json();
+        setProducto(producto);
+      }
+    } catch (error) {
+      console.error("Error al cargar producto:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleAgregarCarrito = () => {
+    const productToAdd = {
+      _id: producto._id,
+      nombre: producto.nombreProducto || producto.nombre,
+      precio: producto.precio,
+      imagen: producto.imagen,
+      categoria: producto.categoria,
+      talle: producto.talle,
+      color: producto.color,
+      stock: producto.stock,
+      marca: producto.marca || "Lannister",
+    };
+
+    addToCart(productToAdd);
+
+    Swal.fire({
+      title: "¡Agregado al carrito!",
+      text: `${producto.nombreProducto} se agregó a tu carrito`,
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  };
+
+  const aumentarCantidad = () => {
+    if (producto && cantidad < producto.stock) {
+      setCantidad(cantidad + 1);
+    }
+  };
+
+  const disminuirCantidad = () => {
+    if (cantidad > 1) {
+      setCantidad(cantidad - 1);
+    }
+  };
+
+  if (loading) {
+    return (
+      <Container className="my-5 text-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </div>
+        <p className="mt-2">Cargando producto...</p>
+      </Container>
+    );
+  }
+
+  if (!producto) {
+    return (
+      <Container className="my-5">
+        <Alert variant="danger">Producto no encontrado</Alert>
+      </Container>
+    );
+  }
+
   return (
     <Container className="my-5">
       <Card className="producto-simple">
@@ -86,11 +175,11 @@ const DetalleProducto = () => {
                 <div className="d-flex align-items-center gap-3 mb-4">
                   <label className="mb-0">Cantidad:</label>
                   <div className="d-flex align-items-center gap-2">
-                    <Button variant="outline-secondary" size="sm">
+                    <Button variant="outline-secondary" size="sm" onClick={disminuirCantidad}>
                       −
                     </Button>
-                    <span className="px-3 fw-bold">1</span>
-                    <Button variant="outline-secondary" size="sm">
+                    <span className="px-3 fw-bold">{cantidad}</span>
+                    <Button variant="outline-secondary" size="sm" onClick={aumentarCantidad}>
                       +
                     </Button>
                   </div>
@@ -98,15 +187,38 @@ const DetalleProducto = () => {
 
                 {/* Botones */}
                 <div className="d-flex gap-2">
-                  <Button variant="primary" className="flex-grow-1">
+                  <Button
+                    variant="primary"
+                    className="flex-grow-1"
+                    onClick={handleAgregarCarrito}
+                    disabled={producto.stock === 0}
+                  >
                     <ShoppingCart size={18} className="me-2" />
-                    Agregar al Carrito
+                    {producto.stock === 0 ? "Sin stock" : "Agregar al carrito"}
                   </Button>
-                  <Button variant="dark" className="flex-grow-1">
+                  <Button
+                    variant="dark"
+                    className="flex-grow-1"
+                    onClick={handleBuy}
+                    disabled={producto.stock === 0}
+                  >
                     <ShoppingBag size={18} className="me-2" />
                     Comprar Ahora
                   </Button>
                 </div>
+                {/* Mensaje de sin stock */}
+                {producto.stock === 0 && (
+                  <Alert variant="warning" className="mt-3">
+                    Este producto está temporalmente sin stock
+                  </Alert>
+                )}
+                {animationStage !== "idle" && (
+                  <div className="buy-overlay">
+                    <div className={`buy-overlay ${animationStage}`}>
+                      <div className="buy-box">📦</div>
+                    </div>
+                  </div>
+                )}
               </div>
             </Col>
           </Row>

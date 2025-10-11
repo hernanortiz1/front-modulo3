@@ -338,7 +338,7 @@ const Administrador = () => {
                     <span className=" d-none d-md-inline">
                       Página {pageUsuario} de {totalPagesUsuario}
                     </span>
-                    <span className="d-inline d-md-block">
+                    <span className="d-inline d-md-none">
                       {pageUsuario} de {totalPagesUsuario}
                     </span>
                   </span>

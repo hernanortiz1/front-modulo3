@@ -4,10 +4,12 @@ import { Link } from "react-router";
 import { borrarProducto } from "../../../helpers/queries";
 import Swal from "sweetalert2";
 import { obtenerProductos } from "../../../helpers/queries";
+import { formatearPrecio } from "../categorias/funcion/operaciones";
+
 const ItemProducto = ({ ropa, setRopa, fila }) => {
   const eliminarProducto = async () => {
     Swal.fire({
-      title: "¿Eliminar producto?",
+      title: `¿Eliminar ${ropa.nombreProducto}?`,
       text: "No podras revertir esta accion",
       icon: "warning",
       showCancelButton: true,
@@ -37,7 +39,7 @@ const ItemProducto = ({ ropa, setRopa, fila }) => {
       <td className="alineacionFila"> {ropa.nombreProducto} </td>
       <td className="alineacionFila">{ropa.talle}</td>
       <td className="alineacionFila">{ropa.color} </td>
-      <td className="alineacionFila">${ropa.precio} </td>
+      <td className="alineacionFila">$ {formatearPrecio( ropa.precio)} </td>
       <td className="alineacionFila">{ropa.stock} </td>
       <td className="alineacionFila">
         {" "}

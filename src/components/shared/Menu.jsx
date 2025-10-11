@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 import { jwtDecode } from "jwt-decode";
 import CartOffcanvas from "./componentsMenu/CartOffCanvas";
 import { useCart } from "../../helpers/CartContext";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
@@ -208,63 +209,62 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             </Nav>
             <Nav className="ms-auto">
               <>
-                {usuarioAdmin.token && usuarioAdmin.rol === "Administrador" ? (
-                  //falta agregar .TOKEN
+                {usuarioAdmin.token ? (
                   <>
-                    <Button
-                      variant="link"
-                      className="nav-link p-0 me-3"
-                      onClick={logout}
-                      title="Cerrar sesión"
-                    >
-                      <i className="bi bi-box-arrow-left text-light fs-4"></i>
-                    </Button>
-                    <NavLink className="nav-link" to={"/administrador"}>
-                      Administrador
-                    </NavLink>
-                  </>
-                ) : usuarioAdmin.token ? (
-                  <>
-                    {/* Botón logout */}
-                    <Button
-                      variant="link"
-                      className="nav-link p-0"
-                      onClick={logout}
-                      title="Cerrar sesión"
-                    >
-                      <i className="bi bi-box-arrow-left text-light fs-4"></i>
-                    </Button>
-
-                    {!isCartPage && (
-                      <Button
-                        className="nav-link d-flex align-items-center ms-lg-5 position-relative"
-                        onClick={() => setShowCart(true)}
-                        disabled={isLoading} // opcional
+                    <Dropdown align="end" className="me-3">
+                      <Dropdown.Toggle
+                        variant="link"
+                        className="text-light text-decoration-none d-flex align-items-center gap-2"
                       >
-                        <i className="bi bi-bag-fill text-light fs-4"></i>
-                        {!isLoading && getTotalItems() > 0 && (
-                          <Badge bg="danger">{getTotalItems()}</Badge>
+                        <i className="bi bi-person-circle fs-4"></i>
+                        <span className="fw-semibold">
+                          {usuarioAdmin.nombreUsuario}
+                        </span>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        {usuarioAdmin.rol === "Administrador" && (
+                          <Dropdown.Item as={NavLink} to="/administrador">
+                            <i className="bi bi-gear-fill me-2"></i>
+                            Panel de administración
+                          </Dropdown.Item>
                         )}
-                      </Button>
+
+                        {usuarioAdmin.rol !== "Administrador" &&
+                          !isCartPage && (
+                            <Dropdown.Item onClick={() => setShowCart(true)}>
+                              <i className="bi bi-bag-fill me-2"></i>
+                              Ver carrito ({getTotalItems()})
+                            </Dropdown.Item>
+                          )}
+
+                        <Dropdown.Divider />
+
+                        <Dropdown.Item onClick={logout} className="cerrar-sesion-item">
+                          <i className="bi bi-box-arrow-left me-2"></i>
+                          Cerrar sesión
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {usuarioAdmin.rol !== "Administrador" && (
+                      <CartOffcanvas
+                        show={showCart}
+                        handleClose={() => setShowCart(false)}
+                      />
                     )}
-                    <CartOffcanvas
-                      show={showCart}
-                      handleClose={() => setShowCart(false)}
-                    />
                   </>
                 ) : (
-                  <>
-                    <Button
-                      variant="link"
-                      className="nav-link p-0"
-                      onClick={handleShow}
-                    >
-                      <div className="d-flex align-items-center gap-2">
-                        <i className="bi bi-person-fill text-light fs-4"></i>
-                        <h6 className="mb-0 text-light">Login</h6>
-                      </div>
-                    </Button>
-                  </>
+                  <Button
+                    variant="link"
+                    className="nav-link p-0"
+                    onClick={handleShow}
+                    title="Iniciar sesión"
+                  >
+                    <div className="d-flex align-items-center gap-2 text-light">
+                      <i className="bi bi-person-fill fs-4"></i>
+                      <span>Iniciar sesión</span>
+                    </div>
+                  </Button>
                 )}
               </>
             </Nav>

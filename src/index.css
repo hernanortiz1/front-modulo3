@@ -90,7 +90,7 @@ main {
 }
 
 .color-box {
-  background-color: #1d3557; 
+  background-color: #1d3557;
   padding: 6rem 2rem;
   box-shadow: 1px 0px 20px 6px rgba(67, 19, 180, 1) inset;
   -webkit-box-shadow: 1px 0px 20px 6px rgba(67, 19, 180, 1) inset;
@@ -381,13 +381,22 @@ main {
     0 0 10px rgba(190, 34, 104, 0.637), 0 0 15px rgba(190, 34, 104, 0.637);
   border-radius: 5px;
   padding: 15px;
-  max-height: 400px; 
+  max-height: 400px;
   overflow-y: auto;
-  position: sticky; 
-  top: 100px; 
+  position: sticky;
+  top: 100px;
 }
 
 /*texto de card Categoria Producto*/
 .textoPequenio{
-   font-size: 0.75rem; 
+   font-size: 0.75rem;
+}
+
+.cerrar-sesion-item {
+  color: red !important; 
+}
+
+.cerrar-sesion-item:hover {
+  background-color: #ffdddd !important;
+  color: #b30000 !important;
 }

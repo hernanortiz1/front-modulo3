@@ -14,6 +14,8 @@ import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
 import { jwtDecode } from "jwt-decode";
+import CartOffcanvas from "./componentsMenu/CartOffCanvas";
+
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -25,6 +27,82 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     reset();
   };
   const handleShow = () => setShow(true);
+
+  //CARRITO
+  const [showCart, setShowCart] = useState(false);
+
+  const cartItems = [
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+    {
+      name: "Remera levis negra",
+      size: 46,
+      price: 279900,
+      quantity: 1,
+      image:
+        "https://acdn-us.mitiendanube.com/stores/002/186/544/products/rn21-5e815e9dace32e20ff16540263656000-640-0.jpg",
+      increaseQty: () => {}, // lógica personalizada
+      decreaseQty: () => {}, // lógica personalizada
+    },
+  ];
 
   const irARegistro = () => {
     handleClose();
@@ -226,13 +304,17 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     </Button>
 
                     {/* Botón carrito */}
-                    <NavLink
-                      to="/carrito"
+                    <Button
                       className="nav-link d-flex align-items-center ms-lg-5"
-                      onClick={() => setExpanded(false)}
+                      onClick={() => setShowCart(true)}
                     >
                       <i className="bi bi-bag-fill text-light fs-4"></i>
-                    </NavLink>
+                    </Button>
+                    <CartOffcanvas
+                      show={showCart}
+                      handleClose={() => setShowCart(false)}
+                      cartItems={cartItems}
+                    />
                   </>
                 ) : (
                   <>

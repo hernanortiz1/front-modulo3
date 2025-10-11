@@ -115,3 +115,76 @@ export const registro = async (nuevoUsuario) => {
     return null;
   }
 };
+
+export const obtenerUsuarios = async () => {
+  try {
+    const respuesta = await fetch(API_USUARIOS);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const obtenerUsuarioID = async (id) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS + `/${id}`);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const editarUsuario = async (usuarioEditado, id) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS + `/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuarioEditado),
+    });
+    const data = await respuesta.json();
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const borrarUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(API_USUARIOS + `/${id}`, {
+      method: "DELETE",
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const leerUsuariosPaginados = async (page, limit, search = "") => {
+  try {
+    const respuesta = await fetch(
+      `${API_USUARIOS}/paginacion?page=${page}&limit=${limit}&search=${search}`
+    );
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const leerProductosPaginados = async (page, limit, search = "") => {
+  try {
+    const respuesta = await fetch(
+      `${API_URL}/paginacion?page=${page}&limit=${limit}&search=${search}`
+    );
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

@@ -120,7 +120,7 @@ const Administrador = () => {
 
   const handleChangeProducto = (e) => {
     setTerminoBusquedaProducto(e.target.value);
-    setPageProducto(1); 
+    setPageProducto(1);
   };
 
   const handleChangeUsuario = (e) => {
@@ -174,6 +174,7 @@ const Administrador = () => {
                         <th>Color</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Último control</th>
                         <th>Imagen</th>
                         <th>Opciones</th>
                       </tr>

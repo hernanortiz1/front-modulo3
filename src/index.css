@@ -187,8 +187,10 @@ main {
 }
 
 .img-ropa {
-  width: 150px;
-  height: 125px;
+ width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .card-ropa {
@@ -390,4 +392,35 @@ main {
 /*texto de card Categoria Producto*/
 .textoPequenio{
    font-size: 0.75rem; 
+}
+
+/*alineacion de fila de tabla administrador*/
+.alineacionFila{
+  text-align: center;     
+  vertical-align: middle; 
+}
+.contenedorBotones {
+  display: flex;
+  flex-direction: column; /* columna en xs/sm */
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem; /* espacio entre botones */
+}
+
+@media (min-width: 768px) {
+  .contenedorBotones {
+    flex-direction: row; /* fila en md/lg */
+  }
+}
+
+/* botones cuadrados */
+.btnAdministrador {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 0.25rem;
+  line-height: 1;
 }

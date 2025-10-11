@@ -127,21 +127,21 @@ const ItemUsuario = ({
   return (
     <>
       <tr className="Montserrat">
-        <td className="text-center">{fila}</td>
-        <td className="text-center">{usuario.nombreUsuario}</td>
-        <td className="text-center">{usuario.email}</td>
-        <td className="text-center">{usuario.rol}</td>
-        <td className="text-center">
-          <div className="d-flex gap-1 justify-content-center">
+        <td className="alineacionFila">{fila}</td>
+        <td className="alineacionFila">{usuario.nombreUsuario}</td>
+        <td className="alineacionFila">{usuario.email}</td>
+        <td className="alineacionFila">{usuario.rol}</td>
+        <td className="alineacionFila">
+          <div className="contenedorBotones">
             <Button
-              className="btn btn-warning me-lg-2"
+              className="btn btn-warning btnAdministrador"
               onClick={() => prepararModal(usuario._id)}
             >
               <i className="bi bi-person-fill-gear"></i>
             </Button>
             <Button
               variant="danger"
-              className="me-lg-2"
+              className="btnAdministrador"
               onClick={eliminarUsuario}
             >
               <i className="bi bi-person-fill-x"></i>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { NavLink } from "react-router";
 import { useCart } from "../../helpers/CartContext";
+import Swal from "sweetalert2";
 
 const Carrito = () => {
   const {
@@ -14,6 +15,28 @@ const Carrito = () => {
 
   const totalPrice = getTotalPrice();
   const displayTotal = typeof totalPrice === "number" ? totalPrice : 0;
+
+  const [animationStage, setAnimationStage] = useState("idle");
+
+  const handleBuy = () => {
+    setAnimationStage("entering");
+
+    setTimeout(() => {
+      setAnimationStage("exiting");
+    }, 2000);
+
+    setTimeout(() => {
+      setAnimationStage("idle");
+
+      Swal.fire({
+        title: "¡Gracias por su compra!",
+        text: `Su comprado fue realizada exitosamente`,
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }, 4000);
+  };
 
   return (
     <>
@@ -116,7 +139,9 @@ const Carrito = () => {
                         </div>
                       </div>
                       <div className="col-2 text-center">
-                        <span>${(item.precio * item.quantity).toLocaleString()}</span>
+                        <span>
+                          ${(item.precio * item.quantity).toLocaleString()}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -142,12 +167,19 @@ const Carrito = () => {
                       <strong>${displayTotal.toLocaleString()}</strong>
                     </li>
                   </ul>
-                  <NavLink to={"*"} className="btn btn-success w-100 mb-2">
+                  <NavLink className="btn btn-success w-100 mb-2" onClick={handleBuy}>
                     Comprar
                   </NavLink>
                   <NavLink to={"/"} className="btn btn-outline-dark w-100">
                     Seguir comprando
                   </NavLink>
+                </div>
+              </div>
+            )}
+            {animationStage !== "idle" && (
+              <div className="buy-overlay">
+                <div className={`buy-overlay ${animationStage}`}>
+                  <div className="buy-box">📦</div>
                 </div>
               </div>
             )}

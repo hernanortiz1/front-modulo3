@@ -41,91 +41,86 @@ const Carrito = () => {
                   </NavLink>
                 </div>
               ) : (
-                cartItems.map((item, index) => {
-                  const itemPrice = Number(item.price) || 0;
-                  const itemQuantity = Number(item.quantity) || 0;
-                  const itemTotal = itemPrice * itemQuantity;
-                  return (
-                    <div
-                      key={`${item.id}-${item.size}-${index}`}
-                      className="mb-4 mx-2 mx-md-0"
-                    >
-                      <h5 className="text-center text-md-start text-success">
-                        <i className="bi bi-lightning-fill"></i>
-                        {item.vendor || "Producto Full"}
-                      </h5>
-                      <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
-                        <div className="col-2 p-0 d-flex justify-content-center">
-                          <Image
-                            src={item.image}
-                            rounded
-                            width={95}
-                            height={95}
-                            onError={(e) => {
-                              e.target.src =
-                                "https://via.placeholder.com/95x95?text=Imagen+No+Disponible";
-                            }}
-                          />
-                        </div>
-                        <div className="col-4 text-center">
-                          <p className="m-0">
-                            <strong>{item.name}</strong>
-                          </p>
-                          <p className="m-0">
-                            Talle: <strong>{item.size || "Único"}</strong>
-                          </p>
-                          <p className="m-0">
-                            Color:{" "}
-                            <strong>{item.color || "No especificado"}</strong>
-                          </p>
-                        </div>
-                        <div className="col-4 text-center">
-                          <div>
-                            <span>Cantidad</span>
-                            <div className="d-flex justify-content-center align-items-center mt-2">
-                              <Button
-                                variant="outline-secondary"
-                                size="sm"
-                                onClick={() =>
-                                  decreaseQuantity(item.id, item.size)
-                                }
-                              >
-                                -
-                              </Button>
-                              <span className="mx-2">{item.quantity}</span>
-                              <Button
-                                variant="outline-secondary"
-                                size="sm"
-                                onClick={() =>
-                                  increaseQuantity(item.id, item.isze)
-                                }
-                              >
-                                +
-                              </Button>
-                            </div>
-                          </div>
-                          <div className="mt-4">
+                cartItems.map((item, index) => (
+                  <div
+                    key={`${item._id}-${item.size}-${index}`}
+                    className="mb-4 mx-2 mx-md-0"
+                  >
+                    <h5 className="text-center text-md-start text-success">
+                      <i className="bi bi-lightning-fill"></i>
+                      {item.vendor || "Producto tienda Lannister"}
+                    </h5>
+                    <div className="row border border-dark bg-body-secondary p-3 mb-3 align-items-center">
+                      <div className="col-2 p-0 d-flex justify-content-center">
+                        <Image
+                          src={item.imagen}
+                          rounded
+                          width={95}
+                          height={95}
+                          onError={(e) => {
+                            e.target.src =
+                              "https://via.placeholder.com/95x95?text=Imagen+No+Disponible";
+                          }}
+                        />
+                      </div>
+                      <div className="col-4 text-center">
+                        <p className="m-0">
+                          <strong>{item.nombre}</strong>
+                        </p>
+                        <p className="m-0">
+                          Talle: <strong>{item.size || "Único"}</strong>
+                        </p>
+                        <p className="m-0">
+                          Color:{" "}
+                          <strong>{item.color || "No especificado"}</strong>
+                        </p>
+                      </div>
+                      <div className="col-4 text-center">
+                        <div>
+                          <span>Cantidad</span>
+                          <div className="d-flex justify-content-center align-items-center mt-2">
                             <Button
-                              onClick={() => removeFromCart(item.id, item.size)}
-                              className="btn btn-danger text-decoration-none p-1 p-md-2 border me-2"
+                              variant="outline-secondary"
+                              size="sm"
+                              onClick={() =>
+                                decreaseQuantity(item._id, item.size)
+                              }
                             >
-                              <i className="bi bi-trash-fill text-light"></i>
+                              -
                             </Button>
-                            <NavLink
-                              to={"*"}
-                              className="btn btn-success text-decoration-none p-1 p-md-2 border"
+                            <span className="mx-2">{item.quantity}</span>
+                            <Button
+                              variant="outline-secondary"
+                              size="sm"
+                              onClick={() =>
+                                increaseQuantity(item._id, item.isze)
+                              }
                             >
-                              Comprar
-                            </NavLink>
+                              +
+                            </Button>
                           </div>
                         </div>
-                        <div className="col-2 text-center">
-                          <span>${itemTotal.toLocaleString()}</span>
+                        <div className="mt-4">
+                          <Button
+                            onClick={() => removeFromCart(item._id, item.size)}
+                            className="btn btn-danger text-decoration-none p-1 p-md-2 border me-2"
+                          >
+                            <i className="bi bi-trash-fill text-light"></i>
+                          </Button>
+                          <NavLink
+                            to={"*"}
+                            className="btn btn-success text-decoration-none p-1 p-md-2 border"
+                          >
+                            Comprar
+                          </NavLink>
                         </div>
                       </div>
+                      <div className="col-2 text-center">
+                        <span>${(item.precio * item.quantity).toLocaleString()}</span>
+                      </div>
                     </div>
-                  );
-                })
+                  </div>
+                ))
               )}
             </div>
 
@@ -150,10 +145,7 @@ const Carrito = () => {
                   <NavLink to={"*"} className="btn btn-success w-100 mb-2">
                     Comprar
                   </NavLink>
-                  <NavLink
-                    to={"/"}
-                    className="btn btn-outline-dark w-100"
-                  >
+                  <NavLink to={"/"} className="btn btn-outline-dark w-100">
                     Seguir comprando
                   </NavLink>
                 </div>

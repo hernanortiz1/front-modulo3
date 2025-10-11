@@ -76,10 +76,8 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         token: datoUsuario.token,
       });
       Swal.fire({
-        title: "Inicio de sesion correcto!",
-
+        title: "Inicio de sesion correcto",
         text: `Bienvenido ${datoUsuario.nombreUsuario} !`,
-
         icon: "success",
       });
       handleClose();
@@ -87,9 +85,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     } else {
       Swal.fire({
         title: "Error al iniciar sesion",
-
         text: `Credenciales incorrectas`,
-
         icon: "error",
       });
     }
@@ -202,7 +198,6 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <Nav className="ms-auto">
               <>
                 {usuarioAdmin.token ? (
-                  //falta agregar .TOKEN
                   <>
                     <NavLink className="nav-link" to={"/administrador"}>
                       Administrador
@@ -229,7 +224,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       <Button
                         className="nav-link d-flex align-items-center ms-lg-5 position-relative"
                         onClick={() => setShowCart(true)}
-                        disabled={isLoading} // opcional
+                        disabled={isLoading} 
                       >
                         <i className="bi bi-bag-fill text-light fs-4"></i>
                         {!isLoading && getTotalItems() > 0 && (

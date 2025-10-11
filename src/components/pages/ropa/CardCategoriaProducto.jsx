@@ -5,6 +5,7 @@ import {
   precioDescuento,
   calcularCuotas,
   formatearPrecio,
+  precioSinImpuestos
 } from "../categorias/funcion/operaciones";
 
 const CardCategoriaProducto = ({ productos }) => {
@@ -48,8 +49,8 @@ const CardCategoriaProducto = ({ productos }) => {
                   </strong>
                 </li>
                 <li className="mb-1">
-                  <small>
-                    {productos.descripcion.substring(0, 50) + "..."}
+                  <small className="textoPequenio">
+                     Precio sin impuestos nacionales {formatearPrecio(precioSinImpuestos(productos.precio))}
                   </small>
                 </li>
               </ul>

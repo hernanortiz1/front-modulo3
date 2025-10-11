@@ -40,7 +40,28 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Guardar en localStorage cuando cambie el carrito
+  useEffect(() => {
+    try {
+      const savedCart = localStorage.getItem("lannister-cart");
+
+      if (savedCart && savedCart !== "undefined") {
+        const parsedCart = JSON.parse(savedCart);
+
+        if (Array.isArray(parsedCart)) {
+          setCartItems(parsedCart);
+        } else {
+          setCartItems([]);
+        }
+      } else {
+        setCartItems([]);
+      }
+    } catch (error) {
+      console.error("Error al cargar el carrito:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (!isLoading) {
       try {
@@ -54,24 +75,26 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(
-        (item) => item.id === product.id && item.size === product.size
+        (item) => item._id === product._id && item.size === product.size
       );
 
       if (existingItem) {
         return prevItems.map((item) =>
-          item.id === product.id && item.size === product.size
-            ? { ...item, quantity: item.quantity + 1 }
+          item._id === product._id && item.size === product.size
+            ? { ...item, quantity: item.quantity + product.quantity || 1 }
             : item
         );
       } else {
-        return [...prevItems, { ...product, quantity: 1 }];
+        return [...prevItems, { ...product, quantity: product.quantity || 1 }];
       }
     });
   };
 
   const removeFromCart = (productId, size) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => !(item.id === productId && item.size === size))
+      prevItems.filter(
+        (item) => !(item._id === productId && item.size === size)
+      )
     );
   };
 
@@ -83,7 +106,7 @@ export const CartProvider = ({ children }) => {
 
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === productId && item.size === size
+        item._id === productId && item.size === size
           ? { ...item, quantity: newQuantity }
           : item
       )
@@ -91,31 +114,21 @@ export const CartProvider = ({ children }) => {
   };
 
   const increaseQuantity = (productId, size) => {
-    setCartItems((prevItems) => {
-      return prevItems.map((item) => {
-        if (item.id === productId && item.size === size) {
-          return { ...item, quantity: (item.quantity || 0) + 1 };
-        }
-        return item;
-      });
-    });
+    const item = cartItems.find(
+      (item) => item._id === productId && item.size === size
+    );
+    if (item) {
+      updateQuantity(productId, size, item.quantity + 1);
+    }
   };
 
   const decreaseQuantity = (productId, size) => {
-    setCartItems((prevItems) => {
-      return prevItems
-        .map((item) => {
-          if (item.id === productId && item.size === size) {
-            const newQuantity = (item.quantity || 1) - 1;
-            if (newQuantity <= 0) {
-              return null; // Será filtrado después
-            }
-            return { ...item, quantity: newQuantity };
-          }
-          return item;
-        })
-        .filter((item) => item !== null); // Filtrar items eliminados
-    });
+    const item = cartItems.find(
+      (item) => item._id === productId && item.size === size
+    );
+    if (item) {
+      updateQuantity(productId, size, item.quantity - 1);
+    }
   };
 
   const clearCart = () => {
@@ -123,18 +136,14 @@ export const CartProvider = ({ children }) => {
   };
 
   const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => {
-      const price = Number(item.price) || 0;
-      const quantity = Number(item.quantity) || 0;
-      return total + price * quantity;
-    }, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.precio * item.quantity,
+      0
+    );
   };
 
   const getTotalItems = () => {
-    return cartItems.reduce(
-      (total, item) => total + (Number(item.quantity) || 0),
-      0
-    );
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
   const value = {

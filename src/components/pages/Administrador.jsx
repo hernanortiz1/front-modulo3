@@ -229,7 +229,12 @@ const Administrador = () => {
                     Anterior
                   </Button>
                   <span className="mx-3">
-                    Página {pageProducto} de {totalPagesProducto}
+                    <span className="d-none d-md-inline">
+                      Página {pageProducto} de {totalPagesProducto}
+                    </span>
+                    <span className="d-inline d-md-none">
+                      {pageProducto} de {totalPagesProducto}
+                    </span>
                   </span>
                   <Button
                     onClick={() =>
@@ -330,7 +335,12 @@ const Administrador = () => {
                     Anterior
                   </Button>
                   <span className="mx-3">
-                    Página {pageUsuario} de {totalPagesUsuario}
+                    <span className=" d-none d-md-inline">
+                      Página {pageUsuario} de {totalPagesUsuario}
+                    </span>
+                    <span className="d-inline d-md-block">
+                      {pageUsuario} de {totalPagesUsuario}
+                    </span>
                   </span>
                   <Button
                     onClick={() =>

@@ -80,10 +80,8 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         rol: datosToken.rol,
       });
       Swal.fire({
-        title: "Inicio de sesion correcto!",
-
+        title: "Inicio de sesion correcto",
         text: `Bienvenido ${datoUsuario.nombreUsuario} !`,
-
         icon: "success",
       });
       handleClose();
@@ -95,9 +93,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     } else {
       Swal.fire({
         title: "Error al iniciar sesion",
-
         text: `Credenciales incorrectas`,
-
         icon: "error",
       });
     }
@@ -244,23 +240,31 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                           onClick={logout}
                           className="logout-item"
                           style={{
-                            transition: 'all 0.3s ease',
-                            padding: 0
+                            transition: "all 0.3s ease",
+                            padding: 0,
                           }}
                         >
                           <div
                             style={{
-                              padding: '0.5rem 1rem',
-                              width: '100%',
-                              transition: 'all 0.3s ease'
+                              padding: "0.5rem 1rem",
+                              width: "100%",
+                              transition: "all 0.3s ease",
                             }}
                             onMouseEnter={(e) => {
-                              e.target.style.setProperty('background-color', '#dc3545', 'important');
-                              e.target.style.setProperty('color', 'white', 'important');
+                              e.target.style.setProperty(
+                                "background-color",
+                                "#dc3545",
+                                "important"
+                              );
+                              e.target.style.setProperty(
+                                "color",
+                                "white",
+                                "important"
+                              );
                             }}
                             onMouseLeave={(e) => {
-                              e.target.style.removeProperty('background-color');
-                              e.target.style.removeProperty('color');
+                              e.target.style.removeProperty("background-color");
+                              e.target.style.removeProperty("color");
                             }}
                           >
                             <i className="bi bi-box-arrow-left me-2"></i>

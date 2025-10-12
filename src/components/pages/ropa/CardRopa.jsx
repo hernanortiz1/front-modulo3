@@ -12,14 +12,11 @@ const CardRopa = ({ ropa }) => {
     <>
       <Link className="text-decoration-none" to={`/detalle/${ropa._id}`}>
         <Card className="card-ropa h-100 d-flex flex-column shadow">
-          <Card.Img
+          <Card.Img className="cardImgRopa"
             src={ropa.imagen}
-            style={{
-              height: "250px",
-              objectFit: "cover",
-            }}
+            alt={ropa.nombreProducto}
           />
-          <Card.Body className="d-flex flex-column">
+          <Card.Body className="d-flex flex-column cardCategoriasBody">
             <Card.Title className="Montserrat text-truncate">
               {ropa.nombreProducto}
             </Card.Title>

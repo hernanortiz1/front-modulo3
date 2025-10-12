@@ -10,6 +10,10 @@ import {
   formatearPrecio,
   precioSinImpuestos,
 } from "../pages/categorias/funcion/operaciones.js";
+import americanExpress from "../../assets/tarjetas/americanExpress.svg.png";
+import mastercard from "../../assets/tarjetas/Mastercard-logo.svg.png";
+import naranajx from "../../assets/tarjetas/NaranjaX-logo.svg.png";
+import visa from "../../assets/tarjetas/Visa_Logo.png";
 
 const DetalleProducto = () => {
   const [producto, setProducto] = useState({});
@@ -83,7 +87,7 @@ const DetalleProducto = () => {
                   </p>
                 </div>
                 {/* Precio */}
-                <h3 className="Montserrat mb-3">
+                <h3 className="Montserrat mb-3 fs-2">
                   ${formatearPrecio(producto.precio)}
                 </h3>
 
@@ -96,7 +100,7 @@ const DetalleProducto = () => {
                         con Transferencia
                       </small>
                     </li>
-                    <li className="mb-1">
+                    <li className="mb-1 fs-5">
                       3 cuotas sin interés de{" "}
                       <strong>
                         $ {formatearPrecio(calcularCuotas(producto.precio, 3))}
@@ -111,26 +115,16 @@ const DetalleProducto = () => {
                   </ul>
                 </div>
 
-                <div class="d-flex justify-content-center pe-3 ps-5">
+                <div class="d-flex justify-content-start pe-3 gap-3 my-4">
                   <img
-                    src="../"
-                    alt=""
-                    class="border border-3 border-dark-subtle w-25 img-fluid me-1 rounded-3 d-block"
+                    src={mastercard}
+                    alt="mastercard"
+                    className="logoTarjetas"
                   />
                   <img
-                    src="../img/productonotebook/2.png"
-                    alt=""
-                    class="border border-3 border-dark-subtle w-25 img-fluid me-1 rounded-3 d-block"
-                  />
-                  <img
-                    src="../img/productonotebook/3.png"
-                    alt=""
-                    class="border border-3 border-dark-subtle w-25 img-fluid me-1 rounded-3 d-block"
-                  />
-                  <img
-                    src="../img/productonotebook/4.png"
-                    alt=""
-                    class="border border-3 border-dark-subtle w-25 img-fluid me-1 rounded-3 d-block"
+                    src={visa}
+                    alt="visa"
+                    className="logoTarjetas"
                   />
                 </div>
 

@@ -157,7 +157,7 @@ main {
   overflow: hidden;
 }
 
-.texto-sobre-imagen {
+.cdsobre-imagen {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -194,20 +194,15 @@ main {
 }
 
 /*card de ropa */
-.card-ropa {
+.card-ropa, .box-shadow {
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.box-shadow {
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.card-ropa:hover {
+
+.card-ropa:hover, .box-shadow:hover  {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.box-shadow:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
+
 .cardImgRopa {
   height: 250px;
   object-fit: cover;
@@ -368,13 +363,54 @@ main {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
+  transition: transform 0.2s, opacity 0.5s ease;
   z-index: 1;
+  padding: 0;
+  opacity: 0;
 }
 
 .btnScrollArriba:hover {
   transform: scale(1.1);
 }
+
+.btnScrollArriba.visible {
+  opacity: 1;
+}
+
+.btnScrollArriba.hidden {
+  opacity: 0;
+}
+
+.scrollCirculo {
+  width: 50px;
+  height: 50px;
+  transform: rotate(-90deg);
+}
+
+.circuloInicio {
+  stroke: #e0e0e0;
+  stroke-width: 6;
+  fill: none;
+}
+
+.circuloActivo {
+  stroke: #0d6efd;
+  stroke-width: 6;
+  fill: none;
+  transition: stroke-dashoffset 0.2s ease;
+}
+
+.iconoFlecha {
+  font-size: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  transform: rotate(90deg);
+}
+
 /* FIN BTN Scroll de categoria productos */
 
 .botonIrAlCarrito:hover {
@@ -429,9 +465,7 @@ main {
   border-radius: 0.25rem;
   line-height: 1;
 }
-.textoPequenio {
-  font-size: 0.75rem;
-}
+
 /*Adapta el texto del titulo de producto*/
 .tituloCardCategoria {
   font-size: 1.05rem;

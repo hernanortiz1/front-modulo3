@@ -187,10 +187,13 @@ main {
 }
 
 .img-ropa {
-  width: 150px;
-  height: 125px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
+/*card de ropa */
 .card-ropa, .box-shadow {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -199,6 +202,13 @@ main {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+.cardImgRopa {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+/*fin card de ropa*/
 
 .btn-error {
   border: #1d3557 1px solid;
@@ -423,6 +433,37 @@ main {
 /*texto de card Categoria Producto*/
 .textoPequenio {
   font-size: 0.75rem;
+}
+
+/*alineacion de fila de tabla administrador*/
+.alineacionFila {
+  text-align: center;
+  vertical-align: middle;
+}
+.contenedorBotones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .contenedorBotones {
+    flex-direction: row; /* fila en md/lg */
+  }
+}
+
+/* botones cuadrados */
+.btnAdministrador {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 0.25rem;
+  line-height: 1;
 }
 
 /*Adapta el texto del titulo de producto*/

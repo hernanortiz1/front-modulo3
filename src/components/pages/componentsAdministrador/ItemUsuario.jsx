@@ -38,20 +38,20 @@ const ItemUsuario = ({
 
   const eliminarUsuario = () => {
     Swal.fire({
-      title: "¿Quieres eliminar el usuario?",
-      text: "No puedes revertir este paso!",
+      title: `¿Quieres eliminar el usuario ${usuario.nombreUsuario}?`,
+      text: "No puedes revertir este paso",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#277a35ff",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, quiero eliminar!",
+      confirmButtonText: "Si, quiero eliminar",
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const respuesta = await borrarUsuario(usuario._id);
         if (respuesta.status === 200) {
           Swal.fire({
-            title: "Usuario eliminado!",
+            title: "Usuario eliminado",
             text: `El usuario ${usuario.nombreUsuario} fue eliminado correctamente`,
             icon: "success",
           });
@@ -63,7 +63,7 @@ const ItemUsuario = ({
           setUsuarios(usuariosActualizados.usuarios);
         } else {
           Swal.fire({
-            title: "Usario eliminado!",
+            title: "Usario eliminado",
             text: `El Usuario ${usuario.nombreUsuario} no pudo ser eliminado`,
             icon: "error",
           });
@@ -102,7 +102,7 @@ const ItemUsuario = ({
     const respuesta = await editarUsuario(usuarioActualizado, usuario._id);
     if (respuesta.status === 200) {
       Swal.fire({
-        title: "Producto editado",
+        title: "Usuario editado",
         text: `El usuario ${usuarioActualizado.nombreUsuario} fue editado correctamente.`,
         icon: "success",
       });
@@ -117,7 +117,7 @@ const ItemUsuario = ({
       handleClose();
     } else {
       Swal.fire({
-        title: "Error al actualizar el usuario!",
+        title: "Error al actualizar el usuario",
         text: `El usuario ${usuarioActualizado.nombreUsuario} no pudo ser editado.`,
         icon: "error",
       });
@@ -127,21 +127,21 @@ const ItemUsuario = ({
   return (
     <>
       <tr className="Montserrat">
-        <td className="text-center">{fila}</td>
-        <td className="text-center">{usuario.nombreUsuario}</td>
-        <td className="text-center">{usuario.email}</td>
-        <td className="text-center">{usuario.rol}</td>
-        <td className="text-center">
-          <div className="d-flex gap-1 justify-content-center">
+        <td className="alineacionFila">{fila}</td>
+        <td className="alineacionFila">{usuario.nombreUsuario}</td>
+        <td className="alineacionFila">{usuario.email}</td>
+        <td className="alineacionFila">{usuario.rol}</td>
+        <td className="alineacionFila">
+          <div className="contenedorBotones">
             <Button
-              className="btn btn-warning me-lg-2"
+              className="btn btn-warning btnAdministrador"
               onClick={() => prepararModal(usuario._id)}
             >
               <i className="bi bi-person-fill-gear"></i>
             </Button>
             <Button
               variant="danger"
-              className="me-lg-2"
+              className="btnAdministrador"
               onClick={eliminarUsuario}
             >
               <i className="bi bi-person-fill-x"></i>

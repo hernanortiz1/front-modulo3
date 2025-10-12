@@ -33,7 +33,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   //CARRITO
   const [showCart, setShowCart] = useState(false);
-  const { cartItems, getTotalItems, isLoading } = useCart();
+  const { getTotalItems } = useCart();
 
   const isCartPage = location.pathname === "/carrito";
 
@@ -240,9 +240,32 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
                         <Dropdown.Divider />
 
-                        <Dropdown.Item onClick={logout} className="cerrar-sesion-item">
-                          <i className="bi bi-box-arrow-left me-2"></i>
-                          Cerrar sesión
+                        <Dropdown.Item
+                          onClick={logout}
+                          className="logout-item"
+                          style={{
+                            transition: 'all 0.3s ease',
+                            padding: 0
+                          }}
+                        >
+                          <div
+                            style={{
+                              padding: '0.5rem 1rem',
+                              width: '100%',
+                              transition: 'all 0.3s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.setProperty('background-color', '#dc3545', 'important');
+                              e.target.style.setProperty('color', 'white', 'important');
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.removeProperty('background-color');
+                              e.target.style.removeProperty('color');
+                            }}
+                          >
+                            <i className="bi bi-box-arrow-left me-2"></i>
+                            Cerrar sesión
+                          </div>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>

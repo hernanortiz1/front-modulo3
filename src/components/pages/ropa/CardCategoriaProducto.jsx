@@ -29,7 +29,7 @@ const CardCategoriaProducto = ({ productos }) => {
             <Card.Body className="cardCategoriasBody">
               <ul className="list-unstyled mb-0">
                 <li className="mb-1">
-                  <strong className="fs-5">
+                  <strong className="fs-5 tituloCardCategoria">
                     {productos.nombreProducto.substring(0, 20) + "..."}
                   </strong>
                 </li>
@@ -49,8 +49,8 @@ const CardCategoriaProducto = ({ productos }) => {
                   </strong>
                 </li>
                 <li className="mb-1">
-                  <small className="textoPequenio">
-                     Precio sin impuestos nacionales {formatearPrecio(precioSinImpuestos(productos.precio))}
+                  <small className="textoPequenio d-block">
+                     Precio sin impuestos nacionales $ {formatearPrecio(precioSinImpuestos(productos.precio))}
                   </small>
                 </li>
               </ul>

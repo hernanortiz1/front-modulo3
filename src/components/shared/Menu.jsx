@@ -14,8 +14,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
 import CartOffcanvas from "./componentsMenu/CartOffCanvas";
 import { useCart } from "../../helpers/CartContext";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
@@ -31,7 +33,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   //CARRITO
   const [showCart, setShowCart] = useState(false);
-  const { getTotalItems, isLoading } = useCart();
+  const { getTotalItems } = useCart();
 
   const isCartPage = location.pathname === "/carrito";
 
@@ -49,18 +51,43 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const logout = () => {
     Swal.fire({
       title: "¿Cerrar sesión?",
-      text: "¿Estás seguro que quieres salir?",
-      icon: "warning",
+      text: "¿Estás seguro que deseas salir de tu cuenta?",
+      icon: "question", // ✅ Mejor que "warning" para esta acción
+      iconColor: "#1d3557", // Color personalizado
       showCancelButton: true,
-      confirmButtonText: "Sí, salir",
-      confirmButtonColor: "#198754",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: '<i class="bi bi-box-arrow-right me-2"></i>Sí, salir',
+      cancelButtonText: '<i class="bi bi-x-circle me-2"></i>Cancelar',
+      confirmButtonColor: "#1d3557", // Color más elegante
+      cancelButtonColor: "#6c757d",
+      reverseButtons: true, // ✅ Botón cancelar a la izquierda
+      backdrop: `
+        rgba(0,0,0,0.6)
+        left top
+        no-repeat
+      `,
+      customClass: {
+        popup: "rounded-4 shadow-lg",
+        confirmButton: "px-4 py-2 fw-semibold",
+        cancelButton: "px-4 py-2 fw-semibold",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
+        sessionStorage.removeItem("userKey"); // ✅ Limpiar sesión
         setUsuarioAdmin({});
         navegacion("/");
-        Swal.fire("Sesión cerrada", "Has salido correctamente.", "success");
+
+        Swal.fire({
+          title: "¡Hasta pronto!",
+          text: "Tu sesión se ha cerrado correctamente",
+          icon: "success",
+          iconColor: "#198754",
+          timer: 2000, // ✅ Se cierra automáticamente
+          timerProgressBar: true,
+          showConfirmButton: false,
+          customClass: {
+            popup: "rounded-4 shadow-lg",
+          },
+        });
       }
     });
   };
@@ -69,31 +96,57 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   const iniciarSesion = async (usuario) => {
     const respuesta = await login(usuario);
+
     if (respuesta.status === 200) {
       const datoUsuario = await respuesta.json();
+      const datosToken = jwtDecode(datoUsuario.token);
+
       setUsuarioAdmin({
         nombreUsuario: datoUsuario.nombreUsuario,
         token: datoUsuario.token,
+        rol: datosToken.rol,
       });
+
+      const esAdmin = datosToken.rol === "Administrador";
+
       Swal.fire({
-        title: "Inicio de sesion correcto!",
-
-        text: `Bienvenido ${datoUsuario.nombreUsuario} !`,
-
         icon: "success",
+        title: `Hola, ${datoUsuario.nombreUsuario}`,
+        html: `
+          <div class="d-flex align-items-center justify-content-center gap-2 mt-3">
+            <i class="bi ${esAdmin ? 'bi-shield-fill-check' : 'bi-person-circle'}" style="font-size: 2rem; color: ${esAdmin ? '#0d6efd' : '#198754'};"></i>
+            <span class="fw-semibold">${esAdmin ? 'Acceso Administrador' : 'Redirigiendo...'}</span>
+          </div>
+        `,
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'rounded-3'
+        }
       });
+
       handleClose();
-      Navegacion("/administrador");
+
+      setTimeout(() => {
+        Navegacion(datosToken.rol === "Administrador" ? "/administrador" : "/");
+      }, 1500);
+
     } else {
       Swal.fire({
-        title: "Error al iniciar sesion",
-
-        text: `Credenciales incorrectas`,
-
         icon: "error",
+        title: "Error de autenticación",
+        text: "Usuario o contraseña incorrectos",
+        confirmButtonText: "Entendido",
+        confirmButtonColor: "#6c757d",
+        customClass: {
+          popup: 'rounded-3'
+        }
       });
     }
   };
+
 
   return (
     <header>
@@ -202,46 +255,92 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <Nav className="ms-auto">
               <>
                 {usuarioAdmin.token ? (
-                  //falta agregar .TOKEN
                   <>
-                    <NavLink className="nav-link" to={"/administrador"}>
-                      Administrador
-                    </NavLink>
-                    <Button className="nav-link" onClick={logout}>
-                      Logout
-                    </Button>
+                    <Dropdown align="end" className="me-3">
+                      <Dropdown.Toggle
+                        variant="link"
+                        className="text-light text-decoration-none d-flex align-items-center gap-2"
+                      >
+                        <i className="bi bi-person-circle fs-4"></i>
+                        <span className="fw-semibold">
+                          {usuarioAdmin.nombreUsuario}
+                        </span>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        {usuarioAdmin.rol === "Administrador" && (
+                          <Dropdown.Item as={NavLink} to="/administrador">
+                            <i className="bi bi-gear-fill me-2"></i>
+                            Panel de administración
+                          </Dropdown.Item>
+                        )}
+
+                        {usuarioAdmin.rol !== "Administrador" &&
+                          !isCartPage && (
+                            <Dropdown.Item onClick={() => setShowCart(true)}>
+                              <i className="bi bi-bag-fill me-2"></i>
+                              Ver carrito ({getTotalItems()})
+                            </Dropdown.Item>
+                          )}
+
+                        <Dropdown.Divider />
+
+                        <Dropdown.Item
+                          onClick={logout}
+                          className="logout-item"
+                          style={{
+                            transition: "all 0.3s ease",
+                            padding: 0,
+                          }}
+                        >
+                          <div
+                            style={{
+                              padding: "0.5rem 1rem",
+                              width: "100%",
+                              transition: "all 0.3s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.setProperty(
+                                "background-color",
+                                "#dc3545",
+                                "important"
+                              );
+                              e.target.style.setProperty(
+                                "color",
+                                "white",
+                                "important"
+                              );
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.removeProperty("background-color");
+                              e.target.style.removeProperty("color");
+                            }}
+                          >
+                            <i className="bi bi-box-arrow-left me-2"></i>
+                            Cerrar sesión
+                          </div>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {usuarioAdmin.rol !== "Administrador" && (
+                      <CartOffcanvas
+                        show={showCart}
+                        handleClose={() => setShowCart(false)}
+                      />
+                    )}
                   </>
                 ) : (
-                  <>
-                    {/* Botón login */}
-                    <Button
-                      variant="link"
-                      className="nav-link p-0"
-                      onClick={handleShow}
-                    >
-                      <div className="d-flex align-items-center gap-2">
-                        <i className="bi bi-person-fill text-light fs-4"></i>
-                        <h6 className="mb-0 text-light">Login</h6>
-                      </div>
-                    </Button>
-
-                    {!isCartPage && (
-                      <Button
-                        className="nav-link d-flex align-items-center ms-lg-5 position-relative"
-                        onClick={() => setShowCart(true)}
-                        disabled={isLoading} // opcional
-                      >
-                        <i className="bi bi-bag-fill text-light fs-4"></i>
-                        {!isLoading && getTotalItems() > 0 && (
-                          <Badge bg="danger">{getTotalItems()}</Badge>
-                        )}
-                      </Button>
-                    )}
-                    <CartOffcanvas
-                      show={showCart}
-                      handleClose={() => setShowCart(false)}
-                    />
-                  </>
+                  <Button
+                    variant="link"
+                    className="nav-link p-0"
+                    onClick={handleShow}
+                    title="Iniciar sesión"
+                  >
+                    <div className="d-flex align-items-center gap-2 text-light">
+                      <i className="bi bi-person-fill fs-4"></i>
+                      <span>Iniciar sesión</span>
+                    </div>
+                  </Button>
                 )}
               </>
             </Nav>

@@ -64,12 +64,6 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setRopa(datos.productos);
       setTotalPagesProducto(datos.totalPages);
-      setTimeout(() => {
-        headerProductosRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 100);
     } else {
       console.info("Error al cargar los productos");
     }
@@ -87,12 +81,6 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setUsuarios(datos.usuarios);
       setTotalPagesUsuario(datos.totalPages);
-      setTimeout(() => {
-        headerUsuariosRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 100);
     } else {
       console.info("Error al cargar los usuarios");
     }
@@ -120,11 +108,21 @@ const Administrador = () => {
 
   const handleChangeProducto = (e) => {
     setTerminoBusquedaProducto(e.target.value);
-    setPageProducto(1); 
+    setPageProducto(1);
   };
 
   const handleChangeUsuario = (e) => {
     setTerminoBusquedaUsuario(e.target.value);
+    setPageUsuario(1);
+  };
+
+  const limpiarBusquedaProducto = () => {
+    setTerminoBusquedaProducto("");
+    setPageProducto(1);
+  };
+
+  const limpiarBusquedaUsuario = () => {
+    setTerminoBusquedaUsuario("");
     setPageUsuario(1);
   };
 
@@ -143,13 +141,30 @@ const Administrador = () => {
               </Accordion.Header>
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
-                  <Form className="w-50 d-flex justify-content-center me-3">
+                  <Form className="w-50 d-flex justify-content-center me-3 position-relative">
                     <Form.Control
                       type="text"
                       placeholder="Buscar por nombre de producto"
                       onChange={handleChangeProducto}
                       value={terminoBusquedaProducto}
+                      style={{ paddingRight: terminoBusquedaProducto ? '40px' : '12px' }}
                     />
+                    {terminoBusquedaProducto && (
+                      <Button
+                        variant="link"
+                        className="position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                        onClick={limpiarBusquedaProducto}
+                        style={{
+                          zIndex: 10,
+                          color: '#dc3545',
+                          fontSize: '18px',
+                          lineHeight: 1
+                        }}
+                        title="Limpiar búsqueda"
+                      >
+                        <i className="bi bi-x-circle-fill"></i>
+                      </Button>
+                    )}
                   </Form>
                   <Button
                     className="btn btn-success"
@@ -252,13 +267,30 @@ const Administrador = () => {
               </Accordion.Header>
               <Accordion.Body className="row">
                 <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
-                  <Form className="w-50 d-flex justify-content-center me-3">
+                  <Form className="w-50 d-flex justify-content-center me-3 position-relative">
                     <Form.Control
                       type="text"
                       placeholder="Buscar por nombre de usuario"
                       onChange={handleChangeUsuario}
                       value={terminoBusquedaUsuario}
+                      style={{ paddingRight: terminoBusquedaUsuario ? '40px' : '12px' }}
                     />
+                    {terminoBusquedaUsuario && (
+                      <Button
+                        variant="link"
+                        className="position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                        onClick={limpiarBusquedaUsuario}
+                        style={{
+                          zIndex: 10,
+                          color: '#dc3545',
+                          fontSize: '18px',
+                          lineHeight: 1
+                        }}
+                        title="Limpiar búsqueda"
+                      >
+                        <i className="bi bi-x-circle-fill"></i>
+                      </Button>
+                    )}
                   </Form>
                   <Button className="btn btn-success" onClick={handleShow}>
                     <i className="bi bi-person-plus-fill"></i>

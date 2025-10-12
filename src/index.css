@@ -193,6 +193,7 @@ main {
   border-radius: 4px;
 }
 
+/*card de ropa */
 .card-ropa {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -203,11 +204,16 @@ main {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 .box-shadow:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
+.cardImgRopa {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+/*fin card de ropa*/
 
 .btn-error {
   border: #1d3557 1px solid;
@@ -389,10 +395,6 @@ main {
 }
 
 /*texto de card Categoria Producto*/
-.textoPequenio{
-   font-size: 0.75rem;
-}
-
 .textoPequenio {
   font-size: 0.75rem;
 }
@@ -404,10 +406,10 @@ main {
 }
 .contenedorBotones {
   display: flex;
-  flex-direction: column; /* columna en xs/sm */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem; /* espacio entre botones */
+  gap: 0.5rem;
 }
 
 @media (min-width: 768px) {

@@ -90,7 +90,7 @@ main {
 }
 
 .color-box {
-  background-color: #1d3557; 
+  background-color: #1d3557;
   padding: 6rem 2rem;
   box-shadow: 1px 0px 20px 6px rgba(67, 19, 180, 1) inset;
   -webkit-box-shadow: 1px 0px 20px 6px rgba(67, 19, 180, 1) inset;
@@ -187,7 +187,7 @@ main {
 }
 
 .img-ropa {
- width: 80px;
+  width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 4px;
@@ -321,8 +321,7 @@ main {
 }
 
 .cardCategoriasBody {
-  height: 220px;
-  overflow: hidden;
+  height: auto;
 }
 @media (max-width: 992px) {
   .cardCategorias {
@@ -343,7 +342,7 @@ main {
     height: 250px;
   }
   .cardCategoriasBody {
-    height: auto;
+    min-height: auto;
   }
 }
 /* FIN  hover de card categoria productos*/
@@ -383,21 +382,21 @@ main {
     0 0 10px rgba(190, 34, 104, 0.637), 0 0 15px rgba(190, 34, 104, 0.637);
   border-radius: 5px;
   padding: 15px;
-  max-height: 400px; 
+  max-height: 400px;
   overflow-y: auto;
-  position: sticky; 
-  top: 100px; 
+  position: sticky;
+  top: 100px;
 }
 
 /*texto de card Categoria Producto*/
-.textoPequenio{
-   font-size: 0.75rem; 
+.textoPequenio {
+  font-size: 0.75rem;
 }
 
 /*alineacion de fila de tabla administrador*/
-.alineacionFila{
-  text-align: center;     
-  vertical-align: middle; 
+.alineacionFila {
+  text-align: center;
+  vertical-align: middle;
 }
 .contenedorBotones {
   display: flex;
@@ -423,4 +422,15 @@ main {
   padding: 0;
   border-radius: 0.25rem;
   line-height: 1;
+}
+.textoPequenio {
+  font-size: 0.75rem;
+}
+/*Adapta el texto del titulo de producto*/
+.tituloCardCategoria {
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }

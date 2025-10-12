@@ -90,7 +90,7 @@ main {
 }
 
 .color-box {
-  background-color: #1d3557; 
+  background-color: #1d3557;
   padding: 6rem 2rem;
   box-shadow: 1px 0px 20px 6px rgba(67, 19, 180, 1) inset;
   -webkit-box-shadow: 1px 0px 20px 6px rgba(67, 19, 180, 1) inset;
@@ -363,11 +363,43 @@ main {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
   z-index: 1;
+  padding: 0;
 }
 
 .btnScrollArriba:hover {
   transform: scale(1.1);
 }
+
+.scrollCirculo {
+  width: 50px;
+  height: 50px;
+  transform: rotate(-90deg);
+}
+
+.circuloInicio {
+  stroke: #e0e0e0;
+  stroke-width: 6;
+  fill: none;
+}
+
+.circuloActivo {
+  stroke: #0d6efd;
+  stroke-width: 6;
+  fill: none;
+  transition: stroke-dashoffset 0.2s ease;
+}
+
+.iconoFlecha {
+  font-size: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  transform: rotate(90deg);
+}
+
 /* FIN BTN Scroll de categoria productos */
 
 .botonIrAlCarrito:hover {
@@ -381,13 +413,13 @@ main {
     0 0 10px rgba(190, 34, 104, 0.637), 0 0 15px rgba(190, 34, 104, 0.637);
   border-radius: 5px;
   padding: 15px;
-  max-height: 400px; 
+  max-height: 400px;
   overflow-y: auto;
-  position: sticky; 
-  top: 100px; 
+  position: sticky;
+  top: 100px;
 }
 
 /*texto de card Categoria Producto*/
-.textoPequenio{
-   font-size: 0.75rem; 
+.textoPequenio {
+  font-size: 0.75rem;
 }

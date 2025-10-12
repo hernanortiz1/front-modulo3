@@ -14,8 +14,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
 import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
 import CartOffcanvas from "./componentsMenu/CartOffCanvas";
 import { useCart } from "../../helpers/CartContext";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
@@ -31,7 +33,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   //CARRITO
   const [showCart, setShowCart] = useState(false);
-  const { cartItems, getTotalItems, isLoading } = useCart();
+  const { getTotalItems } = useCart();
 
   const isCartPage = location.pathname === "/carrito";
 
@@ -71,9 +73,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     const respuesta = await login(usuario);
     if (respuesta.status === 200) {
       const datoUsuario = await respuesta.json();
+      const datosToken = jwtDecode(datoUsuario.token);
       setUsuarioAdmin({
         nombreUsuario: datoUsuario.nombreUsuario,
         token: datoUsuario.token,
+        rol: datosToken.rol,
       });
       Swal.fire({
         title: "Inicio de sesion correcto!",
@@ -83,7 +87,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         icon: "success",
       });
       handleClose();
-      Navegacion("/administrador");
+      if (datosToken.rol === "Administrador") {
+        Navegacion("/administrador");
+      } else {
+        Navegacion("/");
+      }
     } else {
       Swal.fire({
         title: "Error al iniciar sesion",
@@ -202,46 +210,84 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <Nav className="ms-auto">
               <>
                 {usuarioAdmin.token ? (
-                  //falta agregar .TOKEN
                   <>
-                    <NavLink className="nav-link" to={"/administrador"}>
-                      Administrador
-                    </NavLink>
-                    <Button className="nav-link" onClick={logout}>
-                      Logout
-                    </Button>
+                    <Dropdown align="end" className="me-3">
+                      <Dropdown.Toggle
+                        variant="link"
+                        className="text-light text-decoration-none d-flex align-items-center gap-2"
+                      >
+                        <i className="bi bi-person-circle fs-4"></i>
+                        <span className="fw-semibold">
+                          {usuarioAdmin.nombreUsuario}
+                        </span>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        {usuarioAdmin.rol === "Administrador" && (
+                          <Dropdown.Item as={NavLink} to="/administrador">
+                            <i className="bi bi-gear-fill me-2"></i>
+                            Panel de administración
+                          </Dropdown.Item>
+                        )}
+
+                        {usuarioAdmin.rol !== "Administrador" &&
+                          !isCartPage && (
+                            <Dropdown.Item onClick={() => setShowCart(true)}>
+                              <i className="bi bi-bag-fill me-2"></i>
+                              Ver carrito ({getTotalItems()})
+                            </Dropdown.Item>
+                          )}
+
+                        <Dropdown.Divider />
+
+                        <Dropdown.Item
+                          onClick={logout}
+                          className="logout-item"
+                          style={{
+                            transition: 'all 0.3s ease',
+                            padding: 0
+                          }}
+                        >
+                          <div
+                            style={{
+                              padding: '0.5rem 1rem',
+                              width: '100%',
+                              transition: 'all 0.3s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.setProperty('background-color', '#dc3545', 'important');
+                              e.target.style.setProperty('color', 'white', 'important');
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.removeProperty('background-color');
+                              e.target.style.removeProperty('color');
+                            }}
+                          >
+                            <i className="bi bi-box-arrow-left me-2"></i>
+                            Cerrar sesión
+                          </div>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {usuarioAdmin.rol !== "Administrador" && (
+                      <CartOffcanvas
+                        show={showCart}
+                        handleClose={() => setShowCart(false)}
+                      />
+                    )}
                   </>
                 ) : (
-                  <>
-                    {/* Botón login */}
-                    <Button
-                      variant="link"
-                      className="nav-link p-0"
-                      onClick={handleShow}
-                    >
-                      <div className="d-flex align-items-center gap-2">
-                        <i className="bi bi-person-fill text-light fs-4"></i>
-                        <h6 className="mb-0 text-light">Login</h6>
-                      </div>
-                    </Button>
-
-                    {!isCartPage && (
-                      <Button
-                        className="nav-link d-flex align-items-center ms-lg-5 position-relative"
-                        onClick={() => setShowCart(true)}
-                        disabled={isLoading} // opcional
-                      >
-                        <i className="bi bi-bag-fill text-light fs-4"></i>
-                        {!isLoading && getTotalItems() > 0 && (
-                          <Badge bg="danger">{getTotalItems()}</Badge>
-                        )}
-                      </Button>
-                    )}
-                    <CartOffcanvas
-                      show={showCart}
-                      handleClose={() => setShowCart(false)}
-                    />
-                  </>
+                  <Button
+                    variant="link"
+                    className="nav-link p-0"
+                    onClick={handleShow}
+                    title="Iniciar sesión"
+                  >
+                    <div className="d-flex align-items-center gap-2 text-light">
+                      <i className="bi bi-person-fill fs-4"></i>
+                      <span>Iniciar sesión</span>
+                    </div>
+                  </Button>
                 )}
               </>
             </Nav>

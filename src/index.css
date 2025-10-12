@@ -191,20 +191,13 @@ main {
   height: 125px;
 }
 
-.card-ropa {
+.card-ropa, .box-shadow {
   transition: transform 0.3s, box-shadow 0.3s;
-}
-.box-shadow {
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.card-ropa:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.box-shadow:hover {
+.card-ropa:hover, .box-shadow:hover  {
   transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .btn-error {

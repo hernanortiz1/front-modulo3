@@ -64,6 +64,15 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setRopa(datos.productos);
       setTotalPagesProducto(datos.totalPages);
+
+      if (pageProducto > 1) {
+        setTimeout(() => {
+          headerProductosRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
     } else {
       console.info("Error al cargar los productos");
     }
@@ -81,6 +90,16 @@ const Administrador = () => {
       const datos = await respuesta.json();
       setUsuarios(datos.usuarios);
       setTotalPagesUsuario(datos.totalPages);
+
+      if (pageUsuario > 1) {
+        setTimeout(() => {
+          headerUsuariosRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
+
     } else {
       console.info("Error al cargar los usuarios");
     }
@@ -189,6 +208,7 @@ const Administrador = () => {
                         <th>Color</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Último control</th>
                         <th>Imagen</th>
                         <th>Opciones</th>
                       </tr>
@@ -243,7 +263,12 @@ const Administrador = () => {
                     Anterior
                   </Button>
                   <span className="mx-3">
-                    Página {pageProducto} de {totalPagesProducto}
+                    <span className="d-none d-md-inline">
+                      Página {pageProducto} de {totalPagesProducto}
+                    </span>
+                    <span className="d-inline d-md-none">
+                      {pageProducto} de {totalPagesProducto}
+                    </span>
                   </span>
                   <Button
                     onClick={() =>
@@ -361,7 +386,12 @@ const Administrador = () => {
                     Anterior
                   </Button>
                   <span className="mx-3">
-                    Página {pageUsuario} de {totalPagesUsuario}
+                    <span className=" d-none d-md-inline">
+                      Página {pageUsuario} de {totalPagesUsuario}
+                    </span>
+                    <span className="d-inline d-md-none">
+                      {pageUsuario} de {totalPagesUsuario}
+                    </span>
                   </span>
                   <Button
                     onClick={() =>

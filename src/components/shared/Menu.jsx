@@ -110,7 +110,6 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       const esAdmin = datosToken.rol === "Administrador";
 
       Swal.fire({
-        icon: "success",
         title: `Hola, ${datoUsuario.nombreUsuario}`,
         html: `
           <div class="d-flex align-items-center justify-content-center gap-2 mt-3">
@@ -118,6 +117,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <span class="fw-semibold">${esAdmin ? 'Acceso Administrador' : 'Redirigiendo...'}</span>
           </div>
         `,
+        icon: "success",
         timer: 1500,
         timerProgressBar: true,
         showConfirmButton: false,
@@ -128,16 +128,16 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       });
 
       handleClose();
-
-      setTimeout(() => {
-        Navegacion(datosToken.rol === "Administrador" ? "/administrador" : "/");
-      }, 1500);
-
+      if (datosToken.rol === "Administrador") {
+        Navegacion("/administrador");
+      } else {
+        Navegacion("/");
+      }
     } else {
       Swal.fire({
-        icon: "error",
         title: "Error de autenticación",
         text: "Usuario o contraseña incorrectos",
+        icon: "error",
         confirmButtonText: "Entendido",
         confirmButtonColor: "#6c757d",
         customClass: {

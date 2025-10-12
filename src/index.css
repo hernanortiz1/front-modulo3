@@ -157,7 +157,7 @@ main {
   overflow: hidden;
 }
 
-.texto-sobre-imagen {
+.cdsobre-imagen {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -187,25 +187,28 @@ main {
 }
 
 .img-ropa {
-  width: 150px;
-  height: 125px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
-.card-ropa {
+/*card de ropa */
+.card-ropa, .box-shadow {
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.box-shadow {
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.card-ropa:hover {
+
+.card-ropa:hover, .box-shadow:hover  {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.box-shadow:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+.cardImgRopa {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
 }
+/*fin card de ropa*/
 
 .btn-error {
   border: #1d3557 1px solid;
@@ -360,13 +363,54 @@ main {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
+  transition: transform 0.2s, opacity 0.5s ease;
   z-index: 1;
+  padding: 0;
+  opacity: 0;
 }
 
 .btnScrollArriba:hover {
   transform: scale(1.1);
 }
+
+.btnScrollArriba.visible {
+  opacity: 1;
+}
+
+.btnScrollArriba.hidden {
+  opacity: 0;
+}
+
+.scrollCirculo {
+  width: 50px;
+  height: 50px;
+  transform: rotate(-90deg);
+}
+
+.circuloInicio {
+  stroke: #e0e0e0;
+  stroke-width: 6;
+  fill: none;
+}
+
+.circuloActivo {
+  stroke: #0d6efd;
+  stroke-width: 6;
+  fill: none;
+  transition: stroke-dashoffset 0.2s ease;
+}
+
+.iconoFlecha {
+  font-size: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  transform: rotate(90deg);
+}
+
 /* FIN BTN Scroll de categoria productos */
 
 .botonIrAlCarrito:hover {
@@ -390,6 +434,38 @@ main {
 .textoPequenio {
   font-size: 0.75rem;
 }
+
+/*alineacion de fila de tabla administrador*/
+.alineacionFila {
+  text-align: center;
+  vertical-align: middle;
+}
+.contenedorBotones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .contenedorBotones {
+    flex-direction: row; /* fila en md/lg */
+  }
+}
+
+/* botones cuadrados */
+.btnAdministrador {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 0.25rem;
+  line-height: 1;
+}
+
 /*Adapta el texto del titulo de producto*/
 .tituloCardCategoria {
   font-size: 1.05rem;
@@ -397,4 +473,54 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
+}
+
+/* Estilos personalizados para SweetAlert de logout */
+.swal-logout-popup {
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  border: 2px solid #1d3557 !important;
+}
+
+.swal-logout-title {
+  color: #1d3557 !important;
+  font-weight: bold !important;
+  font-size: 24px !important;
+  margin-bottom: 0 !important;
+}
+
+.swal-logout-confirm {
+  background: linear-gradient(45deg, #dc3545, #c82333) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal-logout-confirm:hover {
+  background: linear-gradient(45deg, #c82333, #a71e2a) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4) !important;
+}
+
+.swal-logout-cancel {
+  background: linear-gradient(45deg, #6c757d, #5a6268) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal-logout-cancel:hover {
+  background: linear-gradient(45deg, #5a6268, #495057) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4) !important;
+}
+
+.swal-success-popup {
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3) !important;
+  border: 2px solid #28a745 !important;
 }

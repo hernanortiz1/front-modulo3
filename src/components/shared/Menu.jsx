@@ -31,7 +31,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   //CARRITO
   const [showCart, setShowCart] = useState(false);
-  const { cartItems, getTotalItems, isLoading } = useCart();
+  const { getTotalItems, isLoading } = useCart();
 
   const isCartPage = location.pathname === "/carrito";
 

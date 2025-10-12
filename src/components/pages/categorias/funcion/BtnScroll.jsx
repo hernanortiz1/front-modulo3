@@ -23,18 +23,14 @@ const BtnScroll = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (!visible) return null;
-
   return (
-    <button className="btnScrollArriba" onClick={scrollToTop}>
+    <button
+      className={`btnScrollArriba ${visible ? "visible" : "hidden"}`}
+      onClick={scrollToTop}
+    >
       <svg className="scrollCirculo" viewBox="0 0 100 100">
         {/* Círculo incio*/}
-        <circle
-          className="circuloInicio"
-          cx="50"
-          cy="50"
-          r="45"
-        />
+        <circle className="circuloInicio" cx="50" cy="50" r="45" />
 
         {/* Círculo activo*/}
         <circle
@@ -45,8 +41,7 @@ const BtnScroll = () => {
           style={{
             strokeDasharray: 2 * Math.PI * 45,
             strokeDashoffset:
-              2 * Math.PI * 45 -
-              (2 * Math.PI * 45 * scrollPercent) / 100,
+              2 * Math.PI * 45 - (2 * Math.PI * 45 * scrollPercent) / 100,
           }}
         />
 

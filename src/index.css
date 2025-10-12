@@ -361,13 +361,22 @@ main {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
+  transition: transform 0.2s, opacity 0.5s ease;
   z-index: 1;
   padding: 0;
+  opacity: 0;
 }
 
 .btnScrollArriba:hover {
   transform: scale(1.1);
+}
+
+.btnScrollArriba.visible {
+  opacity: 1;
+}
+
+.btnScrollArriba.hidden {
+  opacity: 0;
 }
 
 .scrollCirculo {

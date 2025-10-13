@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Card, Row, Col, Button } from "react-bootstrap";
+import { Container, Card, Row, Col, Button, Alert } from "react-bootstrap";
 import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
-import { obtenerProductosPorId } from "../../helpers/queries";
+import { comprarProducto, obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useCart } from "../../helpers/CartContext";
@@ -17,25 +17,65 @@ const DetalleProducto = () => {
   const [animationStage, setAnimationStage] = useState("idle");
   const Navigate = useNavigate();
 
-  const handleBuy = () => {
-    setAnimationStage("entering");
+  const handleBuy = async () => {
+    Swal.fire({
+      title: "Estas seguro de comprar este producto?",
+      text: "¡Atencion!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#23e05cff",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Comprar!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          if (cantidad > producto.stock) {
+            Swal.fire({
+              title: "Stock insuficiente",
+              text: `Solo hay ${producto.stock} unidades disponibles`,
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          }
 
-    setTimeout(() => {
-      setAnimationStage("exiting");
-    }, 2000);
+          // Usar la función específica para compras
+          const resultado = await comprarProducto(producto._id, cantidad);
 
-    setTimeout(() => {
-      setAnimationStage("idle");
+          if (resultado && resultado.status === 200) {
+            const data = await resultado.json();
+            setProducto(data.producto);
 
-      Swal.fire({
-        title: "¡Gracias por su compra!",
-        text: `${producto.nombreProducto} comprado exitosamente`,
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-      Navigate("/");
-    }, 4000);
+            setAnimationStage("entering");
+
+            setTimeout(() => {
+              setAnimationStage("exiting");
+            }, 2000);
+
+            setTimeout(() => {
+              setAnimationStage("idle");
+
+              Swal.fire({
+                title: "¡Gracias por su compra!",
+                text: `Has comprado ${cantidad} ${producto.nombreProducto}`,
+                icon: "success",
+                timer: 1500,
+                confirmButtonText: "continuar",
+              });
+              Navigate("/");
+            }, 4000);
+          }
+        } catch (error) {
+          console.error("Error en la compra:", error);
+          Swal.fire({
+            title: "Error en la compra",
+            text: "No se pudo procesar tu compra. Intenta nuevamente.",
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+          });
+        }
+      }
+    });
   };
 
   useEffect(() => {
@@ -175,24 +215,10 @@ const DetalleProducto = () => {
 
                 {/* Cantidad */}
                 <div className="d-flex align-items-center gap-3 mb-4">
-                  <label className="mb-0">Cantidad:</label>
-                  <div className="d-flex align-items-center gap-2">
-                    <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={disminuirCantidad}
-                    >
-                      −
-                    </Button>
-                    <span className="px-3 fw-bold">{cantidad}</span>
-                    <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={aumentarCantidad}
-                    >
-                      +
-                    </Button>
-                  </div>
+                  <span className="text-danger">
+                    ({producto.stock === 1 ? "0" : `${producto.stock}`})
+                    Disponibles
+                  </span>
                 </div>
 
                 {/* Botones */}
@@ -201,23 +227,23 @@ const DetalleProducto = () => {
                     variant="primary"
                     className="flex-grow-1"
                     onClick={handleAgregarCarrito}
-                    disabled={producto.stock === 0}
+                    disabled={producto.stock === 1}
                   >
                     <ShoppingCart size={18} className="me-2" />
-                    {producto.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+                    {producto.stock === 1 ? "Sin stock" : "Agregar al carrito"}
                   </Button>
                   <Button
                     variant="dark"
                     className="flex-grow-1"
                     onClick={handleBuy}
-                    disabled={producto.stock === 0}
+                    disabled={producto.stock === 1}
                   >
                     <ShoppingBag size={18} className="me-2" />
                     Comprar Ahora
                   </Button>
                 </div>
                 {/* Mensaje de sin stock */}
-                {producto.stock === 0 && (
+                {producto.stock === 1 && (
                   <Alert variant="warning" className="mt-3">
                     Este producto está temporalmente sin stock
                   </Alert>

@@ -188,3 +188,41 @@ export const leerProductosPaginados = async (page, limit, search = "") => {
     return null;
   }
 };
+
+export const comprarProducto = async (productoId, cantidad) => {
+  try {
+    const respuesta = await fetch(API_URL + `/${productoId}/comprar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cantidad: cantidad
+      }),
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const comprarMultiplesProductos = async (productos) => {
+  try {
+    const respuestas = await Promise.all(
+      productos.map(producto => 
+        comprarProducto(producto._id, producto.quantity)
+      )
+    );
+    
+    // Verificar que todas las compras fueron exitosas
+    const todasExitosas = respuestas.every(respuesta => 
+      respuesta && respuesta.status === 200
+    );
+    
+    return todasExitosas;
+  } catch (error) {
+    console.error("Error en compra múltiple:", error);
+    return false;
+  }
+};

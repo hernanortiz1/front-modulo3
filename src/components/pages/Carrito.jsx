@@ -3,6 +3,7 @@ import { Button, Image } from "react-bootstrap";
 import { NavLink } from "react-router";
 import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
+import { comprarMultiplesProductos } from "../../helpers/queries";
 
 const Carrito = () => {
   const {
@@ -19,26 +20,57 @@ const Carrito = () => {
 
   const [animationStage, setAnimationStage] = useState("idle");
 
-  const handleBuy = () => {
-    setAnimationStage("entering");
+  const handleBuy = async () => {
+    // Validar que todos los productos tengan stock suficiente
+    const productosSinStock = cartItems.filter(
+      (item) => item.quantity > item.stock
+    );
 
-    setTimeout(() => {
-      setAnimationStage("exiting");
-    }, 2000);
-
-    setTimeout(() => {
-      setAnimationStage("idle");
-
+    if (productosSinStock.length > 1) {
       Swal.fire({
-        title: "¡Gracias por su compra!",
-        text: `Su comprado fue realizada exitosamente`,
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
+        title: "Stock insuficiente",
+        text: `Algunos productos no tienen stock suficiente`,
+        icon: "error",
+        confirmButtonColor: "#3085d6",
       });
-    }, 4000);
+      return;
+    }
 
-    clearCart()
+    try {
+      // Comprar todos los productos del carrito
+      const compraExitosa = await comprarMultiplesProductos(cartItems);
+
+      if (compraExitosa) {
+        setAnimationStage("entering");
+
+        setTimeout(() => {
+          setAnimationStage("exiting");
+        }, 2000);
+
+        setTimeout(() => {
+          setAnimationStage("idle");
+          clearCart();
+
+          Swal.fire({
+            title: "¡Gracias por su compra!",
+            text: `Su compra fue realizada exitosamente`,
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        }, 4000);
+      } else {
+        throw new Error("Error en alguna de las compras");
+      }
+    } catch (error) {
+      console.error("Error en la compra:", error);
+      Swal.fire({
+        title: "Error en la compra",
+        text: "No se pudo procesar tu compra. Intenta nuevamente.",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+      });
+    }
   };
 
   return (
@@ -170,7 +202,10 @@ const Carrito = () => {
                       <strong>${displayTotal.toLocaleString()}</strong>
                     </li>
                   </ul>
-                  <NavLink className="btn btn-success w-100 mb-2" onClick={handleBuy}>
+                  <NavLink
+                    className="btn btn-success w-100 mb-2"
+                    onClick={handleBuy}
+                  >
                     Comprar
                   </NavLink>
                   <NavLink to={"/"} className="btn btn-outline-dark w-100">

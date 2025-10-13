@@ -123,6 +123,10 @@ const DetalleProducto = () => {
                   />
                   <img src={visa} alt="visa" className="logoTarjetas" />
                 </div>
+                <p>
+                  6 cuotas sin interés de ${" "}
+                  <strong>{formatearPrecio(calcularCuotas(producto.precio, 6))}</strong>
+                </p>
                 <div class="d-flex justify-content-start align-items-center pe-3 gap-33">
                   <img src={macro} alt="macro" className="logoMacro" />
                   <img
@@ -130,11 +134,7 @@ const DetalleProducto = () => {
                     alt="santander"
                     className="logoSantander"
                   />
-                  <img
-                    src={naranjax}
-                    alt="naranjax"
-                    className="logoNaranja"
-                  />
+                  <img src={naranjax} alt="naranjax" className="logoNaranja" />
                 </div>
 
                 <hr />

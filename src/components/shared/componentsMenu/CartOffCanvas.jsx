@@ -20,62 +20,72 @@ const CartOffcanvas = ({ show, handleClose }) => {
     clearCart,
   } = useCart();
 
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
-  const handleBuy = async () => {
+  const handleBuy = () => {
+    Swal.fire({
+      title: "Estas seguro de comprar este producto?",
+      text: "¡Atencion!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#23e05cff",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Comprar!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const productosSinStock = cartItems.filter(
+          (item) => item.quantity > item.stock
+        );
 
-    const productosSinStock = cartItems.filter(
-      (item) => item.quantity > item.stock
-    );
-
-    if (productosSinStock.length > 1) {
-      Swal.fire({
-        title: "Stock insuficiente",
-        text: `Algunos productos no tienen stock suficiente`,
-        icon: "error",
-        confirmButtonColor: "#3085d6",
-      });
-      return;
-    }
-
-    try {
-
-      const compraExitosa = await comprarMultiplesProductos(cartItems);
-
-      if (compraExitosa) {
-        setAnimationStage("entering");
-
-        setTimeout(() => {
-          setAnimationStage("exiting");
-        }, 2000);
-
-        setTimeout(() => {
-          setAnimationStage("idle");
-          clearCart();
-
+        if (productosSinStock.length > 1) {
           Swal.fire({
-            title: "¡Gracias por su compra!",
-            text: `Su compra fue realizada exitosamente`,
-            icon: "success",
-            timer: 1500,
-            showConfirmButton: false,
+            title: "Stock insuficiente",
+            text: `Algunos productos no tienen stock suficiente`,
+            icon: "error",
+            confirmButtonColor: "#3085d6",
           });
+          return;
+        }
 
-          handleClose();
-          Navigate('/')
-        }, 4000);
-      } else {
-        throw new Error("Error en alguna de las compras");
+        try {
+          const compraExitosa = await comprarMultiplesProductos(cartItems);
+
+          if (compraExitosa) {
+            setAnimationStage("entering");
+
+            setTimeout(() => {
+              setAnimationStage("exiting");
+            }, 2000);
+
+            setTimeout(() => {
+              setAnimationStage("idle");
+              clearCart();
+
+              Swal.fire({
+                title: "¡Gracias por su compra!",
+                text: `Su compra fue realizada exitosamente`,
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+              });
+
+              handleClose();
+              Navigate("/");
+            }, 4000);
+          } else {
+            throw new Error("Error en alguna de las compras");
+          }
+        } catch (error) {
+          console.error("Error en la compra:", error);
+          Swal.fire({
+            title: "Error en la compra",
+            text: "No se pudo procesar tu compra. Intenta nuevamente.",
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+          });
+        }
       }
-    } catch (error) {
-      console.error("Error en la compra:", error);
-      Swal.fire({
-        title: "Error en la compra",
-        text: "No se pudo procesar tu compra. Intenta nuevamente.",
-        icon: "error",
-        confirmButtonColor: "#3085d6",
-      });
-    }
+    });
   };
 
   useEffect(() => {

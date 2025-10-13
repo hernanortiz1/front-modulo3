@@ -160,6 +160,22 @@ main {
   width: 400px;
 }
 
+.logoNaranja{
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+}
+.logoSantander{
+  position: relative;
+  overflow: hidden;
+  height: 35px;
+}
+.logoMacro{
+ position: relative;
+  overflow: hidden;
+  height: 18px;
+}
+
 .texto-sobre-imagen {
   position: absolute;
   bottom: 20px;

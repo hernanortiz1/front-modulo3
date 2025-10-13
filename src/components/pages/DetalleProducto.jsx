@@ -10,9 +10,10 @@ import {
   formatearPrecio,
   precioSinImpuestos,
 } from "../pages/categorias/funcion/operaciones.js";
-import americanExpress from "../../assets/tarjetas/americanExpress.svg.png";
 import mastercard from "../../assets/tarjetas/Mastercard-logo.svg.png";
-import naranajx from "../../assets/tarjetas/NaranjaX-logo.svg.png";
+import naranjax from "../../assets/tarjetas/NaranjaX-logo.svg.png";
+import macro from "../../assets/tarjetas/Logo_Banco_Macro.svg.png";
+import santander from "../../assets/tarjetas/Santander_Logo.png";
 import visa from "../../assets/tarjetas/Visa_Logo.png";
 
 const DetalleProducto = () => {
@@ -49,7 +50,7 @@ const DetalleProducto = () => {
 
             {/* Columna de Información */}
             <Col md={6} lg={7}>
-              <div className="mt-3 mt-md-0">
+              <div className="mt-3 mt-md-0 d-flex flex-column align-content-around">
                 {/* Categoría y Favorito */}
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <span className="badge colorNavbarFooter">
@@ -75,7 +76,7 @@ const DetalleProducto = () => {
                 <div className="mb-4 d-flex flex-column">
                   <p className="text-muted mb-0">{producto.descripcion}</p>
                 </div>
-                <div className="d-flex justify-content-between justify-content-md-start gap-md-4 my-4">
+                <div className="d-flex justify-content-between justify-content-md-start gap-md-4 mb-3">
                   <p className="badge colorNavbarFooter w-auto">
                     Stock: {producto.stock}
                   </p>
@@ -114,7 +115,6 @@ const DetalleProducto = () => {
                     </li>
                   </ul>
                 </div>
-
                 <div class="d-flex justify-content-start pe-3 gap-3 my-4">
                   <img
                     src={mastercard}
@@ -123,25 +123,24 @@ const DetalleProducto = () => {
                   />
                   <img src={visa} alt="visa" className="logoTarjetas" />
                 </div>
+                <div class="d-flex justify-content-start align-items-center pe-3 gap-33">
+                  <img src={macro} alt="macro" className="logoMacro" />
+                  <img
+                    src={santander}
+                    alt="santander"
+                    className="logoSantander"
+                  />
+                  <img
+                    src={naranjax}
+                    alt="naranjax"
+                    className="logoNaranja"
+                  />
+                </div>
 
                 <hr />
 
-                {/* Cantidad */}
-                <div className="d-flex align-items-center gap-3 my-4">
-                  <label className="mb-0">Cantidad:</label>
-                  <div className="d-flex align-items-center gap-2">
-                    <Button variant="outline-secondary" size="sm">
-                      −
-                    </Button>
-                    <span className="px-3 fw-bold">1</span>
-                    <Button variant="outline-secondary" size="sm">
-                      +
-                    </Button>
-                  </div>
-                </div>
-
                 {/* Botones */}
-                <div className="d-flex gap-2">
+                <div className="d-flex gap-2 pt-4">
                   <Button variant="primary" className="flex-grow-1">
                     <ShoppingCart size={18} className="me-2" />
                     Agregar al Carrito

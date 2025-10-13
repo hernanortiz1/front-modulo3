@@ -9,6 +9,15 @@ import Swal from "sweetalert2";
 const CartOffcanvas = ({ show, handleClose }) => {
   const endRef = useRef(null);
   const [animationStage, setAnimationStage] = useState("idle");
+  const {
+    cartItems,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    getTotalPrice,
+    isLoading,
+    clearCart,
+  } = useCart();
 
   const handleBuy = () => {
     setAnimationStage("entering");
@@ -27,17 +36,10 @@ const CartOffcanvas = ({ show, handleClose }) => {
         timer: 1500,
         showConfirmButton: false,
       });
+      clearCart()
     }, 4000);
   };
 
-  const {
-    cartItems,
-    removeFromCart,
-    increaseQuantity,
-    decreaseQuantity,
-    getTotalPrice,
-    isLoading,
-  } = useCart();
 
   useEffect(() => {
     if (show && endRef.current) {

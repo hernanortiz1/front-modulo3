@@ -11,6 +11,7 @@ const Carrito = () => {
     increaseQuantity,
     decreaseQuantity,
     getTotalPrice,
+    clearCart,
   } = useCart();
 
   const totalPrice = getTotalPrice();
@@ -36,6 +37,8 @@ const Carrito = () => {
         showConfirmButton: false,
       });
     }, 4000);
+
+    clearCart()
   };
 
   return (
@@ -78,8 +81,8 @@ const Carrito = () => {
                         <Image
                           src={item.imagen}
                           rounded
-                          width={95}
-                          height={95}
+                          width={80}
+                          height={80}
                           onError={(e) => {
                             e.target.src =
                               "https://via.placeholder.com/95x95?text=Imagen+No+Disponible";

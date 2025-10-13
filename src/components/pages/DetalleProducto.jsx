@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -15,6 +15,7 @@ const DetalleProducto = () => {
   const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
   const [animationStage, setAnimationStage] = useState("idle");
+  const Navigate = useNavigate();
 
   const handleBuy = () => {
     setAnimationStage("entering");
@@ -33,6 +34,7 @@ const DetalleProducto = () => {
         timer: 1500,
         showConfirmButton: false,
       });
+      Navigate("/");
     }, 4000);
   };
 
@@ -175,11 +177,19 @@ const DetalleProducto = () => {
                 <div className="d-flex align-items-center gap-3 mb-4">
                   <label className="mb-0">Cantidad:</label>
                   <div className="d-flex align-items-center gap-2">
-                    <Button variant="outline-secondary" size="sm" onClick={disminuirCantidad}>
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      onClick={disminuirCantidad}
+                    >
                       −
                     </Button>
                     <span className="px-3 fw-bold">{cantidad}</span>
-                    <Button variant="outline-secondary" size="sm" onClick={aumentarCantidad}>
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      onClick={aumentarCantidad}
+                    >
                       +
                     </Button>
                   </div>

@@ -125,7 +125,9 @@ const DetalleProducto = () => {
                 </div>
                 <p>
                   6 cuotas sin interés de ${" "}
-                  <strong>{formatearPrecio(calcularCuotas(producto.precio, 6))}</strong>
+                  <strong>
+                    {formatearPrecio(calcularCuotas(producto.precio, 6))}
+                  </strong>
                 </p>
                 <div class="d-flex justify-content-start align-items-center pe-3 gap-33">
                   <img src={macro} alt="macro" className="logoMacro" />

@@ -23,6 +23,13 @@ const Registro = () => {
         title: "Registro exitoso",
         text: `Bienvenido ${usuario.nombreUsuario}`,
         icon: "success",
+        iconColor: "#1d3557",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        customClass: {
+          popup: "rounded-4 shadow-lg",
+        },
       });
       navegacion("/");
     } else {

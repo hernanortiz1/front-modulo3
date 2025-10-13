@@ -152,9 +152,28 @@ main {
     transform: translateX(0);
   }
 }
+
 .imagen-container {
   position: relative;
   overflow: hidden;
+  height: 520px;
+  width: 400px;
+}
+
+.logoNaranja{
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+}
+.logoSantander{
+  position: relative;
+  overflow: hidden;
+  height: 35px;
+}
+.logoMacro{
+ position: relative;
+  overflow: hidden;
+  height: 18px;
 }
 
 .cdsobre-imagen {
@@ -216,6 +235,11 @@ main {
   border-radius: 0.8rem;
   text-decoration: none;
   color: #1d3557;
+}
+
+.logoTarjetas {
+  width: 50px;
+  height: 30px;
 }
 
 @media (max-width: 768px) {
@@ -324,6 +348,16 @@ main {
 .cardCategoriasBody {
   height: auto;
 }
+
+.cardCategorias {
+    height: auto;
+  }
+  .cardCategoriasImgWrapper {
+    height: 250px;
+  }
+  .cardCategoriasBody {
+    min-height: auto;}
+
 @media (max-width: 992px) {
   .cardCategorias {
     height: 450px;
@@ -334,18 +368,11 @@ main {
   .cardCategoriasBody {
     height: 170px;
   }
+  .imagen-container {
+  height: 100%;
 }
-@media (max-width: 768px) {
-  .cardCategorias {
-    height: auto;
-  }
-  .cardCategoriasImgWrapper {
-    height: 250px;
-  }
-  .cardCategoriasBody {
-    min-height: auto;
-  }
 }
+
 /* FIN  hover de card categoria productos*/
 /* BTN Scroll de categoria productos */
 .btnScrollArriba {
@@ -452,6 +479,11 @@ main {
   .contenedorBotones {
     flex-direction: row; /* fila en md/lg */
   }
+
+  .imagen-container {
+  height: 580px;
+  width: 100%;
+}
 }
 
 /* botones cuadrados */

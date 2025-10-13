@@ -18,7 +18,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
-
+import ProductCard from "./componentsInicio/ProductCard";
+import BtnScroll from "./categorias/funcion/BtnScroll";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
@@ -199,7 +200,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {remeras.length === 0 ? (
@@ -238,7 +239,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {camisas.length === 0 ? (
@@ -277,7 +278,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {buzos.length === 0 ? (
@@ -316,7 +317,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {abrigosCamperas.length === 0 ? (
@@ -355,7 +356,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {pantalones.length === 0 ? (
@@ -394,7 +395,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {bermudas.length === 0 ? (
@@ -433,7 +434,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {shortsBanio.length === 0 ? (
@@ -472,7 +473,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {gorras.length === 0 ? (
@@ -511,7 +512,7 @@ const Inicio = () => {
                     className="text-decoration-none text-dark"
                   >
                     {" "}
-                    ver todo <i className="bi bi-arrow-right"></i>
+                    Ver todo <i className="bi bi-arrow-right"></i>
                   </Link>
                 </div>
                 {anteojos.length === 0 ? (
@@ -547,6 +548,18 @@ const Inicio = () => {
       <section className="mt-3">
         <BannerPublicidad />
       </section>
+      <div className="container my-4">
+        <h1 className="text-center mb-4">Nuestros Productos</h1>
+
+        <div className="row">
+          {productosEjemplo.map((producto) => (
+            <div key={producto.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+              <ProductCard product={producto} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <BtnScroll />
     </>
   );
 };

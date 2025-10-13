@@ -130,29 +130,22 @@ function App() {
                 }
               >
                 <Route index element={<Administrador></Administrador>}></Route>
+
                 <Route
                   path="crear"
-                  element={<FormularioRopa />}
-                  titulo={"Crear producto"}
+                  element={<FormularioRopa titulo={"Crear producto"} />}
                 ></Route>
 
                 <Route
-                path="crear"
-                element={<FormularioRopa
-                titulo={"Crear producto"}
-                />}
-              ></Route>
-
-              <Route
                   path="editar/:id"
                   element={
                     <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
                   }
                 ></Route>
-            </Route>
-            <Route path="*" element={<Error404></Error404>}></Route>
-          </Routes>
-        </main>
+              </Route>
+              <Route path="*" element={<Error404></Error404>}></Route>
+            </Routes>
+          </main>
 
           <Footer></Footer>
         </BrowserRouter>

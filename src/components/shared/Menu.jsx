@@ -51,18 +51,43 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const logout = () => {
     Swal.fire({
       title: "¿Cerrar sesión?",
-      text: "¿Estás seguro que quieres salir?",
-      icon: "warning",
+      text: "¿Estás seguro que deseas salir de tu cuenta?",
+      icon: "question", // ✅ Mejor que "warning" para esta acción
+      iconColor: "#1d3557", // Color personalizado
       showCancelButton: true,
-      confirmButtonText: "Sí, salir",
-      confirmButtonColor: "#198754",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: '<i class="bi bi-box-arrow-right me-2"></i>Sí, salir',
+      cancelButtonText: '<i class="bi bi-x-circle me-2"></i>Cancelar',
+      confirmButtonColor: "#1d3557", // Color más elegante
+      cancelButtonColor: "#6c757d",
+      reverseButtons: true, // ✅ Botón cancelar a la izquierda
+      backdrop: `
+        rgba(0,0,0,0.6)
+        left top
+        no-repeat
+      `,
+      customClass: {
+        popup: "rounded-4 shadow-lg",
+        confirmButton: "px-4 py-2 fw-semibold",
+        cancelButton: "px-4 py-2 fw-semibold",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
+        sessionStorage.removeItem("userKey"); // ✅ Limpiar sesión
         setUsuarioAdmin({});
         navegacion("/");
-        Swal.fire("Sesión cerrada", "Has salido correctamente.", "success");
+
+        Swal.fire({
+          title: "¡Hasta pronto!",
+          text: "Tu sesión se ha cerrado correctamente",
+          icon: "success",
+          iconColor: "#198754",
+          timer: 2000, // ✅ Se cierra automáticamente
+          timerProgressBar: true,
+          showConfirmButton: false,
+          customClass: {
+            popup: "rounded-4 shadow-lg",
+          },
+        });
       }
     });
   };
@@ -71,19 +96,37 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   const iniciarSesion = async (usuario) => {
     const respuesta = await login(usuario);
+
     if (respuesta.status === 200) {
       const datoUsuario = await respuesta.json();
       const datosToken = jwtDecode(datoUsuario.token);
+
       setUsuarioAdmin({
         nombreUsuario: datoUsuario.nombreUsuario,
         token: datoUsuario.token,
         rol: datosToken.rol,
       });
+
+      const esAdmin = datosToken.rol === "Administrador";
+
       Swal.fire({
-        title: "Inicio de sesion correcto",
-        text: `Bienvenido ${datoUsuario.nombreUsuario} !`,
+        title: `Hola, ${datoUsuario.nombreUsuario}`,
+        html: `
+          <div class="d-flex align-items-center justify-content-center gap-2 mt-3">
+            <i class="bi ${esAdmin ? 'bi-shield-fill-check' : 'bi-person-circle'}" style="font-size: 2rem; color: ${esAdmin ? '#0d6efd' : '#198754'};"></i>
+            <span class="fw-semibold">${esAdmin ? 'Acceso Administrador' : 'Redirigiendo...'}</span>
+          </div>
+        `,
         icon: "success",
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'rounded-3'
+        }
       });
+
       handleClose();
       if (datosToken.rol === "Administrador") {
         Navegacion("/administrador");
@@ -92,12 +135,18 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       }
     } else {
       Swal.fire({
-        title: "Error al iniciar sesion",
-        text: `Credenciales incorrectas`,
+        title: "Error de autenticación",
+        text: "Usuario o contraseña incorrectos",
         icon: "error",
+        confirmButtonText: "Entendido",
+        confirmButtonColor: "#6c757d",
+        customClass: {
+          popup: 'rounded-3'
+        }
       });
     }
   };
+
 
   return (
     <header>

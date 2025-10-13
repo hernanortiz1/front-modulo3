@@ -24,7 +24,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
 
   const handleBuy = () => {
     Swal.fire({
-      title: "Estas seguro de comprar este producto?",
+      title: "¡Estas seguro de esta compra?",
       text: "¡Atencion!",
       icon: "warning",
       showCancelButton: true,

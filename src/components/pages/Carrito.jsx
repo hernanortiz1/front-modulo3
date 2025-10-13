@@ -22,7 +22,7 @@ const Carrito = () => {
 
   const handleBuy = async () => {
     Swal.fire({
-      title: "Estas seguro de esta compra?",
+      title: "?Estas seguro de esta compra?",
       text: "¡Atencion!",
       icon: "warning",
       showCancelButton: true,

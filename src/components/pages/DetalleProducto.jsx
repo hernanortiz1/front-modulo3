@@ -19,7 +19,7 @@ const DetalleProducto = () => {
 
   const handleBuy = async () => {
     Swal.fire({
-      title: "Estas seguro de comprar este producto?",
+      title: "¿Estas seguro de comprar este producto?",
       text: "¡Atencion!",
       icon: "warning",
       showCancelButton: true,

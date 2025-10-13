@@ -37,18 +37,18 @@ const DetalleProducto = () => {
         <Card.Body className="p-4">
           <Row>
             {/* Columna de Imagen */}
-            <Col md={5}>
-              <div className="imagen-container">
+            <Col md={6} lg={5}>
+              <div className="d-flex justify-content-center">
                 <img
                   src={producto.imagen}
                   alt={producto.nombreProducto}
-                  className="img-fluid rounded"
+                  className="imagen-container rounded"
                 />
               </div>
             </Col>
 
             {/* Columna de Información */}
-            <Col md={7}>
+            <Col md={6} lg={7}>
               <div className="mt-3 mt-md-0">
                 {/* Categoría y Favorito */}
                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -75,14 +75,14 @@ const DetalleProducto = () => {
                 <div className="mb-4 d-flex flex-column">
                   <p className="text-muted mb-0">{producto.descripcion}</p>
                 </div>
-                <div className="d-flex justify-content-between my-4">
-                  <p className="badge colorNavbarFooter w-25">
+                <div className="d-flex justify-content-between justify-content-md-start gap-md-4 my-4">
+                  <p className="badge colorNavbarFooter w-auto">
                     Stock: {producto.stock}
                   </p>
-                  <p className="badge colorNavbarFooter w-25">
+                  <p className="badge colorNavbarFooter w-auto">
                     Color: {producto.color}
                   </p>
-                  <p className="badge colorNavbarFooter w-25">
+                  <p className="badge colorNavbarFooter w-auto">
                     Talle: {producto.talle}
                   </p>
                 </div>
@@ -100,17 +100,17 @@ const DetalleProducto = () => {
                         con Transferencia
                       </small>
                     </li>
-                    <li className="mb-1 fs-5">
-                      3 cuotas sin interés de{" "}
-                      <strong>
-                        $ {formatearPrecio(calcularCuotas(producto.precio, 3))}
-                      </strong>
-                    </li>
                     <li className="mb-1">
                       <small className="textoPequenio d-block">
                         Precio sin impuestos nacionales ${" "}
                         {formatearPrecio(precioSinImpuestos(producto.precio))}
                       </small>
+                    </li>
+                    <li className="mb-1 mt-3 fs-6">
+                      3 cuotas sin interés de{" "}
+                      <strong>
+                        $ {formatearPrecio(calcularCuotas(producto.precio, 3))}
+                      </strong>
                     </li>
                   </ul>
                 </div>
@@ -121,17 +121,13 @@ const DetalleProducto = () => {
                     alt="mastercard"
                     className="logoTarjetas"
                   />
-                  <img
-                    src={visa}
-                    alt="visa"
-                    className="logoTarjetas"
-                  />
+                  <img src={visa} alt="visa" className="logoTarjetas" />
                 </div>
 
                 <hr />
 
                 {/* Cantidad */}
-                <div className="d-flex align-items-center gap-3 mb-4">
+                <div className="d-flex align-items-center gap-3 my-4">
                   <label className="mb-0">Cantidad:</label>
                   <div className="d-flex align-items-center gap-2">
                     <Button variant="outline-secondary" size="sm">

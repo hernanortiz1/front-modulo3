@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { registro } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
 import imagenRegistro from "../../assets/sobreNosotros/registroImagen.jpg";
+import { useNavigate } from "react-router";
 
 const Registro = () => {
+  const navegacion = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -20,6 +23,13 @@ const Registro = () => {
         title: "Registro exitoso",
         text: `Bienvenido ${usuario.nombreUsuario}`,
         icon: "success",
+        iconColor: "#1d3557",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        customClass: {
+          popup: "rounded-4 shadow-lg",
+        },
       });
       navegacion("/");
     } else {

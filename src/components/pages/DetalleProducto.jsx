@@ -1,37 +1,167 @@
 import React from "react";
-import { Container, Card, Row, Col, Button } from "react-bootstrap";
+import { Container, Card, Row, Col, Button, Alert } from "react-bootstrap";
 import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
-import { useParams } from "react-router";
-import { obtenerProductosPorId } from "../../helpers/queries";
+import { useNavigate, useParams } from "react-router";
+import { comprarProducto, obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
 import {
-  precioDescuento,
-  calcularCuotas,
   formatearPrecio,
+  precioDescuento,
   precioSinImpuestos,
-} from "../pages/categorias/funcion/operaciones.js";
+  calcularCuotas,
+} from "./categorias/funcion/operaciones";
 import mastercard from "../../assets/tarjetas/Mastercard-logo.svg.png";
 import naranjax from "../../assets/tarjetas/NaranjaX-logo.svg.png";
 import macro from "../../assets/tarjetas/Logo_Banco_Macro.svg.png";
 import santander from "../../assets/tarjetas/Santander_Logo.png";
 import visa from "../../assets/tarjetas/Visa_Logo.png";
+import { useCart } from "../../helpers/CartContext";
+import Swal from "sweetalert2";
 
 const DetalleProducto = () => {
   const [producto, setProducto] = useState({});
   const [favorito, setFavorito] = useState(false);
   const { id } = useParams();
+  const { addToCart } = useCart();
+  const [loading, setLoading] = useState(true);
+  const [cantidad, setCantidad] = useState(1);
+  const [animationStage, setAnimationStage] = useState("idle");
+  const Navigate = useNavigate();
+
+  const handleBuy = async () => {
+    Swal.fire({
+      title: "¿Estas seguro de comprar este producto?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#23e05cff",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Comprar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          if (cantidad > producto.stock) {
+            Swal.fire({
+              title: "Stock insuficiente",
+              text: `Solo hay ${producto.stock} unidades disponibles`,
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          }
+
+          // Usar la función específica para compras
+          const resultado = await comprarProducto(producto._id, cantidad);
+
+          if (resultado && resultado.status === 200) {
+            const data = await resultado.json();
+            setProducto(data.producto);
+
+            setAnimationStage("entering");
+
+            setTimeout(() => {
+              setAnimationStage("exiting");
+            }, 2000);
+
+            setTimeout(() => {
+              setAnimationStage("idle");
+
+              Swal.fire({
+                title: "¡Gracias por su compra!",
+                text: `Has comprado ${cantidad} ${producto.nombreProducto}`,
+                icon: "success",
+                timer: 1500,
+                confirmButtonText: "continuar",
+              });
+              Navigate("/");
+            }, 4000);
+          }
+        } catch (error) {
+          console.error("Error en la compra:", error);
+          Swal.fire({
+            title: "Error en la compra",
+            text: "No se pudo procesar tu compra. Intenta nuevamente.",
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+          });
+        }
+      }
+    });
+  };
 
   useEffect(() => {
     leerProducto();
-  }, []);
+  }, [id]);
 
   const leerProducto = async () => {
-    const respuesta = await obtenerProductosPorId(id);
-    if (respuesta.status === 200) {
-      const producto = await respuesta.json();
-      setProducto(producto);
+    try {
+      const respuesta = await obtenerProductosPorId(id);
+      if (respuesta.status === 200) {
+        const producto = await respuesta.json();
+        setProducto(producto);
+      }
+    } catch (error) {
+      console.error("Error al cargar producto:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleAgregarCarrito = () => {
+    const productToAdd = {
+      _id: producto._id,
+      nombre: producto.nombreProducto || producto.nombre,
+      precio: producto.precio,
+      imagen: producto.imagen,
+      categoria: producto.categoria,
+      talle: producto.talle,
+      color: producto.color,
+      stock: producto.stock,
+      marca: producto.marca || "Lannister",
+    };
+
+    addToCart(productToAdd);
+
+    Swal.fire({
+      title: "¡Agregado al carrito!",
+      text: `${producto.nombreProducto} se agregó a tu carrito`,
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  };
+
+  const aumentarCantidad = () => {
+    if (producto && cantidad < producto.stock) {
+      setCantidad(cantidad + 1);
+    }
+  };
+
+  const disminuirCantidad = () => {
+    if (cantidad > 1) {
+      setCantidad(cantidad - 1);
+    }
+  };
+
+  if (loading) {
+    return (
+      <Container className="my-5 text-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </div>
+        <p className="mt-2">Cargando producto...</p>
+      </Container>
+    );
+  }
+
+  if (!producto) {
+    return (
+      <Container className="my-5">
+        <Alert variant="danger">Producto no encontrado</Alert>
+      </Container>
+    );
+  }
+
   return (
     <Container className="my-5">
       <Card className="producto-simple">
@@ -78,7 +208,7 @@ const DetalleProducto = () => {
                 </div>
                 <div className="d-flex justify-content-between justify-content-md-start gap-md-4 mb-3">
                   <p className="badge colorNavbarFooter w-auto">
-                    Stock: {producto.stock}
+                    Stock: {producto.stock === 1 ? "Sin stock" : `${producto.stock}`}
                   </p>
                   <p className="badge colorNavbarFooter w-auto">
                     Color: {producto.color}
@@ -115,7 +245,7 @@ const DetalleProducto = () => {
                     </li>
                   </ul>
                 </div>
-                <div class="d-flex justify-content-start pe-3 gap-3 my-4">
+                <div className="d-flex justify-content-start pe-3 gap-3 my-4">
                   <img
                     src={mastercard}
                     alt="mastercard"
@@ -129,7 +259,7 @@ const DetalleProducto = () => {
                     {formatearPrecio(calcularCuotas(producto.precio, 6))}
                   </strong>
                 </p>
-                <div class="d-flex justify-content-start align-items-center pe-3 gap-33">
+                <div className="d-flex justify-content-start align-items-center pe-3 gap-33">
                   <img src={macro} alt="macro" className="logoMacro" />
                   <img
                     src={santander}
@@ -143,15 +273,37 @@ const DetalleProducto = () => {
 
                 {/* Botones */}
                 <div className="d-flex gap-2 pt-4">
-                  <Button variant="primary" className="flex-grow-1">
+                  <Button
+                    variant="primary"
+                    className="flex-grow-1"
+                    onClick={handleAgregarCarrito}
+                  >
                     <ShoppingCart size={18} className="me-2" />
-                    Agregar al Carrito
+                    {producto.stock === 1 ? "Sin stock" : "Agregar al carrito"}
                   </Button>
-                  <Button variant="dark" className="flex-grow-1">
+                  <Button
+                    variant="dark"
+                    className="flex-grow-1"
+                    onClick={handleBuy}
+                    disabled={producto.stock === 1}
+                  >
                     <ShoppingBag size={18} className="me-2" />
                     Comprar Ahora
                   </Button>
                 </div>
+                {/* Mensaje de sin stock */}
+                {producto.stock === 1 && (
+                  <Alert variant="warning" className="mt-3">
+                    Este producto está temporalmente sin stock
+                  </Alert>
+                )}
+                {animationStage !== "idle" && (
+                  <div className="buy-overlay">
+                    <div className={`buy-overlay ${animationStage}`}>
+                      <div className="buy-box">📦</div>
+                    </div>
+                  </div>
+                )}
               </div>
             </Col>
           </Row>

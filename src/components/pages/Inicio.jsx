@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import BannerDesktop_uno from "../../assets/BannerDesktop_uno.png";
 import BannerDesktop_dos from "../../assets/BannerDesktop_dos.png";
 import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
-import BannerMobile from "../../assets/BannerMobile.png";
+import BannerMobile from "../../assets/bannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
 import React from "react";

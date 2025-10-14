@@ -22,13 +22,13 @@ const Carrito = () => {
 
   const handleBuy = async () => {
     Swal.fire({
-      title: "?Estas seguro de esta compra?",
-      text: "¡Atencion!",
-      icon: "warning",
+      title: "¿Estas seguro de esta compra?",
+      icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#23e05cff",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Comprar!",
+      confirmButtonText: "Comprar",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const productosSinStock = cartItems.filter(
@@ -46,7 +46,6 @@ const Carrito = () => {
         }
 
         try {
-          // Comprar todos los productos del carrito
           const compraExitosa = await comprarMultiplesProductos(cartItems);
 
           if (compraExitosa) {

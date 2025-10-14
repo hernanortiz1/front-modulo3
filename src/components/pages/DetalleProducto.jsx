@@ -4,11 +4,22 @@ import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { comprarProducto, obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import {
+  formatearPrecio,
+  precioDescuento,
+  precioSinImpuestos,
+  calcularCuotas,
+} from "./categorias/funcion/operaciones";
+import mastercard from "../../assets/tarjetas/Mastercard-logo.svg.png";
+import naranjax from "../../assets/tarjetas/NaranjaX-logo.svg.png";
+import macro from "../../assets/tarjetas/Logo_Banco_Macro.svg.png";
+import santander from "../../assets/tarjetas/Santander_Logo.png";
+import visa from "../../assets/tarjetas/Visa_Logo.png";
 import { useCart } from "../../helpers/CartContext";
+import Swal from "sweetalert2";
 
 const DetalleProducto = () => {
-  const [producto, setProducto] = useState([]);
+  const [producto, setProducto] = useState({});
   const [favorito, setFavorito] = useState(false);
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -20,12 +31,12 @@ const DetalleProducto = () => {
   const handleBuy = async () => {
     Swal.fire({
       title: "¿Estas seguro de comprar este producto?",
-      text: "¡Atencion!",
-      icon: "warning",
+      icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#23e05cff",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Comprar!",
+      confirmButtonText: "Comprar",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -157,32 +168,23 @@ const DetalleProducto = () => {
         <Card.Body className="p-4">
           <Row>
             {/* Columna de Imagen */}
-            <Col md={5}>
-              <div className="imagen-container">
+            <Col md={6} lg={5}>
+              <div className="d-flex justify-content-center">
                 <img
                   src={producto.imagen}
                   alt={producto.nombreProducto}
-                  className="img-fluid rounded"
+                  className="imagen-container rounded"
                 />
               </div>
             </Col>
 
             {/* Columna de Información */}
-            <Col md={7}>
-              <div className="mt-3 mt-md-0">
+            <Col md={6} lg={7}>
+              <div className="mt-3 mt-md-0 d-flex flex-column align-content-around">
                 {/* Categoría y Favorito */}
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <span className="badge colorNavbarFooter">
-                    Categoria: {producto.categoria}
-                  </span>
-                  <span className="badge colorNavbarFooter">
-                    Stock: {producto.stock}
-                  </span>
-                  <span className="badge colorNavbarFooter">
-                    Color: {producto.color}
-                  </span>
-                  <span className="badge colorNavbarFooter">
-                    Talle: {producto.talle}
+                    {producto.categoria}
                   </span>
                   <Button
                     variant="link"
@@ -200,34 +202,81 @@ const DetalleProducto = () => {
                 {/* Título */}
                 <h2 className="Montserrat mb-3">{producto.nombreProducto}</h2>
 
-                {/* Precio */}
-                <h3 className="Montserrat mb-3">${producto.precio}</h3>
-
                 {/* Descripción */}
-                <div className="mb-4">
-                  <span className="badge colorNavbarFooter mb-2">
-                    Descripción:
-                  </span>
+                <div className="mb-4 d-flex flex-column">
                   <p className="text-muted mb-0">{producto.descripcion}</p>
+                </div>
+                <div className="d-flex justify-content-between justify-content-md-start gap-md-4 mb-3">
+                  <p className="badge colorNavbarFooter w-auto">
+                    Stock: {producto.stock === 1 ? "Sin stock" : `${producto.stock}`}
+                  </p>
+                  <p className="badge colorNavbarFooter w-auto">
+                    Color: {producto.color}
+                  </p>
+                  <p className="badge colorNavbarFooter w-auto">
+                    Talle: {producto.talle}
+                  </p>
+                </div>
+                {/* Precio */}
+                <h3 className="Montserrat mb-3 fs-2">
+                  ${formatearPrecio(producto.precio)}
+                </h3>
+
+                <div>
+                  <ul className="list-unstyled mb-0">
+                    <li className="mb-1">
+                      <small className="text-primary">
+                        ${" "}
+                        {formatearPrecio(precioDescuento(producto.precio, 10))}{" "}
+                        con Transferencia
+                      </small>
+                    </li>
+                    <li className="mb-1">
+                      <small className="textoPequenio d-block">
+                        Precio sin impuestos nacionales ${" "}
+                        {formatearPrecio(precioSinImpuestos(producto.precio))}
+                      </small>
+                    </li>
+                    <li className="mb-1 mt-3 fs-6">
+                      3 cuotas sin interés de{" "}
+                      <strong>
+                        $ {formatearPrecio(calcularCuotas(producto.precio, 3))}
+                      </strong>
+                    </li>
+                  </ul>
+                </div>
+                <div className="d-flex justify-content-start pe-3 gap-3 my-4">
+                  <img
+                    src={mastercard}
+                    alt="mastercard"
+                    className="logoTarjetas"
+                  />
+                  <img src={visa} alt="visa" className="logoTarjetas" />
+                </div>
+                <p>
+                  6 cuotas sin interés de ${" "}
+                  <strong>
+                    {formatearPrecio(calcularCuotas(producto.precio, 6))}
+                  </strong>
+                </p>
+                <div className="d-flex justify-content-start align-items-center pe-3 gap-33">
+                  <img src={macro} alt="macro" className="logoMacro" />
+                  <img
+                    src={santander}
+                    alt="santander"
+                    className="logoSantander"
+                  />
+                  <img src={naranjax} alt="naranjax" className="logoNaranja" />
                 </div>
 
                 <hr />
 
-                {/* Cantidad */}
-                <div className="d-flex align-items-center gap-3 mb-4">
-                  <span className="text-danger">
-                    ({producto.stock === 1 ? "0" : `${producto.stock}`})
-                    Disponibles
-                  </span>
-                </div>
-
                 {/* Botones */}
-                <div className="d-flex gap-2">
+                <div className="d-flex gap-2 pt-4">
                   <Button
                     variant="primary"
                     className="flex-grow-1"
                     onClick={handleAgregarCarrito}
-                    disabled={producto.stock === 1}
                   >
                     <ShoppingCart size={18} className="me-2" />
                     {producto.stock === 1 ? "Sin stock" : "Agregar al carrito"}

@@ -41,6 +41,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     handleClose();
     navegacion("/registro");
   };
+  const irAError = () => {
+    handleClose();
+    navegacion("*");
+  };
   const {
     register,
     handleSubmit,
@@ -113,8 +117,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         title: `Hola, ${datoUsuario.nombreUsuario}`,
         html: `
           <div class="d-flex align-items-center justify-content-center gap-2 mt-3">
-            <i class="bi ${esAdmin ? 'bi-shield-fill-check' : 'bi-person-circle'}" style="font-size: 2rem; color: ${esAdmin ? '#0d6efd' : '#198754'};"></i>
-            <span class="fw-semibold">${esAdmin ? 'Acceso Administrador' : 'Redirigiendo...'}</span>
+            <i class="bi ${
+              esAdmin ? "bi-shield-fill-check" : "bi-person-circle"
+            }" style="font-size: 2rem; color: ${
+          esAdmin ? "#0d6efd" : "#198754"
+        };"></i>
+            <span class="fw-semibold">${
+              esAdmin ? "Acceso Administrador" : "Redirigiendo..."
+            }</span>
           </div>
         `,
         icon: "success",
@@ -123,8 +133,8 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         showConfirmButton: false,
         allowOutsideClick: false,
         customClass: {
-          popup: 'rounded-3'
-        }
+          popup: "rounded-3",
+        },
       });
 
       handleClose();
@@ -141,12 +151,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         confirmButtonText: "Entendido",
         confirmButtonColor: "#6c757d",
         customClass: {
-          popup: 'rounded-3'
-        }
+          popup: "rounded-3",
+        },
       });
     }
   };
-
 
   return (
     <header>
@@ -406,6 +415,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 {errors.password && (
                   <span className="text-danger">{errors.password.message}</span>
                 )}
+                <Button
+                  variant="link"
+                  style={{ fontSize: "14px" }}
+                  className="link-light mt-3 text-decoration-none link-opacity-75-hover p-0"
+                  onClick={irAError}
+                >
+                  ¿Has olvidado tu contraseña?
+                </Button>
               </Form.Group>
               <Button variant="primary" className="w-100" type="submit">
                 Ingresar

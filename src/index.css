@@ -63,7 +63,8 @@ main {
 }
 .imagenBanners {
   width: 100%;
-  max-height: 350px;
+  max-height: 380px;
+  min-height: 380px;
   object-fit: cover;
 }
 .fade-in-right {
@@ -251,6 +252,11 @@ main {
     font-size: 1.2rem;
     padding: 10px 15px;
   }
+
+  .imagenBanners {
+  max-height: 200px;
+  min-height: 200px;
+}
 }
 /* autofocus de modal en menu */
 .focus-red:focus {
@@ -370,6 +376,10 @@ main {
   }
   .imagen-container {
   height: 100%;
+}
+.imagenBanners {
+  max-height: 280px;
+  min-height: 280px;
 }
 }
 

@@ -342,7 +342,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                   <Button
                     variant="link"
                     className="nav-link p-0"
-                    onClick={handleShow}
+                    onClick={() => {
+                      handleShow();
+                      setExpanded(false);
+                    }}
                     title="Iniciar sesión"
                   >
                     <div className="d-flex align-items-center gap-2 text-light">
@@ -417,13 +420,13 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 )}
               </Form.Group>
               <Button
-                  variant="link"
-                  style={{ fontSize: "14px" }}
-                  className="link-light text-decoration-none link-opacity-75-hover p-0"
-                  onClick={irAError}
-                >
-                  ¿Has olvidado tu contraseña?
-                </Button>
+                variant="link"
+                style={{ fontSize: "14px" }}
+                className="link-light text-decoration-none link-opacity-75-hover p-0"
+                onClick={irAError}
+              >
+                ¿Has olvidado tu contraseña?
+              </Button>
               <Button variant="primary" className="w-100 mt-3" type="submit">
                 Ingresar
               </Button>
@@ -431,7 +434,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <Button
               variant="outline-danger"
               className="w-100 mt-2"
-              onClick={irARegistro}
+              onClick={() => {
+                irARegistro();
+                setExpanded(false);
+              }}
             >
               Crear cuenta
             </Button>

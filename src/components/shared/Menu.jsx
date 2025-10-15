@@ -41,6 +41,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     handleClose();
     navegacion("/registro");
   };
+  const irAError = () => {
+    handleClose();
+    navegacion("*");
+  };
   const {
     register,
     handleSubmit,
@@ -52,14 +56,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     Swal.fire({
       title: "¿Cerrar sesión?",
       text: "¿Estás seguro que deseas salir de tu cuenta?",
-      icon: "question", // ✅ Mejor que "warning" para esta acción
-      iconColor: "#1d3557", // Color personalizado
+      icon: "question", 
+      iconColor: "#1d3557",
       showCancelButton: true,
       confirmButtonText: '<i class="bi bi-box-arrow-right me-2"></i>Sí, salir',
       cancelButtonText: '<i class="bi bi-x-circle me-2"></i>Cancelar',
-      confirmButtonColor: "#1d3557", // Color más elegante
+      confirmButtonColor: "#1d3557", 
       cancelButtonColor: "#6c757d",
-      reverseButtons: true, // ✅ Botón cancelar a la izquierda
+      reverseButtons: true, 
       backdrop: `
         rgba(0,0,0,0.6)
         left top
@@ -72,7 +76,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        sessionStorage.removeItem("userKey"); // ✅ Limpiar sesión
+        sessionStorage.removeItem("userKey"); 
         setUsuarioAdmin({});
         navegacion("/");
 
@@ -81,7 +85,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           text: "Tu sesión se ha cerrado correctamente",
           icon: "success",
           iconColor: "#198754",
-          timer: 2000, // ✅ Se cierra automáticamente
+          timer: 2000, 
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {
@@ -113,8 +117,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         title: `Hola, ${datoUsuario.nombreUsuario}`,
         html: `
           <div class="d-flex align-items-center justify-content-center gap-2 mt-3">
-            <i class="bi ${esAdmin ? 'bi-shield-fill-check' : 'bi-person-circle'}" style="font-size: 2rem; color: ${esAdmin ? '#0d6efd' : '#198754'};"></i>
-            <span class="fw-semibold">${esAdmin ? 'Acceso Administrador' : 'Redirigiendo...'}</span>
+            <i class="bi ${
+              esAdmin ? "bi-shield-fill-check" : "bi-person-circle"
+            }" style="font-size: 2rem; color: ${
+          esAdmin ? "#0d6efd" : "#198754"
+        };"></i>
+            <span class="fw-semibold">${
+              esAdmin ? "Acceso Administrador" : "Redirigiendo..."
+            }</span>
           </div>
         `,
         icon: "success",
@@ -123,8 +133,8 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         showConfirmButton: false,
         allowOutsideClick: false,
         customClass: {
-          popup: 'rounded-3'
-        }
+          popup: "rounded-3",
+        },
       });
 
       handleClose();
@@ -141,12 +151,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
         confirmButtonText: "Entendido",
         confirmButtonColor: "#6c757d",
         customClass: {
-          popup: 'rounded-3'
-        }
+          popup: "rounded-3",
+        },
       });
     }
   };
-
 
   return (
     <header>
@@ -333,7 +342,10 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                   <Button
                     variant="link"
                     className="nav-link p-0"
-                    onClick={handleShow}
+                    onClick={() => {
+                      handleShow();
+                      setExpanded(false);
+                    }}
                     title="Iniciar sesión"
                   >
                     <div className="d-flex align-items-center gap-2 text-light">
@@ -407,14 +419,25 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                   <span className="text-danger">{errors.password.message}</span>
                 )}
               </Form.Group>
-              <Button variant="primary" className="w-100" type="submit">
+              <Button
+                variant="link"
+                style={{ fontSize: "14px" }}
+                className="link-light text-decoration-none link-opacity-75-hover p-0"
+                onClick={irAError}
+              >
+                ¿Has olvidado tu contraseña?
+              </Button>
+              <Button variant="primary" className="w-100 mt-3" type="submit">
                 Ingresar
               </Button>
             </Form>
             <Button
               variant="outline-danger"
               className="w-100 mt-2"
-              onClick={irARegistro}
+              onClick={() => {
+                irARegistro();
+                setExpanded(false);
+              }}
             >
               Crear cuenta
             </Button>

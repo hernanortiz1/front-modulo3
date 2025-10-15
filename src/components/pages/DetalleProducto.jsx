@@ -50,7 +50,7 @@ const DetalleProducto = () => {
             return;
           }
 
-          // Usar la función específica para compras
+          
           const resultado = await comprarProducto(producto._id, cantidad);
 
           if (resultado && resultado.status === 200) {

@@ -49,7 +49,7 @@ const Registro = () => {
         <div className="col-12 col-md-5">
           <Form className="Montserrat" onSubmit={handleSubmit(crearCuenta)}>
             <Form.Group className="mb-3" controlId="nombreUsuario">
-              <Form.Label>Nombre del usuario</Form.Label>
+              <Form.Label>Nombre del usuario *</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Ej: juanperez01"
@@ -73,7 +73,7 @@ const Registro = () => {
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Email *</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Ej: juanperez@mail.com"
@@ -93,7 +93,7 @@ const Registro = () => {
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Contraseña</Form.Label>
+              <Form.Label>Contraseña *</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Ingresa una contraseña"
@@ -112,6 +112,9 @@ const Registro = () => {
                 {errors.password?.message}
               </Form.Text>
             </Form.Group>
+            <div className="form-text my-3">
+              Los campos (*) son obligatorios.
+            </div>
             <Button variant="success" type="submit">
               Registrarse
             </Button>

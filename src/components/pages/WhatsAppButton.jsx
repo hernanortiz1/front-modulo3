@@ -1,8 +1,8 @@
 import React from "react";
 
 const WhatsAppButton = () => {
-  const phone = "5493811234567"; // Cambia por tu número
-  const message = "Hola! Quiero más info sobre un producto";
+  const phone = import.meta.env.VITE_API_WHATSAPP_PHONE;
+  const message = import.meta.env.VITE_API_WHATSAPP_MESSAGE;
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   return (

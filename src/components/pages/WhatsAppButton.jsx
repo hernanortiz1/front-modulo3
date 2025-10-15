@@ -12,7 +12,7 @@ const WhatsAppButton = () => {
       rel="noopener noreferrer"
       className="whatsapp-button"
     >
-      <i className="bi bi-whatsapp fs-1 d-flex justify-content-center align-content-center"></i>
+      <i className="bi bi-whatsapp fs-1 d-flex justify-content-center align-content-center" title="¡Chateá con nosotros!"></i>
     </a>
   );
 };

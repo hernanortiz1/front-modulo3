@@ -27,7 +27,6 @@ import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
 import { LogIn } from "lucide-react";
 import { CartProvider } from "./helpers/CartContext";
-import WhatsAppButton from "./components/pages/WhatsAppButton";
 
 function App() {
   useEffect(() => {
@@ -146,7 +145,6 @@ function App() {
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>
-          <WhatsAppButton />
           <Footer></Footer>
         </BrowserRouter>
       </CartProvider>

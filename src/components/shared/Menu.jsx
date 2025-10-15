@@ -415,16 +415,16 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 {errors.password && (
                   <span className="text-danger">{errors.password.message}</span>
                 )}
-                <Button
+              </Form.Group>
+              <Button
                   variant="link"
                   style={{ fontSize: "14px" }}
-                  className="link-light mt-3 text-decoration-none link-opacity-75-hover p-0"
+                  className="link-light text-decoration-none link-opacity-75-hover p-0"
                   onClick={irAError}
                 >
                   ¿Has olvidado tu contraseña?
                 </Button>
-              </Form.Group>
-              <Button variant="primary" className="w-100" type="submit">
+              <Button variant="primary" className="w-100 mt-3" type="submit">
                 Ingresar
               </Button>
             </Form>

@@ -277,6 +277,7 @@ const DetalleProducto = () => {
                     variant="primary"
                     className="flex-grow-1"
                     onClick={handleAgregarCarrito}
+                    disabled={producto.stock === 1}
                   >
                     <ShoppingCart size={18} className="me-2" />
                     {producto.stock === 1 ? "Sin stock" : "Agregar al carrito"}

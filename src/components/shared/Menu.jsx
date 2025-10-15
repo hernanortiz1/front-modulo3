@@ -56,14 +56,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     Swal.fire({
       title: "¿Cerrar sesión?",
       text: "¿Estás seguro que deseas salir de tu cuenta?",
-      icon: "question", // ✅ Mejor que "warning" para esta acción
-      iconColor: "#1d3557", // Color personalizado
+      icon: "question", 
+      iconColor: "#1d3557",
       showCancelButton: true,
       confirmButtonText: '<i class="bi bi-box-arrow-right me-2"></i>Sí, salir',
       cancelButtonText: '<i class="bi bi-x-circle me-2"></i>Cancelar',
-      confirmButtonColor: "#1d3557", // Color más elegante
+      confirmButtonColor: "#1d3557", 
       cancelButtonColor: "#6c757d",
-      reverseButtons: true, // ✅ Botón cancelar a la izquierda
+      reverseButtons: true, 
       backdrop: `
         rgba(0,0,0,0.6)
         left top
@@ -76,7 +76,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        sessionStorage.removeItem("userKey"); // ✅ Limpiar sesión
+        sessionStorage.removeItem("userKey"); 
         setUsuarioAdmin({});
         navegacion("/");
 
@@ -85,7 +85,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           text: "Tu sesión se ha cerrado correctamente",
           icon: "success",
           iconColor: "#198754",
-          timer: 2000, // ✅ Se cierra automáticamente
+          timer: 2000, 
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {

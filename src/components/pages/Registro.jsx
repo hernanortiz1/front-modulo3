@@ -3,7 +3,6 @@ import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { registro } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
-import imagenRegistro from "../../assets/sobreNosotros/registroImagen.jpg";
 import { useNavigate } from "react-router";
 
 const Registro = () => {

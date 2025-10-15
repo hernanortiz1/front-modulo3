@@ -17,6 +17,7 @@ import santander from "../../assets/tarjetas/Santander_Logo.png";
 import visa from "../../assets/tarjetas/Visa_Logo.png";
 import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
+import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 
 const DetalleProducto = () => {
   const [producto, setProducto] = useState({});
@@ -309,6 +310,7 @@ const DetalleProducto = () => {
           </Row>
         </Card.Body>
       </Card>
+      <WhatsAppButton />
     </Container>
   );
 };

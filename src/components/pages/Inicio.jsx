@@ -13,13 +13,10 @@ import React from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useEffect, useState } from "react";
 import { obtenerProductos } from "../../helpers/queries";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import BtnScroll from "./categorias/funcion/BtnScroll";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
+import SwiperCustom from "../shared/componentsMenu/SwiperCustom";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
@@ -141,10 +138,14 @@ const Inicio = () => {
           <p className="text-center lead mb-5">
             Explora lo último en tendencias.
           </p>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
+          <SwiperCustom
+            items={coleccionRandom}
+            CardComponent={CardRopa}
+            uniqueId="coleccion-random"
+            linkTo="/"
+            title=""
             slidesPerView={4}
+            spaceBetween={20}
             navigation
             pagination={{ clickable: true, dynamicBullets: true }}
             style={{
@@ -155,13 +156,7 @@ const Inicio = () => {
               576: { slidesPerView: 2 },
               992: { slidesPerView: 4 },
             }}
-          >
-            {coleccionRandom.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          />
         </div>
         <hr />
         <div className="row align-items-center">
@@ -208,25 +203,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {remeras.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={remeras} CardComponent={CardRopa} uniqueId="remeras" />
                 )}
               </div>
             )}
@@ -247,25 +224,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {camisas.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={camisas} CardComponent={CardRopa} uniqueId="camisas" />
                 )}
               </div>
             )}
@@ -286,25 +245,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {buzos.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={buzos} CardComponent={CardRopa} uniqueId="buzos" />
                 )}
               </div>
             )}
@@ -325,25 +266,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {abrigosCamperas.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={abrigosCamperas} CardComponent={CardRopa} uniqueId="abrigos-camperas" />
                 )}
               </div>
             )}
@@ -364,25 +287,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {pantalones.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={pantalones} CardComponent={CardRopa} uniqueId="pantalones" />
                 )}
               </div>
             )}
@@ -403,25 +308,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {bermudas.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={bermudas} CardComponent={CardRopa} uniqueId="bermudas" />
                 )}
               </div>
             )}
@@ -442,25 +329,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {shortsBanio.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={shortsBanio} CardComponent={CardRopa} uniqueId="shorts-banio" />
                 )}
               </div>
             )}
@@ -481,25 +350,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {gorras.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={gorras} CardComponent={CardRopa} uniqueId="gorras" />
                 )}
               </div>
             )}
@@ -520,25 +371,7 @@ const Inicio = () => {
                     <i className="bi bi-x-lg"></i> No se encontraron productos
                   </p>
                 ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    navigation
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    style={{ paddingBottom: "40px" }}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      576: { slidesPerView: 2 },
-                      992: { slidesPerView: 4 },
-                    }}
-                  >
-                    {anteojos.map((ropa) => (
-                      <SwiperSlide key={ropa.id}>
-                        <CardRopa ropa={ropa} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  <SwiperCustom items={anteojos} CardComponent={CardRopa} uniqueId="anteojos" />
                 )}
               </div>
             )}

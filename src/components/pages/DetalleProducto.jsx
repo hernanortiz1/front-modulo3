@@ -19,7 +19,7 @@ import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 
-const DetalleProducto = () => {
+const DetalleProducto = ({ usuarioAdmin }) => {
   const [producto, setProducto] = useState({});
   const [favorito, setFavorito] = useState(false);
   const { id } = useParams();
@@ -30,64 +30,73 @@ const DetalleProducto = () => {
   const Navigate = useNavigate();
 
   const handleBuy = async () => {
-    Swal.fire({
-      title: "¿Estas seguro de comprar este producto?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#23e05cff",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Comprar",
-      cancelButtonText: "Cancelar",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          if (cantidad > producto.stock) {
+    if (usuarioAdmin.token) {
+      Swal.fire({
+        title: "¿Estas seguro de comprar este producto?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#23e05cff",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Comprar",
+        cancelButtonText: "Cancelar",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            if (cantidad > producto.stock) {
+              Swal.fire({
+                title: "Stock insuficiente",
+                text: `Solo hay ${producto.stock} unidades disponibles`,
+                icon: "error",
+                confirmButtonColor: "#3085d6",
+              });
+              return;
+            }
+
+            const resultado = await comprarProducto(producto._id, cantidad);
+
+            if (resultado && resultado.status === 200) {
+              const data = await resultado.json();
+              setProducto(data.producto);
+
+              setAnimationStage("entering");
+
+              setTimeout(() => {
+                setAnimationStage("exiting");
+              }, 2000);
+
+              setTimeout(() => {
+                setAnimationStage("idle");
+
+                Swal.fire({
+                  title: "¡Gracias por su compra!",
+                  text: `Has comprado ${cantidad} ${producto.nombreProducto}`,
+                  icon: "success",
+                  timer: 1500,
+                  confirmButtonText: "continuar",
+                });
+                Navigate("/");
+              }, 4000);
+            }
+          } catch (error) {
+            console.error("Error en la compra:", error);
             Swal.fire({
-              title: "Stock insuficiente",
-              text: `Solo hay ${producto.stock} unidades disponibles`,
+              title: "Error en la compra",
+              text: "No se pudo procesar tu compra. Intenta nuevamente.",
               icon: "error",
               confirmButtonColor: "#3085d6",
             });
-            return;
           }
-
-          
-          const resultado = await comprarProducto(producto._id, cantidad);
-
-          if (resultado && resultado.status === 200) {
-            const data = await resultado.json();
-            setProducto(data.producto);
-
-            setAnimationStage("entering");
-
-            setTimeout(() => {
-              setAnimationStage("exiting");
-            }, 2000);
-
-            setTimeout(() => {
-              setAnimationStage("idle");
-
-              Swal.fire({
-                title: "¡Gracias por su compra!",
-                text: `Has comprado ${cantidad} ${producto.nombreProducto}`,
-                icon: "success",
-                timer: 1500,
-                confirmButtonText: "continuar",
-              });
-              Navigate("/");
-            }, 4000);
-          }
-        } catch (error) {
-          console.error("Error en la compra:", error);
-          Swal.fire({
-            title: "Error en la compra",
-            text: "No se pudo procesar tu compra. Intenta nuevamente.",
-            icon: "error",
-            confirmButtonColor: "#3085d6",
-          });
         }
-      }
-    });
+      });
+    } else {
+      Swal.fire({
+        title: "¡Debes Registarte y/o Iniciar sesion!",
+        text: `Si quieres realizar compras y/o agregar carrito`,
+        icon: "warning",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
   };
 
   useEffect(() => {
@@ -109,38 +118,36 @@ const DetalleProducto = () => {
   };
 
   const handleAgregarCarrito = () => {
-    const productToAdd = {
-      _id: producto._id,
-      nombre: producto.nombreProducto || producto.nombre,
-      precio: producto.precio,
-      imagen: producto.imagen,
-      categoria: producto.categoria,
-      talle: producto.talle,
-      color: producto.color,
-      stock: producto.stock,
-      marca: producto.marca || "Lannister",
-    };
+    if (usuarioAdmin.token) {
+      const productToAdd = {
+        _id: producto._id,
+        nombre: producto.nombreProducto || producto.nombre,
+        precio: producto.precio,
+        imagen: producto.imagen,
+        categoria: producto.categoria,
+        talle: producto.talle,
+        color: producto.color,
+        stock: producto.stock,
+        marca: producto.marca || "Lannister",
+      };
 
-    addToCart(productToAdd);
+      addToCart(productToAdd);
 
-    Swal.fire({
-      title: "¡Agregado al carrito!",
-      text: `${producto.nombreProducto} se agregó a tu carrito`,
-      icon: "success",
-      timer: 1500,
-      showConfirmButton: false,
-    });
-  };
-
-  const aumentarCantidad = () => {
-    if (producto && cantidad < producto.stock) {
-      setCantidad(cantidad + 1);
-    }
-  };
-
-  const disminuirCantidad = () => {
-    if (cantidad > 1) {
-      setCantidad(cantidad - 1);
+      Swal.fire({
+        title: "¡Agregado al carrito!",
+        text: `${producto.nombreProducto} se agregó a tu carrito`,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } else {
+      Swal.fire({
+        title: "¡Debes Registrarte y/o Iniciar sesion!",
+        text: `Si quieres realizar compras y/o agregar carrito`,
+        icon: "warning",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
   };
 
@@ -209,7 +216,8 @@ const DetalleProducto = () => {
                 </div>
                 <div className="d-flex justify-content-between justify-content-md-start gap-md-4 mb-3">
                   <p className="badge colorNavbarFooter w-auto">
-                    Stock: {producto.stock === 1 ? "Sin stock" : `${producto.stock}`}
+                    Stock:{" "}
+                    {producto.stock === 1 ? "Sin stock" : `${producto.stock}`}
                   </p>
                   <p className="badge colorNavbarFooter w-auto">
                     Color: {producto.color}
@@ -278,6 +286,7 @@ const DetalleProducto = () => {
                     variant="primary"
                     className="flex-grow-1"
                     onClick={handleAgregarCarrito}
+                    disabled={producto.stock === 1}
                   >
                     <ShoppingCart size={18} className="me-2" />
                     {producto.stock === 1 ? "Sin stock" : "Agregar al carrito"}

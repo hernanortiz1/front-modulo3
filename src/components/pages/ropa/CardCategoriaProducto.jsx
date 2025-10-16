@@ -5,7 +5,7 @@ import {
   precioDescuento,
   calcularCuotas,
   formatearPrecio,
-  precioSinImpuestos
+  precioSinImpuestos,
 } from "../categorias/funcion/operaciones";
 
 const CardCategoriaProducto = ({ productos }) => {

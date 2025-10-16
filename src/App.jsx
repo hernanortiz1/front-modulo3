@@ -145,7 +145,6 @@ function App() {
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>
-
           <Footer></Footer>
         </BrowserRouter>
       </CartProvider>

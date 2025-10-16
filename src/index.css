@@ -161,18 +161,18 @@ main {
   width: 400px;
 }
 
-.logoNaranja{
+.logoNaranja {
   position: relative;
   overflow: hidden;
   height: 20px;
 }
-.logoSantander{
+.logoSantander {
   position: relative;
   overflow: hidden;
   height: 35px;
 }
-.logoMacro{
- position: relative;
+.logoMacro {
+  position: relative;
   overflow: hidden;
   height: 18px;
 }
@@ -214,11 +214,13 @@ main {
 }
 
 /*card de ropa */
-.card-ropa, .box-shadow {
+.card-ropa,
+.box-shadow {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card-ropa:hover, .box-shadow:hover  {
+.card-ropa:hover,
+.box-shadow:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -254,9 +256,9 @@ main {
   }
 
   .imagenBanners {
-  max-height: 200px;
-  min-height: 200px;
-}
+    max-height: 200px;
+    min-height: 200px;
+  }
 }
 /* autofocus de modal en menu */
 .focus-red:focus {
@@ -356,13 +358,14 @@ main {
 }
 
 .cardCategorias {
-    height: auto;
-  }
-  .cardCategoriasImgWrapper {
-    height: 250px;
-  }
-  .cardCategoriasBody {
-    min-height: auto;}
+  height: auto;
+}
+.cardCategoriasImgWrapper {
+  height: 250px;
+}
+.cardCategoriasBody {
+  min-height: auto;
+}
 
 @media (max-width: 992px) {
   .cardCategorias {
@@ -375,12 +378,12 @@ main {
     height: 170px;
   }
   .imagen-container {
-  height: 100%;
-}
-.imagenBanners {
-  max-height: 280px;
-  min-height: 280px;
-}
+    height: 100%;
+  }
+  .imagenBanners {
+    max-height: 280px;
+    min-height: 280px;
+  }
 }
 
 /* FIN  hover de card categoria productos*/
@@ -487,13 +490,13 @@ main {
 
 @media (min-width: 768px) {
   .contenedorBotones {
-    flex-direction: row; 
+    flex-direction: row;
   }
 
   .imagen-container {
-  height: 580px;
-  width: 100%;
-}
+    height: 580px;
+    width: 100%;
+  }
 }
 
 /* botones cuadrados */
@@ -625,5 +628,35 @@ main {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+.whatsapp-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  padding: 5px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 767px) {
+  .whatsapp-button {
+    display: none;
+  }
+}
+
+@media (max-width: 997px) {
+  .whatsapp-button {
+    padding: 6px;
   }
 }

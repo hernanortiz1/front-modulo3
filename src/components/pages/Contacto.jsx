@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import React from "react";
+import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 
 const Contacto = () => {
   const {
@@ -185,6 +186,7 @@ const Contacto = () => {
             ></iframe>
           </article>
         </div>
+        <WhatsAppButton />
       </section>
     </>
   );

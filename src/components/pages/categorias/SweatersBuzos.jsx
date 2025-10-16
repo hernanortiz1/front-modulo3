@@ -3,6 +3,7 @@ import { Row } from "react-bootstrap";
 import CardCategoriaProducto from "../ropa/CardCategoriaProducto";
 import HashLoader from "react-spinners/HashLoader";
 import BtnScroll from "./funcion/BtnScroll";
+import WhatsAppButton from "./funcion/WhatsAppButton";
 
 const SweatersBuzos = ({ productos }) => {
   const [cargando, setCargando] = useState(true);
@@ -47,6 +48,7 @@ const SweatersBuzos = ({ productos }) => {
         )}
       </section>
       <BtnScroll />
+      <WhatsAppButton />
     </>
   );
 };

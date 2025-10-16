@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import BtnScroll from "./categorias/funcion/BtnScroll";
+import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
@@ -548,6 +549,7 @@ const Inicio = () => {
         <BannerPublicidad />
       </section>
       <BtnScroll />
+      <WhatsAppButton />
     </>
   );
 };

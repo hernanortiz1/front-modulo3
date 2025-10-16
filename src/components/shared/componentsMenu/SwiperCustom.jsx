@@ -22,7 +22,7 @@ const SwiperCustom = ({ items = [], CardComponent, uniqueId }) => {
           dynamicBullets: true,
         }}
         style={{
-          paddingBottom: "60px", // espacio para los dots
+          paddingBottom: "60px",
           paddingLeft: "50px",
           paddingRight: "50px",
         }}

@@ -660,3 +660,11 @@ main {
     padding: 6px;
   }
 }
+
+/* Ocultar flechas en pantallas pequeñas */
+@media (max-width: 576px) {
+  [class^="custom-prev-"],
+  [class^="custom-next-"] {
+    display: none !important;
+  }
+}

@@ -85,6 +85,7 @@ proyecto-modulo3/
 |   |   |    └──  funcion/
 |   |   |    |        └──  BtnScroll.jsx
 |   |   |    |        └──  operaciones.js
+|   |   |    |        └──  WhatsAppButton.jsx
 |   |   |    └── AbrigosCamperas.jsx
 |   |   |    └── Anteojos.jsx
 |   |   |    └── Bermudas.jsx
@@ -102,6 +103,7 @@ proyecto-modulo3/
 │   |   └── ropa/
 |   |   |    └── CardCategoriaProducto.jsx
 |   |   |    └── CardRopa.jsx
+|   |   |    └── FormularioProducto.css
 |   |   |    └── FormularioRopa.jsx
 │   │   └── Administrador.jsx
 │   │   └── Contacto.jsx
@@ -115,8 +117,9 @@ proyecto-modulo3/
 │   │   └── ProtectorAdmin.jsx
 │   └── shared/
 │   |   └── Footer.jsx
-│   |   └── Header.jsx
+│   |   └── Menu.jsx
 │   ├── helpers/
+│   │   └── CartContext.jsx
 │   │   └── queries.js
 │   └── App.jsx
 │   └── index.css

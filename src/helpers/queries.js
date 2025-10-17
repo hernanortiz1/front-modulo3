@@ -1,4 +1,3 @@
-//queries
 const API_URL = import.meta.env.VITE_API_PRODUCTOS;
 const API_USUARIOS = import.meta.env.VITE_API_USUARIOS;
 

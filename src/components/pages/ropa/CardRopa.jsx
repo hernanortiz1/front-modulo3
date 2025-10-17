@@ -1,18 +1,15 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router";
-import {
-  precioDescuento,
-  calcularCuotas,
-  formatearPrecio,
-} from "../categorias/funcion/operaciones.js";
+import { formatearPrecio } from "../categorias/funcion/operaciones.js";
 
 const CardRopa = ({ ropa }) => {
   return (
     <>
       <Link className="text-decoration-none" to={`/detalle/${ropa._id}`}>
         <Card className="card-ropa h-100 d-flex flex-column shadow">
-          <Card.Img className="cardImgRopa"
+          <Card.Img
+            className="cardImgRopa"
             src={ropa.imagen}
             alt={ropa.nombreProducto}
           />

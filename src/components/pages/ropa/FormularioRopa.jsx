@@ -201,7 +201,7 @@ const FormularioRopa = ({ titulo }) => {
                     message: "El campo solo admite números",
                   },
                   min: {
-                    value: 1,
+                    value: 0,
                     message: "Como minimo es 1 stock (un producto disponible)",
                   },
                   max: {

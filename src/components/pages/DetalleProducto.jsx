@@ -217,7 +217,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                 <div className="d-flex justify-content-between justify-content-md-start gap-md-4 mb-3">
                   <p className="badge colorNavbarFooter w-auto">
                     Stock:{" "}
-                    {producto.stock === 1 ? "Sin stock" : `${producto.stock}`}
+                    {producto.stock === 0 ? "Sin stock" : `${producto.stock}`}
                   </p>
                   <p className="badge colorNavbarFooter w-auto">
                     Color: {producto.color}
@@ -286,23 +286,23 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                     variant="primary"
                     className="flex-grow-1"
                     onClick={handleAgregarCarrito}
-                    disabled={producto.stock === 1}
+                    disabled={producto.stock === 0}
                   >
                     <ShoppingCart size={18} className="me-2" />
-                    {producto.stock === 1 ? "Sin stock" : "Agregar al carrito"}
+                    {producto.stock === 0 ? "Sin stock" : "Agregar al carrito"}
                   </Button>
                   <Button
                     variant="dark"
                     className="flex-grow-1"
                     onClick={handleBuy}
-                    disabled={producto.stock === 1}
+                    disabled={producto.stock === 0}
                   >
                     <ShoppingBag size={18} className="me-2" />
                     Comprar Ahora
                   </Button>
                 </div>
                 {/* Mensaje de sin stock */}
-                {producto.stock === 1 && (
+                {producto.stock === 0 && (
                   <Alert variant="warning" className="mt-3">
                     Este producto está temporalmente sin stock
                   </Alert>

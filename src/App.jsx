@@ -73,7 +73,7 @@ function App() {
 
               <Route
                 path="/detalle/:id"
-                element={<DetalleProducto></DetalleProducto>}
+                element={<DetalleProducto usuarioAdmin={usuarioAdmin}></DetalleProducto>}
               ></Route>
 
               <Route path="/login" element={<LogIn></LogIn>}></Route>
@@ -145,7 +145,6 @@ function App() {
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>
-
           <Footer></Footer>
         </BrowserRouter>
       </CartProvider>

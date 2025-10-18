@@ -2,6 +2,7 @@ import { Card } from "react-bootstrap";
 import Perfil from '../../assets/sobreNosotros/imagenPerfil.webp'
 import React from "react";
 import BtnScroll from "./categorias/funcion/BtnScroll";
+import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 
 const SobreNosotros = () => {
   return (
@@ -101,6 +102,7 @@ const SobreNosotros = () => {
         </div>
       </section>
       <BtnScroll/>
+      <WhatsAppButton />
     </>
   );
 };

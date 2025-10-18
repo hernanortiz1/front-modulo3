@@ -4,6 +4,7 @@ import { NavLink } from "react-router";
 import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
 import { comprarMultiplesProductos } from "../../helpers/queries";
+import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 
 const Carrito = () => {
   const {
@@ -233,6 +234,7 @@ const Carrito = () => {
             )}
           </div>
         </div>
+        <WhatsAppButton />
       </section>
     </>
   );

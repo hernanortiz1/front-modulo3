@@ -372,7 +372,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           <Modal.Body>
             <Form onSubmit={handleSubmit(iniciarSesion)}>
               <Form.Group className="mb-3" controlId="ControlInput1">
-                <Form.Label>Email *</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Ingrese e-mail"

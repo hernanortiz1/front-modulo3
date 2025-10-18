@@ -14,10 +14,8 @@ const ItemUsuario = ({
   usuario,
   fila,
   setUsuarios,
-  usuarios,
   limitUsuario,
   pageUsuario,
-  leerUsuarios,
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {

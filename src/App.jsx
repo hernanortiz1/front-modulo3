@@ -25,7 +25,6 @@ import Registro from "./components/pages/Registro";
 import { obtenerProductos } from "./helpers/queries";
 import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
-import { LogIn } from "lucide-react";
 import { CartProvider } from "./helpers/CartContext";
 
 function App() {
@@ -76,7 +75,6 @@ function App() {
                 element={<DetalleProducto usuarioAdmin={usuarioAdmin}></DetalleProducto>}
               ></Route>
 
-              <Route path="/login" element={<LogIn></LogIn>}></Route>
               <Route path="/carrito" element={<Carrito />} />
 
               <Route path="/registro" element={<Registro></Registro>}></Route>

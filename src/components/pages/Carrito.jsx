@@ -176,12 +176,6 @@ const Carrito = () => {
                           >
                             <i className="bi bi-trash-fill text-light"></i>
                           </Button>
-                          <NavLink
-                            to={"*"}
-                            className="btn btn-success text-decoration-none p-1 p-md-2 border"
-                          >
-                            Comprar
-                          </NavLink>
                         </div>
                       </div>
                       <div className="col-2 text-center">

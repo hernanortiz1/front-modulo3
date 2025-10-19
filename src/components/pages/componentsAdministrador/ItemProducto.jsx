@@ -33,20 +33,17 @@ const ItemProducto = ({ ropa, setRopa, fila }) => {
       }
     });
   };
+  const fecha = new Date(ropa.fechaUltimoControlStock);
+  fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
   return (
     <tr className="Montserrat">
       <td className="alineacionFila">{fila} </td>
       <td className="alineacionFila"> {ropa.nombreProducto} </td>
       <td className="alineacionFila">{ropa.talle}</td>
       <td className="alineacionFila">{ropa.color} </td>
-      <td className="alineacionFila">$ {formatearPrecio( ropa.precio)} </td>
+      <td className="alineacionFila">$ {formatearPrecio(ropa.precio)} </td>
       <td className="alineacionFila">{ropa.stock} </td>
-      <td className="alineacionFila">
-        {" "}
-        {new Date(ropa.fechaUltimoControlStock).toLocaleDateString(
-          "es-AR"
-        )}{" "}
-      </td>
+      <td className="alineacionFila">{fecha.toLocaleDateString("es-AR")} </td>
       <td className="text-center">
         <img
           src={ropa.imagen}

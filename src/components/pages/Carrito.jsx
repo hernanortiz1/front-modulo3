@@ -158,17 +158,36 @@ const Carrito = () => {
                               -
                             </Button>
                             <span className="mx-2">{item.quantity}</span>
+
+
+
+
+                           
+                           
+
+
+
                             <Button
                               variant="outline-secondary"
                               size="sm"
                               onClick={() =>
-                                increaseQuantity(item._id, item.isze)
+                                increaseQuantity(item._id, item.size)
                               }
                             >
                               +
                             </Button>
                           </div>
                         </div>
+
+ <div className="d-flex flex-column">
+                              
+                               {item.quantity > item.stock && (
+                              <small className="text-danger d-block">
+                                Stock insuficiente
+                              </small>
+                            )}
+                            </div>
+
                         <div className="mt-4">
                           <Button
                             onClick={() => removeFromCart(item._id, item.size)}
@@ -178,7 +197,7 @@ const Carrito = () => {
                           </Button>
                         </div>
                       </div>
-                      <div className="col-2 text-center">
+                      <div className="col-2 p-0">
                         <span>
                           ${(item.precio * item.quantity).toLocaleString()}
                         </span>

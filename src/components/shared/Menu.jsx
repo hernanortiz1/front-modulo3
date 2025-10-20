@@ -272,7 +272,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       >
                         <i className="bi bi-person-circle fs-4"></i>
                         <span className="fw-semibold">
-                          {usuarioAdmin.nombreUsuario}
+                          {usuarioAdmin.nombreUsuario.substring(0, 20) + "..."}
                         </span>
                       </Dropdown.Toggle>
 

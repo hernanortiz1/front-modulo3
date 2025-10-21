@@ -37,10 +37,6 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   const isCartPage = location.pathname === "/carrito";
 
-  const irARegistro = () => {
-    handleClose();
-    navegacion("/registro");
-  };
   const irAError = () => {
     handleClose();
     navegacion("*");
@@ -354,7 +350,12 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                         <span>Iniciar sesión</span>
                       </div>
                     </Button>
-                    <Link to={"/registro"} className="btn btn-success ms-3 my-3 my-lg-0">Crear cuenta</Link>
+                    <Link
+                      to={"/registro"}
+                      className="btn btn-success ms-3 my-3 my-lg-0"
+                    >
+                      Crear cuenta
+                    </Link>
                   </>
                 )}
               </>
@@ -434,16 +435,6 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 Ingresar
               </Button>
             </Form>
-            <Button
-              variant="outline-danger"
-              className="w-100 mt-2"
-              onClick={() => {
-                irARegistro();
-                setExpanded(false);
-              }}
-            >
-              Crear cuenta
-            </Button>
           </Modal.Body>
         </div>
       </Modal>

@@ -28,9 +28,6 @@ const SobreNosotros = () => {
           <Col xs={12}>
             <Card className="info-card border-0 shadow-sm hover-lift border-left-accent">
               <Card.Body className="p-4">
-                <h2 className="Montserrat mb-3 card-title-color">
-                  Cuatro desarrolladores. Una visión.
-                </h2>
                 <p className="text-muted mb-0 lh-lg">
                   En <strong className="brand-color">Lannister</strong>,
                   combinamos tecnología y estilo para crear una tienda pensada
@@ -94,31 +91,28 @@ const SobreNosotros = () => {
                     <div className="d-flex align-items-start">
                       <span className="check-icon me-3 fs-4">✓</span>
                       <p className="mb-0 text-muted">
-                        Somos usuarios antes que vendedores
+                        Usuarios antes que vendedores
                       </p>
                     </div>
                   </Col>
                   <Col md={4}>
                     <div className="d-flex align-items-start">
                       <span className="check-icon me-3 fs-4">✓</span>
-                      <p className="mb-0 text-muted">
-                        Creemos en la calidad antes que en la cantidad
-                      </p>
+                      <p className="mb-0 text-muted">Calidad sobre cantidad</p>
                     </div>
                   </Col>
                   <Col md={4}>
                     <div className="d-flex align-items-start">
                       <span className="check-icon me-3 fs-4">✓</span>
                       <p className="mb-0 text-muted">
-                        Cada prenda fue seleccionada con criterio y propósito
+                        Cada prenda, cuidadosamente seleccionada
                       </p>
                     </div>
                   </Col>
                 </Row>
                 <p className="text-center text-muted mb-0 mt-4 fst-italic">
-                  Gracias por formar parte de esta comunidad. Estamos acá para
-                  ayudarte a vestir mejor, sentirte mejor y mostrar tu mejor
-                  versión.
+                  Gracias por ser parte de esta comunidad. Estamos para ayudarte
+                  a vestir y sentirte mejor.
                 </p>
               </Card.Body>
             </Card>
@@ -129,10 +123,10 @@ const SobreNosotros = () => {
       <section className="equipo-section">
         <Container>
           <div className="text-center text-white mb-5">
-            <h2 className="Bodoni display-3 mb-3">Lannister</h2>
-            <h3 className="Montserrat fs-4 fw-light">
+            <h3 className="Bodoni display-3 mb-3">
               Conocé al equipo detrás de Lannister
             </h3>
+            <h3 className="Montserrat fs-4 fw-light"></h3>
           </div>
 
           <Row className="g-4">

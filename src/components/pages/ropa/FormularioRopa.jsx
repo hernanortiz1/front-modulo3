@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import HashLoader from "react-spinners/HashLoader";
 
-const FormularioRopa = ({ titulo }) => {
+const FormularioRopa = ({ titulo, cargarProductos }) => {
   const [imagenActual, setImagenActual] = useState("");
   const [preview, setPreview] = useState("");
   const [cargando, setCargando] = useState(false);
@@ -71,6 +71,7 @@ const FormularioRopa = ({ titulo }) => {
         }).then((result) => {
           if (result.isConfirmed) {
             reset();
+            if(cargarProductos) cargarProductos()
             navegacion("/administrador");
           }
         });
@@ -92,6 +93,7 @@ const FormularioRopa = ({ titulo }) => {
         }).then((result) => {
           if (result.isConfirmed) {
             reset();
+            if(cargarProductos) cargarProductos();
             navegacion("/administrador");
           }
         });

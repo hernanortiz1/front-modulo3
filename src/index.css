@@ -649,12 +649,6 @@ main {
   transform: scale(1.1);
 }
 
-@media (max-width: 767px) {
-  .whatsapp-button {
-    display: none;
-  }
-}
-
 @media (max-width: 997px) {
   .whatsapp-button {
     padding: 6px;

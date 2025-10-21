@@ -64,12 +64,17 @@ const Carrito = () => {
                 title: "¡Gracias por su compra!",
                 text: `Su compra fue realizada exitosamente`,
                 icon: "success",
-                timer: 1500,
+                timer: 4500,
                 showConfirmButton: false,
               });
             }, 4000);
           } else {
-            throw new Error("Error en alguna de las compras");
+            Swal.fire({
+              title: "Error en alguna de las compras",
+              text: "No se pudo procesar tu compra. Intenta nuevamente.",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
           }
         } catch (error) {
           console.error("Error en la compra:", error);

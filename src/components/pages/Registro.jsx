@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { registro } from "../../helpers/queries.js";
@@ -7,6 +7,9 @@ import { useNavigate } from "react-router";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton.jsx";
 
 const Registro = () => {
+  const [mostrarPassword, setMostrarPassword] = useState(false);
+  const [mostrarPasswordRepetida, setMostrarPasswordRepetida] = useState(false);
+
   const navegacion = useNavigate();
 
   const {
@@ -15,6 +18,14 @@ const Registro = () => {
     formState: { errors },
     watch,
   } = useForm();
+
+  const verPassword = () => {
+    setMostrarPassword((prev) => !prev);
+  };
+
+  const verPasswordRepetida = () => {
+    setMostrarPasswordRepetida((prev) => !prev);
+  };
 
   const crearCuenta = async (usuario) => {
     const respuesta = await registro(usuario);
@@ -97,21 +108,27 @@ const Registro = () => {
             <Form.Group className="mb-3" controlId="password">
               <Form.Label>Contraseña *</Form.Label>
               <div className="d-flex">
-              <Form.Control
-                type="password"
-                placeholder="Ingresa una contraseña"
-                maxLength={40}
-                {...register("password", {
-                  required: "La contraseña es un dato obligatorio",
-                  pattern: {
-                    value:
-                      /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
-                    message:
-                      "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.",
-                  },
-                })}
-              />
-              <Button variant="link"><i className="bi bi-eye text-dark"></i></Button>
+                <Form.Control
+                  type={mostrarPassword ? "text" : "password"}
+                  placeholder="Ingresa una contraseña"
+                  maxLength={40}
+                  {...register("password", {
+                    required: "La contraseña es un dato obligatorio",
+                    pattern: {
+                      value:
+                        /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                      message:
+                        "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.",
+                    },
+                  })}
+                />
+                <Button variant="link" onClick={verPassword}>
+                  {mostrarPassword ? (
+                    <i className="bi bi-eye-slash text-dark"></i>
+                  ) : (
+                    <i className="bi bi-eye text-dark"></i>
+                  )}
+                </Button>
               </div>
               <Form.Text className="text-danger">
                 {errors.password?.message}
@@ -120,18 +137,24 @@ const Registro = () => {
             <Form.Group className="mb-3" controlId="passwordRepetida">
               <Form.Label>Repetir contraseña *</Form.Label>
               <div className="d-flex">
-              <Form.Control
-                type="password"
-                placeholder="Ingresa nuevamente la contraseña"
-                maxLength={40}
-                {...register("passwordRepetida", {
-                  required: "La contraseña debe ser ingresada nuevamente",
-                  validate: (passwordRepetida) =>
-                    passwordRepetida === watch("password") ||
-                    "Las contraseñas deben coincidir",
-                })}
-              />
-              <Button variant="link"><i className="bi bi-eye text-dark"></i></Button>
+                <Form.Control
+                  type={mostrarPasswordRepetida ? "text" : "password"}
+                  placeholder="Ingresa nuevamente la contraseña"
+                  maxLength={40}
+                  {...register("passwordRepetida", {
+                    required: "La contraseña debe ser ingresada nuevamente",
+                    validate: (passwordRepetida) =>
+                      passwordRepetida === watch("password") ||
+                      "Las contraseñas deben coincidir",
+                  })}
+                />
+                <Button variant="link" onClick={verPasswordRepetida}>
+                  {mostrarPasswordRepetida ? (
+                    <i className="bi bi-eye-slash text-dark"></i>
+                  ) : (
+                    <i className="bi bi-eye text-dark"></i>
+                  )}
+                </Button>
               </div>
               <Form.Text className="text-danger">
                 {errors.passwordRepetida?.message}

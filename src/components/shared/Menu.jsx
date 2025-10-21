@@ -405,7 +405,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Contraseña</Form.Label>
-                <div className="d-flex">
+                <div className="position-relative">
                   <Form.Control
                     type={mostrarPassword ? "text" : "password"}
                     className="focus-red"
@@ -426,11 +426,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       },
                     })}
                   />
-                  <Button variant="link" onClick={verPassword}>
+                  <Button variant="link" onClick={verPassword} className="position-absolute end-0 top-50 translate-middle-y">
                     {mostrarPassword ? (
-                      <i className="bi bi-eye-slash text-light"></i>
+                      <i className="bi bi-eye-slash text-dark"></i>
                     ) : (
-                      <i className="bi bi-eye text-light"></i>
+                      <i className="bi bi-eye text-dark"></i>
                     )}
                   </Button>
                 </div>

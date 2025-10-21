@@ -107,7 +107,7 @@ const Registro = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="password">
               <Form.Label>Contraseña *</Form.Label>
-              <div className="d-flex">
+              <div className="position-relative">
                 <Form.Control
                   type={mostrarPassword ? "text" : "password"}
                   placeholder="Ingresa una contraseña"
@@ -122,7 +122,7 @@ const Registro = () => {
                     },
                   })}
                 />
-                <Button variant="link" onClick={verPassword}>
+                <Button variant="link" onClick={verPassword} className="position-absolute end-0 top-50 translate-middle-y">
                   {mostrarPassword ? (
                     <i className="bi bi-eye-slash text-dark"></i>
                   ) : (
@@ -136,7 +136,7 @@ const Registro = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="passwordRepetida">
               <Form.Label>Repetir contraseña *</Form.Label>
-              <div className="d-flex">
+              <div className="position-relative">
                 <Form.Control
                   type={mostrarPasswordRepetida ? "text" : "password"}
                   placeholder="Ingresa nuevamente la contraseña"
@@ -148,7 +148,7 @@ const Registro = () => {
                       "Las contraseñas deben coincidir",
                   })}
                 />
-                <Button variant="link" onClick={verPasswordRepetida}>
+                <Button variant="link" onClick={verPasswordRepetida} className="position-absolute end-0 top-50 translate-middle-y">
                   {mostrarPasswordRepetida ? (
                     <i className="bi bi-eye-slash text-dark"></i>
                   ) : (

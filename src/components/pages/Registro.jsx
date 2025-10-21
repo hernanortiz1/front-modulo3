@@ -13,6 +13,7 @@ const Registro = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const crearCuenta = async (usuario) => {
@@ -24,7 +25,7 @@ const Registro = () => {
         text: `Bienvenido/a ${usuario.nombreUsuario}, ya puedes iniciar sesión!`,
         icon: "success",
         iconColor: "#1d3557",
-        timer: 6000,
+        timer: 5000,
         timerProgressBar: true,
         showConfirmButton: false,
         customClass: {
@@ -111,6 +112,23 @@ const Registro = () => {
               />
               <Form.Text className="text-danger">
                 {errors.password?.message}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="passwordRepetida">
+              <Form.Label>Repetir contraseña *</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Ingresa una contraseña"
+                maxLength={40}
+                {...register("passwordRepetida", {
+                  required: "La contraseña debe ser ingresada nuevamente",
+                  validate: (passwordRepetida) =>
+                    passwordRepetida === watch("password") ||
+                    "Las contraseñas deben coincidir",
+                })}
+              />
+              <Form.Text className="text-danger">
+                {errors.passwordRepetida?.message}
               </Form.Text>
             </Form.Group>
             <div className="form-text my-3">

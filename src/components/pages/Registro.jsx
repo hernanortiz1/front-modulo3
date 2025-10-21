@@ -20,11 +20,11 @@ const Registro = () => {
 
     if (respuesta.status === 201) {
       Swal.fire({
-        title: "Registro exitoso",
-        text: `Bienvenido ${usuario.nombreUsuario}`,
+        title: "Cuenta creada",
+        text: `Bienvenido/a ${usuario.nombreUsuario}, ya puedes iniciar sesión!`,
         icon: "success",
         iconColor: "#1d3557",
-        timer: 2000,
+        timer: 6000,
         timerProgressBar: true,
         showConfirmButton: false,
         customClass: {

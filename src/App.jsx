@@ -53,11 +53,9 @@ function App() {
     }
   };
 
-
   useEffect(() => {
     cargarProductos();
   }, []);
-
 
   useEffect(() => {
     sessionStorage.setItem("userKey", JSON.stringify(usuarioAdmin));
@@ -92,7 +90,11 @@ function App() {
 
               <Route
                 path="/detalle/:id"
-                element={<DetalleProducto usuarioAdmin={usuarioAdmin}></DetalleProducto>}
+                element={
+                  <DetalleProducto
+                    usuarioAdmin={usuarioAdmin}
+                  ></DetalleProducto>
+                }
               ></Route>
 
               <Route path="/carrito" element={<Carrito />} />
@@ -150,13 +152,21 @@ function App() {
 
                 <Route
                   path="crear"
-                  element={<FormularioRopa titulo={"Crear producto"} cargarProductos={cargarProductos}/>}
+                  element={
+                    <FormularioRopa
+                      titulo={"Crear producto"}
+                      cargarProductos={cargarProductos}
+                    />
+                  }
                 ></Route>
 
                 <Route
                   path="editar/:id"
                   element={
-                    <FormularioRopa titulo={"Editar producto"} cargarProductos={cargarProductos}></FormularioRopa>
+                    <FormularioRopa
+                      titulo={"Editar producto"}
+                      cargarProductos={cargarProductos}
+                    ></FormularioRopa>
                   }
                 ></Route>
               </Route>

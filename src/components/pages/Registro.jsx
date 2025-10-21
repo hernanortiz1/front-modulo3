@@ -118,7 +118,7 @@ const Registro = () => {
               <Form.Label>Repetir contraseña *</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Ingresa una contraseña"
+                placeholder="Ingresa nuevamente la contraseña"
                 maxLength={40}
                 {...register("passwordRepetida", {
                   required: "La contraseña debe ser ingresada nuevamente",

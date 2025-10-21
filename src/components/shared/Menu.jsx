@@ -24,6 +24,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const [expanded, setExpanded] = useState(false);
 
   const [show, setShow] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -41,6 +42,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     handleClose();
     navegacion("*");
   };
+
+  const verPassword = () => {
+    setMostrarPassword((prev) => !prev);
+  };
+
   const {
     register,
     handleSubmit,
@@ -399,26 +405,35 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  type="password"
-                  className="focus-red"
-                  maxLength={100}
-                  minLength={8}
-                  placeholder="Ingrese contraseña"
-                  {...register("password", {
-                    required: "La contraseña es obligatoria",
-                    minLength: {
-                      value: 8,
-                      message: "Mínimo 8 caracteres",
-                    },
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$/,
-                      message:
-                        "Debe tener mayúscula, minúscula, número y símbolo",
-                    },
-                  })}
-                />
+                <div className="d-flex">
+                  <Form.Control
+                    type={mostrarPassword ? "text" : "password"}
+                    className="focus-red"
+                    maxLength={100}
+                    minLength={8}
+                    placeholder="Ingrese contraseña"
+                    {...register("password", {
+                      required: "La contraseña es obligatoria",
+                      minLength: {
+                        value: 8,
+                        message: "Mínimo 8 caracteres",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$/,
+                        message:
+                          "Debe tener mayúscula, minúscula, número y símbolo",
+                      },
+                    })}
+                  />
+                  <Button variant="link" onClick={verPassword}>
+                    {mostrarPassword ? (
+                      <i className="bi bi-eye-slash text-light"></i>
+                    ) : (
+                      <i className="bi bi-eye text-light"></i>
+                    )}
+                  </Button>
+                </div>
                 {errors.password && (
                   <span className="text-danger">{errors.password.message}</span>
                 )}

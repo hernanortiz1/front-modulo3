@@ -5,6 +5,14 @@
   flex-direction: column;
   min-height: 100vh;
 }
+:root {
+  --primary-color: #1d3557;
+  --primary-light: #2a4a7a;
+  --primary-shadow: rgba(29, 53, 87, 0.3);
+  --primary-shadow-light: rgba(29, 53, 87, 0.15);
+  --primary-shadow-strong: rgba(29, 53, 87, 0.2);
+}
+
 main {
   flex-grow: 1;
 }
@@ -652,5 +660,137 @@ main {
 @media (max-width: 997px) {
   .whatsapp-button {
     padding: 6px;
+  }
+}
+
+.hero-section {
+  padding: 3rem 0;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-light) 100%
+  );
+  box-shadow: 0 4px 20px var(--primary-shadow);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 20% 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.info-card,
+.trust-card,
+.dev-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--primary-shadow-light) !important;
+}
+
+.border-left-accent {
+  border-left: 4px solid var(--primary-color);
+}
+
+.border-top-accent {
+  border-top: 3px solid var(--primary-color);
+}
+
+.card-title-color {
+  color: var(--primary-color);
+}
+
+.brand-color {
+  color: var(--primary-color);
+}
+
+.check-icon {
+  color: var(--primary-color);
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary-color), #457b9d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.trust-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.equipo-section {
+  padding: 3rem 0;
+  background: var(--primary-color);
+  margin-bottom: 3rem;
+  box-shadow: 0 8px 20px var(--primary-color);
+  position: relative;
+}
+
+.dev-card {
+  background: white;
+}
+
+.dev-image-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 4px 15px var(--primary-shadow-strong);
+  overflow: hidden;
+}
+
+.dev-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dev-name {
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 0;
+  }
+
+  .icon-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .dev-image-wrapper {
+    width: 100px;
+    height: 100px;
   }
 }

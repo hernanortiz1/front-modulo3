@@ -159,14 +159,6 @@ const Carrito = () => {
                             </Button>
                             <span className="mx-2">{item.quantity}</span>
 
-
-
-
-                           
-                           
-
-
-
                             <Button
                               variant="outline-secondary"
                               size="sm"
@@ -179,14 +171,13 @@ const Carrito = () => {
                           </div>
                         </div>
 
- <div className="d-flex flex-column">
-                              
-                               {item.quantity > item.stock && (
-                              <small className="text-danger d-block">
-                                Stock insuficiente
-                              </small>
-                            )}
-                            </div>
+                        <div className="d-flex flex-column">
+                          {item.quantity > item.stock && (
+                            <small className="text-danger d-block">
+                              Stock insuficiente
+                            </small>
+                          )}
+                        </div>
 
                         <div className="mt-4">
                           <Button

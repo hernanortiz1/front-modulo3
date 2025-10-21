@@ -39,6 +39,26 @@ function App() {
 
   const [productos, setProductos] = useState([]);
 
+  const cargarProductos = async () => {
+    try {
+      const respuesta = await obtenerProductos();
+      if (respuesta && respuesta.ok) {
+        const data = await respuesta.json();
+        setProductos(data);
+      } else {
+        console.error("Error al obtener productos");
+      }
+    } catch (error) {
+      console.error("Error al cargar productos:", error);
+    }
+  };
+
+
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
+
   useEffect(() => {
     sessionStorage.setItem("userKey", JSON.stringify(usuarioAdmin));
   }, [usuarioAdmin]);
@@ -130,13 +150,13 @@ function App() {
 
                 <Route
                   path="crear"
-                  element={<FormularioRopa titulo={"Crear producto"} />}
+                  element={<FormularioRopa titulo={"Crear producto"} cargarProductos={cargarProductos}/>}
                 ></Route>
 
                 <Route
                   path="editar/:id"
                   element={
-                    <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
+                    <FormularioRopa titulo={"Editar producto"} cargarProductos={cargarProductos}></FormularioRopa>
                   }
                 ></Route>
               </Route>

@@ -30,11 +30,9 @@ const SobreNosotros = () => {
               <Card.Body className="p-4">
                 <p className="text-muted mb-0 lh-lg">
                   En <strong className="brand-color">Lannister</strong>,
-                  combinamos tecnología y estilo para crear una tienda pensada
-                  para el hombre moderno. Somos cuatro devs apasionados por el
-                  diseño, la moda y la experiencia digital. Lo que empezó como
-                  un proyecto entre colegas, hoy es una marca que busca
-                  redefinir cómo se ve y se siente la ropa masculina.
+                  combinamos tecnología y estilo para el hombre moderno. Somos
+                  cuatro devs apasionados por el diseño y la moda, redefiniendo
+                  la experiencia de compra masculina.
                 </p>
               </Card.Body>
             </Card>
@@ -50,11 +48,10 @@ const SobreNosotros = () => {
                   </h2>
                 </div>
                 <p className="text-muted lh-lg">
-                  Cada prenda que ofrecemos está pensada para hombres que
-                  valoran la elegancia, la comodidad y los detalles. En{" "}
-                  <strong className="brand-color">Lannister</strong>, no
-                  seguimos tendencias pasajeras: apostamos por un estilo
-                  atemporal, versátil y auténtico.
+                  Cada prenda está pensada para hombres que valoran elegancia,
+                  comodidad y detalles. En{" "}
+                  <strong className="brand-color">Lannister</strong>, apostamos
+                  por un estilo atemporal y auténtico.
                 </p>
               </Card.Body>
             </Card>
@@ -70,11 +67,9 @@ const SobreNosotros = () => {
                   </h2>
                 </div>
                 <p className="text-muted lh-lg">
-                  Como desarrolladores, cuidamos cada aspecto de la experiencia
-                  digital. Queremos que comprar ropa sea tan intuitivo como
-                  vestirse bien. Por eso, trabajamos en una plataforma rápida,
-                  segura y pensada para que encuentres lo que buscás sin perder
-                  tiempo.
+                  Como desarrolladores, cuidamos cada detalle de la experiencia
+                  digital. Una plataforma rápida, segura e intuitiva para que
+                  encuentres lo que buscás sin perder tiempo.
                 </p>
               </Card.Body>
             </Card>
@@ -91,28 +86,31 @@ const SobreNosotros = () => {
                     <div className="d-flex align-items-start">
                       <span className="check-icon me-3 fs-4">✓</span>
                       <p className="mb-0 text-muted">
-                        Usuarios antes que vendedores
+                        Somos usuarios antes que vendedores
                       </p>
-                    </div>
-                  </Col>
-                  <Col md={4}>
-                    <div className="d-flex align-items-start">
-                      <span className="check-icon me-3 fs-4">✓</span>
-                      <p className="mb-0 text-muted">Calidad sobre cantidad</p>
                     </div>
                   </Col>
                   <Col md={4}>
                     <div className="d-flex align-items-start">
                       <span className="check-icon me-3 fs-4">✓</span>
                       <p className="mb-0 text-muted">
-                        Cada prenda, cuidadosamente seleccionada
+                        Creemos en la calidad antes que en la cantidad
+                      </p>
+                    </div>
+                  </Col>
+                  <Col md={4}>
+                    <div className="d-flex align-items-start">
+                      <span className="check-icon me-3 fs-4">✓</span>
+                      <p className="mb-0 text-muted">
+                        Cada prenda fue seleccionada con criterio y propósito
                       </p>
                     </div>
                   </Col>
                 </Row>
                 <p className="text-center text-muted mb-0 mt-4 fst-italic">
-                  Gracias por ser parte de esta comunidad. Estamos para ayudarte
-                  a vestir y sentirte mejor.
+                  Gracias por formar parte de esta comunidad. Estamos acá para
+                  ayudarte a vestir mejor, sentirte mejor y mostrar tu mejor
+                  versión.
                 </p>
               </Card.Body>
             </Card>

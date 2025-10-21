@@ -9,7 +9,7 @@ import {
   Modal,
   Badge,
 } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
@@ -56,14 +56,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     Swal.fire({
       title: "¿Cerrar sesión?",
       text: "¿Estás seguro que deseas salir de tu cuenta?",
-      icon: "question", 
+      icon: "question",
       iconColor: "#1d3557",
       showCancelButton: true,
       confirmButtonText: '<i class="bi bi-box-arrow-right me-2"></i>Sí, salir',
       cancelButtonText: '<i class="bi bi-x-circle me-2"></i>Cancelar',
-      confirmButtonColor: "#1d3557", 
+      confirmButtonColor: "#1d3557",
       cancelButtonColor: "#6c757d",
-      reverseButtons: true, 
+      reverseButtons: true,
       backdrop: `
         rgba(0,0,0,0.6)
         left top
@@ -76,7 +76,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        sessionStorage.removeItem("userKey"); 
+        sessionStorage.removeItem("userKey");
         setUsuarioAdmin({});
         navegacion("/");
 
@@ -85,7 +85,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           text: "Tu sesión se ha cerrado correctamente",
           icon: "success",
           iconColor: "#198754",
-          timer: 2000, 
+          timer: 2000,
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {
@@ -339,20 +339,23 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     )}
                   </>
                 ) : (
-                  <Button
-                    variant="link"
-                    className="nav-link p-0"
-                    onClick={() => {
-                      handleShow();
-                      setExpanded(false);
-                    }}
-                    title="Iniciar sesión"
-                  >
-                    <div className="d-flex align-items-center gap-2 text-light">
-                      <i className="bi bi-person-fill fs-4"></i>
-                      <span>Iniciar sesión</span>
-                    </div>
-                  </Button>
+                  <>
+                    <Button
+                      variant="link"
+                      className="nav-link p-0"
+                      onClick={() => {
+                        handleShow();
+                        setExpanded(false);
+                      }}
+                      title="Iniciar sesión"
+                    >
+                      <div className="d-flex align-items-center gap-2 text-light">
+                        <i className="bi bi-person-fill fs-4"></i>
+                        <span>Iniciar sesión</span>
+                      </div>
+                    </Button>
+                    <Link to={"/registro"} className="btn btn-success ms-3 my-3 my-lg-0">Crear cuenta</Link>
+                  </>
                 )}
               </>
             </Nav>

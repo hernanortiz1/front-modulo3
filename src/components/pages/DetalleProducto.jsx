@@ -71,7 +71,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                   title: "¡Gracias por su compra!",
                   text: `Has comprado ${cantidad} ${producto.nombreProducto}`,
                   icon: "success",
-                  timer: 1500,
+                  timer: 4500,
                   confirmButtonText: "continuar",
                 });
                 Navigate("/");
@@ -83,6 +83,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
               title: "Error en la compra",
               text: "No se pudo procesar tu compra. Intenta nuevamente.",
               icon: "error",
+              timer: 4500,
               confirmButtonColor: "#3085d6",
             });
           }
@@ -90,10 +91,10 @@ const DetalleProducto = ({ usuarioAdmin }) => {
       });
     } else {
       Swal.fire({
-        title: "¡Debes Registarte y/o Iniciar sesion!",
+        title: "¡Debes crear cuenta y/o Iniciar sesion!",
         text: `Si quieres realizar compras y/o agregar carrito`,
         icon: "warning",
-        timer: 2000,
+        timer: 4500,
         showConfirmButton: false,
       });
     }
@@ -133,19 +134,27 @@ const DetalleProducto = ({ usuarioAdmin }) => {
 
       addToCart(productToAdd);
 
-      Swal.fire({
-        title: "¡Agregado al carrito!",
-        text: `${producto.nombreProducto} se agregó a tu carrito`,
-        icon: "success",
-        timer: 2000,
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
         showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        text: `${producto.nombreProducto} se agregó a tu carrito`,
       });
     } else {
       Swal.fire({
-        title: "¡Debes Registrarte y/o Iniciar sesion!",
+        title: "¡Debes crear cuenta y/o Iniciar sesion!",
         text: `Si quieres realizar compras y/o agregar carrito`,
         icon: "warning",
-        timer: 2000,
+        timer: 4500,
         showConfirmButton: false,
       });
     }

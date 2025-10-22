@@ -256,9 +256,13 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                   <img
                     src={mastercard}
                     alt="mastercard"
-                    className="logoTarjetas"
+                    className="logoTarjetas logoMastercard"
                   />
-                  <img src={visa} alt="visa" className="logoTarjetas" />
+                  <img
+                    src={visa}
+                    alt="visa"
+                    className="logoTarjetas logoVisa"
+                  />
                 </div>
                 <p>
                   6 cuotas sin interés de ${" "}
@@ -267,13 +271,21 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                   </strong>
                 </p>
                 <div className="d-flex justify-content-start align-items-center pe-3 gap-33">
-                  <img src={macro} alt="macro" className="logoMacro" />
+                  <img
+                    src={macro}
+                    alt="macro"
+                    className="logoTarjetas logoMacro"
+                  />
                   <img
                     src={santander}
                     alt="santander"
-                    className="logoSantander"
+                    className="logoTarjetas logoSantander"
                   />
-                  <img src={naranjax} alt="naranjax" className="logoNaranja" />
+                  <img
+                    src={naranjax}
+                    alt="naranjax"
+                    className="logoTarjetas logoNaranja"
+                  />
                 </div>
 
                 <hr />

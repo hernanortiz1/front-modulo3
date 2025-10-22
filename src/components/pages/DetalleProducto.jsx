@@ -203,17 +203,6 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                   <span className="badge colorNavbarFooter">
                     {producto.categoria}
                   </span>
-                  <Button
-                    variant="link"
-                    className="p-0 border-0"
-                    onClick={() => setFavorito(!favorito)}
-                  >
-                    <Heart
-                      size={24}
-                      className="text-danger"
-                      fill={favorito ? "red" : "none"}
-                    />
-                  </Button>
                 </div>
 
                 {/* Título */}

@@ -256,7 +256,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                   <img
                     src={mastercard}
                     alt="mastercard"
-                    className="logoTarjetas logoMastercart"
+                    className="logoTarjetas logoMastercard"
                   />
                   <img src={visa} alt="visa" className="logoTarjetas logoVisa" />
                 </div>

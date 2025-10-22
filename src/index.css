@@ -169,23 +169,27 @@ main {
   border-radius: 8px;
   background-color: #f8f9fa;
 }
-
-.logoNaranja {
+/*imagen de tarjetas de credito detalle producto*/
+.logoTarjetas {
   position: relative;
   overflow: hidden;
+}
+.logoMastercart{
+  height: 25px;
+}
+.logoVisa{
+  height: 18px;
+}
+.logoNaranja {
   height: 20px;
 }
 .logoSantander {
-  position: relative;
-  overflow: hidden;
   height: 35px;
 }
 .logoMacro {
-  position: relative;
-  overflow: hidden;
   height: 18px;
 }
-
+/*FIN imagen de tarjetas de credito detalle producto*/
 .cdsobre-imagen {
   position: absolute;
   bottom: 20px;
@@ -247,11 +251,6 @@ main {
   border-radius: 0.8rem;
   text-decoration: none;
   color: #1d3557;
-}
-
-.logoTarjetas {
-  width: 50px;
-  height: 30px;
 }
 
 @media (max-width: 768px) {

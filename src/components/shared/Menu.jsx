@@ -288,7 +288,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                           </Dropdown.Item>
                         )}
 
-                        {usuarioAdmin.rol !== "Administrador" &&
+                        {usuarioAdmin.rol === "Usuario" &&
                           !isCartPage && (
                             <Dropdown.Item onClick={() => setShowCart(true)}>
                               <i className="bi bi-bag-fill me-2"></i>

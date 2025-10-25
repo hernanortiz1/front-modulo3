@@ -126,7 +126,7 @@ export const obtenerUsuarios = async () => {
 };
 
 export const obtenerUsuarioID = async (id) => {
- try {
+  try {
     const token = JSON.parse(sessionStorage.getItem("userKey"))?.token;
     const respuesta = await fetch(API_USUARIOS + `/${id}`, {
       headers: {
@@ -233,5 +233,24 @@ export const comprarMultiplesProductos = async (productos) => {
   } catch (error) {
     console.error("Error en compra múltiple:", error);
     return false;
+  }
+};
+
+export const crearUsuarioAdministrador = async (nuevoUsuario) => {
+  try {
+    const token = JSON.parse(sessionStorage.getItem("userKey")).token;
+    const respuesta = await fetch(`${API_USUARIOS}/admin/crear`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": token,
+      },
+      body: JSON.stringify(nuevoUsuario),
+    });
+    return respuesta;
+    
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };

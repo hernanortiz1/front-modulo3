@@ -5,12 +5,11 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import {
+  crearUsuarioAdministrador,
   leerProductosPaginados,
   leerUsuariosPaginados,
-  registro,
 } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
-import { data } from "react-router";
 
 const Administrador = () => {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
@@ -126,7 +125,7 @@ const Administrador = () => {
   };
 
   const crearCuenta = async (usuario) => {
-    const respuesta = await registro(usuario);
+    const respuesta = await crearUsuarioAdministrador(usuario);
     if (respuesta.status === 201) {
       Swal.fire({
         title: "Usuario creado!",

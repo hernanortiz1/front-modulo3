@@ -152,7 +152,7 @@ function App() {
                   ></ProtectorRol>
                 }
               >
-                <Route index element={<Administrador></Administrador>}></Route>
+                <Route index element={<Administrador titulo={usuarioAdmin.rol || "Administrador"}></Administrador>}></Route>
 
                 <Route
                   path="crear"

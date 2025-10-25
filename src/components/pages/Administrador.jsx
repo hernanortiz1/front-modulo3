@@ -11,7 +11,7 @@ import {
 } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
 
-const Administrador = () => {
+const Administrador = ({ titulo }) => {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const rol = usuarioLogueado.rol;
 
@@ -134,6 +134,7 @@ const Administrador = () => {
       });
       reset();
       leerUsuarios();
+      handleClose();
     } else {
       Swal.fire({
         title: "ocurrió un problema",
@@ -166,7 +167,7 @@ const Administrador = () => {
   return (
     <>
       <section className="py-3 colorNavbarFooter text-light">
-        <h3 className=" Montserrat text-center">ADMINISTRADOR</h3>
+        <h3 className=" Montserrat text-center text-uppercase">{titulo}</h3>
       </section>
       <section className="container">
         <article className="my-4">

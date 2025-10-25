@@ -12,6 +12,9 @@ import {
 import Swal from "sweetalert2";
 
 const Administrador = () => {
+  const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
+  const rol = usuarioLogueado.rol;
+
   const [show, setShow] = useState(false);
   const [ropa, setRopa] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
@@ -99,7 +102,6 @@ const Administrador = () => {
           });
         }, 100);
       }
-
     } else {
       console.info("Error al cargar los usuarios");
     }
@@ -166,7 +168,9 @@ const Administrador = () => {
                       placeholder="Buscar por nombre de producto"
                       onChange={handleChangeProducto}
                       value={terminoBusquedaProducto}
-                      style={{ paddingRight: terminoBusquedaProducto ? '40px' : '12px' }}
+                      style={{
+                        paddingRight: terminoBusquedaProducto ? "40px" : "12px",
+                      }}
                     />
                     {terminoBusquedaProducto && (
                       <Button
@@ -175,9 +179,9 @@ const Administrador = () => {
                         onClick={limpiarBusquedaProducto}
                         style={{
                           zIndex: 10,
-                          color: '#dc3545',
-                          fontSize: '18px',
-                          lineHeight: 1
+                          color: "#dc3545",
+                          fontSize: "18px",
+                          lineHeight: 1,
                         }}
                         title="Limpiar búsqueda"
                       >
@@ -298,7 +302,9 @@ const Administrador = () => {
                       placeholder="Buscar por nombre de usuario"
                       onChange={handleChangeUsuario}
                       value={terminoBusquedaUsuario}
-                      style={{ paddingRight: terminoBusquedaUsuario ? '40px' : '12px' }}
+                      style={{
+                        paddingRight: terminoBusquedaUsuario ? "40px" : "12px",
+                      }}
                     />
                     {terminoBusquedaUsuario && (
                       <Button
@@ -307,9 +313,9 @@ const Administrador = () => {
                         onClick={limpiarBusquedaUsuario}
                         style={{
                           zIndex: 10,
-                          color: '#dc3545',
-                          fontSize: '18px',
-                          lineHeight: 1
+                          color: "#dc3545",
+                          fontSize: "18px",
+                          lineHeight: 1,
                         }}
                         title="Limpiar búsqueda"
                       >
@@ -489,8 +495,22 @@ const Administrador = () => {
                   })}
                 >
                   <option value="">Seleccione una opcion</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Usuario">Usuario</option>
+                  {/* opciones para Administrador */}
+                  {rol === "Administrador" && (
+                    <>
+                      <option value="Administrador">Administrador</option>
+                      <option value="Gerente">Gerente</option>
+                      <option value="Vendedor">Vendedor</option>
+                      <option value="Usuario">Usuario</option>
+                    </>
+                  )}
+                  {/* opciones para Gerente */}
+                  {rol === "Gerente" && (
+                    <>
+                      <option value="Vendedor">Vendedor</option>
+                      <option value="Usuario">Usuario</option>
+                    </>
+                  )}
                 </Form.Select>
                 <Form.Text className="text-danger">
                   {errors.rol?.message}

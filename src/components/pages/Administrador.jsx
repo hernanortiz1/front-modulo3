@@ -289,131 +289,143 @@ const Administrador = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header className="Montserrat" ref={headerUsuariosRef}>
-                <i className="bi bi-person-fill me-2"></i>Usuarios
-              </Accordion.Header>
-              <Accordion.Body className="row">
-                <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
-                  <Form className="w-50 d-flex justify-content-center me-3 position-relative">
-                    <Form.Control
-                      type="text"
-                      placeholder="Buscar por nombre de usuario"
-                      onChange={handleChangeUsuario}
-                      value={terminoBusquedaUsuario}
-                      style={{
-                        paddingRight: terminoBusquedaUsuario ? "40px" : "12px",
-                      }}
-                    />
-                    {terminoBusquedaUsuario && (
-                      <Button
-                        variant="link"
-                        className="position-absolute end-0 top-50 translate-middle-y me-2 p-0"
-                        onClick={limpiarBusquedaUsuario}
+          {rol !== "Vendedor" && (
+            <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
+              <Accordion.Item eventKey="0">
+                <Accordion.Header
+                  className="Montserrat"
+                  ref={headerUsuariosRef}
+                >
+                  <i className="bi bi-person-fill me-2"></i>Usuarios
+                </Accordion.Header>
+                <Accordion.Body className="row">
+                  <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
+                    <Form className="w-50 d-flex justify-content-center me-3 position-relative">
+                      <Form.Control
+                        type="text"
+                        placeholder="Buscar por nombre de usuario"
+                        onChange={handleChangeUsuario}
+                        value={terminoBusquedaUsuario}
                         style={{
-                          zIndex: 10,
-                          color: "#dc3545",
-                          fontSize: "18px",
-                          lineHeight: 1,
+                          paddingRight: terminoBusquedaUsuario
+                            ? "40px"
+                            : "12px",
                         }}
-                        title="Limpiar búsqueda"
-                      >
-                        <i className="bi bi-x-circle-fill"></i>
+                      />
+                      {terminoBusquedaUsuario && (
+                        <Button
+                          variant="link"
+                          className="position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                          onClick={limpiarBusquedaUsuario}
+                          style={{
+                            zIndex: 10,
+                            color: "#dc3545",
+                            fontSize: "18px",
+                            lineHeight: 1,
+                          }}
+                          title="Limpiar búsqueda"
+                        >
+                          <i className="bi bi-x-circle-fill"></i>
+                        </Button>
+                      )}
+                    </Form>
+                    {/* btn Crear */}
+                    {(rol === "Administrador" || rol === "Gerente") && (
+                      <Button className="btn btn-success" onClick={handleShow}>
+                        <i className="bi bi-person-plus-fill"></i>
                       </Button>
                     )}
-                  </Form>
-                  <Button className="btn btn-success" onClick={handleShow}>
-                    <i className="bi bi-person-plus-fill"></i>
-                  </Button>
-                </div>
-                <div className="col-12">
-                  <Table
-                    responsive
-                    striped
-                    bordered
-                    hover
-                    className="Montserrat"
-                  >
-                    <thead>
-                      <tr className="text-center">
-                        <th>#</th>
-                        <th>Nombre de usuario</th>
-                        <th>Correo eléctronico</th>
-                        <th>Rol</th>
-                        <th>Opciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {loadingUsuarios ? (
-                        <tr>
-                          <td colSpan="5" className="text-center py-4">
-                            <div
-                              className="spinner-border text-success"
-                              role="status"
-                            >
-                              <span className="visually-hidden">
-                                Cargando...
-                              </span>
-                            </div>
-                          </td>
+                  </div>
+                  <div className="col-12">
+                    <Table
+                      responsive
+                      striped
+                      bordered
+                      hover
+                      className="Montserrat"
+                    >
+                      <thead>
+                        <tr className="text-center">
+                          <th>#</th>
+                          <th>Nombre de usuario</th>
+                          <th>Correo eléctronico</th>
+                          <th>Rol</th>
+                          <th>Opciones</th>
                         </tr>
-                      ) : usuarios.length === 0 ? (
-                        <tr>
-                          <td colSpan="5" className="text-center py-4">
-                            <i className="bi bi-x-lg"></i> No hay resultados
-                            disponibles para “{terminoBusquedaUsuario}”
-                          </td>
-                        </tr>
-                      ) : (
-                        usuarios.map((usuario, indice) => (
-                          <ItemUsuario
-                            key={usuario._id}
-                            usuario={usuario}
-                            fila={(pageUsuario - 1) * limitUsuario + indice + 1}
-                            setUsuarios={setUsuarios}
-                            limitUsuario={limitUsuario}
-                            pageUsuario={pageUsuario}
-                            leerUsuarios={leerUsuarios}
-                          />
-                        ))
-                      )}
-                    </tbody>
-                  </Table>
-                </div>
-                <div className="d-flex justify-content-center align-items-center my-3">
-                  <Button
-                    onClick={() =>
-                      setPageUsuario((prev) => Math.max(prev - 1, 1))
-                    }
-                    disabled={pageUsuario === 1}
-                    className="btn-table"
-                  >
-                    Anterior
-                  </Button>
-                  <span className="mx-3">
-                    <span className=" d-none d-md-inline">
-                      Página {pageUsuario} de {totalPagesUsuario}
+                      </thead>
+                      <tbody>
+                        {loadingUsuarios ? (
+                          <tr>
+                            <td colSpan="5" className="text-center py-4">
+                              <div
+                                className="spinner-border text-success"
+                                role="status"
+                              >
+                                <span className="visually-hidden">
+                                  Cargando...
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ) : usuarios.length === 0 ? (
+                          <tr>
+                            <td colSpan="5" className="text-center py-4">
+                              <i className="bi bi-x-lg"></i> No hay resultados
+                              disponibles para “{terminoBusquedaUsuario}”
+                            </td>
+                          </tr>
+                        ) : (
+                          usuarios.map((usuario, indice) => (
+                            <ItemUsuario
+                              key={usuario._id}
+                              usuario={usuario}
+                              fila={
+                                (pageUsuario - 1) * limitUsuario + indice + 1
+                              }
+                              setUsuarios={setUsuarios}
+                              limitUsuario={limitUsuario}
+                              pageUsuario={pageUsuario}
+                              leerUsuarios={leerUsuarios}
+                            />
+                          ))
+                        )}
+                      </tbody>
+                    </Table>
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center my-3">
+                    <Button
+                      onClick={() =>
+                        setPageUsuario((prev) => Math.max(prev - 1, 1))
+                      }
+                      disabled={pageUsuario === 1}
+                      className="btn-table"
+                    >
+                      Anterior
+                    </Button>
+                    <span className="mx-3">
+                      <span className=" d-none d-md-inline">
+                        Página {pageUsuario} de {totalPagesUsuario}
+                      </span>
+                      <span className="d-inline d-md-none">
+                        {pageUsuario} de {totalPagesUsuario}
+                      </span>
                     </span>
-                    <span className="d-inline d-md-none">
-                      {pageUsuario} de {totalPagesUsuario}
-                    </span>
-                  </span>
-                  <Button
-                    onClick={() =>
-                      setPageUsuario((prev) =>
-                        Math.min(prev + 1, totalPagesUsuario)
-                      )
-                    }
-                    disabled={pageUsuario === totalPagesUsuario}
-                    className="btn-table"
-                  >
-                    Siguiente
-                  </Button>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+                    <Button
+                      onClick={() =>
+                        setPageUsuario((prev) =>
+                          Math.min(prev + 1, totalPagesUsuario)
+                        )
+                      }
+                      disabled={pageUsuario === totalPagesUsuario}
+                      className="btn-table"
+                    >
+                      Siguiente
+                    </Button>
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          )}
         </article>
       </section>
       <Modal show={show} onHide={handleClose}>

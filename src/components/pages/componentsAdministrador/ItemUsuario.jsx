@@ -60,8 +60,16 @@ const ItemUsuario = ({
             pageUsuario,
             limitUsuario
           );
-          const usuariosActualizados = await respuestaUsuarios.json();
-          setUsuarios(usuariosActualizados.usuarios);
+          if (respuestaUsuarios.status === 200) {
+            const datos = await respuestaUsuarios.json();
+            let usuariosFiltrados = datos.usuarios;
+            if (rol === "Gerente") {
+              usuariosFiltrados = datos.usuarios.filter(
+                (u) => u.rol === "Vendedor" || u.rol === "Usuario"
+              );
+            }
+            setUsuarios(usuariosFiltrados);
+          }
         } else {
           Swal.fire({
             title: "Usario eliminado",
@@ -113,7 +121,13 @@ const ItemUsuario = ({
       );
       if (respuestaUsuarios.status === 200) {
         const datos = await respuestaUsuarios.json();
-        setUsuarios(datos.usuarios);
+        let usuariosFiltrados = datos.usuarios;
+        if (rol === "Gerente") {
+          usuariosFiltrados = datos.usuarios.filter(
+            (u) => u.rol === "Vendedor" || u.rol === "Usuario"
+          );
+        }
+        setUsuarios(usuariosFiltrados);
       }
       handleClose();
     } else {

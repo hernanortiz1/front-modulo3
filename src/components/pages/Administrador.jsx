@@ -96,10 +96,10 @@ const Administrador = () => {
       if (respuesta.status === 200) {
         const datos = await respuesta.json();
 
-        //muestra en la lista solo vendedores y usuarios
+        //si es Gerente
         let usuariosFiltrados = datos.usuarios;
         if (rol === "Gerente") {
-          usuariosFiltrados = datos.usuarios.filter(
+          usuariosFiltrados = usuariosFiltrados.filter(
             (usuario) => usuario.rol === "Vendedor" || usuario.rol === "Usuario"
           );
         }

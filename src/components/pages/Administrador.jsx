@@ -10,6 +10,7 @@ import {
   registro,
 } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
+import { data } from "react-router";
 
 const Administrador = () => {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
@@ -84,28 +85,44 @@ const Administrador = () => {
 
   const leerUsuarios = async () => {
     setLoadingUsuarios(true);
-    const respuesta = await leerUsuariosPaginados(
-      pageUsuario,
-      limitUsuario,
-      terminoBusquedaUsuario
-    );
-    if (respuesta.status === 200) {
-      const datos = await respuesta.json();
-      setUsuarios(datos.usuarios);
-      setTotalPagesUsuario(datos.totalPages);
 
-      if (pageUsuario > 1) {
-        setTimeout(() => {
-          headerUsuariosRef.current?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 100);
+    try {
+      const respuesta = await leerUsuariosPaginados(
+        pageUsuario,
+        limitUsuario,
+        terminoBusquedaUsuario
+      );
+
+      if (respuesta.status === 200) {
+        const datos = await respuesta.json();
+
+        //muestra en la lista solo vendedores y usuarios
+        let usuariosFiltrados = datos.usuarios;
+        if (rol === "Gerente") {
+          usuariosFiltrados = datos.usuarios.filter(
+            (usuario) => usuario.rol === "Vendedor" || usuario.rol === "Usuario"
+          );
+        }
+
+        setUsuarios(usuariosFiltrados);
+        setTotalPagesUsuario(datos.totalPages);
+
+        if (pageUsuario > 1) {
+          setTimeout(() => {
+            headerUsuariosRef.current?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }, 100);
+        }
+      } else {
+        console.info("Error al cargar los usuarios");
       }
-    } else {
-      console.info("Error al cargar los usuarios");
+    } catch (error) {
+      console.error("Error al leer usuarios:", error);
+    } finally {
+      setLoadingUsuarios(false);
     }
-    setLoadingUsuarios(false);
   };
 
   const crearCuenta = async (usuario) => {
@@ -154,144 +171,150 @@ const Administrador = () => {
       </section>
       <section className="container">
         <article className="my-4">
-         {/* lista productos */}
-          { rol !== "Usuario" &&
-          (<Accordion defaultActiveKey={["0"]} alwaysOpen>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header className="Montserrat" ref={headerProductosRef}>
-                <i className="bi bi-database me-2"></i>
-                Productos
-              </Accordion.Header>
-              <Accordion.Body className="row">
-                <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
-                  <Form className="w-50 d-flex justify-content-center me-3 position-relative">
-                    <Form.Control
-                      type="text"
-                      placeholder="Buscar por nombre de producto"
-                      onChange={handleChangeProducto}
-                      value={terminoBusquedaProducto}
-                      style={{
-                        paddingRight: terminoBusquedaProducto ? "40px" : "12px",
-                      }}
-                    />
-                    {terminoBusquedaProducto && (
-                      <Button
-                        variant="link"
-                        className="position-absolute end-0 top-50 translate-middle-y me-2 p-0"
-                        onClick={limpiarBusquedaProducto}
+          {/* lista productos */}
+          {rol !== "Usuario" && (
+            <Accordion defaultActiveKey={["0"]} alwaysOpen>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header
+                  className="Montserrat"
+                  ref={headerProductosRef}
+                >
+                  <i className="bi bi-database me-2"></i>
+                  Productos
+                </Accordion.Header>
+                <Accordion.Body className="row">
+                  <div className="d-flex col-12 text-end text-md-center order-first order-md-0 my-3">
+                    <Form className="w-50 d-flex justify-content-center me-3 position-relative">
+                      <Form.Control
+                        type="text"
+                        placeholder="Buscar por nombre de producto"
+                        onChange={handleChangeProducto}
+                        value={terminoBusquedaProducto}
                         style={{
-                          zIndex: 10,
-                          color: "#dc3545",
-                          fontSize: "18px",
-                          lineHeight: 1,
+                          paddingRight: terminoBusquedaProducto
+                            ? "40px"
+                            : "12px",
                         }}
-                        title="Limpiar búsqueda"
-                      >
-                        <i className="bi bi-x-circle-fill"></i>
-                      </Button>
-                    )}
-                  </Form>
-                  <Button
-                    className="btn btn-success"
-                    href="/administrador/crear"
-                  >
-                    <i className="bi bi-file-earmark-plus"></i>
-                  </Button>
-                </div>
-                <div className="col-12">
-                  <Table
-                    responsive
-                    striped
-                    bordered
-                    hover
-                    className="Montserrat"
-                  >
-                    <thead>
-                      <tr className="text-center">
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Talle</th>
-                        <th>Color</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Último control</th>
-                        <th>Imagen</th>
-                        <th>Opciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {loadingProductos ? (
-                        <tr>
-                          <td colSpan="8" className="text-center py-4">
-                            <div
-                              className="spinner-border text-success"
-                              role="status"
-                            >
-                              <span className="visually-hidden">
-                                Cargando...
-                              </span>
-                            </div>
-                          </td>
-                        </tr>
-                      ) : ropa.length === 0 ? (
-                        <tr>
-                          <td colSpan="8" className="text-center py-4">
-                            <i className="bi bi-x-lg"></i> No hay resultados
-                            disponibles para “{terminoBusquedaProducto}”
-                          </td>
-                        </tr>
-                      ) : (
-                        ropa.map((producto, indice) => (
-                          <ItemProducto
-                            key={producto._id}
-                            ropa={producto}
-                            setRopa={setRopa}
-                            fila={
-                              (pageProducto - 1) * limitProducto + indice + 1
-                            }
-                            limitProducto={limitProducto}
-                            pageProducto={pageProducto}
-                            onProductoActualizado={leerProductos}
-                          />
-                        ))
+                      />
+                      {terminoBusquedaProducto && (
+                        <Button
+                          variant="link"
+                          className="position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                          onClick={limpiarBusquedaProducto}
+                          style={{
+                            zIndex: 10,
+                            color: "#dc3545",
+                            fontSize: "18px",
+                            lineHeight: 1,
+                          }}
+                          title="Limpiar búsqueda"
+                        >
+                          <i className="bi bi-x-circle-fill"></i>
+                        </Button>
                       )}
-                    </tbody>
-                  </Table>
-                </div>
-                <div className="d-flex justify-content-center align-items-center my-3">
-                  <Button
-                    onClick={() =>
-                      setPageProducto((prev) => Math.max(prev - 1, 1))
-                    }
-                    disabled={pageProducto === 1}
-                    className="btn-table"
-                  >
-                    Anterior
-                  </Button>
-                  <span className="mx-3">
-                    <span className="d-none d-md-inline">
-                      Página {pageProducto} de {totalPagesProducto}
+                    </Form>
+                    <Button
+                      className="btn btn-success"
+                      href="/administrador/crear"
+                    >
+                      <i className="bi bi-file-earmark-plus"></i>
+                    </Button>
+                  </div>
+                  <div className="col-12">
+                    <Table
+                      responsive
+                      striped
+                      bordered
+                      hover
+                      className="Montserrat"
+                    >
+                      <thead>
+                        <tr className="text-center">
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Talle</th>
+                          <th>Color</th>
+                          <th>Precio</th>
+                          <th>Stock</th>
+                          <th>Último control</th>
+                          <th>Imagen</th>
+                          <th>Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {loadingProductos ? (
+                          <tr>
+                            <td colSpan="8" className="text-center py-4">
+                              <div
+                                className="spinner-border text-success"
+                                role="status"
+                              >
+                                <span className="visually-hidden">
+                                  Cargando...
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ) : ropa.length === 0 ? (
+                          <tr>
+                            <td colSpan="8" className="text-center py-4">
+                              <i className="bi bi-x-lg"></i> No hay resultados
+                              disponibles para “{terminoBusquedaProducto}”
+                            </td>
+                          </tr>
+                        ) : (
+                          ropa.map((producto, indice) => (
+                            <ItemProducto
+                              key={producto._id}
+                              ropa={producto}
+                              setRopa={setRopa}
+                              fila={
+                                (pageProducto - 1) * limitProducto + indice + 1
+                              }
+                              limitProducto={limitProducto}
+                              pageProducto={pageProducto}
+                              onProductoActualizado={leerProductos}
+                            />
+                          ))
+                        )}
+                      </tbody>
+                    </Table>
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center my-3">
+                    <Button
+                      onClick={() =>
+                        setPageProducto((prev) => Math.max(prev - 1, 1))
+                      }
+                      disabled={pageProducto === 1}
+                      className="btn-table"
+                    >
+                      Anterior
+                    </Button>
+                    <span className="mx-3">
+                      <span className="d-none d-md-inline">
+                        Página {pageProducto} de {totalPagesProducto}
+                      </span>
+                      <span className="d-inline d-md-none">
+                        {pageProducto} de {totalPagesProducto}
+                      </span>
                     </span>
-                    <span className="d-inline d-md-none">
-                      {pageProducto} de {totalPagesProducto}
-                    </span>
-                  </span>
-                  <Button
-                    onClick={() =>
-                      setPageProducto((prev) =>
-                        Math.min(prev + 1, totalPagesProducto)
-                      )
-                    }
-                    disabled={pageProducto === totalPagesProducto}
-                    className="btn-table"
-                  >
-                    Siguiente
-                  </Button>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            {/* lista usuarios */}
-          </Accordion>)}
+                    <Button
+                      onClick={() =>
+                        setPageProducto((prev) =>
+                          Math.min(prev + 1, totalPagesProducto)
+                        )
+                      }
+                      disabled={pageProducto === totalPagesProducto}
+                      className="btn-table"
+                    >
+                      Siguiente
+                    </Button>
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+              {/* lista usuarios */}
+            </Accordion>
+          )}
 
           {/* lista usuarios */}
           {(rol === "Administrador" || rol === "Gerente") && (

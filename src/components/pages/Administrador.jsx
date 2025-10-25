@@ -35,6 +35,9 @@ const Administrador = ({ titulo }) => {
   const [terminoBusquedaUsuario, setTerminoBusquedaUsuario] = useState("");
   const [terminoBusquedaProducto, setTerminoBusquedaProducto] = useState("");
 
+  const [mostrarPassword, setMostrarPassword] = useState(false);
+  const verPassword = () => setMostrarPassword((prev) => !prev);
+
   const handleClose = () => {
     setShow(false);
   };
@@ -467,6 +470,7 @@ const Administrador = ({ titulo }) => {
                 <Form.Label>Nombre del Usuario</Form.Label>
                 <Form.Control
                   type="text"
+                  className="focus-red"
                   maxLength={120}
                   placeholder="Ej: juanperez97"
                   {...register("nombreUsuario", {
@@ -491,6 +495,7 @@ const Administrador = ({ titulo }) => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
+                  className="focus-red"
                   maxLength={120}
                   placeholder="Ej: juanperez@mail.com"
                   {...register("email", {
@@ -509,20 +514,36 @@ const Administrador = ({ titulo }) => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="password">
                 <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  type="password"
-                  maxLength={50}
-                  placeholder="Ingresa una contraseña"
-                  {...register("password", {
-                    required: "La contraseña es un dato obligatorio",
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
-                      message:
-                        "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.",
-                    },
-                  })}
-                />
+                <div className="position-relative">
+                  <Form.Control
+                    type={mostrarPassword ? "text" : "password"}
+                    className="focus-red"
+                    maxLength={50}
+                    placeholder="Ingresa una contraseña"
+                    {...register("password", {
+                      required: "La contraseña es un dato obligatorio",
+                      pattern: {
+                        value:
+                          /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                        message:
+                          "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.",
+                      },
+                    })}
+                  />
+                  <Button
+                    type="button"
+                    variant="link"
+                    onClick={verPassword}
+                    className="position-absolute end-0 top-50 translate-middle-y"
+                  >
+                    {mostrarPassword ? (
+                      <i className="bi bi-eye-slash text-dark"></i>
+                    ) : (
+                      <i className="bi bi-eye text-dark"></i>
+                    )}
+                  </Button>
+                </div>
+
                 <Form.Text className="text-danger">
                   {errors.password?.message}
                 </Form.Text>

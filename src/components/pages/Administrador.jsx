@@ -154,7 +154,9 @@ const Administrador = () => {
       </section>
       <section className="container">
         <article className="my-4">
-          <Accordion defaultActiveKey={["0"]} alwaysOpen>
+         {/* lista productos */}
+          { rol !== "Usuario" &&
+          (<Accordion defaultActiveKey={["0"]} alwaysOpen>
             <Accordion.Item eventKey="0">
               <Accordion.Header className="Montserrat" ref={headerProductosRef}>
                 <i className="bi bi-database me-2"></i>
@@ -288,8 +290,11 @@ const Administrador = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
-          {rol !== "Vendedor" && (
+            {/* lista usuarios */}
+          </Accordion>)}
+
+          {/* lista usuarios */}
+          {(rol === "Administrador" || rol === "Gerente") && (
             <Accordion defaultActiveKey={["0"]} alwaysOpen className="mt-4">
               <Accordion.Item eventKey="0">
                 <Accordion.Header

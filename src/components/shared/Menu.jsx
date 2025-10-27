@@ -9,7 +9,7 @@ import {
   Modal,
   Badge,
 } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../helpers/queries";
@@ -24,6 +24,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const [expanded, setExpanded] = useState(false);
 
   const [show, setShow] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -37,14 +38,15 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
   const isCartPage = location.pathname === "/carrito";
 
-  const irARegistro = () => {
-    handleClose();
-    navegacion("/registro");
-  };
   const irAError = () => {
     handleClose();
     navegacion("*");
   };
+
+  const verPassword = () => {
+    setMostrarPassword((prev) => !prev);
+  };
+
   const {
     register,
     handleSubmit,
@@ -56,14 +58,14 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     Swal.fire({
       title: "¿Cerrar sesión?",
       text: "¿Estás seguro que deseas salir de tu cuenta?",
-      icon: "question", 
+      icon: "question",
       iconColor: "#1d3557",
       showCancelButton: true,
       confirmButtonText: '<i class="bi bi-box-arrow-right me-2"></i>Sí, salir',
       cancelButtonText: '<i class="bi bi-x-circle me-2"></i>Cancelar',
-      confirmButtonColor: "#1d3557", 
+      confirmButtonColor: "#1d3557",
       cancelButtonColor: "#6c757d",
-      reverseButtons: true, 
+      reverseButtons: true,
       backdrop: `
         rgba(0,0,0,0.6)
         left top
@@ -76,7 +78,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        sessionStorage.removeItem("userKey"); 
+        sessionStorage.removeItem("userKey");
         setUsuarioAdmin({});
         navegacion("/");
 
@@ -85,7 +87,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
           text: "Tu sesión se ha cerrado correctamente",
           icon: "success",
           iconColor: "#198754",
-          timer: 2000, 
+          timer: 2000,
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {
@@ -275,16 +277,18 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                           {usuarioAdmin.nombreUsuario.substring(0, 20) + "..."}
                         </span>
                       </Dropdown.Toggle>
-
+                      {/* opciones de Menu segun el rol */}
                       <Dropdown.Menu>
-                        {usuarioAdmin.rol === "Administrador" && (
+                        {(usuarioAdmin.rol === "Administrador" ||
+                          usuarioAdmin.rol === "Gerente" ||
+                          usuarioAdmin.rol === "Empleado") && (
                           <Dropdown.Item as={NavLink} to="/administrador">
                             <i className="bi bi-gear-fill me-2"></i>
                             Panel de administración
                           </Dropdown.Item>
                         )}
 
-                        {usuarioAdmin.rol !== "Administrador" &&
+                        {usuarioAdmin.rol === "Usuario" &&
                           !isCartPage && (
                             <Dropdown.Item onClick={() => setShowCart(true)}>
                               <i className="bi bi-bag-fill me-2"></i>
@@ -339,20 +343,28 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                     )}
                   </>
                 ) : (
-                  <Button
-                    variant="link"
-                    className="nav-link p-0"
-                    onClick={() => {
-                      handleShow();
-                      setExpanded(false);
-                    }}
-                    title="Iniciar sesión"
-                  >
-                    <div className="d-flex align-items-center gap-2 text-light">
-                      <i className="bi bi-person-fill fs-4"></i>
-                      <span>Iniciar sesión</span>
-                    </div>
-                  </Button>
+                  <>
+                    <Button
+                      variant="link"
+                      className="nav-link p-0"
+                      onClick={() => {
+                        handleShow();
+                        setExpanded(false);
+                      }}
+                      title="Iniciar sesión"
+                    >
+                      <div className="d-flex align-items-center gap-2 text-light">
+                        <i className="bi bi-person-fill fs-4"></i>
+                        <span>Iniciar sesión</span>
+                      </div>
+                    </Button>
+                    <Link
+                      to={"/registro"}
+                      className="btn btn-success ms-3 my-3 my-lg-0"
+                    >
+                      Crear cuenta
+                    </Link>
+                  </>
                 )}
               </>
             </Nav>
@@ -363,7 +375,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       {/*MODAL */}
 
       <Modal show={show} onHide={handleClose}>
-        <div className="colorNavbarFooter text-light rounded-2 shadow">
+        <div className="colorNavbarFooter text-light rounded-2 shadow pb-2">
           <Modal.Header closeButton>
             <Modal.Title className="text-center w-100">
               Iniciar sesión
@@ -395,26 +407,39 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  type="password"
-                  className="focus-red"
-                  maxLength={100}
-                  minLength={8}
-                  placeholder="Ingrese contraseña"
-                  {...register("password", {
-                    required: "La contraseña es obligatoria",
-                    minLength: {
-                      value: 8,
-                      message: "Mínimo 8 caracteres",
-                    },
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$/,
-                      message:
-                        "Debe tener mayúscula, minúscula, número y símbolo",
-                    },
-                  })}
-                />
+                <div className="position-relative">
+                  <Form.Control
+                    type={mostrarPassword ? "text" : "password"}
+                    className="focus-red"
+                    maxLength={100}
+                    minLength={8}
+                    placeholder="Ingrese contraseña"
+                    {...register("password", {
+                      required: "La contraseña es obligatoria",
+                      minLength: {
+                        value: 8,
+                        message: "Mínimo 8 caracteres",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$/,
+                        message:
+                          "Debe tener mayúscula, minúscula, número y símbolo",
+                      },
+                    })}
+                  />
+                  <Button
+                    variant="link"
+                    onClick={verPassword}
+                    className="position-absolute end-0 top-50 translate-middle-y"
+                  >
+                    {mostrarPassword ? (
+                      <i className="bi bi-eye-slash text-dark"></i>
+                    ) : (
+                      <i className="bi bi-eye text-dark"></i>
+                    )}
+                  </Button>
+                </div>
                 {errors.password && (
                   <span className="text-danger">{errors.password.message}</span>
                 )}
@@ -431,16 +456,6 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 Ingresar
               </Button>
             </Form>
-            <Button
-              variant="outline-danger"
-              className="w-100 mt-2"
-              onClick={() => {
-                irARegistro();
-                setExpanded(false);
-              }}
-            >
-              Crear cuenta
-            </Button>
           </Modal.Body>
         </div>
       </Modal>

@@ -64,12 +64,17 @@ const Carrito = () => {
                 title: "¡Gracias por su compra!",
                 text: `Su compra fue realizada exitosamente`,
                 icon: "success",
-                timer: 1500,
+                timer: 4500,
                 showConfirmButton: false,
               });
             }, 4000);
           } else {
-            throw new Error("Error en alguna de las compras");
+            Swal.fire({
+              title: "Error en alguna de las compras",
+              text: "No se pudo procesar tu compra. Intenta nuevamente.",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
           }
         } catch (error) {
           console.error("Error en la compra:", error);
@@ -159,14 +164,6 @@ const Carrito = () => {
                             </Button>
                             <span className="mx-2">{item.quantity}</span>
 
-
-
-
-                           
-                           
-
-
-
                             <Button
                               variant="outline-secondary"
                               size="sm"
@@ -179,14 +176,13 @@ const Carrito = () => {
                           </div>
                         </div>
 
- <div className="d-flex flex-column">
-                              
-                               {item.quantity > item.stock && (
-                              <small className="text-danger d-block">
-                                Stock insuficiente
-                              </small>
-                            )}
-                            </div>
+                        <div className="d-flex flex-column">
+                          {item.quantity > item.stock && (
+                            <small className="text-danger d-block">
+                              Stock insuficiente
+                            </small>
+                          )}
+                        </div>
 
                         <div className="mt-4">
                           <Button

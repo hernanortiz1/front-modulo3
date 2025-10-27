@@ -26,6 +26,7 @@ import { obtenerProductos } from "./helpers/queries";
 import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
 import { CartProvider } from "./helpers/CartContext";
+import ProtectorRol from "./components/routes/ProtectorRol";
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,24 @@ function App() {
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
 
   const [productos, setProductos] = useState([]);
+
+  const cargarProductos = async () => {
+    try {
+      const respuesta = await obtenerProductos();
+      if (respuesta && respuesta.ok) {
+        const data = await respuesta.json();
+        setProductos(data);
+      } else {
+        console.error("Error al obtener productos");
+      }
+    } catch (error) {
+      console.error("Error al cargar productos:", error);
+    }
+  };
+
+  useEffect(() => {
+    cargarProductos();
+  }, []);
 
   useEffect(() => {
     sessionStorage.setItem("userKey", JSON.stringify(usuarioAdmin));
@@ -72,7 +91,11 @@ function App() {
 
               <Route
                 path="/detalle/:id"
-                element={<DetalleProducto usuarioAdmin={usuarioAdmin}></DetalleProducto>}
+                element={
+                  <DetalleProducto
+                    usuarioAdmin={usuarioAdmin}
+                  ></DetalleProducto>
+                }
               ></Route>
 
               <Route path="/carrito" element={<Carrito />} />
@@ -123,20 +146,31 @@ function App() {
               <Route
                 path="/administrador"
                 element={
-                  <ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>
+                  <ProtectorRol
+                    rolesPermitidos={["Administrador", "Gerente", "Empleado"]}
+                    usuario={usuarioAdmin}
+                  ></ProtectorRol>
                 }
               >
-                <Route index element={<Administrador></Administrador>}></Route>
+                <Route index element={<Administrador titulo={usuarioAdmin.rol || "Administrador"}></Administrador>}></Route>
 
                 <Route
                   path="crear"
-                  element={<FormularioRopa titulo={"Crear producto"} />}
+                  element={
+                    <FormularioRopa
+                      titulo={"Crear producto"}
+                      cargarProductos={cargarProductos}
+                    />
+                  }
                 ></Route>
 
                 <Route
                   path="editar/:id"
                   element={
-                    <FormularioRopa titulo={"Editar producto"}></FormularioRopa>
+                    <FormularioRopa
+                      titulo={"Editar producto"}
+                      cargarProductos={cargarProductos}
+                    ></FormularioRopa>
                   }
                 ></Route>
               </Route>

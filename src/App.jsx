@@ -26,6 +26,7 @@ import { obtenerProductos } from "./helpers/queries";
 import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
 import { CartProvider } from "./helpers/CartContext";
+import ProtectorRol from "./components/routes/ProtectorRol";
 
 function App() {
   useEffect(() => {
@@ -145,10 +146,13 @@ function App() {
               <Route
                 path="/administrador"
                 element={
-                  <ProtectorAdmin isAdmin={usuarioAdmin}></ProtectorAdmin>
+                  <ProtectorRol
+                    rolesPermitidos={["Administrador", "Gerente", "Empleado"]}
+                    usuario={usuarioAdmin}
+                  ></ProtectorRol>
                 }
               >
-                <Route index element={<Administrador></Administrador>}></Route>
+                <Route index element={<Administrador titulo={usuarioAdmin.rol || "Administrador"}></Administrador>}></Route>
 
                 <Route
                   path="crear"

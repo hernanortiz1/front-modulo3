@@ -86,7 +86,7 @@ const SobreNosotros = () => {
                     <div className="d-flex align-items-start">
                       <span className="check-icon me-3 fs-4">✓</span>
                       <p className="mb-0 text-muted">
-                        Somos usuarios antes que vendedores
+                        Somos usuarios antes que Empleadoes
                       </p>
                     </div>
                   </Col>

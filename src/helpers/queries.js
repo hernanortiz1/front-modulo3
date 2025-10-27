@@ -127,7 +127,12 @@ export const obtenerUsuarios = async () => {
 
 export const obtenerUsuarioID = async (id) => {
   try {
-    const respuesta = await fetch(API_USUARIOS + `/${id}`);
+    const token = JSON.parse(sessionStorage.getItem("userKey"))?.token;
+    const respuesta = await fetch(API_USUARIOS + `/${id}`, {
+      headers: {
+        "x-token": token,
+      },
+    });
     return respuesta;
   } catch (error) {
     console.error(error);
@@ -137,14 +142,15 @@ export const obtenerUsuarioID = async (id) => {
 
 export const editarUsuario = async (usuarioEditado, id) => {
   try {
+    const token = JSON.parse(sessionStorage.getItem("userKey"))?.token;
     const respuesta = await fetch(API_USUARIOS + `/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "x-token": token,
       },
       body: JSON.stringify(usuarioEditado),
     });
-    const data = await respuesta.json();
     return respuesta;
   } catch (error) {
     console.error(error);
@@ -154,8 +160,12 @@ export const editarUsuario = async (usuarioEditado, id) => {
 
 export const borrarUsuario = async (id) => {
   try {
+    const token = JSON.parse(sessionStorage.getItem("userKey"))?.token;
     const respuesta = await fetch(API_USUARIOS + `/${id}`, {
       method: "DELETE",
+      headers: {
+        "x-token": token,
+      },
     });
     return respuesta;
   } catch (error) {
@@ -196,7 +206,7 @@ export const comprarProducto = async (productoId, cantidad) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        cantidad: cantidad
+        cantidad: cantidad,
       }),
     });
     return respuesta;
@@ -209,19 +219,38 @@ export const comprarProducto = async (productoId, cantidad) => {
 export const comprarMultiplesProductos = async (productos) => {
   try {
     const respuestas = await Promise.all(
-      productos.map(producto => 
+      productos.map((producto) =>
         comprarProducto(producto._id, producto.quantity)
       )
     );
-    
+
     // Verificar que todas las compras fueron exitosas
-    const todasExitosas = respuestas.every(respuesta => 
-      respuesta && respuesta.status === 200
+    const todasExitosas = respuestas.every(
+      (respuesta) => respuesta && respuesta.status === 200
     );
-    
+
     return todasExitosas;
   } catch (error) {
     console.error("Error en compra múltiple:", error);
     return false;
+  }
+};
+
+export const crearUsuarioAdministrador = async (nuevoUsuario) => {
+  try {
+    const token = JSON.parse(sessionStorage.getItem("userKey")).token;
+    const respuesta = await fetch(`${API_USUARIOS}/admin/crear`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": token,
+      },
+      body: JSON.stringify(nuevoUsuario),
+    });
+    return respuesta;
+    
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };

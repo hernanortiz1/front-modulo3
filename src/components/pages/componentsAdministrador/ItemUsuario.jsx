@@ -17,6 +17,9 @@ const ItemUsuario = ({
   limitUsuario,
   pageUsuario,
 }) => {
+  const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
+  const rol = usuarioLogueado.rol;
+
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -57,8 +60,17 @@ const ItemUsuario = ({
             pageUsuario,
             limitUsuario
           );
-          const usuariosActualizados = await respuestaUsuarios.json();
-          setUsuarios(usuariosActualizados.usuarios);
+          if (respuestaUsuarios.status === 200) {
+            const datos = await respuestaUsuarios.json();
+            let usuariosFiltrados = datos.usuarios;
+            if (rol === "Gerente") {
+              usuariosFiltrados = datos.usuarios.filter(
+                (usuario) =>
+                  usuario.rol === "Empleado" || usuario.rol === "Usuario"
+              );
+            }
+            setUsuarios(usuariosFiltrados);
+          }
         } else {
           Swal.fire({
             title: "Usario eliminado",
@@ -110,7 +122,13 @@ const ItemUsuario = ({
       );
       if (respuestaUsuarios.status === 200) {
         const datos = await respuestaUsuarios.json();
-        setUsuarios(datos.usuarios);
+        let usuariosFiltrados = datos.usuarios;
+        if (rol === "Gerente") {
+          usuariosFiltrados = datos.usuarios.filter(
+            (usuario) => usuario.rol === "Empleado" || usuario.rol === "Usuario"
+          );
+        }
+        setUsuarios(usuariosFiltrados);
       }
       handleClose();
     } else {
@@ -137,13 +155,16 @@ const ItemUsuario = ({
             >
               <i className="bi bi-person-fill-gear"></i>
             </Button>
-            <Button
-              variant="danger"
-              className="btnAdministrador"
-              onClick={eliminarUsuario}
-            >
-              <i className="bi bi-person-fill-x"></i>
-            </Button>
+            {/* Btn Eliminar */}
+            {rol === "Administrador" && (
+              <Button
+                variant="danger"
+                className="btnAdministrador"
+                onClick={eliminarUsuario}
+              >
+                <i className="bi bi-person-fill-x"></i>
+              </Button>
+            )}
           </div>
         </td>
       </tr>
@@ -208,8 +229,22 @@ const ItemUsuario = ({
                   })}
                 >
                   <option value="">Seleccione una opcion</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Usuario">Usuario</option>
+                  {/* opciones si es Administrador */}
+                  {rol === "Administrador" && (
+                    <>
+                      <option value="Administrador">Administrador</option>
+                      <option value="Gerente">Gerente</option>
+                      <option value="Empleado">Empleado</option>
+                      <option value="Usuario">Usuario</option>
+                    </>
+                  )}
+                  {/* opciones si es Gerente */}
+                  {rol === "Gerente" && (
+                    <>
+                      <option value="Empleado">Empleado</option>
+                      <option value="Usuario">Usuario</option>
+                    </>
+                  )}
                 </Form.Select>
                 <Form.Text className="text-danger">
                   {errors.rol?.message}

@@ -277,16 +277,18 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                           {usuarioAdmin.nombreUsuario.substring(0, 20) + "..."}
                         </span>
                       </Dropdown.Toggle>
-
+                      {/* opciones de Menu segun el rol */}
                       <Dropdown.Menu>
-                        {usuarioAdmin.rol === "Administrador" && (
+                        {(usuarioAdmin.rol === "Administrador" ||
+                          usuarioAdmin.rol === "Gerente" ||
+                          usuarioAdmin.rol === "Empleado") && (
                           <Dropdown.Item as={NavLink} to="/administrador">
                             <i className="bi bi-gear-fill me-2"></i>
                             Panel de administración
                           </Dropdown.Item>
                         )}
 
-                        {usuarioAdmin.rol !== "Administrador" &&
+                        {usuarioAdmin.rol === "Usuario" &&
                           !isCartPage && (
                             <Dropdown.Item onClick={() => setShowCart(true)}>
                               <i className="bi bi-bag-fill me-2"></i>
@@ -426,7 +428,11 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       },
                     })}
                   />
-                  <Button variant="link" onClick={verPassword} className="position-absolute end-0 top-50 translate-middle-y">
+                  <Button
+                    variant="link"
+                    onClick={verPassword}
+                    className="position-absolute end-0 top-50 translate-middle-y"
+                  >
                     {mostrarPassword ? (
                       <i className="bi bi-eye-slash text-dark"></i>
                     ) : (

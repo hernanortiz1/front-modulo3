@@ -147,7 +147,7 @@ function App() {
                 path="/administrador"
                 element={
                   <ProtectorRol
-                    rolesPermitidos={["Administrador", "Gerente", "Vendedor"]}
+                    rolesPermitidos={["Administrador", "Gerente", "Empleado"]}
                     usuario={usuarioAdmin}
                   ></ProtectorRol>
                 }

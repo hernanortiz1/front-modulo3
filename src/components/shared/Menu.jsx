@@ -281,7 +281,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                       <Dropdown.Menu>
                         {(usuarioAdmin.rol === "Administrador" ||
                           usuarioAdmin.rol === "Gerente" ||
-                          usuarioAdmin.rol === "Vendedor") && (
+                          usuarioAdmin.rol === "Empleado") && (
                           <Dropdown.Item as={NavLink} to="/administrador">
                             <i className="bi bi-gear-fill me-2"></i>
                             Panel de administración

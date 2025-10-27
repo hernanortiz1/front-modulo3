@@ -102,7 +102,7 @@ const Administrador = ({ titulo }) => {
         let usuariosFiltrados = datos.usuarios;
         if (rol === "Gerente") {
           usuariosFiltrados = usuariosFiltrados.filter(
-            (usuario) => usuario.rol === "Vendedor" || usuario.rol === "Usuario"
+            (usuario) => usuario.rol === "Empleado" || usuario.rol === "Usuario"
           );
         }
 
@@ -561,14 +561,14 @@ const Administrador = ({ titulo }) => {
                     <>
                       <option value="Administrador">Administrador</option>
                       <option value="Gerente">Gerente</option>
-                      <option value="Vendedor">Vendedor</option>
+                      <option value="Empleado">Empleado</option>
                       <option value="Usuario">Usuario</option>
                     </>
                   )}
                   {/* opciones para Gerente */}
                   {rol === "Gerente" && (
                     <>
-                      <option value="Vendedor">Vendedor</option>
+                      <option value="Empleado">Empleado</option>
                       <option value="Usuario">Usuario</option>
                     </>
                   )}

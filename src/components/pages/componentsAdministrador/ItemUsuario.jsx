@@ -66,7 +66,7 @@ const ItemUsuario = ({
             if (rol === "Gerente") {
               usuariosFiltrados = datos.usuarios.filter(
                 (usuario) =>
-                  usuario.rol === "Vendedor" || usuario.rol === "Usuario"
+                  usuario.rol === "Empleado" || usuario.rol === "Usuario"
               );
             }
             setUsuarios(usuariosFiltrados);
@@ -125,7 +125,7 @@ const ItemUsuario = ({
         let usuariosFiltrados = datos.usuarios;
         if (rol === "Gerente") {
           usuariosFiltrados = datos.usuarios.filter(
-            (usuario) => usuario.rol === "Vendedor" || usuario.rol === "Usuario"
+            (usuario) => usuario.rol === "Empleado" || usuario.rol === "Usuario"
           );
         }
         setUsuarios(usuariosFiltrados);
@@ -234,14 +234,14 @@ const ItemUsuario = ({
                     <>
                       <option value="Administrador">Administrador</option>
                       <option value="Gerente">Gerente</option>
-                      <option value="Vendedor">Vendedor</option>
+                      <option value="Empleado">Empleado</option>
                       <option value="Usuario">Usuario</option>
                     </>
                   )}
                   {/* opciones si es Gerente */}
                   {rol === "Gerente" && (
                     <>
-                      <option value="Vendedor">Vendedor</option>
+                      <option value="Empleado">Empleado</option>
                       <option value="Usuario">Usuario</option>
                     </>
                   )}

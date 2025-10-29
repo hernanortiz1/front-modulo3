@@ -27,6 +27,7 @@ import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
 import { CartProvider } from "./helpers/CartContext";
 import ProtectorRol from "./components/routes/ProtectorRol";
+import PagoExitoso from "./components/pages/PagoExitoso";
 
 function App() {
   useEffect(() => {
@@ -174,6 +175,7 @@ function App() {
                   }
                 ></Route>
               </Route>
+              <Route path="/pago/exitoso" element={<PagoExitoso />} />
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>

@@ -5,7 +5,7 @@ import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
 import { comprarMultiplesProductos } from "../../helpers/queries";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
-import { crearOrdenCarritoAPI } from "../../helpers/queriesPagos.js";
+import { crearOrdenCarritoAPI } from "../../helpers/queriesPagos";
 
 const Carrito = () => {
   const {

@@ -88,7 +88,6 @@ const Carrito = () => {
         }
 
         try {
-          const compraExitosa = await comprarMultiplesProductos(cartItems);
 
           if (compraExitosa) {
             setAnimationStage("entering");
@@ -102,8 +101,8 @@ const Carrito = () => {
               clearCart();
 
               Swal.fire({
-                title: "¡Gracias por su compra!",
-                text: `Su compra fue realizada exitosamente`,
+                title: "¡Preparando su compra!",
+                text: `Serás redirigido para completar el pago`,
                 icon: "success",
                 timer: 4500,
                 showConfirmButton: false,

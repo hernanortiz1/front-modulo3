@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
 import { XCircle, ArrowLeft, CreditCard, RefreshCw } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const PagoFallido = () => {
   const navigate = useNavigate();

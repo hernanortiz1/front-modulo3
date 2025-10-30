@@ -87,34 +87,25 @@ const Carrito = () => {
         }
 
         try {
-          if (compraExitosa) {
-            setAnimationStage("entering");
+          setAnimationStage("entering");
 
-            setTimeout(() => {
-              setAnimationStage("exiting");
-            }, 2000);
+          setTimeout(() => {
+            setAnimationStage("exiting");
+          }, 2000);
 
-            setTimeout(() => {
-              setAnimationStage("idle");
-              clearCart();
+          setTimeout(() => {
+            setAnimationStage("idle");
+            clearCart();
 
-              Swal.fire({
-                title: "¡Preparando su compra!",
-                text: `Serás redirigido para completar el pago`,
-                icon: "success",
-                timer: 4500,
-                showConfirmButton: false,
-              });
-              handlePagar();
-            }, 4000);
-          } else {
             Swal.fire({
-              title: "Error en alguna de las compras",
-              text: "No se pudo procesar tu compra. Intenta nuevamente.",
-              icon: "error",
-              confirmButtonColor: "#3085d6",
+              title: "¡Preparando su compra!",
+              text: `Serás redirigido para completar el pago`,
+              icon: "success",
+              timer: 4500,
+              showConfirmButton: false,
             });
-          }
+            handlePagar();
+          }, 4000);
         } catch (error) {
           console.error("Error en la compra:", error);
           Swal.fire({

@@ -18,16 +18,57 @@ import visa from "../../assets/tarjetas/Visa_Logo.png";
 import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
+import { crearOrdenCarritoAPI } from "../../helpers/queriesPagos";
 
 const DetalleProducto = ({ usuarioAdmin }) => {
   const [producto, setProducto] = useState({});
   const [favorito, setFavorito] = useState(false);
   const { id } = useParams();
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
   const [animationStage, setAnimationStage] = useState("idle");
   const Navigate = useNavigate();
+
+  const handlePagar = async () => {
+    // 1. Formatear los productos del carrito según lo esperado por el backend
+    const productosFormateados = cartItems.map((item) => ({
+      id: item._id, // Asegúrate de que el backend espera el _id como 'id'
+      quantity: item.quantity,
+    }));
+
+    // 2. Enviar la petición al backend
+    try {
+      const respuesta = await crearOrdenCarritoAPI(productosFormateados);
+
+      if (respuesta && respuesta.status === 201) {
+        const data = await respuesta.json();
+        if (respuesta.ok) {
+          // Guardar el pedidoId en localStorage para verificación posterior
+          localStorage.setItem("ultimoPedidoId", data.pedidoId);
+
+          // Redirigir a Mercado Pago
+          window.location.href = data.init_point;
+        }
+      } else {
+        const errorData = await respuesta.json();
+        Swal.fire({
+          title: "Ocurrió un error",
+          text:
+            errorData.mensaje ||
+            "No se pudo procesar el pago. Intente nuevamente en unos minutos.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      Swal.fire({
+        title: "Ocurrió un error",
+        text: "No se pudo conectar con el servidor para procesar el pago. Por favor, verifique su conexión e intente de nuevo.",
+        icon: "error",
+      });
+    }
+  };
 
   const handleBuy = async () => {
     if (usuarioAdmin.token) {
@@ -52,31 +93,24 @@ const DetalleProducto = ({ usuarioAdmin }) => {
               return;
             }
 
-            const resultado = await comprarProducto(producto._id, cantidad);
+            setAnimationStage("entering");
 
-            if (resultado && resultado.status === 200) {
-              const data = await resultado.json();
-              setProducto(data.producto);
+            setTimeout(() => {
+              setAnimationStage("exiting");
+            }, 2000);
 
-              setAnimationStage("entering");
+            setTimeout(() => {
+              setAnimationStage("idle");
 
-              setTimeout(() => {
-                setAnimationStage("exiting");
-              }, 2000);
-
-              setTimeout(() => {
-                setAnimationStage("idle");
-
-                Swal.fire({
-                  title: "¡Gracias por su compra!",
-                  text: `Has comprado ${cantidad} ${producto.nombreProducto}`,
-                  icon: "success",
-                  timer: 4500,
-                  confirmButtonText: "continuar",
-                });
-                Navigate("/");
-              }, 4000);
-            }
+              Swal.fire({
+                title: "¡Preparando su compra!",
+                text: `Serás redirigido para completar el pago`,
+                icon: "success",
+                timer: 4500,
+                showConfirmButton: false,
+              });
+              handlePagar()
+            }, 4000);
           } catch (error) {
             console.error("Error en la compra:", error);
             Swal.fire({

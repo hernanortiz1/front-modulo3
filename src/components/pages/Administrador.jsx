@@ -222,6 +222,12 @@ const Administrador = ({ titulo }) => {
                     >
                       <i className="bi bi-file-earmark-plus"></i>
                     </Button>
+                    <Button
+                      className="btn btn-warning ms-2"
+                      href="/"
+                    >
+                     <i className="bi bi-star-fill"></i>
+                    </Button>
                   </div>
                   <div className="col-12">
                     <Table

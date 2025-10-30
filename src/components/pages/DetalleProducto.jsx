@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Card, Row, Col, Button, Alert } from "react-bootstrap";
 import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
-import { comprarProducto, obtenerProductosPorId } from "../../helpers/queries";
+import { obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
 import {
   formatearPrecio,
@@ -18,7 +18,7 @@ import visa from "../../assets/tarjetas/Visa_Logo.png";
 import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
-import { crearOrdenCarritoAPI } from "../../helpers/queriesPagos";
+import { crearOrdenProductoIndividual } from "../../helpers/queriesPagos";
 
 const DetalleProducto = ({ usuarioAdmin }) => {
   const [producto, setProducto] = useState({});
@@ -30,16 +30,15 @@ const DetalleProducto = ({ usuarioAdmin }) => {
   const [animationStage, setAnimationStage] = useState("idle");
   const Navigate = useNavigate();
 
-  const handlePagar = async () => {
-    // 1. Formatear los productos del carrito según lo esperado por el backend
-    const productosFormateados = cartItems.map((item) => ({
-      id: item._id, // Asegúrate de que el backend espera el _id como 'id'
-      quantity: item.quantity,
-    }));
+  const handlePagarIndividual = async () => {
+    // Crear objeto con los datos del producto individual
+    const productoIndividual = {
+      productoId: producto._id,
+      cantidad: cantidad,
+    };
 
-    // 2. Enviar la petición al backend
     try {
-      const respuesta = await crearOrdenCarritoAPI(productosFormateados);
+      const respuesta = await crearOrdenProductoIndividual(productoIndividual);
 
       if (respuesta && respuesta.status === 201) {
         const data = await respuesta.json();
@@ -54,17 +53,15 @@ const DetalleProducto = ({ usuarioAdmin }) => {
         const errorData = await respuesta.json();
         Swal.fire({
           title: "Ocurrió un error",
-          text:
-            errorData.mensaje ||
-            "No se pudo procesar el pago. Intente nuevamente en unos minutos.",
+          text: errorData.mensaje || "No se pudo procesar el pago.",
           icon: "error",
         });
       }
     } catch (error) {
-      console.error("Error al procesar el pago:", error);
+      console.error("Error al procesar el pago individual:", error);
       Swal.fire({
         title: "Ocurrió un error",
-        text: "No se pudo conectar con el servidor para procesar el pago. Por favor, verifique su conexión e intente de nuevo.",
+        text: "No se pudo conectar con el servidor para procesar el pago.",
         icon: "error",
       });
     }
@@ -109,7 +106,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
                 timer: 4500,
                 showConfirmButton: false,
               });
-              handlePagar()
+              handlePagarIndividual();
             }, 4000);
           } catch (error) {
             console.error("Error en la compra:", error);

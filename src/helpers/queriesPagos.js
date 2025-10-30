@@ -33,3 +33,19 @@ export const verificarEstadoPedido = async (pedidoId) => {
     return "Desconocido";
   }
 };
+
+export const crearOrdenProductoIndividual = async (producto) => {
+  try {
+    const respuesta = await fetch(`${API_PAGOS}/crear-orden-individual`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(producto),
+    });
+    return respuesta;
+  } catch (error) {
+    console.error("Error al crear orden individual:", error);
+    return null;
+  }
+};

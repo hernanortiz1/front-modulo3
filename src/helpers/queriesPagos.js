@@ -36,7 +36,7 @@ export const verificarEstadoPedido = async (pedidoId) => {
 
 export const crearOrdenProductoIndividual = async (producto) => {
   try {
-    const respuesta = await fetch(`${API_PAGOS}/crear-orden-individual`, {
+    const respuesta = await fetch(`${URL_PAGOS}/crear-orden-individual`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

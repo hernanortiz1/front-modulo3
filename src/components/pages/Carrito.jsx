@@ -3,7 +3,6 @@ import { Button, Image } from "react-bootstrap";
 import { NavLink } from "react-router";
 import { useCart } from "../../helpers/CartContext";
 import Swal from "sweetalert2";
-import { comprarMultiplesProductos } from "../../helpers/queries";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 import { crearOrdenCarritoAPI } from "../../helpers/queriesPagos";
 
@@ -22,7 +21,7 @@ const Carrito = () => {
 
   const [animationStage, setAnimationStage] = useState("idle");
 
-   const handlePagar = async () => {
+  const handlePagar = async () => {
     // 1. Formatear los productos del carrito según lo esperado por el backend
     const productosFormateados = cartItems.map((item) => ({
       id: item._id, // Asegúrate de que el backend espera el _id como 'id'
@@ -88,7 +87,6 @@ const Carrito = () => {
         }
 
         try {
-
           if (compraExitosa) {
             setAnimationStage("entering");
 

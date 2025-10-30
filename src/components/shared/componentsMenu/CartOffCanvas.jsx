@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { useCart } from "../../../helpers/CartContext";
 import Swal from "sweetalert2";
-import { comprarMultiplesProductos } from "../../../helpers/queries";
+import { crearOrdenCarritoAPI } from "../../../helpers/queriesPagos";
 
 const CartOffcanvas = ({ show, handleClose }) => {
   const endRef = useRef(null);
@@ -21,6 +21,46 @@ const CartOffcanvas = ({ show, handleClose }) => {
   } = useCart();
 
   const Navigate = useNavigate();
+
+  const handlePagar = async () => {
+    // 1. Formatear los productos del carrito según lo esperado por el backend
+    const productosFormateados = cartItems.map((item) => ({
+      id: item._id, // Asegúrate de que el backend espera el _id como 'id'
+      quantity: item.quantity,
+    }));
+
+    // 2. Enviar la petición al backend
+    try {
+      const respuesta = await crearOrdenCarritoAPI(productosFormateados);
+
+      if (respuesta && respuesta.status === 201) {
+        const data = await respuesta.json();
+        if (respuesta.ok) {
+          // Guardar el pedidoId en localStorage para verificación posterior
+          localStorage.setItem("ultimoPedidoId", data.pedidoId);
+
+          // Redirigir a Mercado Pago
+          window.location.href = data.init_point;
+        }
+      } else {
+        const errorData = await respuesta.json();
+        Swal.fire({
+          title: "Ocurrió un error",
+          text:
+            errorData.mensaje ||
+            "No se pudo procesar el pago. Intente nuevamente en unos minutos.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      Swal.fire({
+        title: "Ocurrió un error",
+        text: "No se pudo conectar con el servidor para procesar el pago. Por favor, verifique su conexión e intente de nuevo.",
+        icon: "error",
+      });
+    }
+  };
 
   const handleBuy = () => {
     Swal.fire({
@@ -48,38 +88,27 @@ const CartOffcanvas = ({ show, handleClose }) => {
         }
 
         try {
-          const compraExitosa = await comprarMultiplesProductos(cartItems);
+          setAnimationStage("entering");
 
-          if (compraExitosa) {
-            setAnimationStage("entering");
+          setTimeout(() => {
+            setAnimationStage("exiting");
+          }, 2000);
 
-            setTimeout(() => {
-              setAnimationStage("exiting");
-            }, 2000);
+          setTimeout(() => {
+            setAnimationStage("idle");
+            clearCart();
 
-            setTimeout(() => {
-              setAnimationStage("idle");
-              clearCart();
-
-              Swal.fire({
-                title: "¡Gracias por su compra!",
-                text: `Su compra fue realizada exitosamente`,
-                icon: "success",
-                timer: 4500,
-                showConfirmButton: false,
-              });
-
-              handleClose();
-              Navigate("/");
-            }, 4000);
-          } else {
             Swal.fire({
-              title: "Error en alguna de las compras",
-              text: "No se pudo procesar tu compra. Intenta nuevamente.",
-              icon: "error",
-              confirmButtonColor: "#3085d6",
+              title: "¡Preparando su compra!",
+              text: `Serás redirigido para completar el pago`,
+              icon: "success",
+              timer: 4500,
+              showConfirmButton: false,
             });
-          }
+
+            handleClose();
+            handlePagar()
+          }, 4000);
         } catch (error) {
           console.error("Error en la compra:", error);
           Swal.fire({

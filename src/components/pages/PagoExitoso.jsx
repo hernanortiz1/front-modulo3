@@ -1,28 +1,8 @@
 import React, { useEffect } from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import { Link } from "react-router";
-import { verificarEstadoPedido } from "../../../src/helpers/queriesPagos.js";
-import Swal from "sweetalert2";
 
 const PagoExitoso = () => {
-  useEffect(() => {
-    const pedidoId = localStorage.getItem("ultimoPedidoId");
-
-    if (pedidoId) {
-      const intervalo = setInterval(async () => {
-        const estado = await verificarEstadoPedido(pedidoId);
-
-        if (estado === "Pendiente") {
-          Swal.fire("¡Pago confirmado!", "Tu pedido está aprobado", "success");
-          clearInterval(intervalo);
-        }
-
-        // Si pasan 10 minutos, parar
-      }, 5000); // Verificar cada 5 segundos
-
-      return () => clearInterval(intervalo);
-    }
-  }, []);
   return (
     <Container className="mainSection d-flex justify-content-center align-items-center my-4">
       <Card className="text-center shadow p-4">

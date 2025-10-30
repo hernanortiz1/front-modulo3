@@ -222,9 +222,10 @@ const Administrador = ({ titulo }) => {
                     >
                       <i className="bi bi-file-earmark-plus"></i>
                     </Button>
+                    {/*btn Categorias destacadas */}
                     <Button
                       className="btn btn-warning ms-2"
-                      href="/"
+                      href="/categorias-destacadas"
                     >
                      <i className="bi bi-star-fill"></i>
                     </Button>

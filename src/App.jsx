@@ -27,6 +27,7 @@ import Carrito from "./components/pages/Carrito";
 import SobreNosotros from "./components/pages/SobreNosotros";
 import { CartProvider } from "./helpers/CartContext";
 import ProtectorRol from "./components/routes/ProtectorRol";
+import CategoriaDestacada from "./components/pages/categorias/CategoriaDestacada";
 
 function App() {
   useEffect(() => {
@@ -144,6 +145,10 @@ function App() {
 
               <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
               <Route
+                path="/categorias-destacadas"
+                element={<CategoriaDestacada />}
+              ></Route>
+              <Route
                 path="/administrador"
                 element={
                   <ProtectorRol
@@ -152,7 +157,14 @@ function App() {
                   ></ProtectorRol>
                 }
               >
-                <Route index element={<Administrador titulo={usuarioAdmin.rol || "Administrador"}></Administrador>}></Route>
+                <Route
+                  index
+                  element={
+                    <Administrador
+                      titulo={usuarioAdmin.rol || "Administrador"}
+                    ></Administrador>
+                  }
+                ></Route>
 
                 <Route
                   path="crear"

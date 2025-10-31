@@ -1,5 +1,10 @@
-import React from "react";
-import { Container, Form, Table } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Form, Table, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
+import {
+  obtenerConfiguracion,
+  guardarConfiguracion,
+} from "../../../helpers/queries";
 
 const CategoriaDestacada = () => {
   const categorias = [
@@ -14,9 +19,56 @@ const CategoriaDestacada = () => {
     "Anteojos de sol",
   ];
 
+  const [titulo, setTitulo] = useState("");
+  const [seleccionadas, setSeleccionadas] = useState([]);
+
+  useEffect(() => {
+    const cargarDatos = async () => {
+      const respuesta = await obtenerConfiguracion();
+      if (respuesta?.ok) {
+        const data = await respuesta.json();
+        setTitulo(data.titulo || "");
+        setSeleccionadas(data.categoriasSeleccionadas || []);
+      }
+    };
+    cargarDatos();
+  }, []);
+
+  const manejarCheck = (categoria) => {
+    setSeleccionadas((prev) =>
+      prev.includes(categoria)
+        ? prev.filter((c) => c !== categoria)
+        : [...prev, categoria]
+    );
+  };
+
+  const manejarGuardar = async () => {
+    const configuracion = {
+      titulo,
+      categoriasSeleccionadas: seleccionadas,
+    };
+
+    const respuesta = await guardarConfiguracion(configuracion);
+    if (respuesta?.ok) {
+      Swal.fire("Éxito", "Configuración guardada correctamente", "success");
+    } else {
+      Swal.fire("Error", "No se pudo guardar la configuración", "error");
+    }
+  };
+
   return (
     <Container className="my-5">
       <div className="border border-dark rounded-3 p-4 bg-light shadow-sm">
+        <div className="mb-4 text-center">
+          <h4>Título de categoría</h4>
+          <Form.Control
+            type="text"
+            placeholder="Ingrese título"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+          />
+        </div>
+
         <h4 className="text-center mb-4">Categorías destacadas</h4>
         <div className="table-responsive">
           <Table className="text-center align-middle">
@@ -31,12 +83,21 @@ const CategoriaDestacada = () => {
               <tr className="table-primary">
                 {categorias.map((cat) => (
                   <td key={cat}>
-                    <Form.Check type="checkbox" id={`check-${cat}`} />
+                    <Form.Check
+                      type="checkbox"
+                      id={`check-${cat}`}
+                      checked={seleccionadas.includes(cat)}
+                      onChange={() => manejarCheck(cat)}
+                    />
                   </td>
                 ))}
               </tr>
             </tbody>
           </Table>
+        </div>
+
+        <div className="text-center mt-4">
+          <Button onClick={manejarGuardar}>Guardar cambios</Button>
         </div>
       </div>
     </Container>
@@ -44,3 +105,4 @@ const CategoriaDestacada = () => {
 };
 
 export default CategoriaDestacada;
+

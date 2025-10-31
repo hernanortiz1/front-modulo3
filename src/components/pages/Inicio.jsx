@@ -12,7 +12,7 @@ import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
 import React from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useEffect, useState } from "react";
-import { obtenerProductos } from "../../helpers/queries";
+import { obtenerConfiguracion, obtenerProductos } from "../../helpers/queries";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,9 +20,12 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import BtnScroll from "./categorias/funcion/BtnScroll";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
+
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
+  //datos para titulo y categoria de seccion principal
+  const [configuracion, setConfiguracion] = useState(null);
 
   useEffect(() => {
     leerProductos();
@@ -36,6 +39,17 @@ const Inicio = () => {
       return () => clearTimeout(timer);
     }
   }, [productos]);
+
+  useEffect(() => {
+    const cargarConfiguracion = async () => {
+      const respuesta = await obtenerConfiguracion();
+      if (respuesta?.ok) {
+        const datos = await respuesta.json();
+        setConfiguracion(datos);
+      }
+    };
+    cargarConfiguracion();
+  }, []);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -134,35 +148,47 @@ const Inicio = () => {
         </Carousel.Item>
       </Carousel>
       <Container className="my-4">
-        <div data-aos="fade-down" data-aos-delay="0">
-          <h2 className="Montserrat text-center mt-5 mb-4">
-            COLECCIÓN PRIMAVERA-VERANO
-          </h2>
-          <p className="text-center lead mb-5">
-            Explora lo último en tendencias.
-          </p>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true, dynamicBullets: true }}
-            style={{
-              paddingBottom: "40px",
-            }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {coleccionRandom.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        {configuracion && (
+          <div data-aos="fade-down" data-aos-delay="0">
+            <h2 className="Montserrat text-center mt-5 mb-4">
+              {configuracion.tituloSeccion || "PRODUCTOS DESTACADOS"}
+            </h2>
+            <p className="text-center lead mb-5">
+              Explora lo último en tendencias.
+            </p>
+            <Swiper
+              modules={[Navigation, Pagination]}
+              spaceBetween={20}
+              slidesPerView={4}
+              navigation
+              pagination={{ clickable: true, dynamicBullets: true }}
+              style={{
+                paddingBottom: "40px",
+              }}
+              breakpoints={{
+                0: { slidesPerView: 1 },
+                576: { slidesPerView: 2 },
+                992: { slidesPerView: 4 },
+              }}
+            >
+               {(configuracion.categoriasDestacadas || []).map((categoria) => {
+          // Filtrar productos por cada categoría destacada
+          const productosFiltrados = productos.filter(
+            (producto) => producto.categoria === categoria
+          );
+
+          // Si no hay productos para la categoría, no renderiza nada
+          if (!productosFiltrados.length) return null;
+
+          return productosFiltrados.slice(0, 8).map((ropa) => (
+            <SwiperSlide key={ropa._id}>
+              <CardRopa ropa={ropa} />
+            </SwiperSlide>
+          ));
+        })}
+      </Swiper>
+          </div>
+        )}
         <hr />
         <div className="row align-items-center">
           <h3 className="Montserrat text-start my-5 col-6">

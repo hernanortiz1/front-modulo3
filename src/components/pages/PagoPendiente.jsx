@@ -1,4 +1,6 @@
 // Ejemplo de página pendiente
+import React from "react";
+
 const PagoPendiente = () => {
   return (
     <div className="text-center">

@@ -2,7 +2,7 @@ import { Offcanvas, Button, Image, ListGroup } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import React from "react";
 import { useRef } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { useCart } from "../../../helpers/CartContext";
 import Swal from "sweetalert2";
 import { crearOrdenCarritoAPI } from "../../../helpers/queriesPagos";
@@ -19,8 +19,6 @@ const CartOffcanvas = ({ show, handleClose }) => {
     isLoading,
     clearCart,
   } = useCart();
-
-  const Navigate = useNavigate();
 
   const handlePagar = async () => {
     // 1. Formatear los productos del carrito según lo esperado por el backend

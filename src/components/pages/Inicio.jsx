@@ -1,4 +1,4 @@
-import BannerPublicidad from "./componentsInicio/bannerPublicidad";
+import BannerPublicidad from "./componentsInicio/BannerPublicidad";
 import Carousel from "react-bootstrap/Carousel";
 import CardRopa from "../pages/ropa/CardRopa";
 import { Container, Form } from "react-bootstrap";
@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import BannerDesktop_uno from "../../assets/BannerDesktop_uno.png";
 import BannerDesktop_dos from "../../assets/BannerDesktop_dos.png";
 import BannerDesktop_tres from "../../assets/BannerDesktop_tres.png";
-import BannerMobile from "../../assets/BannerMobile.png";
+import BannerMobile from "../../assets/bannerMobile.png";
 import BannerMobile_dos from "../../assets/BannerMobile_dos.png";
 import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
 import React from "react";
@@ -20,6 +20,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import BtnScroll from "./categorias/funcion/BtnScroll";
 import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
+
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
@@ -99,6 +100,8 @@ const Inicio = () => {
     shortsBanio.length === 0 &&
     gorras.length === 0 &&
     anteojos.length === 0;
+
+
   return (
     <>
       <Carousel>
@@ -494,6 +497,7 @@ const Inicio = () => {
       <section className="mt-3">
         <BannerPublicidad />
       </section>
+  
       <BtnScroll />
       <WhatsAppButton />
     </>

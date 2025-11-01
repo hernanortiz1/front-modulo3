@@ -5,6 +5,7 @@ import {
   obtenerConfiguracion,
   guardarConfiguracion,
 } from "../../../helpers/queries";
+import { useNavigate } from "react-router";
 
 const CategoriaDestacada = () => {
   const categorias = [
@@ -21,6 +22,7 @@ const CategoriaDestacada = () => {
 
   const [titulo, setTitulo] = useState("");
   const [seleccionadas, setSeleccionadas] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -72,7 +74,7 @@ const CategoriaDestacada = () => {
         <h4 className="text-center mb-4 text-light">Categorías destacadas</h4>
         <div className="table-responsive">
           <Table className="text-center align-middle rounded-3">
-            <thead >
+            <thead>
               <tr>
                 {categorias.map((cat) => (
                   <th key={cat}>{cat}</th>
@@ -97,7 +99,12 @@ const CategoriaDestacada = () => {
         </div>
 
         <div className="text-center mt-4">
-          <Button onClick={manejarGuardar}>Guardar cambios</Button>
+          <Button onClick={manejarGuardar} className="me-2">
+            Guardar cambios
+          </Button>
+          <Button variant="danger" onClick={() => navigate("/administrador")}>
+            Volver
+          </Button>
         </div>
       </div>
     </Container>
@@ -105,4 +112,3 @@ const CategoriaDestacada = () => {
 };
 
 export default CategoriaDestacada;
-

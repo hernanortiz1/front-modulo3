@@ -174,10 +174,10 @@ main {
   position: relative;
   overflow: hidden;
 }
-.logoMastercard{
+.logoMastercard {
   height: 25px;
 }
-.logoVisa{
+.logoVisa {
   height: 18px;
 }
 .logoNaranja {
@@ -793,4 +793,32 @@ main {
     width: 100px;
     height: 100px;
   }
+}
+
+/* Agregar en tu archivo CSS */
+.pago-fallido-card {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+}
+
+.pago-fallido-card .card-body {
+  background: white;
+  border-radius: 15px;
+}
+
+/* Animación sutil para el icono */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.text-danger {
+  animation: shake 0.5s ease-in-out;
 }

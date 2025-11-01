@@ -28,6 +28,9 @@ import SobreNosotros from "./components/pages/SobreNosotros";
 import { CartProvider } from "./helpers/CartContext";
 import ProtectorRol from "./components/routes/ProtectorRol";
 import CategoriaDestacada from "./components/pages/categorias/CategoriaDestacada";
+import PagoExitoso from "./components/pages/PagoExitoso";
+import PagoFallido from "./components/pages/PagoFallido";
+import PagoPendiente from "./components/pages/PagoPendiente";
 
 function App() {
   useEffect(() => {
@@ -186,6 +189,9 @@ function App() {
                   }
                 ></Route>
               </Route>
+              <Route path="/pago/exitoso" element={<PagoExitoso />} />
+              <Route path="/pago/fallido" element={<PagoFallido />} />
+              <Route path="/pago/pendiente" element={<PagoPendiente />} />
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>

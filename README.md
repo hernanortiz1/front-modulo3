@@ -107,21 +107,29 @@ proyecto-modulo3/
 |   |   |    └── FormularioProducto.css
 |   |   |    └── FormularioRopa.jsx
 │   │   └── Administrador.jsx
+│   │   └── Carrito.jsx
 │   │   └── Contacto.jsx
 │   │   └── DetalleProducto.jsx
 │   │   └── Error404.jsx
 │   │   └── Inicio.jsx
+│   │   └── PagoExitoso.jsx
+│   │   └── PagoFallido.jsx
+│   │   └── PagoPendiente.jsx
 │   │   └── Login.jsx
 │   │   └── Registro.jsx
 │   │   └── SobreNosotros.jsx
 │   ├── routes/
 │   │   └── ProtectorAdmin.jsx
+│   │   └── ProtectorRol.jsx
 │   └── shared/
+│   |   └── componentsMenu/
+|   |   |    └── CartOffCanvas.jsx
 │   |   └── Footer.jsx
 │   |   └── Menu.jsx
 │   ├── helpers/
 │   │   └── CartContext.jsx
 │   │   └── queries.js
+│   │   └── queriesPagos.js
 │   └── App.jsx
 │   └── index.css
 │   └── main.jsx

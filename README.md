@@ -90,6 +90,7 @@ proyecto-modulo3/
 |   |   |    └── Anteojos.jsx
 |   |   |    └── Bermudas.jsx
 |   |   |    └── Camisas.jsx
+|   |   |    └── CategoriaDestacada.jsx
 |   |   |    └── Gorras.jsx
 |   |   |    └── Pantalones.jsx
 |   |   |    └── RemerasChombas.jsx

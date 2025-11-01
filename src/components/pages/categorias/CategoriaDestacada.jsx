@@ -58,8 +58,8 @@ const CategoriaDestacada = () => {
 
   return (
     <Container className="my-5">
-      <div className="border border-dark rounded-3 p-4 bg-light shadow-sm">
-        <div className="mb-4 text-center">
+      <div className="border border-dark rounded-3 p-4 colorNavbarFooter shadow-sm ">
+        <div className="mb-4 text-center text-light">
           <h4>Título de categoría</h4>
           <Form.Control
             type="text"
@@ -69,18 +69,18 @@ const CategoriaDestacada = () => {
           />
         </div>
 
-        <h4 className="text-center mb-4">Categorías destacadas</h4>
+        <h4 className="text-center mb-4 text-light">Categorías destacadas</h4>
         <div className="table-responsive">
-          <Table className="text-center align-middle">
-            <thead>
+          <Table className="text-center align-middle rounded-3">
+            <thead >
               <tr>
                 {categorias.map((cat) => (
                   <th key={cat}>{cat}</th>
                 ))}
               </tr>
             </thead>
-            <tbody>
-              <tr className="table-primary">
+            <tbody className="rounded rounded-3">
+              <tr className="table-primary ">
                 {categorias.map((cat) => (
                   <td key={cat}>
                     <Form.Check

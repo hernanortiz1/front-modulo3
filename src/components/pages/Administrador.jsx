@@ -224,10 +224,10 @@ const Administrador = ({ titulo }) => {
                     </Button>
                     {/*btn Categorias destacadas */}
                     <Button
-                      className="btn btn-warning ms-2"
+                      className="btn btn-primary ms-2"
                       href="/categorias-destacadas"
                     >
-                     <i className="bi bi-star-fill"></i>
+                     <i className="bi bi-star-fill text-light"></i>
                     </Button>
                   </div>
                   <div className="col-12">

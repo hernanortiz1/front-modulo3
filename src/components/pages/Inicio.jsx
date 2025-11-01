@@ -26,6 +26,7 @@ const Inicio = () => {
   const [coleccionRandom, setColeccionRandom] = useState([]);
   //datos para titulo y categoria de seccion principal
   const [configuracion, setConfiguracion] = useState(null);
+  const [productosDestacados, setProductosDestacados] = useState([]);
 
   useEffect(() => {
     leerProductos();
@@ -50,6 +51,19 @@ const Inicio = () => {
     };
     cargarConfiguracion();
   }, []);
+
+  useEffect(() => {
+    if (productos.length > 0 && configuracion?.categoriasSeleccionadas) {
+      const categorias = configuracion.categoriasSeleccionadas;
+      const filtrados = productos.filter((producto) =>
+        categorias.includes(producto.categoria)
+      );
+
+      const aleatorios = filtrados.sort(() => Math.random() - 0.5).slice(0, 10);
+
+      setProductosDestacados(aleatorios);
+    }
+  }, [productos, configuracion]);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -151,42 +165,37 @@ const Inicio = () => {
         {configuracion && (
           <div data-aos="fade-down" data-aos-delay="0">
             <h2 className="Montserrat text-center mt-5 mb-4">
-              {configuracion.tituloSeccion || "PRODUCTOS DESTACADOS"}
+              {configuracion.titulo || "PRODUCTOS DESTACADOS"}
             </h2>
             <p className="text-center lead mb-5">
               Explora lo último en tendencias.
             </p>
-            <Swiper
-              modules={[Navigation, Pagination]}
-              spaceBetween={20}
-              slidesPerView={4}
-              navigation
-              pagination={{ clickable: true, dynamicBullets: true }}
-              style={{
-                paddingBottom: "40px",
-              }}
-              breakpoints={{
-                0: { slidesPerView: 1 },
-                576: { slidesPerView: 2 },
-                992: { slidesPerView: 4 },
-              }}
-            >
-               {(configuracion.categoriasDestacadas || []).map((categoria) => {
-          // Filtrar productos por cada categoría destacada
-          const productosFiltrados = productos.filter(
-            (producto) => producto.categoria === categoria
-          );
 
-          // Si no hay productos para la categoría, no renderiza nada
-          if (!productosFiltrados.length) return null;
-
-          return productosFiltrados.slice(0, 8).map((ropa) => (
-            <SwiperSlide key={ropa._id}>
-              <CardRopa ropa={ropa} />
-            </SwiperSlide>
-          ));
-        })}
-      </Swiper>
+            {productosDestacados.length > 0 ? (
+              <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={20}
+                slidesPerView={4}
+                navigation
+                pagination={{ clickable: true, dynamicBullets: true }}
+                style={{ paddingBottom: "40px" }}
+                breakpoints={{
+                  0: { slidesPerView: 1 },
+                  576: { slidesPerView: 2 },
+                  992: { slidesPerView: 4 },
+                }}
+              >
+                {productosDestacados.map((ropa) => (
+                  <SwiperSlide key={ropa._id}>
+                    <CardRopa ropa={ropa} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <p className="text-center my-5">
+                No hay productos destacados disponibles.
+              </p>
+            )}
           </div>
         )}
         <hr />

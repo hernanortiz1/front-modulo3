@@ -31,7 +31,6 @@ const DetalleProducto = ({ usuarioAdmin }) => {
   const Navigate = useNavigate();
 
   const handlePagarIndividual = async () => {
-    // Crear objeto con los datos del producto individual
     const productoIndividual = {
       productoId: producto._id,
       cantidad: cantidad,

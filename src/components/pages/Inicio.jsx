@@ -12,7 +12,7 @@ import BannerMobile_tres from "../../assets/BannerMobile_tres.png";
 import React from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useEffect, useState } from "react";
-import { obtenerProductos } from "../../helpers/queries";
+import { obtenerConfiguracion, obtenerProductos } from "../../helpers/queries";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -24,6 +24,10 @@ import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
   const [coleccionRandom, setColeccionRandom] = useState([]);
+
+  //titulo y categoria de seccion principal
+  const [configuracion, setConfiguracion] = useState(null);
+  const [productosDestacados, setProductosDestacados] = useState([]);
 
   useEffect(() => {
     leerProductos();
@@ -37,6 +41,30 @@ const Inicio = () => {
       return () => clearTimeout(timer);
     }
   }, [productos]);
+
+  useEffect(() => {
+    const cargarConfiguracion = async () => {
+      const respuesta = await obtenerConfiguracion();
+      if (respuesta?.ok) {
+        const datos = await respuesta.json();
+        setConfiguracion(datos);
+      }
+    };
+    cargarConfiguracion();
+  }, []);
+
+  useEffect(() => {
+    if (productos.length > 0 && configuracion?.categoriasSeleccionadas) {
+      const categorias = configuracion.categoriasSeleccionadas;
+      const filtrados = productos.filter((producto) =>
+        categorias.includes(producto.categoria)
+      );
+
+      const aleatorios = filtrados.sort(() => Math.random() - 0.5).slice(0, 10);
+
+      setProductosDestacados(aleatorios);
+    }
+  }, [productos, configuracion]);
 
   const leerProductos = async () => {
     const respuesta = await obtenerProductos();
@@ -101,7 +129,6 @@ const Inicio = () => {
     gorras.length === 0 &&
     anteojos.length === 0;
 
-
   return (
     <>
       <Carousel>
@@ -137,35 +164,42 @@ const Inicio = () => {
         </Carousel.Item>
       </Carousel>
       <Container className="my-4">
-        <div data-aos="fade-down" data-aos-delay="0">
-          <h2 className="Montserrat text-center mt-5 mb-4">
-            COLECCIÓN PRIMAVERA-VERANO
-          </h2>
-          <p className="text-center lead mb-5">
-            Explora lo último en tendencias.
-          </p>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true, dynamicBullets: true }}
-            style={{
-              paddingBottom: "40px",
-            }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              576: { slidesPerView: 2 },
-              992: { slidesPerView: 4 },
-            }}
-          >
-            {coleccionRandom.map((ropa) => (
-              <SwiperSlide key={ropa.id}>
-                <CardRopa ropa={ropa} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        {configuracion && (
+          <div data-aos="fade-down" data-aos-delay="0">
+            <h2 className="Montserrat text-center mt-5 mb-4">
+              {configuracion.titulo || "PRODUCTOS DESTACADOS"}
+            </h2>
+            <p className="text-center lead mb-5">
+              Explora lo último en tendencias.
+            </p>
+
+            {productosDestacados.length > 0 ? (
+              <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={20}
+                slidesPerView={4}
+                navigation
+                pagination={{ clickable: true, dynamicBullets: true }}
+                style={{ paddingBottom: "40px" }}
+                breakpoints={{
+                  0: { slidesPerView: 1 },
+                  576: { slidesPerView: 2 },
+                  992: { slidesPerView: 4 },
+                }}
+              >
+                {productosDestacados.map((ropa) => (
+                  <SwiperSlide key={ropa._id}>
+                    <CardRopa ropa={ropa} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <p className="text-center my-5">
+                No hay productos destacados disponibles.
+              </p>
+            )}
+          </div>
+        )}
         <hr />
         <div className="row align-items-center">
           <h3 className="Montserrat text-start my-5 col-6">
@@ -497,7 +531,7 @@ const Inicio = () => {
       <section className="mt-3">
         <BannerPublicidad />
       </section>
-  
+
       <BtnScroll />
       <WhatsAppButton />
     </>

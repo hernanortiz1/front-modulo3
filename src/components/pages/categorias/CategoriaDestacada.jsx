@@ -6,6 +6,7 @@ import {
   guardarConfiguracion,
 } from "../../../helpers/queries";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 
 const CategoriaDestacada = () => {
   const categorias = [
@@ -20,33 +21,39 @@ const CategoriaDestacada = () => {
     "Anteojos de sol",
   ];
 
-  const [titulo, setTitulo] = useState("");
   const [seleccionadas, setSeleccionadas] = useState([]);
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     const cargarDatos = async () => {
       const respuesta = await obtenerConfiguracion();
       if (respuesta?.ok) {
         const data = await respuesta.json();
-        setTitulo(data.titulo || "");
+        setValue("tituloCategoriaDestacada", data.titulo || "");
         setSeleccionadas(data.categoriasSeleccionadas || []);
       }
     };
     cargarDatos();
-  }, []);
+  }, [setValue]);
 
-  const manejarCheck = (categoria) => {
+  const categoriasCheck = (categoria) => {
     setSeleccionadas((prev) =>
       prev.includes(categoria)
-        ? prev.filter((c) => c !== categoria)
+        ? prev.filter((cat) => cat !== categoria)
         : [...prev, categoria]
     );
   };
 
-  const manejarGuardar = async () => {
+  const guardarCategoriasCheck = async (data) => {
     const configuracion = {
-      titulo,
+      titulo: data.tituloCategoriaDestacada,
       categoriasSeleccionadas: seleccionadas,
     };
 
@@ -61,51 +68,68 @@ const CategoriaDestacada = () => {
   return (
     <Container className="my-5">
       <div className="border border-dark rounded-3 p-4 colorNavbarFooter shadow-sm ">
-        <div className="mb-4 text-center text-light">
-          <h4>Título de categoría</h4>
-          <Form.Control
-            type="text"
-            placeholder="Ingrese título"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-          />
-        </div>
+        <Form onSubmit={handleSubmit(guardarCategoriasCheck)}>
+          <div className="mb-4 text-light">
+            <h4 className="text-center">Título de categoría</h4>
 
-        <h4 className="text-center mb-4 text-light">Categorías destacadas</h4>
-        <div className="table-responsive">
-          <Table className="text-center align-middle rounded-3">
-            <thead>
-              <tr>
-                {categorias.map((cat) => (
-                  <th key={cat}>{cat}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="rounded rounded-3">
-              <tr className="table-primary ">
-                {categorias.map((cat) => (
-                  <td key={cat}>
-                    <Form.Check
-                      type="checkbox"
-                      id={`check-${cat}`}
-                      checked={seleccionadas.includes(cat)}
-                      onChange={() => manejarCheck(cat)}
-                    />
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </Table>
-        </div>
+            <Form.Control
+              type="text"
+              required
+              placeholder="Ingrese título"
+              maxLength={100}
+              {...register("tituloCategoriaDestacada", {
+                required: "El titulo un dato obligatorio",
+                minLength: {
+                  value: 3,
+                  message: "El titulo debe tener 3 caracteres como minimo",
+                },
+                maxLength: {
+                  value: 100,
+                  message: "El titulo debe tener 100 caracteres como máximo",
+                },
+              })}
+            />
+            <Form.Text className="text-danger">
+              {errors.tituloCategoriaDestacada?.message}
+            </Form.Text>
+          </div>
 
-        <div className="text-center mt-4">
-          <Button onClick={manejarGuardar} className="me-2">
-            Guardar cambios
-          </Button>
-          <Button variant="danger" onClick={() => navigate("/administrador")}>
-            Volver
-          </Button>
-        </div>
+          <h4 className="text-center mb-4 text-light">Categorías destacadas</h4>
+          <div className="table-responsive">
+            <Table className="text-center align-middle rounded-3">
+              <thead>
+                <tr>
+                  {categorias.map((cat) => (
+                    <th key={cat}>{cat}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="rounded rounded-3">
+                <tr className="table-primary ">
+                  {categorias.map((cat) => (
+                    <td key={cat}>
+                      <Form.Check
+                        type="checkbox"
+                        id={`check-${cat}`}
+                        checked={seleccionadas.includes(cat)}
+                        onChange={() => categoriasCheck(cat)}
+                      />
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+
+          <div className="text-center mt-4">
+            <Button type="submit" className="me-2">
+              Guardar cambios
+            </Button>
+            <Button variant="danger" onClick={() => navigate("/administrador")}>
+              Volver
+            </Button>
+          </div>
+        </Form>
       </div>
     </Container>
   );

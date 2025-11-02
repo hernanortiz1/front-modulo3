@@ -10,7 +10,7 @@ Además, el sistema ahora incluye:
 - 💳 **Integración con Mercado Pago** para pagos online  
 - 🛡️ **Gestión de roles de usuario**  
 - ✨ **Selección de productos destacados aleatorios por categorías**  
-
+- 📧 **Formulario de contacto funcional con EmailJS**, que envía automáticamente los datos ingresados por el usuario a una cuenta de **Gmail** configurada  
 
 ---
 
@@ -41,8 +41,6 @@ Además, el sistema ahora incluye:
 - Mercado Pago (integración de pagos online)
 
 ---
-
-## ✨ Funcionalidades Principales
 
 ## ✨ Funcionalidades Principales
 

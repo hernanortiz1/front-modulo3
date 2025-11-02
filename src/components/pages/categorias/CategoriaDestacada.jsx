@@ -22,6 +22,8 @@ const CategoriaDestacada = () => {
   ];
 
   const [seleccionadas, setSeleccionadas] = useState([]);
+  const [errorCategorias, setErrorCategorias] = useState("");
+
   const navigate = useNavigate();
 
   const {
@@ -52,6 +54,12 @@ const CategoriaDestacada = () => {
   };
 
   const guardarCategoriasCheck = async (data) => {
+    if (seleccionadas.length === 0) {
+      setErrorCategorias("Debe seleccionar al menos una categoria destacada");
+      return;
+    } else {
+      setErrorCategorias("");
+    }
     const configuracion = {
       titulo: data.tituloCategoriaDestacada,
       categoriasSeleccionadas: seleccionadas,
@@ -95,8 +103,8 @@ const CategoriaDestacada = () => {
           </div>
 
           <h4 className="text-center mb-4 text-light">Categorías destacadas</h4>
-          <div className="table-responsive">
-            <Table className="text-center align-middle rounded-3">
+          <div className="table-responsive rounded-3 overflow-hidden">
+            <Table className="text-center align-middle mb-0 table-bordered">
               <thead>
                 <tr>
                   {categorias.map((cat) => (
@@ -120,6 +128,9 @@ const CategoriaDestacada = () => {
               </tbody>
             </Table>
           </div>
+          <Form.Text className="text-danger">
+            {errorCategorias}
+          </Form.Text>
 
           <div className="text-center mt-4">
             <Button type="submit" className="me-2">

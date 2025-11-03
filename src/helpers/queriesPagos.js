@@ -7,13 +7,12 @@ export const crearOrdenCarritoAPI = async (productosCarrito) => {
       headers: {
         "Content-Type": "application/json",
       },
-      // El backend espera un objeto { productosCarrito: [...] }
       body: JSON.stringify({ productosCarrito }),
     });
 
     if (!respuesta.ok) {
       console.error("Error del servidor:", respuesta.status);
-      return respuesta; // Devuelve la respuesta para manejar el error en el componente
+      return respuesta;
     }
     return respuesta;
   } catch (error) {

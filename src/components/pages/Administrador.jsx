@@ -222,6 +222,15 @@ const Administrador = ({ titulo }) => {
                     >
                       <i className="bi bi-file-earmark-plus"></i>
                     </Button>
+                    {/*btn Categorias destacadas */}
+                    {(rol === "Administrador" || rol === "Gerente") && (
+                      <Button
+                        className="btn btn-primary ms-2"
+                        href="/categorias-destacadas"
+                      >
+                        <i className="bi bi-star-fill text-light"></i>
+                      </Button>
+                    )}
                   </div>
                   <div className="col-12">
                     <Table

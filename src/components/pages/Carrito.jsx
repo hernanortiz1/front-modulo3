@@ -24,7 +24,7 @@ const Carrito = () => {
   const handlePagar = async () => {
     // 1. Formatear los productos del carrito según lo esperado por el backend
     const productosFormateados = cartItems.map((item) => ({
-      id: item._id, // Asegúrate de que el backend espera el _id como 'id'
+      id: item._id, 
       quantity: item.quantity,
     }));
 
@@ -35,7 +35,7 @@ const Carrito = () => {
       if (respuesta && respuesta.status === 201) {
         const data = await respuesta.json();
         if (respuesta.ok) {
-          // Guardar el pedidoId en localStorage para verificación posterior
+        
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
 
           // Redirigir a Mercado Pago

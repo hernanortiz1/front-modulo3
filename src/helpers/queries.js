@@ -1,5 +1,6 @@
 const API_URL = import.meta.env.VITE_API_PRODUCTOS;
 const API_USUARIOS = import.meta.env.VITE_API_USUARIOS;
+const API_CATEGORIA_DESTACADA = import.meta.env.VITE_API_CATEGORIA_DESTACADA;
 
 export const crearProducto = async (productoNuevo) => {
   try {
@@ -213,6 +214,36 @@ export const crearUsuarioAdministrador = async (nuevoUsuario) => {
     
   } catch (error) {
     console.error(error);
+    return null;
+  }
+};
+
+export const guardarConfiguracion = async (configuracion) => {
+  try {
+    const token = JSON.parse(sessionStorage.getItem("userKey"))?.token;
+
+    const respuesta = await fetch(API_CATEGORIA_DESTACADA, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": token,
+      },
+      body: JSON.stringify(configuracion),
+    });
+
+    return respuesta;
+  } catch (error) {
+    console.error("Error al guardar configuración:", error);
+    return null;
+  }
+};
+
+export const obtenerConfiguracion = async () => {
+  try {
+    const respuesta = await fetch(API_CATEGORIA_DESTACADA);
+    return respuesta;
+  } catch (error) {
+    console.error("Error al obtener configuración:", error);
     return null;
   }
 };

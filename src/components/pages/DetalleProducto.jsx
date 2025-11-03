@@ -29,7 +29,6 @@ const DetalleProducto = ({ usuarioAdmin }) => {
   const [animationStage, setAnimationStage] = useState("idle");
 
   const handlePagarIndividual = async () => {
-    // Crear objeto con los datos del producto individual
     const productoIndividual = {
       productoId: producto._id,
       cantidad: cantidad,
@@ -41,10 +40,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
       if (respuesta && respuesta.status === 201) {
         const data = await respuesta.json();
         if (respuesta.ok) {
-          // Guardar el pedidoId en localStorage para verificación posterior
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
-
-          // Redirigir a Mercado Pago
           window.location.href = data.init_point;
         }
       } else {

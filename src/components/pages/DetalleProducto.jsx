@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Card, Row, Col, Button, Alert } from "react-bootstrap";
-import { ShoppingCart, Heart, ShoppingBag } from "lucide-react";
-import { useNavigate, useParams } from "react-router";
+import { ShoppingCart, ShoppingBag } from "lucide-react";
+import { useParams } from "react-router";
 import { obtenerProductosPorId } from "../../helpers/queries";
 import { useEffect, useState } from "react";
 import {
@@ -22,13 +22,11 @@ import { crearOrdenProductoIndividual } from "../../helpers/queriesPagos";
 
 const DetalleProducto = ({ usuarioAdmin }) => {
   const [producto, setProducto] = useState({});
-  const [favorito, setFavorito] = useState(false);
   const { id } = useParams();
   const { addToCart, cartItems } = useCart();
   const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
   const [animationStage, setAnimationStage] = useState("idle");
-  const Navigate = useNavigate();
 
   const handlePagarIndividual = async () => {
     // Crear objeto con los datos del producto individual
@@ -229,7 +227,7 @@ const DetalleProducto = ({ usuarioAdmin }) => {
             {/* Columna de Información */}
             <Col md={6} lg={7}>
               <div className="mt-3 mt-md-0 d-flex flex-column align-content-around">
-                {/* Categoría y Favorito */}
+                {/* Categoría */}
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <span className="badge colorNavbarFooter">
                     {producto.categoria}

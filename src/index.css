@@ -795,7 +795,6 @@ main {
   }
 }
 
-/* Agregar en tu archivo CSS */
 .pago-fallido-card {
   background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
 }
@@ -805,7 +804,6 @@ main {
   border-radius: 15px;
 }
 
-/* Animación sutil para el icono */
 @keyframes shake {
   0%,
   100% {

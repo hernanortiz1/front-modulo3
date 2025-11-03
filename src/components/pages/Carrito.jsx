@@ -32,9 +32,8 @@ const Carrito = () => {
       if (respuesta && respuesta.status === 201) {
         const data = await respuesta.json();
         if (respuesta.ok) {
+        
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
-
-          // Redirigir a Mercado Pago
           window.location.href = data.init_point;
         }
       } else {

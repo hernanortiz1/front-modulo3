@@ -147,10 +147,19 @@ function App() {
               ></Route>
 
               <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
+
               <Route
                 path="/categorias-destacadas"
-                element={<CategoriaDestacada />}
-              ></Route>
+                element={
+                  <ProtectorRol
+                    rolesPermitidos={["Administrador", "Gerente", "Empleado"]}
+                    usuario={usuarioAdmin}
+                  >
+                    <CategoriaDestacada />
+                  </ProtectorRol>
+                }
+              />
+
               <Route
                 path="/administrador"
                 element={
@@ -165,6 +174,7 @@ function App() {
                   element={
                     <Administrador
                       titulo={usuarioAdmin.rol || "Administrador"}
+                      cargarProductos={cargarProductos}
                     ></Administrador>
                   }
                 ></Route>

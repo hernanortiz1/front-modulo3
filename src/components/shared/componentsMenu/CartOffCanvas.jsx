@@ -36,9 +36,9 @@ const CartOffcanvas = ({ show, handleClose }) => {
       if (respuesta && respuesta.status === 201) {
         const data = await respuesta.json();
         if (respuesta.ok) {
-          // Guardar el pedidoId en localStorage para verificación posterior
+          // Guardar el pedidoId en localStorage para verificación posterior;
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
-
+          sessionStorage.setItem("flujoPagoCompleto", "true");
           // Redirigir a Mercado Pago
           window.location.href = data.init_point;
         }
@@ -54,6 +54,8 @@ const CartOffcanvas = ({ show, handleClose }) => {
       }
     } catch (error) {
       console.error("Error al procesar el pago:", error);
+      sessionStorage.removeItem("flujoPagoCompleto");
+      localStorage.removeItem("ultimoPedidoId");
       Swal.fire({
         title: "Ocurrió un error",
         text: "No se pudo conectar con el servidor para procesar el pago. Por favor, verifique su conexión e intente de nuevo.",
@@ -107,7 +109,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
             });
 
             handleClose();
-            handlePagar()
+            handlePagar();
           }, 4000);
         } catch (error) {
           console.error("Error en la compra:", error);

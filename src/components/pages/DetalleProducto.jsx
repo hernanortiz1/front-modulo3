@@ -44,8 +44,8 @@ const DetalleProducto = ({ usuarioAdmin }) => {
         const data = await respuesta.json();
         if (respuesta.ok) {
           // Guardar el pedidoId en localStorage para verificación posterior
+          sessionStorage.setItem("flujoPagoCompleto", "true");
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
-
           // Redirigir a Mercado Pago
           window.location.href = data.init_point;
         }
@@ -59,6 +59,8 @@ const DetalleProducto = ({ usuarioAdmin }) => {
       }
     } catch (error) {
       console.error("Error al procesar el pago individual:", error);
+      sessionStorage.removeItem("flujoPagoCompleto");
+      localStorage.removeItem("ultimoPedidoId");
       Swal.fire({
         title: "Ocurrió un error",
         text: "No se pudo conectar con el servidor para procesar el pago.",

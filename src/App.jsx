@@ -201,9 +201,20 @@ function App() {
                   }
                 ></Route>
               </Route>
-              <Route path="/pago/exitoso" element={<PagoExitoso />} />
-              <Route path="/pago/fallido" element={<PagoFallido />} />
-              <Route path="/pago/pendiente" element={<PagoPendiente />} />
+
+              <Route
+                element={
+                  <ProtectorRol
+                    rolesPermitidos={["Administrador", "Gerente", "Empleado", "Usuario"]}
+                    usuario={usuarioAdmin}
+                  />
+                }
+              >
+                <Route path="/pago/exitoso" element={<PagoExitoso />} />
+                <Route path="/pago/fallido" element={<PagoFallido />} />
+                <Route path="/pago/pendiente" element={<PagoPendiente />} />
+              </Route>
+
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>

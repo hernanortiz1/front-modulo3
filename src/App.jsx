@@ -149,16 +149,18 @@ function App() {
               <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
 
               <Route
-                path="/categorias-destacadas"
                 element={
                   <ProtectorRol
-                    rolesPermitidos={["Administrador", "Gerente", "Empleado"]}
+                    rolesPermitidos={["Administrador", "Gerente"]}
                     usuario={usuarioAdmin}
-                  >
-                    <CategoriaDestacada />
-                  </ProtectorRol>
+                  />
                 }
-              />
+              >
+                <Route
+                  path="/categorias-destacadas"
+                  element={<CategoriaDestacada />}
+                />
+              </Route>
 
               <Route
                 path="/administrador"

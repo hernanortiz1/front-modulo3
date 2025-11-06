@@ -11,7 +11,7 @@ import {
 } from "../../helpers/queries.js";
 import Swal from "sweetalert2";
 
-const Administrador = ({ titulo }) => {
+const Administrador = ({ titulo, cargarProductos }) => {
   const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {};
   const rol = usuarioLogueado.rol;
 
@@ -283,6 +283,7 @@ const Administrador = ({ titulo }) => {
                               fila={
                                 (pageProducto - 1) * limitProducto + indice + 1
                               }
+                              cargarProductos={cargarProductos}
                               limitProducto={limitProducto}
                               pageProducto={pageProducto}
                               onProductoActualizado={leerProductos}

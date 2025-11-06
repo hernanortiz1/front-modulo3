@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { obtenerProductos } from "../../../helpers/queries";
 import { formatearPrecio } from "../categorias/funcion/operaciones";
 
-const ItemProducto = ({ ropa, setRopa, fila }) => {
+const ItemProducto = ({ ropa, setRopa, fila, cargarProductos }) => {
   const eliminarProducto = async () => {
     Swal.fire({
       title: `¿Eliminar ${ropa.nombreProducto}?`,
@@ -29,6 +29,10 @@ const ItemProducto = ({ ropa, setRopa, fila }) => {
           const respuestaProducto = await obtenerProductos();
           const productoActualizado = await respuestaProducto.json();
           setRopa(productoActualizado);
+
+          if (cargarProductos) {
+            await cargarProductos();
+          }
         }
       }
     });

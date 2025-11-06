@@ -35,13 +35,22 @@ const CategoriaDestacada = () => {
 
   useEffect(() => {
     const cargarDatos = async () => {
-      const respuesta = await obtenerConfiguracion();
-      if (respuesta?.ok) {
-        const data = await respuesta.json();
-        setValue("tituloCategoriaDestacada", data.titulo || "");
-        setSeleccionadas(data.categoriasSeleccionadas || []);
+      try {
+        const respuesta = await obtenerConfiguracion();
+
+        if (respuesta && respuesta.ok) {
+          const data = await respuesta.json();
+
+          setValue("tituloCategoriaDestacada", data.titulo || "");
+          setSeleccionadas(data.categoriasSeleccionadas || []);
+        } else {
+          console.error("Error: respuesta no OK");
+        }
+      } catch (error) {
+        console.error("Error al cargar configuración:", error);
       }
     };
+
     cargarDatos();
   }, [setValue]);
 
@@ -128,9 +137,7 @@ const CategoriaDestacada = () => {
               </tbody>
             </Table>
           </div>
-          <Form.Text className="text-danger">
-            {errorCategorias}
-          </Form.Text>
+          <Form.Text className="text-danger">{errorCategorias}</Form.Text>
 
           <div className="text-center mt-4">
             <Button type="submit" className="me-2">

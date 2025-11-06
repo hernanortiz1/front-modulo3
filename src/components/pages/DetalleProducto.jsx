@@ -63,7 +63,6 @@ const DetalleProducto = ({ usuarioAdmin }) => {
       });
     }
   };
-
   const handleBuy = async () => {
     if (usuarioAdmin.token) {
       Swal.fire({

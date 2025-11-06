@@ -7,7 +7,6 @@ import Contacto from "./components/pages/Contacto";
 import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
-import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 import DetalleProducto from "./components/pages/DetalleProducto";
 import FormularioRopa from "./components/pages/ropa/FormularioRopa";
 import AbrigosCamperas from "./components/pages/categorias/AbrigosCamperas";
@@ -104,8 +103,22 @@ function App() {
               ></Route>
 
               <Route path="/carrito" element={<Carrito />} />
+              <Route
+                element={
+                  <ProtectorRol
+                    bloquearRoles={[
+                      "Administrador",
+                      "Gerente",
+                      "Empleado",
+                      "Usuario",
+                    ]}
+                    usuario={usuarioAdmin}
+                  />
+                }
+              >
+                <Route path="/registro" element={<Registro />} />
+              </Route>
 
-              <Route path="/registro" element={<Registro></Registro>}></Route>
               <Route
                 path="/remeras-chombas"
                 element={
@@ -148,10 +161,21 @@ function App() {
               ></Route>
 
               <Route path="/sobreNosotros" element={<SobreNosotros />}></Route>
+
               <Route
-                path="/categorias-destacadas"
-                element={<CategoriaDestacada />}
-              ></Route>
+                element={
+                  <ProtectorRol
+                    rolesPermitidos={["Administrador", "Gerente"]}
+                    usuario={usuarioAdmin}
+                  />
+                }
+              >
+                <Route
+                  path="/categorias-destacadas"
+                  element={<CategoriaDestacada />}
+                />
+              </Route>
+
               <Route
                 path="/administrador"
                 element={
@@ -166,6 +190,7 @@ function App() {
                   element={
                     <Administrador
                       titulo={usuarioAdmin.rol || "Administrador"}
+                      cargarProductos={cargarProductos}
                     ></Administrador>
                   }
                 ></Route>

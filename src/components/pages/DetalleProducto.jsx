@@ -41,12 +41,6 @@ const DetalleProducto = ({ usuarioAdmin }) => {
         const data = await respuesta.json();
         if (respuesta.ok) {
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
-
-          //sesion temporal
-          if (usuarioAdmin && usuarioAdmin.token) {
-            sessionStorage.setItem("backupUser", JSON.stringify(usuarioAdmin));
-          }
-
           window.location.href = data.init_point;
         }
       } else {
@@ -66,7 +60,6 @@ const DetalleProducto = ({ usuarioAdmin }) => {
       });
     }
   };
-
   const handleBuy = async () => {
     if (usuarioAdmin.token) {
       Swal.fire({

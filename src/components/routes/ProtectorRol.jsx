@@ -1,18 +1,30 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router";
 
-const ProtectorRol = ({ rolesPermitidos = [], usuario }) => {
-  //Si no hay sesión válida
-  if (!usuario?.token) {
-    return <Navigate to="/" replace />;
+const ProtectorRol = ({
+  rolesPermitidos = [],
+  bloquearRoles = [],
+  usuario,
+}) => {
+  if (!usuario) {
+    return <Navigate to="/login" />;
   }
 
-  //Si el rol no está permitido
-  if (!rolesPermitidos.includes(usuario.rol)) {
-    return <Navigate to="/" replace />;
+  const rolUsuario = usuario.rol;
+
+  if (bloquearRoles.length > 0) {
+    return bloquearRoles.includes(rolUsuario) ? (
+      <Navigate to="/" />
+    ) : (
+      <Outlet />
+    );
   }
 
-  return <Outlet />;
+  return rolesPermitidos.includes(rolUsuario) ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/" />
+  );
 };
 
 export default ProtectorRol;

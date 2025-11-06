@@ -103,8 +103,22 @@ function App() {
               ></Route>
 
               <Route path="/carrito" element={<Carrito />} />
+              <Route
+                element={
+                  <ProtectorRol
+                    bloquearRoles={[
+                      "Administrador",
+                      "Gerente",
+                      "Empleado",
+                      "Usuario",
+                    ]}
+                    usuario={usuarioAdmin}
+                  />
+                }
+              >
+                <Route path="/registro" element={<Registro />} />
+              </Route>
 
-              <Route path="/registro" element={<Registro></Registro>}></Route>
               <Route
                 path="/remeras-chombas"
                 element={
@@ -202,18 +216,9 @@ function App() {
                 ></Route>
               </Route>
 
-              <Route
-                element={
-                  <ProtectorRol
-                    rolesPermitidos={["Administrador", "Gerente", "Empleado", "Usuario"]}
-                    usuario={usuarioAdmin}
-                  />
-                }
-              >
-                <Route path="/pago/exitoso" element={<PagoExitoso />} />
-                <Route path="/pago/fallido" element={<PagoFallido />} />
-                <Route path="/pago/pendiente" element={<PagoPendiente />} />
-              </Route>
+              <Route path="/pago/exitoso" element={<PagoExitoso />} />
+              <Route path="/pago/fallido" element={<PagoFallido />} />
+              <Route path="/pago/pendiente" element={<PagoPendiente />} />
 
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>

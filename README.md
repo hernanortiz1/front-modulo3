@@ -172,7 +172,6 @@ proyecto-modulo3/
 │   │   └── Registro.jsx
 │   │   └── SobreNosotros.jsx
 │   ├── routes/
-│   │   └── ProtectorAdmin.jsx
 │   │   └── ProtectorRol.jsx
 │   └── shared/
 │   |   └── componentsMenu/

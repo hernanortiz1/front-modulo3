@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
 import { XCircle, ArrowLeft, CreditCard, RefreshCw } from "lucide-react";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import WhatsAppButton from "./categorias/funcion/WhatsAppButton";
 
 const PagoFallido = () => {
   const navigate = useNavigate();
@@ -68,15 +69,7 @@ const PagoFallido = () => {
 
               {/* Botones de acción */}
               <div className="d-grid gap-2 d-md-flex justify-content-center">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={() => navigate("/carrito")}
-                  className="me-md-2"
-                >
-                  <RefreshCw size={20} className="me-2" />
-                  Reintentar Pago
-                </Button>
+               
 
                 <Button
                   variant="outline-secondary"
@@ -94,12 +87,10 @@ const PagoFallido = () => {
                   ¿Necesitas ayuda? Contáctanos:
                 </p>
                 <div className="d-flex justify-content-center gap-3">
-                  <Button variant="outline-info" size="sm">
+                  <NavLink className="btn btn-outline-secondary" to={"/contacto"} size="sm">
                     📧 Soporte por Email
-                  </Button>
-                  <Button variant="outline-success" size="sm">
-                    💬 WhatsApp
-                  </Button>
+                  </NavLink >
+                 
                 </div>
               </div>
             </Card.Body>
@@ -114,6 +105,7 @@ const PagoFallido = () => {
           </div>
         </Col>
       </Row>
+        <WhatsAppButton />
     </Container>
   );
 };

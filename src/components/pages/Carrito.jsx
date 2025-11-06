@@ -32,7 +32,7 @@ const Carrito = () => {
       if (respuesta && respuesta.status === 201) {
         const data = await respuesta.json();
         if (respuesta.ok) {
-        
+          sessionStorage.setItem("flujoPagoCompleto", "true");
           localStorage.setItem("ultimoPedidoId", data.pedidoId);
           window.location.href = data.init_point;
         }
@@ -48,6 +48,8 @@ const Carrito = () => {
       }
     } catch (error) {
       console.error("Error al procesar el pago:", error);
+      sessionStorage.removeItem("flujoPagoCompleto");
+      localStorage.removeItem("ultimoPedidoId");
       Swal.fire({
         title: "Ocurrió un error",
         text: "No se pudo conectar con el servidor para procesar el pago. Por favor, verifique su conexión e intente de nuevo.",

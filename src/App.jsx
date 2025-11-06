@@ -30,6 +30,7 @@ import CategoriaDestacada from "./components/pages/categorias/CategoriaDestacada
 import PagoExitoso from "./components/pages/PagoExitoso";
 import PagoFallido from "./components/pages/PagoFallido";
 import PagoPendiente from "./components/pages/PagoPendiente";
+import ProtegerRutaPago from "./components/routes/ProtegerRutaPago";
 
 function App() {
   useEffect(() => {
@@ -214,11 +215,9 @@ function App() {
                   }
                 ></Route>
               </Route>
-
-              <Route path="/pago/exitoso" element={<PagoExitoso />} />
-              <Route path="/pago/fallido" element={<PagoFallido />} />
-              <Route path="/pago/pendiente" element={<PagoPendiente />} />
-
+              <Route path="/pago/exitoso" element={<ProtegerRutaPago><PagoExitoso /></ProtegerRutaPago>} />
+              <Route path="/pago/fallido" element={<ProtegerRutaPago><PagoFallido /></ProtegerRutaPago>} />
+              <Route path="/pago/pendiente" element={<ProtegerRutaPago><PagoPendiente /></ProtegerRutaPago>} />
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>

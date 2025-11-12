@@ -54,6 +54,7 @@ const FormularioRopa = ({ titulo, cargarProductos }) => {
     reset,
     resetField,
     setValue,
+    clearErrors,
   } = useForm();
 
   const onSubmit = async (producto) => {
@@ -71,7 +72,7 @@ const FormularioRopa = ({ titulo, cargarProductos }) => {
         }).then((result) => {
           if (result.isConfirmed) {
             reset();
-            if(cargarProductos) cargarProductos()
+            if (cargarProductos) cargarProductos();
             navegacion("/administrador");
           }
         });
@@ -93,7 +94,7 @@ const FormularioRopa = ({ titulo, cargarProductos }) => {
         }).then((result) => {
           if (result.isConfirmed) {
             reset();
-            if(cargarProductos) cargarProductos();
+            if (cargarProductos) cargarProductos();
             navegacion("/administrador");
           }
         });
@@ -267,13 +268,13 @@ const FormularioRopa = ({ titulo, cargarProductos }) => {
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formImagen">
-              <Form.Label>Imagen URL*</Form.Label>
+              <Form.Label>Imagen*</Form.Label>
               <Form.Control
                 type="file"
                 accept="image/*"
                 {...register("imagen", {
                   required:
-                    titulo === "Crear producto"
+                    titulo === "Crear producto" || (!imagenActual && !preview)
                       ? "La imagen es obligatoria"
                       : false,
                   validate: {
@@ -287,11 +288,13 @@ const FormularioRopa = ({ titulo, cargarProductos }) => {
                   const file = e.target.files[0];
                   if (file) {
                     setPreview(URL.createObjectURL(file));
+                    clearErrors("imagen");
                   } else {
                     setPreview("");
                   }
                 }}
               />
+
               {(preview || imagenActual) && (
                 <div className="mb-2 position-relative d-inline-block mt-3">
                   <img
@@ -314,9 +317,10 @@ const FormularioRopa = ({ titulo, cargarProductos }) => {
                 </div>
               )}
               <Form.Text className="text-danger">
-                {errors.imagen?.message}
+                {!preview && !imagenActual && errors.imagen?.message}
               </Form.Text>
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="formTalle">
               <Form.Label>Talle*</Form.Label>
               <Form.Select

@@ -68,13 +68,32 @@ export const borrarProducto = async (id) => {
 
 export const editarProducto = async (productoEditado, id) => {
   try {
+    const token = JSON.parse(sessionStorage.getItem("userKey")).token
+
+    const formData = new FormData();
+
+    formData.append("nombreProducto", productoEditado.nombreProducto);
+    formData.append("descripcion", productoEditado.descripcion);
+    formData.append("precio", productoEditado.precio);
+    formData.append("categoria", productoEditado.categoria);
+    formData.append("stock", productoEditado.stock);
+    formData.append("talle", productoEditado.talle);
+    formData.append("color", productoEditado.color);
+    formData.append(
+      "fechaUltimoControlStock",
+      productoEditado.fechaUltimoControlStock
+    );
+
+    if (productoEditado.imagen instanceof File) {
+      formData.append("imagen", productoEditado.imagen);
+    }
+
     const respuesta = await fetch(API_URL + `/${id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
-        "x-token": JSON.parse(sessionStorage.getItem("userKey")).token,
+        "x-token": token,
       },
-      body: JSON.stringify(productoEditado),
+      body: formData,
     });
     return respuesta;
   } catch (error) {
@@ -211,7 +230,6 @@ export const crearUsuarioAdministrador = async (nuevoUsuario) => {
       body: JSON.stringify(nuevoUsuario),
     });
     return respuesta;
-    
   } catch (error) {
     console.error(error);
     return null;

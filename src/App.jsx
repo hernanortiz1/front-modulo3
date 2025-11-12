@@ -215,9 +215,30 @@ function App() {
                   }
                 ></Route>
               </Route>
-              <Route path="/pago/exitoso" element={<ProtegerRutaPago><PagoExitoso /></ProtegerRutaPago>} />
-              <Route path="/pago/fallido" element={<ProtegerRutaPago><PagoFallido /></ProtegerRutaPago>} />
-              <Route path="/pago/pendiente" element={<ProtegerRutaPago><PagoPendiente /></ProtegerRutaPago>} />
+              <Route
+                path="/pago/exitoso"
+                element={
+                  <ProtegerRutaPago>
+                    <PagoExitoso />
+                  </ProtegerRutaPago>
+                }
+              />
+              <Route
+                path="/pago/fallido"
+                element={
+                  <ProtegerRutaPago>
+                    <PagoFallido />
+                  </ProtegerRutaPago>
+                }
+              />
+              <Route
+                path="/pago/pendiente"
+                element={
+                  <ProtegerRutaPago>
+                    <PagoPendiente />
+                  </ProtegerRutaPago>
+                }
+              />
               <Route path="*" element={<Error404></Error404>}></Route>
             </Routes>
           </main>

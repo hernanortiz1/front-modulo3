@@ -22,6 +22,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
   const [expanded, setExpanded] = useState(false);
+  const { clearCart } = useCart();
 
   const [show, setShow] = useState(false);
   const [mostrarPassword, setMostrarPassword] = useState(false);
@@ -79,6 +80,8 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         sessionStorage.removeItem("userKey");
+        localStorage.removeItem("lannister-cart");
+        clearCart();
         setUsuarioAdmin({});
         navegacion("/");
 
@@ -288,13 +291,12 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                           </Dropdown.Item>
                         )}
 
-                        {usuarioAdmin.rol === "Usuario" &&
-                          !isCartPage && (
-                            <Dropdown.Item onClick={() => setShowCart(true)}>
-                              <i className="bi bi-bag-fill me-2"></i>
-                              Ver carrito ({getTotalItems()})
-                            </Dropdown.Item>
-                          )}
+                        {usuarioAdmin.rol === "Usuario" && !isCartPage && (
+                          <Dropdown.Item onClick={() => setShowCart(true)}>
+                            <i className="bi bi-bag-fill me-2"></i>
+                            Ver carrito ({getTotalItems()})
+                          </Dropdown.Item>
+                        )}
 
                         <Dropdown.Divider />
 
